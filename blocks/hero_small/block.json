@@ -1,0 +1,13 @@
+{
+    "name": "mcalpine/small-hero",
+    "title": "Small Hero Block",
+    "description": "A custom hero block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "welcome-widgets-menus",
+    "keywords": ["hero", "small", "breadcrumbs"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

@@ -1,0 +1,171 @@
+/* Typography
+--------------------------------------------- */
+/* Elements
+--------------------------------------------- */
+ul,
+ol {
+  margin: 0 0 1.5em 3em;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+  margin-left: 1.5em;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin: 0 1.5em 1.5em;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+figure {
+  margin: 1em 0;
+}
+
+table {
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+
+/* Links
+--------------------------------------------- */
+/* Forms
+--------------------------------------------- */
+.btn {
+  font-size: 1.125rem;
+  padding: 1.25rem 2rem;
+  text-align: center;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+}
+.btn.btn-solid {
+  background-color: #d44235;
+  color: #ffffff;
+}
+.btn.btn-outline {
+  background-color: #ffffff;
+  color: #d44235;
+  border: solid 1px #d44235;
+}
+
+.hero-slider {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  color: #878787;
+}
+.hero-slider ul.slide-content {
+  max-width: 107.5rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  flex-grow: 1;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+@media only screen and (min-width: 120rem) {
+  .hero-slider ul.slide-content {
+    padding: 0;
+  }
+}
+.hero-slider ul.slide-content h1 {
+  font-size: 1.875rem;
+  font-size: clamp(1.875rem, 0.0416666667rem + 3.8194444444vw, 4.625rem);
+  font-weight: 900;
+  margin-bottom: 1.875rem;
+}
+.hero-slider ul.slide-content p {
+  font-size: 1rem;
+  font-size: clamp(1rem, 0.625rem + 0.78125vw, 1.5625rem);
+  max-width: 46.25rem;
+}
+.hero-slider ul.slide-content li {
+  display: none;
+}
+.hero-slider ul.slide-content li.active {
+  display: block;
+}
+.hero-slider ul.slide-controls {
+  max-width: 107.5rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  width: 100%;
+  list-style: none;
+  display: none;
+  flex-direction: row;
+  gap: 1.25rem;
+}
+@media only screen and (min-width: 120rem) {
+  .hero-slider ul.slide-controls {
+    padding: 0;
+  }
+}
+.hero-slider ul.slide-controls li {
+  max-width: 16.875rem;
+  border-bottom: solid 0.5rem #ffffff;
+  cursor: pointer;
+}
+.hero-slider ul.slide-controls li.active {
+  border-bottom: solid 0.5rem #878787;
+}
+@media only screen and (min-width: 48rem) {
+  .hero-slider ul.slide-content h1 {
+    font-size: 3.25rem;
+    font-size: clamp(1.875rem, 0.0416666667rem + 3.8194444444vw, 4.625rem);
+  }
+  .hero-slider ul.slide-controls {
+    display: flex;
+  }
+  .hero-slider ul.slide-controls h4 {
+    font: "TheSans", sans-serif;
+    font-weight: 900;
+    font-size: 1.5625rem;
+    line-height: 1.6875rem;
+    letter-spacing: -0.19px;
+  }
+  .hero-slider ul.slide-controls p {
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+  }
+}
+@media only screen and (min-width: 68rem) {
+  .hero-slider ul.slide-content h1 {
+    font-size: 4.625rem;
+    font-size: clamp(1.875rem, 0.0416666667rem + 3.8194444444vw, 4.625rem);
+  }
+  .hero-slider ul.slide-content p {
+    font-size: 1.5625rem;
+    font-size: clamp(1rem, 0.625rem + 0.78125vw, 1.5625rem);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

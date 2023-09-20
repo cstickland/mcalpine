@@ -1,0 +1,55 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+.faq {
+  max-width: 107.5rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  color: #878787;
+  font-family: "TheSans", sans-serif;
+  margin-bottom: 100px;
+}
+@media only screen and (min-width: 120rem) {
+  .faq {
+    padding: 0;
+  }
+}
+.faq ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+}
+.faq ul li {
+  border-bottom: 1px solid rgba(135, 135, 135, 0.3137254902);
+  list-style: none;
+}
+.faq ul li .question {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-size: clamp(1.125rem, 0.8333333333rem + 0.6076388889vw, 1.5625rem);
+  padding-left: 1.5rem;
+}
+.faq ul li .answer {
+  padding-left: 1.5rem;
+  font-size: 0.75rem;
+  max-height: 0;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+.faq ul li .answer.show {
+  max-height: 500px;
+}
+
+@keyframes reveal-accordion {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: auto;
+  }
+}
+
+/*# sourceMappingURL=style-accordion.css.map*/

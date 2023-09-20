@@ -1,0 +1,244 @@
+/* Typography
+--------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  clear: both;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0.016em;
+  margin: 0;
+}
+
+h1,
+.h1 {
+  font-size: 2.375rem;
+}
+@media only screen and (min-width: 48rem) {
+  h1,
+  .h1 {
+    font-size: 2.375rem;
+    font-size: clamp(2.375rem, -0.1rem + 5.15625vw, 3.2rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h1,
+  .h1 {
+    font-size: 3.2rem;
+  }
+}
+
+h2,
+.h2 {
+  font-size: 1.75rem;
+}
+@media only screen and (min-width: 48rem) {
+  h2,
+  .h2 {
+    font-size: 1.75rem;
+    font-size: clamp(1.75rem, -2rem + 7.8125vw, 3rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h2,
+  .h2 {
+    font-size: 3rem;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 1.5rem;
+}
+@media only screen and (min-width: 48rem) {
+  h3,
+  .h3 {
+    font-size: 1.5rem;
+    font-size: clamp(1.5rem, -1.5rem + 6.25vw, 2.5rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h3,
+  .h3 {
+    font-size: 2.5rem;
+  }
+}
+
+h4,
+.h4 {
+  font-size: 1.25rem;
+}
+@media only screen and (min-width: 48rem) {
+  h4,
+  .h4 {
+    font-size: 1.25rem;
+    font-size: clamp(1.25rem, -0.625rem + 3.90625vw, 1.875rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h4,
+  .h4 {
+    font-size: 1.875rem;
+  }
+}
+
+h5,
+.h5 {
+  font-size: 1.125rem;
+}
+@media only screen and (min-width: 48rem) {
+  h5,
+  .h5 {
+    font-size: 1.125rem;
+    font-size: clamp(1.125rem, 0.375rem + 1.5625vw, 1.375rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h5,
+  .h5 {
+    font-size: 1.375rem;
+  }
+}
+
+h6,
+.h6 {
+  font-size: 1rem;
+}
+@media only screen and (min-width: 48rem) {
+  h6,
+  .h6 {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.625rem + 0.78125vw, 1.125rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h6,
+  .h6 {
+    font-size: 1.125rem;
+  }
+}
+
+/* Elements
+--------------------------------------------- */
+body {
+  font-family: "TheSans", sans-serif;
+  color: #878787;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+figure {
+  margin: 1em 0;
+}
+
+table {
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+
+/* Links
+--------------------------------------------- */
+/* Forms
+--------------------------------------------- */
+.btn {
+  font-size: 1.125rem;
+  padding: 1.25rem 2rem;
+  text-align: center;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+}
+.btn .btn-solid {
+  background-color: #d44235;
+  color: #ffffff;
+}
+.btn .btn-outline {
+  background-color: #ffffff;
+  color: #d44235;
+  border: solid 1px #d44235;
+}
+
+.content-block {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.content-block .content-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.content-block .content-container.contained {
+  width: 100%;
+  max-width: 95rem;
+  margin: 0 auto;
+  padding: 2.1875rem 1.25rem;
+  padding-bottom: 0;
+}
+@media only screen and (min-width: 48rem) {
+  .content-block .content-container.contained {
+    padding: 5.5rem 2.5rem;
+    padding-bottom: 0;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .content-block .content-container.contained {
+    padding: 8.75rem 3.75rem;
+    padding-bottom: 0;
+  }
+}
+@media only screen and (min-width: 120rem) {
+  .content-block .content-container.contained {
+    padding-top: 11.25rem;
+    padding-bottom: 0;
+  }
+}
+.content-block .content-container.full {
+  width: 100%;
+  max-width: 120rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-block .content-container.align-start {
+  align-items: start;
+}
+.content-block .content-container.align-center {
+  align-items: center;
+}
+.content-block .content-container.align-end {
+  align-items: end;
+}
+.content-block .content-container.justify-start {
+  justify-content: start;
+}
+.content-block .content-container.justify-center {
+  justify-content: center;
+}
+.content-block .content-container.justify-end {
+  justify-content: end;
+}
+.content-block .content-container .content-text {
+  position: absolute;
+  z-index: 1;
+}
+.content-block .content-container .content-block-image {
+  opacity: 0.26;
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */

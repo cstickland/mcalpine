@@ -1,0 +1,22 @@
+body {
+  font-family: 'TheSans', sans-serif;
+  color: #878787;
+  overflow-x: hidden;
+
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+
+  @media only screen and (min-width: $tablet) {
+    font-size: 1rem;
+    font-size: clamp(1rem, calc(0.8125rem + 0.3906vw), 1.125rem);
+  }
+
+  @media only screen and (min-width: $desktop) {
+    font-size: 1.125rem;
+  }
+}
+
+#primary {
+  overflow-x: hidden;
+}

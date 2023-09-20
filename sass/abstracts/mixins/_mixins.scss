@@ -1,0 +1,41 @@
+// Center block
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Column width with margin
+@mixin column-width($numberColumns: 3) {
+  width: map-get($columns, $numberColumns) -
+    (($columns__margin * ($numberColumns - 1)) / $numberColumns);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin container-large {
+  width: 100%;
+  max-width: $container__large;
+  margin: 0 auto;
+  padding: 2.1875rem 1.25rem;
+  padding-bottom: 0;
+
+  @media only screen and (min-width: $tablet) {
+    padding: 5.5rem 2.5rem;
+    padding-bottom: 0;
+  }
+
+  @media only screen and (min-width: $desktop) {
+    padding: 8.75rem 3.75rem;
+    padding-bottom: 0;
+  }
+
+  @media only screen and (min-width: $desktop__full) {
+    padding-top: 11.25rem;
+    padding-bottom: 0;
+  }
+}

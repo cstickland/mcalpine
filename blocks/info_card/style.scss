@@ -1,0 +1,68 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.info-card {
+  background: linear-gradient(180deg, #f4f4f4 85%, transparent 15%);
+  aspect-ratio: 1/1.15;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+
+  &:hover {
+    .info-card-text {
+      width: 100%;
+      animation-name: grow;
+      animation-delay: 150ms;
+      animation-fill-mode: forwards;
+      animation-duration: 100ms;
+
+      .info-card-message {
+        grid-template-rows: 1fr;
+        margin-top: 2.5rem;
+        margin-bottom: auto;
+        transition: all 200ms ease-in-out;
+      }
+    }
+  }
+
+  .info-card-text {
+    background-color: $color__mcalpine-red;
+    color: #ffffff;
+    padding: 2rem;
+    padding-right: 1rem;
+    width: 85%;
+    transition: all 200ms ease-in-out;
+    height: auto;
+    flex-grow: 0;
+
+    .info-card-title {
+      font-size: 1.375rem;
+      line-height: 2.25rem;
+      letter-spacing: 0;
+
+      b {
+        font-weight: 900;
+      }
+    }
+
+    .info-card-message {
+      font-size: 1.125rem;
+      line-height: 1.625rem;
+      //
+      display: grid;
+      grid-template-rows: 0fr;
+
+      div {
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+@keyframes grow {
+  from {
+    flex-grow: 0;
+  }
+  to {
+    flex-grow: 1;
+  }
+}

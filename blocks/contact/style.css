@@ -1,0 +1,482 @@
+/* Typography
+--------------------------------------------- */
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-3_Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-3_LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-5_Plain.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-5_PlainItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-7_Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-7_BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-9_Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TheSans";
+  src: url("assets/fonts/TheSans-5_BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@media only screen and (min-width: 48rem) {
+  p {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.8125rem + 0.3906vw, 1.125rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  p {
+    font-size: 1.125rem;
+  }
+}
+
+.page-title,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  line-height: 1.3;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+.page-title {
+  font-size: 4.5rem;
+}
+
+h1,
+.h1 {
+  font-size: 1.802rem;
+}
+@media only screen and (min-width: 48rem) {
+  h1,
+  .h1 {
+    font-size: 1rem;
+    font-size: clamp(1.802rem, -0.6447rem + 5.0973vw, 3.433125rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h1,
+  .h1 {
+    font-size: 3.433125rem;
+  }
+}
+
+h2,
+.h2 {
+  font-size: 1.6rem;
+}
+@media only screen and (min-width: 48rem) {
+  h2,
+  .h2 {
+    font-size: 1rem;
+    font-size: clamp(1.6rem, -0.125rem + 3.5937vw, 2.75rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h2,
+  .h2 {
+    font-size: 2.75rem;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 1.425rem;
+}
+@media only screen and (min-width: 48rem) {
+  h3,
+  .h3 {
+    font-size: 1rem;
+    font-size: clamp(1.425rem, 0.2663rem + 2.4141vw, 2.1975rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h3,
+  .h3 {
+    font-size: 2.1975rem;
+  }
+}
+
+h4,
+.h4 {
+  font-size: 1.266rem;
+}
+@media only screen and (min-width: 48rem) {
+  h4,
+  .h4 {
+    font-size: 1rem;
+    font-size: clamp(1.266rem, 0.528rem + 1.5375vw, 1.758rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h4,
+  .h4 {
+    font-size: 1.758rem;
+  }
+}
+
+h5,
+.h5 {
+  font-size: 1.125rem;
+}
+@media only screen and (min-width: 48rem) {
+  h5,
+  .h5 {
+    font-size: 1rem;
+    font-size: clamp(1.125rem, 0.7031rem + 0.8789vw, 1.40625rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h5,
+  .h5 {
+    font-size: 1.40625rem;
+  }
+}
+
+h6,
+.h6 {
+  font-size: 1rem;
+}
+@media only screen and (min-width: 48rem) {
+  h6,
+  .h6 {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.8162rem + 0.3828vw, 1.1225rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  h6,
+  .h6 {
+    font-size: 1.125rem;
+  }
+}
+
+.text-small {
+  font-size: 0.899rem;
+}
+@media only screen and (min-width: 48rem) {
+  .text-small {
+    font-size: 1rem;
+    font-size: clamp(0.899rem, 0.8975rem + 0.0031vw, 0.9rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .text-small {
+    font-size: 0.9rem;
+  }
+}
+
+.text-smaller {
+  font-size: 0.79rem;
+}
+@media only screen and (min-width: 48rem) {
+  .text-smaller {
+    font-size: 1rem;
+    font-size: clamp(0.79rem, 0.895rem - 0.2188vw, 0.72rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .text-smaller {
+    font-size: 0.72rem;
+  }
+}
+
+/* Elements
+--------------------------------------------- */
+body {
+  font-family: "TheSans", sans-serif;
+  color: #878787;
+  overflow-x: hidden;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@media only screen and (min-width: 48rem) {
+  body {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.8125rem + 0.3906vw, 1.125rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  body {
+    font-size: 1.125rem;
+  }
+}
+
+#primary {
+  overflow-x: hidden;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+figure {
+  margin: 1em 0;
+}
+
+table {
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+
+/* Links
+--------------------------------------------- */
+/* Forms
+--------------------------------------------- */
+.btn {
+  font-size: 1.125rem;
+  padding: 1.25rem 2rem;
+  text-align: center;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+  transition: all 100ms ease-in-out;
+}
+.btn.btn-black {
+  background-color: #222222;
+  border: solid 1px #222222;
+  color: #ffffff;
+}
+.btn.btn-black:hover {
+  background-color: #4e4e4e;
+  border: solid 1px #4e4e4e;
+}
+.btn.btn-black.btn-outline {
+  background-color: #ffffff;
+  border: solid 1px #222222;
+  color: #222222;
+}
+.btn.btn-black.btn-outline:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+.btn.btn-red {
+  background-color: #e63128;
+  color: #ffffff;
+}
+.btn.btn-red:hover {
+  background-color: #eb5a53;
+}
+.btn.btn-red.btn-outline {
+  background-color: #ffffff;
+  color: #222222;
+  border: solid 1px #e63128;
+}
+.btn.btn-red.btn-outline:hover {
+  background-color: #e63128;
+  color: #ffffff;
+}
+
+.contact {
+  width: 100%;
+  max-width: 115rem;
+  margin: 0 auto;
+  padding: 2.1875rem 1.25rem;
+  padding-bottom: 0;
+  background-color: #e63128;
+  padding-top: 100px;
+  color: #ffffff;
+  padding-bottom: 2.5rem;
+  padding-top: 1.5rem;
+}
+@media only screen and (min-width: 48rem) {
+  .contact {
+    padding: 5.5rem 2.5rem;
+    padding-bottom: 0;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .contact {
+    padding: 8.75rem 3.75rem;
+    padding-bottom: 0;
+  }
+}
+@media only screen and (min-width: 120rem) {
+  .contact {
+    padding-top: 11.25rem;
+    padding-bottom: 0;
+  }
+}
+.contact .contact-text {
+  padding-bottom: 3rem;
+}
+.contact .contact-text h2 {
+  max-width: 200px;
+}
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact form select {
+  background-color: #f9f9f9;
+  border: 0;
+  padding-bottom: 0.5rem;
+}
+.contact form .contact-field {
+  box-shadow: 5px 15px 15px rgba(0, 0, 0, 0);
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 1rem 1.825rem;
+}
+.contact form .contact-field:focus {
+  border: 1px solid #878787;
+  outline: 0;
+}
+.contact form textarea.contact-field {
+  height: 11rem;
+}
+.contact form .btn {
+  margin-top: 1.625rem;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (min-width: 64rem) {
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+  }
+  .contact .contact-text h2,
+  .contact .contact-text p {
+    max-width: 380px;
+  }
+  .contact form {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    gap: 1.5rem;
+    width: 100%;
+    grid-row: span 2;
+  }
+  .contact form .contact-select {
+    grid-column: span 8;
+  }
+  .contact form input[name=first-name] {
+    grid-column: span 4;
+  }
+  .contact form input[name=last-name] {
+    grid-column: span 4;
+  }
+  .contact form input[name=email] {
+    grid-column: span 4;
+  }
+  .contact form input[name=phone-number],
+  .contact form input[name=company],
+  .contact form input[name=address-line],
+  .contact form input[name=postcode] {
+    grid-column: span 4;
+  }
+  .contact form textarea[name=message] {
+    grid-column: span 8;
+  }
+  .contact form .form-checkbox-submit {
+    grid-column: span 8;
+  }
+  .contact .form-checkbox-submit {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .contact .form-checkbox-submit .checkbox-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .contact .form-checkbox-submit input[type=checkbox] {
+    appearance: none;
+    background-color: none;
+    margin: 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 0.15em;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+  }
+  .contact .form-checkbox-submit input[type=checkbox]::before {
+    content: "";
+    transform: scale(0);
+    width: 18px;
+    height: 18px;
+    transition: 120ms transform ease-in-out;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #ffffff 37%, #ffffff 37%, #222222 37%, #222222 38%);
+  }
+  .contact .form-checkbox-submit input[type=checkbox]:checked {
+    border: solid 1px #222222;
+  }
+  .contact .form-checkbox-submit input[type=checkbox]:checked::before {
+    transform: scale(1);
+  }
+  .contact .form-checkbox-submit .btn {
+    margin-left: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .contact .contact-link {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    max-width: 502px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

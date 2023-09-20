@@ -1,0 +1,49 @@
+/*!
+Theme Name: YPO 
+Theme URI: http://underscores.me/
+Author: Christopher Stickland
+Author URI: http://underscores.me/
+Description: A custom theme for YPO
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: ypo
+Tags: custom-background, custom-logo, custom-menu, featured-images
+*/
+
+// Import variables and mixins.
+@import 'abstracts/abstracts';
+
+/* Normalize
+--------------------------------------------- */
+@import 'generic/normalize';
+
+/* Box sizing
+--------------------------------------------- */
+@import 'generic/box-sizing';
+
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+@import 'base/base';
+
+@import 'templates/templates';
+
+@import 'components/components';
+
+html {
+  scroll-behavior: smooth;
+}
+
+html :where(.wp-block) {
+  max-width: $container__large;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-red {
+  color: $color__mcalpine-red;
+}

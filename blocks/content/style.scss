@@ -1,0 +1,54 @@
+@import '../../sass/abstracts/_abstracts.scss';
+@import '../../sass/base/base';
+
+.content-block {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    &.contained {
+      @include container-large;
+    }
+
+    &.full {
+      width: 100%;
+      max-width: 120rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.align-start {
+      align-items: start;
+    }
+
+    &.align-center {
+      align-items: center;
+    }
+
+    &.align-end {
+      align-items: end;
+    }
+
+    &.justify-start {
+      justify-content: start;
+    }
+
+    &.justify-center {
+      justify-content: center;
+    }
+
+    &.justify-end {
+      justify-content: end;
+    }
+    .content-text {
+      position: absolute;
+      z-index: 1;
+    }
+    .content-block-image {
+      opacity: 0.26;
+      width: 100%;
+    }
+  }
+}

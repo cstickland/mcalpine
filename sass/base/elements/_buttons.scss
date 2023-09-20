@@ -1,0 +1,55 @@
+.btn {
+  font-size: 1.125rem;
+  padding: 1.25rem 2rem;
+  text-align: center;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+
+  transition: all 100ms ease-in-out;
+
+  &.btn-black {
+    background-color: $color__mcalpine-black;
+    border: solid 1px $color__mcalpine-black;
+    color: #ffffff;
+
+    &:hover {
+      background-color: $color__mcalpine-black-2;
+      border: solid 1px $color__mcalpine-black-2;
+    }
+
+    &.btn-outline {
+      background-color: #ffffff;
+      border: solid 1px $color__mcalpine-black;
+      color: $color__mcalpine-black;
+
+      &:hover {
+        background-color: $color__mcalpine-black;
+        color: #ffffff;
+      }
+    }
+  }
+
+  &.btn-red {
+    background-color: $color__mcalpine-red;
+    color: #ffffff;
+
+    &:hover {
+      background-color: $color__mcalpine-red-2;
+    }
+
+    &.btn-outline {
+      background-color: #ffffff;
+      color: $color__mcalpine-black;
+      border: solid 1px $color__mcalpine-red;
+
+      &:hover {
+        background-color: $color__mcalpine-red;
+        color: #ffffff;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "acf/cta",
+    "title": "Footer Call to Action",
+    "description": "A custom content block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "flag",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

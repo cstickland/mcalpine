@@ -1,0 +1,49 @@
+@import '../../../sass/abstracts/_abstracts.scss';
+.faq {
+	@include container-large;
+	color: $color__cool-grey;
+	font-family: 'TheSans', sans-serif;
+	margin-bottom: 100px;
+	ul {
+		margin: 0;
+		padding: 0;
+		padding-left: 1rem;
+		li {
+			border-bottom: 1px solid $color__cool-grey-transparent;
+			list-style: none;
+			.question {
+				font-weight: bold;
+				cursor: pointer;
+				font-size: 1.125rem;
+				font-size: clamp(
+					1.125rem,
+					0.8333333333333334rem + 0.6076388888888888vw,
+					1.5625rem
+				);
+				padding-left: 1.5rem;
+			}
+			.answer {
+				padding-left: 1.5rem;
+				font-size: 0.75rem;
+				max-height: 0;
+				transition: all 0.2s ease-in-out;
+				overflow: hidden;
+
+				&.show {
+					max-height: 500px;
+				}
+			}
+		}
+	}
+}
+
+@keyframes reveal-accordion {
+	from {
+		opacity: 0;
+		height: 0;
+	}
+	to {
+		opacity: 1;
+		height: auto;
+	}
+}

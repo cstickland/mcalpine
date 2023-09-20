@@ -1,0 +1,17 @@
+.search-hero {
+  width: 100%;
+  text-align: center;
+  padding-top: 10em;
+  padding-bottom: 11.75em;
+
+  .search-hero__subtitle {
+    font-style: italic;
+  }
+  h1 {
+    font-size: 86px;
+    font-weight: 900;
+  }
+  .search-hero__highlight {
+    color: #e63128;
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "acf/hero-product",
+    "title": "Product Hero Block",
+    "description": "A custom content block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php",
+        "postTypes": ["product"]
+    }
+}

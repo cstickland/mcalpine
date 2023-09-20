@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "mcalpine/image-text",
+	"version": "0.1.0",
+	"title": "Product Image Text Card",
+	"category": "widgets",
+	"icon": "editor-ul",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false},
+	"textdomain": "mcalpine",
+	"editorStyle": "file:./style.css",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	}
+}

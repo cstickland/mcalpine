@@ -1,0 +1,17 @@
+{
+    "name": "acf/hero-slider",
+    "title": "Hero Slider",
+    "description": "A custom testing block.",
+    "style": [ "file:./style.css" ],
+	"supports": {
+		"html": false
+	},
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+	"script": "file:./hero-slider.js"
+}

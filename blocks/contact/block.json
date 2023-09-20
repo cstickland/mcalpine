@@ -1,0 +1,13 @@
+{
+    "name": "acf/contact",
+    "title": "Contact Form",
+    "description": "A custom testing block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

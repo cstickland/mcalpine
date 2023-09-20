@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-3_Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-3_LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_Plain.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_PlainItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-7_Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-7_BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-9_Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+
+  @media only screen and (min-width: $tablet) {
+    font-size: 1rem;
+    font-size: clamp(1rem, calc(0.8125rem + 0.3906vw), 1.125rem);
+  }
+
+  @media only screen and (min-width: $desktop) {
+    font-size: 1.125rem;
+  }
+}

@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "create-block/faq",
+	"version": "0.1.0",
+	"title": "FAQ",
+	"category": "widgets",
+	"icon": "editor-ul",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"script": "file:./accordion.js",
+	"textdomain": "faq",
+	"style": "file:./style-accordion.css",
+	"editorStyle": "file:./style-accordion.css",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	}
+}

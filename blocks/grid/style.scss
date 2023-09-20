@@ -1,0 +1,51 @@
+@import '../../sass/abstracts/_abstracts.scss';
+.grid-block {
+  overflow: hidden;
+  @include container-large;
+  .grid-title {
+    width: min-content;
+    margin-bottom: 2.5rem;
+    position: relative;
+    &.red {
+      color: $color__mcalpine-red;
+    }
+
+    &.white {
+      color: #ffffff;
+    }
+
+    &.center {
+      margin: 0 auto;
+      margin-bottom: 2.5rem;
+    }
+
+    .hatch {
+      position: absolute;
+      width: 45%;
+      height: 100%;
+      top: 0;
+      left: 27.5%;
+      background: repeating-linear-gradient(
+        45deg,
+        #ffffff,
+        #ffffff 8px,
+        #bca1a1 9px,
+        #bca1a1 10px
+      );
+      z-index: -1;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .acf-innerblocks-container {
+      max-width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 100%;
+      gap: 1.25rem;
+    }
+  }
+}
