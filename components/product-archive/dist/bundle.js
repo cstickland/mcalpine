@@ -3928,7 +3928,7 @@
     	return block;
     }
 
-    // (96:12) {#if i >= postRangeLow && i < postRangeHigh}
+    // (97:12) {#if i >= postRangeLow && i < postRangeHigh}
     function create_if_block_1(ctx) {
     	let productcard;
     	let current;
@@ -3969,14 +3969,14 @@
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(96:12) {#if i >= postRangeLow && i < postRangeHigh}",
+    		source: "(97:12) {#if i >= postRangeLow && i < postRangeHigh}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (95:8) {#each allProductsList as product, i}
+    // (96:8) {#each allProductsList as product, i}
     function create_each_block(ctx) {
     	let if_block_anchor;
     	let current;
@@ -4035,14 +4035,14 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(95:8) {#each allProductsList as product, i}",
+    		source: "(96:8) {#each allProductsList as product, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (103:8) {#if totalPages > 1}
+    // (104:8) {#if totalPages > 1}
     function create_if_block(ctx) {
     	let pagination;
     	let updating_currentPage;
@@ -4099,7 +4099,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(103:8) {#if totalPages > 1}",
+    		source: "(104:8) {#if totalPages > 1}",
     		ctx
     	});
 
@@ -4117,10 +4117,11 @@
     	let gridtogglebuttons;
     	let updating_gridStyle;
     	let t3;
+    	let div1;
     	let ul;
     	let ul_class_value;
     	let t4;
-    	let div1;
+    	let div2;
     	let section_class_value;
     	let current;
     	let if_block0 = /*showFilters*/ ctx[2] && create_if_block_3(ctx);
@@ -4185,6 +4186,7 @@
     			t2 = space();
     			create_component(gridtogglebuttons.$$.fragment);
     			t3 = space();
+    			div1 = element("div");
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -4192,7 +4194,7 @@
     			}
 
     			t4 = space();
-    			div1 = element("div");
+    			div2 = element("div");
     			if (if_block2) if_block2.c();
     			attr_dev(div0, "class", "archive-controls");
     			add_location(div0, file, 83, 4, 2534);
@@ -4201,9 +4203,11 @@
     			? 'product-archive-grid columns'
     			: 'product-archive-grid rows');
 
-    			add_location(ul, file, 93, 4, 2947);
-    			attr_dev(div1, "class", "pagination-container");
-    			add_location(div1, file, 101, 4, 3227);
+    			add_location(ul, file, 94, 4, 2996);
+    			attr_dev(div1, "class", "product-archive-grid-container");
+    			add_location(div1, file, 93, 4, 2947);
+    			attr_dev(div2, "class", "pagination-container");
+    			add_location(div2, file, 102, 4, 3286);
     			attr_dev(section, "class", section_class_value = "product-archive " + /*filtersClass*/ ctx[12]);
     			add_location(section, file, 55, 0, 1584);
     		},
@@ -4221,7 +4225,8 @@
     			append_dev(div0, t2);
     			mount_component(gridtogglebuttons, div0, null);
     			append_dev(section, t3);
-    			append_dev(section, ul);
+    			append_dev(section, div1);
+    			append_dev(div1, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -4230,8 +4235,8 @@
     			}
 
     			append_dev(section, t4);
-    			append_dev(section, div1);
-    			if (if_block2) if_block2.m(div1, null);
+    			append_dev(section, div2);
+    			if (if_block2) if_block2.m(div2, null);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -4335,7 +4340,7 @@
     					if_block2 = create_if_block(ctx);
     					if_block2.c();
     					transition_in(if_block2, 1);
-    					if_block2.m(div1, null);
+    					if_block2.m(div2, null);
     				}
     			} else if (if_block2) {
     				group_outros();

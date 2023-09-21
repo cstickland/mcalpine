@@ -91,6 +91,7 @@
         <CardsPerPage bind:postsPerPage />
         <GridToggleButtons bind:gridStyle />
     </div>
+    <div class="product-archive-grid-container">
     <ul class={gridStyle ? 'product-archive-grid columns' : 'product-archive-grid rows'}>
         {#each allProductsList as product, i}
             {#if i >= postRangeLow && i < postRangeHigh}
@@ -98,7 +99,7 @@
             {/if}
         {/each}
     </ul>
-
+    </div>
     <div class="pagination-container">
         {#if totalPages > 1}
             <Pagination bind:currentPage {totalPages} />
