@@ -51,7 +51,7 @@
 
     {/if}
     {#if currentPage < totalPages - 1 && totalPages > 3}
-        <div class="pagination-seperator-dots">...</div>
+        <div class="pagination-seperator-dots"><span>...</span></div>
         <button class="pagination-button"
             on:click={() => {
                 setCurrentcurrentPage(totalPages)

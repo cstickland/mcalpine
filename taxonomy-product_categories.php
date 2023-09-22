@@ -29,23 +29,10 @@ class Category
 ?>
 
 <main id="primary" class="site-main">
+    <?php echo do_blocks('<!-- wp:mcalpine/small-hero {"name":"mcalpine/small-hero","mode":"preview"} /-->'); ?>
     <?php if (have_posts()) : ?>
 
-        <?php
-        /* Start the Loop */
-        $term = get_queried_object();
-        var_dump($term);
-        var_dump(get_field('category_image', $term));
-
-
-        if ($term->parent == 0) {
-            echo $term->term_id;
-            echo $term->name;
-            echo '<h2>Parent</h2>';
-            var_dump(get_term_children($term->term_id, 'product_categories'));
-        } else {
-            echo '<h2>Child</h2>';
-        } ?><div id="archive-items">
+        <div id="archive-items">
             <?php
             while (have_posts()) :
                 the_post();

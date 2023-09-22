@@ -7,6 +7,7 @@
     'filters product-grid'
     'pagination pagination';
   @include container-large;
+  padding-top: 0 !important;
 
   &.hide-filters {
     grid-template-columns: 1fr;
@@ -138,134 +139,9 @@
       list-style: none;
       gap: 1.25rem;
       height: fit-content;
-    }
-  }
 
-  .archive-controls {
-    grid-area: controls;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 3.75rem;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
-    justify-content: end;
-
-    .product-archive-total-results {
-      background-color: #f4f4f4;
-      border: solid 1px #d5d5d5;
-      flex-grow: 1;
-      height: 100%;
-      justify-content: space-between;
-      display: flex;
-      align-items: center;
-      padding-left: 2.75rem;
-      padding-right: 1.25rem;
-      color: #707070;
-
-      button {
-        outline: 0;
-        border: 0;
-        background-color: transparent;
-        cursor: pointer;
-      }
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    input[type='number'] {
-      -moz-appearance: textfield;
-      appearance: textfield;
-    }
-
-    input {
-      aspect-ratio: 1;
-      width: 3.75rem;
-      text-align: center;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .layout-button {
-      display: grid;
-      width: 3.75rem;
-      aspect-ratio: 1;
-      outline: 0;
-      border: solid 1px #878787;
-      gap: 0.25rem;
-      padding: 1rem;
-      background-color: transparent;
-      cursor: pointer;
-
-      .square {
-        background-color: #222222;
-      }
-
-      &.grid-layout-button {
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      &.row-layout-button {
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: 1fr 3fr;
-        row-gap: 0.25rem;
-      }
-    }
-  }
-  .pagination-container {
-    grid-area: pagination;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4.5rem;
-    margin-bottom: 4.5rem;
-
-    .prev-next-button {
-      background-color: transparent;
-      outline: none;
-      border: 0;
-      cursor: pointer;
-      color: #222222;
-
-      &:disabled {
-        color: #878787;
-      }
-    }
-    .page-number-buttons {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1.25rem;
-
-      .pagination-seperator-dots {
-        align-self: end;
-        font-size: 22px;
-      }
-      .pagination-button {
-        width: 3.75rem;
-        height: 3.75rem;
-        cursor: pointer;
-        border: solid 1px #d8d8d8;
-        color: #222222;
-        font-size: 1.125rem;
-        letter-spacing: 0;
-        background-color: white;
-
-        &.pagination-button__current {
-          font-weight: 900;
-          background-color: $color__mcalpine-red;
-          color: #ffffff;
-        }
+      &.columns {
+        grid-template-columns: 1fr 1fr;
       }
     }
   }
@@ -276,27 +152,51 @@
     .product-archive {
       .product-archive-grid-container {
         .product-archive-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+
+  @container product-grid-container (min-width: 600px) {
+    .product-archive {
+      .product-archive-grid-container {
+        .product-archive-grid {
           grid-template-columns: 1fr 1fr;
+          &.rows {
+            grid-template-columns: 1fr;
+          }
+        }
+      }
+    }
+  }
+  @container product-grid-container (min-width: 900px) {
+    .product-archive {
+      .product-archive-grid-container {
+        .product-archive-grid {
+          &.columns {
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+
+          &.rows {
+            grid-template-columns: 1fr;
+          }
         }
       }
     }
   }
 
-  @container product-grid-container (min-width: 1000px) {
+  @container product-grid-container (min-width: 1150px) {
     .product-archive {
       .product-archive-grid-container {
         .product-archive-grid {
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-      }
-    }
-  }
+          &.columns {
+            grid-template-columns: repeat(4, 1fr);
+          }
 
-  @container product-grid-container (min-width: 1400px) {
-    .product-archive {
-      .product-archive-grid-container {
-        .product-archive-grid {
-          grid-template-columns: repeat(4, 1fr);
+          &.rows {
+            grid-template-columns: 1fr;
+          }
         }
       }
     }

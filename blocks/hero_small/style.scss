@@ -10,7 +10,7 @@
     width: 50%;
     margin-left: auto;
     max-width: 860px;
-
+    padding-left: 3.75rem;
     .hero-breadcrumbs {
       display: flex;
       flex-direction: row;
@@ -44,10 +44,19 @@
     .small-hero-text {
       margin: 0;
       color: #878787;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 63px;
+      line-height: 21px;
+      width: 349px;
     }
   }
 
   .small-hero-image-container {
+    display: none;
     background: transparent
       linear-gradient(-105deg, #7caef220 0%, #7caef200 100%) 0% 0% no-repeat
       padding-box;
@@ -57,6 +66,9 @@
     align-items: center;
     img {
       margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 68rem) {
     }
   }
 }

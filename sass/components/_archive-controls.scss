@@ -1,0 +1,108 @@
+.archive-controls {
+  grid-area: controls;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2.375rem;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  justify-content: end;
+
+  .product-archive-total-results {
+    background-color: #f4f4f4;
+    border: solid 1px #d5d5d5;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-left: 2.75rem;
+    padding-right: 1.25rem;
+    color: #707070;
+
+    button {
+      outline: 0;
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  input {
+    aspect-ratio: 1;
+    width: 2.375rem;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .layout-button {
+    display: grid;
+    width: 2.375rem;
+    aspect-ratio: 1;
+    outline: 0;
+    border: solid 1px #878787;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+
+    .square {
+      background-color: #222222;
+    }
+
+    &.grid-layout-button-mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      .square {
+        width: 0.3125rem;
+        aspect-ratio: 1;
+        margin: 0 auto;
+      }
+    }
+    &.grid-layout-button {
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.row-layout-button {
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: 1fr 3fr;
+      row-gap: 0.25rem;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .archive-controls {
+    height: 3.75rem;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    input {
+      width: 3.75rem;
+    }
+
+    .layout-button {
+      width: 3.75rem;
+
+      padding: 1rem;
+    }
+  }
+}

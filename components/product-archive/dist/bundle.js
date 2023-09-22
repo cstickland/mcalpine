@@ -979,7 +979,7 @@
     }
 
     // (15:51) {#if product.skus.length > 1}
-    function create_if_block$4(ctx) {
+    function create_if_block$5(ctx) {
     	let t;
 
     	const block = {
@@ -996,7 +996,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block$5.name,
     		type: "if",
     		source: "(15:51) {#if product.skus.length > 1}",
     		ctx
@@ -1083,7 +1083,7 @@
     	let mounted;
     	let dispose;
     	let if_block0 = /*product*/ ctx[0].skus.length == 1 && create_if_block_1$4(ctx);
-    	let if_block1 = /*product*/ ctx[0].skus.length > 1 && create_if_block$4(ctx);
+    	let if_block1 = /*product*/ ctx[0].skus.length > 1 && create_if_block$5(ctx);
     	let each_value = /*product*/ ctx[0].skus;
     	validate_each_argument(each_value);
     	let each_blocks = [];
@@ -1242,7 +1242,7 @@
 
     			if (/*product*/ ctx[0].skus.length > 1) {
     				if (if_block1) ; else {
-    					if_block1 = create_if_block$4(ctx);
+    					if_block1 = create_if_block$5(ctx);
     					if_block1.c();
     					if_block1.m(div1, null);
     				}
@@ -1644,6 +1644,7 @@
     // (53:4) {#if currentPage < totalPages - 1 && totalPages > 3}
     function create_if_block_1$3(ctx) {
     	let div;
+    	let span;
     	let t1;
     	let button;
     	let t2;
@@ -1653,17 +1654,20 @@
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = "...";
+    			span = element("span");
+    			span.textContent = "...";
     			t1 = space();
     			button = element("button");
     			t2 = text(/*totalPages*/ ctx[1]);
+    			add_location(span, file$5, 53, 47, 1532);
     			attr_dev(div, "class", "pagination-seperator-dots");
     			add_location(div, file$5, 53, 8, 1493);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$5, 54, 8, 1550);
+    			add_location(button, file$5, 54, 8, 1563);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
+    			append_dev(div, span);
     			insert_dev(target, t1, anchor);
     			insert_dev(target, button, anchor);
     			append_dev(button, t2);
@@ -1697,7 +1701,7 @@
     }
 
     // (73:0) {:else}
-    function create_else_block$1(ctx) {
+    function create_else_block$2(ctx) {
     	let button;
 
     	const block = {
@@ -1706,7 +1710,7 @@
     			button.textContent = "Next";
     			attr_dev(button, "class", "prev-next-button");
     			button.disabled = true;
-    			add_location(button, file$5, 73, 4, 1932);
+    			add_location(button, file$5, 73, 4, 1945);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1719,7 +1723,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$1.name,
+    		id: create_else_block$2.name,
     		type: "else",
     		source: "(73:0) {:else}",
     		ctx
@@ -1729,7 +1733,7 @@
     }
 
     // (65:0) {#if currentPage < totalPages}
-    function create_if_block$3(ctx) {
+    function create_if_block$4(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -1739,7 +1743,7 @@
     			button = element("button");
     			button.textContent = "Next";
     			attr_dev(button, "class", "prev-next-button");
-    			add_location(button, file$5, 65, 4, 1765);
+    			add_location(button, file$5, 65, 4, 1778);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1759,7 +1763,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block$4.name,
     		type: "if",
     		source: "(65:0) {#if currentPage < totalPages}",
     		ctx
@@ -1795,8 +1799,8 @@
     	let if_block5 = /*currentPage*/ ctx[0] < /*totalPages*/ ctx[1] - 1 && /*totalPages*/ ctx[1] > 3 && create_if_block_1$3(ctx);
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*currentPage*/ ctx[0] < /*totalPages*/ ctx[1]) return create_if_block$3;
-    		return create_else_block$1;
+    		if (/*currentPage*/ ctx[0] < /*totalPages*/ ctx[1]) return create_if_block$4;
+    		return create_else_block$2;
     	}
 
     	let current_block_type_1 = select_block_type_1(ctx);
@@ -2200,7 +2204,8 @@
 
     const file$3 = "src/GridToggleButtons.svelte";
 
-    function create_fragment$3(ctx) {
+    // (15:0) {:else}
+    function create_else_block$1(ctx) {
     	let button0;
     	let div0;
     	let t0;
@@ -2269,42 +2274,39 @@
     			t13 = space();
     			div14 = element("div");
     			attr_dev(div0, "class", "square");
-    			add_location(div0, file$3, 7, 4, 135);
+    			add_location(div0, file$3, 17, 4, 395);
     			attr_dev(div1, "class", "square");
-    			add_location(div1, file$3, 8, 4, 162);
+    			add_location(div1, file$3, 18, 4, 422);
     			attr_dev(div2, "class", "square");
-    			add_location(div2, file$3, 9, 4, 189);
+    			add_location(div2, file$3, 19, 4, 449);
     			attr_dev(div3, "class", "square");
-    			add_location(div3, file$3, 10, 4, 216);
+    			add_location(div3, file$3, 20, 4, 476);
     			attr_dev(div4, "class", "square");
-    			add_location(div4, file$3, 11, 4, 243);
+    			add_location(div4, file$3, 21, 4, 503);
     			attr_dev(div5, "class", "square");
-    			add_location(div5, file$3, 12, 4, 270);
+    			add_location(div5, file$3, 22, 4, 530);
     			attr_dev(div6, "class", "square");
-    			add_location(div6, file$3, 13, 4, 297);
+    			add_location(div6, file$3, 23, 4, 557);
     			attr_dev(div7, "class", "square");
-    			add_location(div7, file$3, 14, 4, 324);
+    			add_location(div7, file$3, 24, 4, 584);
     			attr_dev(div8, "class", "square");
-    			add_location(div8, file$3, 15, 4, 351);
+    			add_location(div8, file$3, 25, 4, 611);
     			attr_dev(button0, "class", "layout-button grid-layout-button");
-    			add_location(button0, file$3, 5, 0, 44);
+    			add_location(button0, file$3, 15, 0, 304);
     			attr_dev(div9, "class", "square");
-    			add_location(div9, file$3, 18, 4, 474);
+    			add_location(div9, file$3, 28, 4, 734);
     			attr_dev(div10, "class", "square");
-    			add_location(div10, file$3, 19, 4, 501);
+    			add_location(div10, file$3, 29, 4, 761);
     			attr_dev(div11, "class", "square");
-    			add_location(div11, file$3, 20, 4, 528);
+    			add_location(div11, file$3, 30, 4, 788);
     			attr_dev(div12, "class", "square");
-    			add_location(div12, file$3, 21, 4, 555);
+    			add_location(div12, file$3, 31, 4, 815);
     			attr_dev(div13, "class", "square");
-    			add_location(div13, file$3, 22, 4, 582);
+    			add_location(div13, file$3, 32, 4, 842);
     			attr_dev(div14, "class", "square");
-    			add_location(div14, file$3, 23, 4, 609);
+    			add_location(div14, file$3, 33, 4, 869);
     			attr_dev(button1, "class", "layout-button row-layout-button");
-    			add_location(button1, file$3, 17, 0, 384);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			add_location(button1, file$3, 27, 0, 644);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button0, anchor);
@@ -2341,22 +2343,137 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*click_handler*/ ctx[1], false, false, false, false),
-    					listen_dev(button1, "click", /*click_handler_1*/ ctx[2], false, false, false, false)
+    					listen_dev(button0, "click", /*click_handler_1*/ ctx[4], false, false, false, false),
+    					listen_dev(button1, "click", /*click_handler_2*/ ctx[5], false, false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: noop,
-    		i: noop,
-    		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button0);
     			if (detaching) detach_dev(t8);
     			if (detaching) detach_dev(button1);
     			mounted = false;
     			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(15:0) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (9:0) {#if innerWidth < 650}
+    function create_if_block$3(ctx) {
+    	let button;
+    	let div0;
+    	let t;
+    	let div1;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			div0 = element("div");
+    			t = space();
+    			div1 = element("div");
+    			attr_dev(div0, "class", "square");
+    			add_location(div0, file$3, 11, 4, 236);
+    			attr_dev(div1, "class", "square");
+    			add_location(div1, file$3, 12, 4, 263);
+    			attr_dev(button, "class", "layout-button grid-layout-button-mobile");
+    			add_location(button, file$3, 9, 0, 132);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, div0);
+    			append_dev(button, t);
+    			append_dev(button, div1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[3], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(9:0) {#if innerWidth < 650}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$3(ctx) {
+    	let if_block_anchor;
+    	let mounted;
+    	let dispose;
+    	add_render_callback(/*onwindowresize*/ ctx[2]);
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*innerWidth*/ ctx[1] < 650) return create_if_block$3;
+    		return create_else_block$1;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(window, "resize", /*onwindowresize*/ ctx[2]);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -2375,6 +2492,7 @@
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GridToggleButtons', slots, []);
     	let { gridStyle } = $$props;
+    	let innerWidth;
 
     	$$self.$$.on_mount.push(function () {
     		if (gridStyle === undefined && !('gridStyle' in $$props || $$self.$$.bound[$$self.$$.props['gridStyle']])) {
@@ -2388,24 +2506,37 @@
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<GridToggleButtons> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => $$invalidate(0, gridStyle = true);
-    	const click_handler_1 = () => $$invalidate(0, gridStyle = false);
+    	function onwindowresize() {
+    		$$invalidate(1, innerWidth = window.innerWidth);
+    	}
+
+    	const click_handler = () => $$invalidate(0, gridStyle = !gridStyle);
+    	const click_handler_1 = () => $$invalidate(0, gridStyle = true);
+    	const click_handler_2 = () => $$invalidate(0, gridStyle = false);
 
     	$$self.$$set = $$props => {
     		if ('gridStyle' in $$props) $$invalidate(0, gridStyle = $$props.gridStyle);
     	};
 
-    	$$self.$capture_state = () => ({ gridStyle });
+    	$$self.$capture_state = () => ({ gridStyle, innerWidth });
 
     	$$self.$inject_state = $$props => {
     		if ('gridStyle' in $$props) $$invalidate(0, gridStyle = $$props.gridStyle);
+    		if ('innerWidth' in $$props) $$invalidate(1, innerWidth = $$props.innerWidth);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [gridStyle, click_handler, click_handler_1];
+    	return [
+    		gridStyle,
+    		innerWidth,
+    		onwindowresize,
+    		click_handler,
+    		click_handler_1,
+    		click_handler_2
+    	];
     }
 
     class GridToggleButtons extends SvelteComponentDev {

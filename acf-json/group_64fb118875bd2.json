@@ -3,6 +3,33 @@
     "title": "Product Categories",
     "fields": [
         {
+            "key": "field_650d84764a558",
+            "label": "Hero Style",
+            "name": "hero_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "small": "Small",
+                "large": "Large"
+            },
+            "default_value": "small",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_64fb11882ebda",
             "label": "Suitability",
             "name": "suitability",
@@ -47,6 +74,44 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_650d84664a557",
+            "label": "Breadcrumb Middle Link",
+            "name": "breadcrumb_middle_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "return_format": "array"
+        },
+        {
+            "key": "field_650d867e6b0f5",
+            "label": "Hero Message",
+            "name": "hero_message",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": "",
+            "maxlength": "",
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
         }
     ],
     "location": [
@@ -71,5 +136,5 @@
     "graphql_field_name": "customFields",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1694519716
+    "modified": 1695385262
 }
