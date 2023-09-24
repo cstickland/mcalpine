@@ -3,14 +3,14 @@
 	"apiVersion": 2,
 	"name": "mcalpine/image-text",
 	"version": "0.1.0",
-	"title": "Product Image Text Card",
+	"title": "Image & Text",
 	"category": "widgets",
-	"icon": "editor-ul",
+	"icon": "format-image",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false},
 	"textdomain": "mcalpine",
-	"editorStyle": "file:./style.css",
+	"style": "file:./style.css",
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php"

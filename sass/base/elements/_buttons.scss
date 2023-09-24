@@ -1,6 +1,7 @@
 .btn {
-  font-size: 1.125rem;
-  padding: 1.25rem 2rem;
+  font-size: 1rem;
+  padding: 1rem 1.6875rem;
+  line-height: 1;
   text-align: center;
   outline: none;
   border: 0;
@@ -51,5 +52,23 @@
         color: #ffffff;
       }
     }
+  }
+
+  &.btn-white {
+    background-color: #ffffff;
+    color: $color__mcalpine-black;
+    border: 0;
+
+    &:hover {
+      background-color: $color__mcalpine-black;
+      color: #ffffff;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .btn {
+    font-size: 1.125rem;
+    padding: 1.25rem 2rem;
   }
 }

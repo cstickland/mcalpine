@@ -649,8 +649,9 @@ table {
 /* Forms
 --------------------------------------------- */
 .btn {
-	font-size: 1.125rem;
-	padding: 1.25rem 2rem;
+	font-size: 1rem;
+	padding: 1rem 1.6875rem;
+	line-height: 1;
 	text-align: center;
 	outline: none;
 	border: 0;
@@ -701,6 +702,24 @@ table {
 .btn.btn-red.btn-outline:hover {
 	background-color: #e63128;
 	color: #ffffff;
+}
+
+.btn.btn-white {
+	background-color: #ffffff;
+	color: #222222;
+	border: 0;
+}
+
+.btn.btn-white:hover {
+	background-color: #222222;
+	color: #ffffff;
+}
+
+@media only screen and (min-width: 64rem) {
+	.btn {
+		font-size: 1.125rem;
+		padding: 1.25rem 2rem;
+	}
 }
 
 .main-nav {
