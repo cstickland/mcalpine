@@ -1,0 +1,13 @@
+{
+    "name": "mcalpine/featured-insight-hero",
+    "title": "Featured Insight Hero Block",
+    "description": "A custom featured insight hero block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "admin-post",
+    "keywords": ["hero", "small", "breadcrumbs"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

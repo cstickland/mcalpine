@@ -12,3 +12,4 @@ require_once('info_card/info_card.php');
 require_once('hero_small/hero-small.php');
 require_once('image_text/image-and-text.php');
 require_once('call_to_action/cta.php');
+require_once('hero_featured_insight/featured-insight-hero.php');

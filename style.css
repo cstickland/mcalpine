@@ -866,7 +866,6 @@ table {
 		max-width: 115rem;
 		margin: 0 auto;
 		padding: 2.1875rem 1.25rem;
-		padding-bottom: 0;
 		padding-top: 15px !important;
 		padding-bottom: 15px !important;
 	}
@@ -874,22 +873,19 @@ table {
 
 @media only screen and (min-width: 68rem) and (min-width: 48rem) {
 	.main-nav .desktop-menu {
-		padding: 5.5rem 2.5rem;
-		padding-bottom: 0;
+		padding: 3.75rem 2.5rem;
 	}
 }
 
 @media only screen and (min-width: 68rem) and (min-width: 64rem) {
 	.main-nav .desktop-menu {
-		padding: 8.75rem 3.75rem;
-		padding-bottom: 0;
+		padding: 5rem 3.75rem;
 	}
 }
 
 @media only screen and (min-width: 68rem) and (min-width: 120rem) {
 	.main-nav .desktop-menu {
-		padding-top: 11.25rem;
-		padding-bottom: 0;
+		padding-top: 5rem;
 	}
 }
 
@@ -1050,29 +1046,26 @@ table {
 		max-width: 115rem;
 		margin: 0 auto;
 		padding: 2.1875rem 1.25rem;
-		padding-bottom: 0;
 		padding-top: 0 !important;
+		padding-bottom: 0 !important;
 	}
 }
 
 @media only screen and (min-width: 80rem) and (min-width: 48rem) {
 	.site-footer .footer-container {
-		padding: 5.5rem 2.5rem;
-		padding-bottom: 0;
+		padding: 3.75rem 2.5rem;
 	}
 }
 
 @media only screen and (min-width: 80rem) and (min-width: 64rem) {
 	.site-footer .footer-container {
-		padding: 8.75rem 3.75rem;
-		padding-bottom: 0;
+		padding: 5rem 3.75rem;
 	}
 }
 
 @media only screen and (min-width: 80rem) and (min-width: 120rem) {
 	.site-footer .footer-container {
-		padding-top: 11.25rem;
-		padding-bottom: 0;
+		padding-top: 5rem;
 	}
 }
 
@@ -1580,28 +1573,24 @@ table {
 	max-width: 115rem;
 	margin: 0 auto;
 	padding: 2.1875rem 1.25rem;
-	padding-bottom: 0;
 	padding-top: 0 !important;
 }
 
 @media only screen and (min-width: 48rem) {
 	.product-archive {
-		padding: 5.5rem 2.5rem;
-		padding-bottom: 0;
+		padding: 3.75rem 2.5rem;
 	}
 }
 
 @media only screen and (min-width: 64rem) {
 	.product-archive {
-		padding: 8.75rem 3.75rem;
-		padding-bottom: 0;
+		padding: 5rem 3.75rem;
 	}
 }
 
 @media only screen and (min-width: 120rem) {
 	.product-archive {
-		padding-top: 11.25rem;
-		padding-bottom: 0;
+		padding-top: 5rem;
 	}
 }
 

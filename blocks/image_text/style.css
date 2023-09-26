@@ -3,25 +3,21 @@
   max-width: 115rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
-  padding-bottom: 0;
   display: flex;
 }
 @media only screen and (min-width: 48rem) {
   .image-text-block .image-text-container {
-    padding: 5.5rem 2.5rem;
-    padding-bottom: 0;
+    padding: 3.75rem 2.5rem;
   }
 }
 @media only screen and (min-width: 64rem) {
   .image-text-block .image-text-container {
-    padding: 8.75rem 3.75rem;
-    padding-bottom: 0;
+    padding: 5rem 3.75rem;
   }
 }
 @media only screen and (min-width: 120rem) {
   .image-text-block .image-text-container {
-    padding-top: 11.25rem;
-    padding-bottom: 0;
+    padding-top: 5rem;
   }
 }
 .image-text-block .image-text-container.i-top {
@@ -63,12 +59,11 @@
 }
 
 @media only screen and (min-width: 64rem) {
-  .image-text-block {
-    padding-bottom: 160px;
-  }
-  .image-text-block .image-text-container.color-red {
+  .image-text-block .image-text-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+  }
+  .image-text-block .image-text-container.color-red {
     grid-template-rows: 1fr 8fr 1fr;
   }
   .image-text-block .image-text-container.color-red .image-container {
@@ -109,14 +104,34 @@
     grid-area: 2/1/span 2/span 8;
   }
   .image-text-block .image-text-container.color-white {
+    grid-template-rows: 9fr 1fr;
     align-items: center;
-    gap: 45px;
+    gap: 0px;
   }
-  .image-text-block .image-text-container.color-white.i-right {
-    flex-direction: row;
+  .image-text-block .image-text-container.color-white.i-right .image-container {
+    grid-area: 1/5/span 1/span 8;
+    width: auto;
+    height: 100%;
   }
-  .image-text-block .image-text-container.color-white.i-left {
-    flex-direction: row-reverse;
+  .image-text-block .image-text-container.color-white.i-right .image-container img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .image-text-block .image-text-container.color-white.i-right .text-container {
+    grid-area: 1/1/span 1/span 4;
+    width: auto;
+  }
+  .image-text-block .image-text-container.color-white.i-left .image-container {
+    grid-area: 1/1/span 1/span 8;
+    width: auto;
+    height: 100%;
+  }
+  .image-text-block .image-text-container.color-white.i-left .text-container {
+    grid-area: 1/9/span 1/span 4;
+    width: auto;
   }
   .image-text-block .image-text-container .text-container {
     min-width: 30%;
@@ -128,11 +143,6 @@
   }
   .image-text-block .image-text-container .image-container {
     width: 66%;
-  }
-}
-@media only screen and (min-width: 80rem) {
-  .image-text-block .image-text-container.color-white {
-    gap: 93px;
   }
 }
 

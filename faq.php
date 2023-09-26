@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Faq Template */
+/* Template Name: Faq */
 
 get_header();
 global $post;
@@ -7,8 +7,9 @@ $blocks = parse_blocks($post->post_content);
 ?>
 
 <main id="primary" class="site-main">
+    <h1>Hi</h1>
     <section class="faq-links">
-<h4 class="scroll-to">Scroll To Queries:</h4>
+        <h4 class="scroll-to">Scroll To Queries:</h4>
         <?php
         foreach ($blocks as $block) {
             if ($block['blockName'] === 'create-block/faq') {
@@ -22,7 +23,6 @@ $blocks = parse_blocks($post->post_content);
         while (have_posts()) :
             the_post();
 
-            the_content();
         endwhile;
         the_posts_navigation();
     endif;

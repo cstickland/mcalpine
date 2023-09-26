@@ -1,26 +1,13 @@
 <?php
 
-/**
- * The template for displaying archive pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package McAlpine
- */
+// wordpress uses this as the archive page for "posts"
 
 get_header();
 ?>
 
 <main id="primary" class="site-main">
-    <?php if (have_posts()) : ?>
-        <header class="page-header">
-            <?php
-            the_archive_title('<h1 class="page-title">', '</h1>');
-            the_archive_description('<div class="archive-description">', '</div>');
-            ?>
-        </header><!-- .page-header -->
-
-    <?php
+    <?php echo do_blocks('<!-- wp:mcalpine/featured-insight-hero {"name":"mcalpine/featured-insight-hero","mode":"preview"} /-->'); ?>
+    <?php if (have_posts()) :
         /* Start the Loop */
         while (have_posts()) :
             the_post();

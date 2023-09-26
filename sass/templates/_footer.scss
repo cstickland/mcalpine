@@ -147,6 +147,7 @@
     .footer-container {
       @include container-large;
       padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
     &.version-1 {
       .footer-content {

@@ -1,5 +1,4 @@
 <?php
-/* Template Name: Faq Template */
 
 get_header();
 global $post;

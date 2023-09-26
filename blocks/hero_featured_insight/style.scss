@@ -1,0 +1,82 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.featured-insight-hero-block {
+  position: relative;
+
+  .insight-hero-gradient {
+    position: absolute;
+    z-index: -1;
+    background: transparent
+      linear-gradient(207deg, #7caef226 0%, #7caef200 100%) 0% 0% no-repeat
+      padding-box;
+    width: 70%;
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+  .insight-hero-container {
+    @include container-large;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    .insight-hero-image-container {
+      display: flex;
+      z-index: 1;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        mix-blend-mode: multiply;
+        background: transparent
+          linear-gradient(180deg, #22222200 0%, #222222 100%) 0% 0% no-repeat
+          padding-box;
+      }
+    }
+
+    .insight-hero-post-content {
+      background-color: $color__mcalpine-red;
+      color: #ffffff;
+      padding-left: 2rem;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      h2 {
+        padding-top: 0.625rem;
+        padding-bottom: 1rem;
+        padding-right: 2rem;
+      }
+
+      p {
+        padding-right: 2rem;
+      }
+
+      .featured-insight-link {
+        background-color: #ffffff;
+        width: 2.4rem;
+        height: 2.5rem;
+        align-self: flex-end;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .hero-title {
+    color: $color__mcalpine-red;
+    background-color: #ffffff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 80%;
+    display: flex;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    align-items: center;
+    justify-content: end;
+    z-index: 2;
+    .hero-title-desktop {
+      display: none;
+    }
+  }
+}

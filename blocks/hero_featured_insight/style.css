@@ -1,0 +1,91 @@
+.featured-insight-hero-block {
+  position: relative;
+}
+.featured-insight-hero-block .insight-hero-gradient {
+  position: absolute;
+  z-index: -1;
+  background: transparent linear-gradient(207deg, rgba(124, 174, 242, 0.1490196078) 0%, rgba(124, 174, 242, 0) 100%) 0% 0% no-repeat padding-box;
+  width: 70%;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+.featured-insight-hero-block .insight-hero-container {
+  width: 100%;
+  max-width: 115rem;
+  margin: 0 auto;
+  padding: 2.1875rem 1.25rem;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+@media only screen and (min-width: 48rem) {
+  .featured-insight-hero-block .insight-hero-container {
+    padding: 3.75rem 2.5rem;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .featured-insight-hero-block .insight-hero-container {
+    padding: 5rem 3.75rem;
+  }
+}
+@media only screen and (min-width: 120rem) {
+  .featured-insight-hero-block .insight-hero-container {
+    padding-top: 5rem;
+  }
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-image-container {
+  display: flex;
+  z-index: 1;
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  mix-blend-mode: multiply;
+  background: transparent linear-gradient(180deg, rgba(34, 34, 34, 0) 0%, #222222 100%) 0% 0% no-repeat padding-box;
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-post-content {
+  background-color: #e63128;
+  color: #ffffff;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-post-content h2 {
+  padding-top: 0.625rem;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-post-content p {
+  padding-right: 2rem;
+}
+.featured-insight-hero-block .insight-hero-container .insight-hero-post-content .featured-insight-link {
+  background-color: #ffffff;
+  width: 2.4rem;
+  height: 2.5rem;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.featured-insight-hero-block .hero-title {
+  color: #e63128;
+  background-color: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 80%;
+  display: flex;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  align-items: center;
+  justify-content: end;
+  z-index: 2;
+}
+.featured-insight-hero-block .hero-title .hero-title-desktop {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
