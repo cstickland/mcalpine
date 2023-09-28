@@ -63,7 +63,7 @@
 }
 .featured-insight-hero-block .insight-hero-container .insight-hero-post-content .featured-insight-link {
   background-color: #ffffff;
-  width: 2.4rem;
+  width: 2.5rem;
   height: 2.5rem;
   align-self: flex-end;
   display: flex;
@@ -86,6 +86,57 @@
 }
 .featured-insight-hero-block .hero-title .hero-title-desktop {
   display: none;
+}
+
+@media only screen and (min-width: 64rem) {
+  .featured-insight-hero-block .insight-hero-gradient {
+    width: 50%;
+  }
+  .featured-insight-hero-block .hero-title {
+    grid-area: 1/1/span 2/span 6;
+    justify-content: start;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+  }
+  .featured-insight-hero-block .hero-title .hero-title-mobile {
+    display: none;
+  }
+  .featured-insight-hero-block .hero-title .hero-title-desktop {
+    display: block;
+    margin: 0;
+  }
+  .featured-insight-hero-block .insight-hero-container {
+    position: relative;
+    max-width: 110.25rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 7.5rem 7.5rem 8fr 1fr;
+  }
+  .featured-insight-hero-block .insight-hero-container .insight-hero-image-container {
+    height: 584px;
+    grid-area: 2/1/span 2/span 12;
+  }
+  .featured-insight-hero-block .insight-hero-container .insight-hero-post-content {
+    padding-top: 46px;
+    padding-left: 90px;
+    grid-area: 3/9/span 2/span 4;
+    z-index: 2;
+    height: fit-content;
+    align-self: end;
+  }
+  .featured-insight-hero-block .insight-hero-container .insight-hero-post-content h2,
+  .featured-insight-hero-block .insight-hero-container .insight-hero-post-content p {
+    padding-right: 5.625rem;
+  }
+  .featured-insight-hero-block .insight-hero-container .insight-hero-post-content .featured-insight-link {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

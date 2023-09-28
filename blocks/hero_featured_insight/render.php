@@ -8,13 +8,13 @@ $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
 
 <div <?php echo get_block_wrapper_attributes(['class' => 'featured-insight-hero-block']); ?>>
     <div class="insight-hero-gradient"></div>
-    <div class="hero-title">
-        <h1 class="hero-title-mobile"><?php the_field('featured_insight_block_title_mobile', 'option'); ?></h1>
-        <h1 class="hero-title-desktop"><?php the_field('featured_insight_block_title_desktop', 'option'); ?></h1>
-    </div>
+
 
     <div class="insight-hero-container">
-
+        <div class="hero-title">
+            <h1 class="hero-title-mobile"><?php the_field('featured_insight_block_title_mobile', 'option'); ?></h1>
+            <h1 class="hero-title-desktop"><?php the_field('featured_insight_block_title_desktop', 'option'); ?></h1>
+        </div>
         <div class="insight-hero-image-container">
             <img src="<?php echo $image; ?>" alt="<?php echo $alt; ?>">
         </div>
