@@ -134,6 +134,7 @@
     container-name: product-grid-container;
     .product-archive-grid {
       display: grid;
+      grid-auto-flow: row dense;
       margin: 0;
       padding: 0;
       list-style: none;

@@ -24,6 +24,29 @@
             "step": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_651826ad21706",
+            "label": "Column Width",
+            "name": "column_width",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": 1,
+            "min": 1,
+            "max": 4,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -48,5 +71,5 @@
     "graphql_field_name": "posts",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1695745015
+    "modified": 1696081603
 }

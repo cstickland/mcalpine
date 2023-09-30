@@ -40,7 +40,7 @@ get_header();
                 $new_insight->permalink = get_the_permalink();
                 $new_insight->alt = $alt;
                 $new_insight->img = $insight_image;
-                $new_insight->columnWidth = 1;
+                $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
                 $insights[] = $new_insight;
         ?>
 

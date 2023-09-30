@@ -5,7 +5,7 @@
     $: openClass = open ? "open" : "closed";
 </script>
 
-<div class="insight-card {openClass}" in:fade={{ duration: 300 }}>
+<div class="insight-card col-{insight.columnWidth}" in:fade={{ duration: 300 }}>
     <div class="insight-card-text">
         <h6 class="insight-identifier">{insight.identifier}</h6>
         <h3 class="insight-card-title">{insight.title}</h3>

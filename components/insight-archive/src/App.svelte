@@ -3,46 +3,69 @@
 
     import InsightCard from "./InsightCard.svelte";
     import Pagination from "./Pagination.svelte";
-   
+
     let currentPage = 1;
     let postsPerPage = 12;
     let gridStyle = true;
-    let filtersClass;
 
- 
+    let totalProducts = getTotal(allInsights);
 
-    $: totalProducts = getTotal(allInsights);
+    let insightsDividedIntoPages = divideInsightsIntoPages();
 
     function getTotal(insights) {
         let total = 0;
-        insights.forEach(element => {
+        insights.forEach((element) => {
             total += element.columnWidth;
         });
-        console.log(total);
         return total;
     }
-    $: totalPages = Math.ceil(totalProducts / postsPerPage);
-    $: postRangeHigh = currentPage * postsPerPage;
-    $: postRangeLow = postRangeHigh - postsPerPage;
- 
-    
 
+    function divideInsightsIntoPages() {
+        let count = 0;
+        let page = [];
+        let pagesArray = [];
+
+        while (allInsights.length > 0) {
+            
+            if(count < 12 ) {
+                let pushInsight = allInsights.shift();
+               page.push(pushInsight);
+               count++;
+            } else {
+                pagesArray.push(page);
+                page = [];
+                count = 0;
+            }
+        }
+
+        return pagesArray;
+    }
+
+    $: totalPages = Math.ceil(totalProducts / postsPerPage);
+
+    $: currentPageInsights = insightsDividedIntoPages[currentPage - 1];
 </script>
 
-<section class="product-archive {filtersClass}">
-
+<section class="product-archive hide-filters">
     <div class="product-archive-grid-container">
-    <ul class={gridStyle ? 'product-archive-grid columns' : 'product-archive-grid rows'}>
-        {#each allInsights as insight, i}
-            {#if i >= postRangeLow && i < postRangeHigh}
+        {insightsDividedIntoPages.length},
+        {totalPages}
+        <ul
+            class={gridStyle
+                ? "product-archive-grid columns"
+                : "product-archive-grid rows"}
+        >
+            {#each currentPageInsights as insight}
                 <InsightCard {insight} />
-            {/if}
-        {/each}
-    </ul>
+            {/each}
+        </ul>
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage {totalPages} />
+            <Pagination
+                bind:currentPage
+                {totalPages}
+            />
         {/if}
     </div>
 </section>
