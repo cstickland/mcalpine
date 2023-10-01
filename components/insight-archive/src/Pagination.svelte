@@ -1,12 +1,9 @@
 <script>
     export let currentPage;
     export let totalPages;
-       function setCurrentcurrentPage(newPage) {
+    function setCurrentcurrentPage(newPage) {
         currentPage = newPage;
-        console.log(currentPage)
-   
     }
-
 </script>
 
 {#if currentPage > 1}

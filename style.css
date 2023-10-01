@@ -1592,7 +1592,7 @@ table {
 }
 
 .insight-card.col-4 {
-	grid-column: span -1;
+	grid-column: span 4;
 }
 
 .insight-card .insight-card-image-container {

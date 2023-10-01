@@ -33,7 +33,6 @@ export async function getData(graphQlUrl, query, productCategories) {
 
   const response = await fetchPromise.json()
   productCategories.set(response.data.productCategories.edges)
-  console.log(response)
 }
 
 export const query = `{

@@ -44,7 +44,6 @@ export async function getData(graphQlUrl, menus, query, productCategories) {
   })
 
   const response = await fetchPromise.json()
-  console.log(response)
   menus.set(response.data.menus.nodes)
   productCategories.set(response.data.productCategories.edges)
 }
