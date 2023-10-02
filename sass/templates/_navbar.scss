@@ -137,6 +137,7 @@
       justify-content: center;
 
       @include container-large;
+      max-width: 115rem;
       padding-top: 15px !important;
       padding-bottom: 15px !important;
     }

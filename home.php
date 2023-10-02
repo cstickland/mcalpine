@@ -17,7 +17,7 @@ get_header();
 
 <main id="primary" class="site-main">
     <?php echo do_blocks('<!-- wp:mcalpine/featured-insight-hero {"name":"mcalpine/featured-insight-hero","mode":"preview"} /-->'); ?>
-    <ul id="insight-archive">
+    <ul id="insight-archive" class="insight-archive-container">
         <?php if (have_posts()) :
             /* Start the Loop */
             while (have_posts()) :
@@ -38,9 +38,15 @@ get_header();
                 $new_insight = new Insight();
                 $new_insight->title = get_the_title();
                 $new_insight->permalink = get_the_permalink();
+                $category;
+                foreach ((get_the_category()) as $cat) {
+                    $category = $cat->cat_name;
+                };
+                $new_insight->identifier = $category;
                 $new_insight->alt = $alt;
                 $new_insight->img = $insight_image;
-                $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
+                $new_insight->columnWidth = 1;
+                // $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
                 $insights[] = $new_insight;
         ?>
 

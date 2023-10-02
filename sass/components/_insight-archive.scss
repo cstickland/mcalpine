@@ -1,0 +1,110 @@
+.insight-archive-container {
+  margin: 0;
+  padding: 0;
+}
+
+.insight-archive {
+  @include container-large;
+  padding-top: 2rem !important;
+
+  .insight-archive-grid-container {
+    container-type: inline-size;
+    container-name: insight-grid-container;
+  }
+}
+
+.insight-archive-filters-container {
+  border-top: solid 1px #f4f4f4;
+  border-bottom: solid 1px #f4f4f4;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .insight-archive-filters {
+    display: flex;
+    @include container-large;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    .insight-archive-filter-categories {
+      width: min-content;
+
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #222222;
+        padding-bottom: 0.25rem;
+        border-bottom: solid 2px $color__mcalpine-red;
+
+        svg {
+          width: 1.5rem;
+          margin-left: 1rem;
+          rect,
+          path {
+            fill: #222222;
+          }
+        }
+      }
+
+      .insight-archive-filter-dropdown {
+        margin: 0;
+        padding: 0;
+        padding-top: 1rem;
+        list-style: none;
+        font-size: 0.875rem;
+      }
+    }
+    .insight-archive-rounded-buttons {
+      margin: 0;
+      display: flex;
+      gap: 1.25rem;
+      margin-left: 3rem;
+      padding: 0;
+      list-style: none;
+      height: min-content;
+      li {
+        border: solid 1px #5a5a5a;
+        border-radius: 30px;
+        padding: 10px 30px;
+        color: #5a5a5a;
+        cursor: pointer;
+        background-color: #ffffff;
+        transition: all 0.2s ease-in-out;
+        font-size: 0.875rem;
+        &:hover,
+        &:active {
+          background-color: #222222;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+.insight-archive-grid {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@supports (container-type: inline-size) {
+  @container insight-grid-container (min-width: 600px) {
+    .insight-archive-grid {
+      grid-template-columns: 1fr 1fr;
+      &.rows {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  @container insight-grid-container (min-width: 1000px) {
+    .insight-archive-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @container insight-grid-container (min-width: 1400px) {
+    .insight-archive-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

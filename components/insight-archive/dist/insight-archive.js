@@ -118,6 +118,9 @@
     function element(name) {
         return document.createElement(name);
     }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
     function text(data) {
         return document.createTextNode(data);
     }
@@ -443,6 +446,112 @@
             }
         };
     }
+    function create_bidirectional_transition(node, fn, params, intro) {
+        const options = { direction: 'both' };
+        let config = fn(node, params, options);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = (program.b - t);
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program || pending_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config(options);
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
 
     function bind(component, name, callback) {
         const index = component.$$.props[name];
@@ -667,6 +776,11 @@
         $inject_state() { }
     }
 
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+
     function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
         const o = +getComputedStyle(node).opacity;
         return {
@@ -676,11 +790,39 @@
             css: t => `opacity: ${t * o}`
         };
     }
+    function slide(node, { delay = 0, duration = 400, easing = cubicOut, axis = 'y' } = {}) {
+        const style = getComputedStyle(node);
+        const opacity = +style.opacity;
+        const primary_property = axis === 'y' ? 'height' : 'width';
+        const primary_property_value = parseFloat(style[primary_property]);
+        const secondary_properties = axis === 'y' ? ['top', 'bottom'] : ['left', 'right'];
+        const capitalized_secondary_properties = secondary_properties.map((e) => `${e[0].toUpperCase()}${e.slice(1)}`);
+        const padding_start_value = parseFloat(style[`padding${capitalized_secondary_properties[0]}`]);
+        const padding_end_value = parseFloat(style[`padding${capitalized_secondary_properties[1]}`]);
+        const margin_start_value = parseFloat(style[`margin${capitalized_secondary_properties[0]}`]);
+        const margin_end_value = parseFloat(style[`margin${capitalized_secondary_properties[1]}`]);
+        const border_width_start_value = parseFloat(style[`border${capitalized_secondary_properties[0]}Width`]);
+        const border_width_end_value = parseFloat(style[`border${capitalized_secondary_properties[1]}Width`]);
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => 'overflow: hidden;' +
+                `opacity: ${Math.min(t * 20, 1) * opacity};` +
+                `${primary_property}: ${t * primary_property_value}px;` +
+                `padding-${secondary_properties[0]}: ${t * padding_start_value}px;` +
+                `padding-${secondary_properties[1]}: ${t * padding_end_value}px;` +
+                `margin-${secondary_properties[0]}: ${t * margin_start_value}px;` +
+                `margin-${secondary_properties[1]}: ${t * margin_end_value}px;` +
+                `border-${secondary_properties[0]}-width: ${t * border_width_start_value}px;` +
+                `border-${secondary_properties[1]}-width: ${t * border_width_end_value}px;`
+        };
+    }
 
     /* src/InsightCard.svelte generated by Svelte v3.59.1 */
-    const file$2 = "src/InsightCard.svelte";
+    const file$3 = "src/InsightCard.svelte";
 
-    function create_fragment$2(ctx) {
+    function create_fragment$3(ctx) {
     	let div5;
     	let div0;
     	let h6;
@@ -701,7 +843,10 @@
     	let div4;
     	let a;
     	let span;
+    	let t7;
     	let div3;
+    	let svg;
+    	let path;
     	let a_href_value;
     	let div5_class_value;
     	let div5_intro;
@@ -725,35 +870,45 @@
     			a = element("a");
     			span = element("span");
     			span.textContent = "View Resource";
+    			t7 = space();
     			div3 = element("div");
-    			div3.textContent = ">";
+    			svg = svg_element("svg");
+    			path = svg_element("path");
     			attr_dev(h6, "class", "insight-identifier");
-    			add_location(h6, file$2, 9, 8, 287);
+    			add_location(h6, file$3, 9, 8, 299);
     			attr_dev(h3, "class", "insight-card-title");
-    			add_location(h3, file$2, 10, 8, 352);
+    			add_location(h3, file$3, 10, 8, 364);
     			attr_dev(div0, "class", "insight-card-text");
-    			add_location(div0, file$2, 8, 4, 247);
+    			add_location(div0, file$3, 8, 4, 259);
     			attr_dev(img, "class", "insight-card-background-image");
     			if (!src_url_equal(img.src, img_src_value = /*insight*/ ctx[0].img)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*insight*/ ctx[0].alt ? /*insight*/ ctx[0].alt : "");
-    			add_location(img, file$2, 13, 8, 470);
+    			add_location(img, file$3, 13, 8, 482);
     			attr_dev(div1, "class", "insight-card-hover-gradient");
-    			add_location(div1, file$2, 18, 8, 623);
+    			add_location(div1, file$3, 18, 8, 635);
     			attr_dev(div2, "class", "insight-card-image-container");
-    			add_location(div2, file$2, 12, 4, 419);
-    			add_location(span, file$2, 23, 13, 793);
+    			add_location(div2, file$3, 12, 4, 431);
+    			add_location(span, file$3, 23, 13, 801);
+    			attr_dev(path, "d", "M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z");
+    			attr_dev(path, "fill", "#fff");
+    			add_location(path, file$3, 30, 21, 1089);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "width", "13.922");
+    			attr_dev(svg, "height", "16.245");
+    			attr_dev(svg, "viewBox", "0 0 13.922 16.245");
+    			add_location(svg, file$3, 25, 16, 889);
     			attr_dev(div3, "class", "insight-link-arrow");
-    			add_location(div3, file$2, 23, 39, 819);
+    			add_location(div3, file$3, 24, 12, 840);
 
     			attr_dev(a, "href", a_href_value = /*insight*/ ctx[0].permalink
     			? /*insight*/ ctx[0].permalink
     			: "");
 
-    			add_location(a, file$2, 22, 8, 727);
+    			add_location(a, file$3, 22, 8, 735);
     			attr_dev(div4, "class", "insight-card-link");
-    			add_location(div4, file$2, 21, 4, 687);
-    			attr_dev(div5, "class", div5_class_value = "insight-card col-" + /*insight*/ ctx[0].columnWidth);
-    			add_location(div5, file$2, 7, 0, 162);
+    			add_location(div4, file$3, 21, 4, 695);
+    			attr_dev(div5, "class", div5_class_value = "insight-card mobile-show col-" + /*insight*/ ctx[0].columnWidth);
+    			add_location(div5, file$3, 7, 0, 162);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -775,7 +930,10 @@
     			append_dev(div5, div4);
     			append_dev(div4, a);
     			append_dev(a, span);
+    			append_dev(a, t7);
     			append_dev(a, div3);
+    			append_dev(div3, svg);
+    			append_dev(svg, path);
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*insight*/ 1 && t0_value !== (t0_value = /*insight*/ ctx[0].identifier + "")) set_data_dev(t0, t0_value);
@@ -795,7 +953,7 @@
     				attr_dev(a, "href", a_href_value);
     			}
 
-    			if (dirty & /*insight*/ 1 && div5_class_value !== (div5_class_value = "insight-card col-" + /*insight*/ ctx[0].columnWidth)) {
+    			if (dirty & /*insight*/ 1 && div5_class_value !== (div5_class_value = "insight-card mobile-show col-" + /*insight*/ ctx[0].columnWidth)) {
     				attr_dev(div5, "class", div5_class_value);
     			}
     		},
@@ -815,7 +973,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$3.name,
     		type: "component",
     		source: "",
     		ctx
@@ -824,7 +982,7 @@
     	return block;
     }
 
-    function instance$2($$self, $$props, $$invalidate) {
+    function instance$3($$self, $$props, $$invalidate) {
     	let openClass;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('InsightCard', slots, []);
@@ -859,13 +1017,13 @@
     class InsightCard extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { insight: 0 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { insight: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "InsightCard",
     			options,
-    			id: create_fragment$2.name
+    			id: create_fragment$3.name
     		});
     	}
 
@@ -880,7 +1038,7 @@
 
     /* src/Pagination.svelte generated by Svelte v3.59.1 */
 
-    const file$1 = "src/Pagination.svelte";
+    const file$2 = "src/Pagination.svelte";
 
     // (16:0) {:else}
     function create_else_block_1(ctx) {
@@ -892,7 +1050,7 @@
     			button.textContent = "Prev";
     			attr_dev(button, "class", "prev-next-button");
     			button.disabled = true;
-    			add_location(button, file$1, 16, 4, 345);
+    			add_location(button, file$2, 16, 4, 345);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -925,7 +1083,7 @@
     			button = element("button");
     			button.textContent = "Prev";
     			attr_dev(button, "class", "prev-next-button");
-    			add_location(button, file$1, 9, 4, 184);
+    			add_location(button, file$2, 9, 4, 184);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -967,7 +1125,7 @@
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$1, 21, 8, 504);
+    			add_location(button, file$2, 21, 8, 504);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1012,7 +1170,7 @@
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$1, 29, 8, 731);
+    			add_location(button, file$2, 29, 8, 731);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1057,7 +1215,7 @@
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$1, 42, 8, 1071);
+    			add_location(button, file$2, 42, 8, 1071);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1102,7 +1260,7 @@
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$1, 50, 8, 1317);
+    			add_location(button, file$2, 50, 8, 1317);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1135,7 +1293,7 @@
     }
 
     // (58:4) {#if currentPage < totalPages - 1 && totalPages > 3}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	let div;
     	let span;
     	let t1;
@@ -1152,11 +1310,11 @@
     			t1 = space();
     			button = element("button");
     			t2 = text(/*totalPages*/ ctx[1]);
-    			add_location(span, file$1, 58, 47, 1614);
+    			add_location(span, file$2, 58, 47, 1614);
     			attr_dev(div, "class", "pagination-seperator-dots");
-    			add_location(div, file$1, 58, 8, 1575);
+    			add_location(div, file$2, 58, 8, 1575);
     			attr_dev(button, "class", "pagination-button");
-    			add_location(button, file$1, 59, 8, 1645);
+    			add_location(button, file$2, 59, 8, 1645);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1184,7 +1342,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
     		source: "(58:4) {#if currentPage < totalPages - 1 && totalPages > 3}",
     		ctx
@@ -1194,7 +1352,7 @@
     }
 
     // (78:0) {:else}
-    function create_else_block(ctx) {
+    function create_else_block$1(ctx) {
     	let button;
 
     	const block = {
@@ -1203,7 +1361,7 @@
     			button.textContent = "Next";
     			attr_dev(button, "class", "prev-next-button");
     			button.disabled = true;
-    			add_location(button, file$1, 78, 4, 2046);
+    			add_location(button, file$2, 78, 4, 2046);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1216,7 +1374,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block.name,
+    		id: create_else_block$1.name,
     		type: "else",
     		source: "(78:0) {:else}",
     		ctx
@@ -1226,7 +1384,7 @@
     }
 
     // (69:0) {#if currentPage < totalPages}
-    function create_if_block$1(ctx) {
+    function create_if_block$2(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -1236,7 +1394,7 @@
     			button = element("button");
     			button.textContent = "Next";
     			attr_dev(button, "class", "prev-next-button");
-    			add_location(button, file$1, 69, 4, 1871);
+    			add_location(button, file$2, 69, 4, 1871);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1256,7 +1414,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
     		source: "(69:0) {#if currentPage < totalPages}",
     		ctx
@@ -1265,7 +1423,7 @@
     	return block;
     }
 
-    function create_fragment$1(ctx) {
+    function create_fragment$2(ctx) {
     	let t0;
     	let div;
     	let t1;
@@ -1289,11 +1447,11 @@
     	let if_block2 = /*currentPage*/ ctx[0] > 1 && create_if_block_4(ctx);
     	let if_block3 = /*currentPage*/ ctx[0] < /*totalPages*/ ctx[1] && create_if_block_3(ctx);
     	let if_block4 = /*currentPage*/ ctx[0] == 1 && /*totalPages*/ ctx[1] > 2 && create_if_block_2(ctx);
-    	let if_block5 = /*currentPage*/ ctx[0] < /*totalPages*/ ctx[1] - 1 && /*totalPages*/ ctx[1] > 3 && create_if_block_1(ctx);
+    	let if_block5 = /*currentPage*/ ctx[0] < /*totalPages*/ ctx[1] - 1 && /*totalPages*/ ctx[1] > 3 && create_if_block_1$1(ctx);
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*currentPage*/ ctx[0] < /*totalPages*/ ctx[1]) return create_if_block$1;
-    		return create_else_block;
+    		if (/*currentPage*/ ctx[0] < /*totalPages*/ ctx[1]) return create_if_block$2;
+    		return create_else_block$1;
     	}
 
     	let current_block_type_1 = select_block_type_1(ctx);
@@ -1320,9 +1478,9 @@
     			if_block6.c();
     			if_block6_anchor = empty();
     			attr_dev(button, "class", "pagination-button pagination-button__current");
-    			add_location(button, file$1, 37, 4, 929);
+    			add_location(button, file$2, 37, 4, 929);
     			attr_dev(div, "class", "page-number-buttons");
-    			add_location(div, file$1, 19, 0, 408);
+    			add_location(div, file$2, 19, 0, 408);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1418,7 +1576,7 @@
     				if (if_block5) {
     					if_block5.p(ctx, dirty);
     				} else {
-    					if_block5 = create_if_block_1(ctx);
+    					if_block5 = create_if_block_1$1(ctx);
     					if_block5.c();
     					if_block5.m(div, null);
     				}
@@ -1458,7 +1616,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$1.name,
+    		id: create_fragment$2.name,
     		type: "component",
     		source: "",
     		ctx
@@ -1467,7 +1625,7 @@
     	return block;
     }
 
-    function instance$1($$self, $$props, $$invalidate) {
+    function instance$2($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Pagination', slots, []);
     	let { currentPage } = $$props;
@@ -1558,13 +1716,13 @@
     class Pagination extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { currentPage: 0, totalPages: 1 });
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { currentPage: 0, totalPages: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Pagination",
     			options,
-    			id: create_fragment$1.name
+    			id: create_fragment$2.name
     		});
     	}
 
@@ -1585,6 +1743,488 @@
     	}
     }
 
+    /* src/Filters.svelte generated by Svelte v3.59.1 */
+    const file$1 = "src/Filters.svelte";
+
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[5] = list[i];
+    	return child_ctx;
+    }
+
+    // (33:12) {:else}
+    function create_else_block(ctx) {
+    	let svg;
+    	let g1;
+    	let g0;
+    	let rect;
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			g1 = svg_element("g");
+    			g0 = svg_element("g");
+    			rect = svg_element("rect");
+    			path = svg_element("path");
+    			attr_dev(rect, "width", "24");
+    			attr_dev(rect, "height", "24");
+    			attr_dev(rect, "opacity", "0");
+    			add_location(rect, file$1, 36, 29, 1402);
+    			attr_dev(path, "d", "M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z");
+    			add_location(path, file$1, 36, 72, 1445);
+    			attr_dev(g0, "data-name", "chevron-down");
+    			add_location(g0, file$1, 35, 25, 1345);
+    			attr_dev(g1, "data-name", "Layer 2");
+    			add_location(g1, file$1, 34, 21, 1297);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			add_location(svg, file$1, 33, 16, 1216);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, g1);
+    			append_dev(g1, g0);
+    			append_dev(g0, rect);
+    			append_dev(g0, path);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(33:12) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (18:12) {#if open}
+    function create_if_block_1(ctx) {
+    	let svg;
+    	let g1;
+    	let g0;
+    	let rect;
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			g1 = svg_element("g");
+    			g0 = svg_element("g");
+    			rect = svg_element("rect");
+    			path = svg_element("path");
+    			attr_dev(rect, "width", "24");
+    			attr_dev(rect, "height", "24");
+    			attr_dev(rect, "transform", "rotate(180 12 12)");
+    			attr_dev(rect, "opacity", "0");
+    			add_location(rect, file$1, 21, 29, 660);
+    			attr_dev(path, "d", "M16 14.5a1 1 0 0 1-.71-.29L12 10.9l-3.3 3.18a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.42l4-3.86a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.42 1 1 0 0 1-.69.28z");
+    			add_location(path, file$1, 26, 30, 889);
+    			attr_dev(g0, "data-name", "chevron-up");
+    			add_location(g0, file$1, 20, 25, 605);
+    			attr_dev(g1, "data-name", "Layer 2");
+    			add_location(g1, file$1, 19, 21, 557);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			add_location(svg, file$1, 18, 16, 476);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, g1);
+    			append_dev(g1, g0);
+    			append_dev(g0, rect);
+    			append_dev(g0, path);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(18:12) {#if open}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (45:8) {#if open}
+    function create_if_block$1(ctx) {
+    	let ul;
+    	let ul_transition;
+    	let current;
+    	let each_value = /*categoriesArray*/ ctx[1];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			ul = element("ul");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(ul, "class", "insight-archive-filter-dropdown");
+    			add_location(ul, file$1, 45, 12, 1774);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, ul, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(ul, null);
+    				}
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*categoriesArray*/ 2) {
+    				each_value = /*categoriesArray*/ ctx[1];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(ul, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!current) return;
+    				if (!ul_transition) ul_transition = create_bidirectional_transition(ul, slide, {}, true);
+    				ul_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!ul_transition) ul_transition = create_bidirectional_transition(ul, slide, {}, false);
+    			ul_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(ul);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching && ul_transition) ul_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(45:8) {#if open}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (47:16) {#each categoriesArray as category}
+    function create_each_block$1(ctx) {
+    	let li;
+    	let t_value = /*category*/ ctx[5] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			li = element("li");
+    			t = text(t_value);
+    			add_location(li, file$1, 47, 20, 1908);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			append_dev(li, t);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(47:16) {#each categoriesArray as category}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let div2;
+    	let div1;
+    	let div0;
+    	let t0;
+    	let t1;
+    	let t2;
+    	let ul;
+    	let li0;
+    	let t4;
+    	let li1;
+    	let t6;
+    	let li2;
+    	let t8;
+    	let li3;
+    	let t10;
+    	let li4;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*open*/ ctx[0]) return create_if_block_1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block0 = current_block_type(ctx);
+    	let if_block1 = /*open*/ ctx[0] && create_if_block$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			t0 = text("Categories\n            ");
+    			if_block0.c();
+    			t1 = space();
+    			if (if_block1) if_block1.c();
+    			t2 = space();
+    			ul = element("ul");
+    			li0 = element("li");
+    			li0.textContent = "News";
+    			t4 = space();
+    			li1 = element("li");
+    			li1.textContent = "Inspiration";
+    			t6 = space();
+    			li2 = element("li");
+    			li2.textContent = "Architects";
+    			t8 = space();
+    			li3 = element("li");
+    			li3.textContent = "Careers";
+    			t10 = space();
+    			li4 = element("li");
+    			li4.textContent = "Etc";
+    			attr_dev(div0, "class", "dropdown-toggle");
+    			add_location(div0, file$1, 10, 8, 288);
+    			attr_dev(div1, "class", "insight-archive-filter-categories");
+    			add_location(div1, file$1, 9, 4, 232);
+    			add_location(li0, file$1, 53, 8, 2052);
+    			add_location(li1, file$1, 54, 8, 2074);
+    			add_location(li2, file$1, 55, 8, 2103);
+    			add_location(li3, file$1, 56, 8, 2131);
+    			add_location(li4, file$1, 57, 8, 2156);
+    			attr_dev(ul, "class", "insight-archive-rounded-buttons");
+    			add_location(ul, file$1, 52, 4, 1999);
+    			attr_dev(div2, "class", "insight-archive-filters");
+    			add_location(div2, file$1, 8, 0, 190);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, t0);
+    			if_block0.m(div0, null);
+    			append_dev(div1, t1);
+    			if (if_block1) if_block1.m(div1, null);
+    			append_dev(div2, t2);
+    			append_dev(div2, ul);
+    			append_dev(ul, li0);
+    			append_dev(ul, t4);
+    			append_dev(ul, li1);
+    			append_dev(ul, t6);
+    			append_dev(ul, li2);
+    			append_dev(ul, t8);
+    			append_dev(ul, li3);
+    			append_dev(ul, t10);
+    			append_dev(ul, li4);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div0, "click", /*click_handler*/ ctx[4], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type !== (current_block_type = select_block_type(ctx))) {
+    				if_block0.d(1);
+    				if_block0 = current_block_type(ctx);
+
+    				if (if_block0) {
+    					if_block0.c();
+    					if_block0.m(div0, null);
+    				}
+    			}
+
+    			if (/*open*/ ctx[0]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty & /*open*/ 1) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block$1(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(div1, null);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block1);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if_block0.d();
+    			if (if_block1) if_block1.d();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Filters', slots, []);
+    	let { filters = [] } = $$props;
+    	let { categories } = $$props;
+    	let open = false;
+    	const categoriesArray = [...categories];
+
+    	$$self.$$.on_mount.push(function () {
+    		if (categories === undefined && !('categories' in $$props || $$self.$$.bound[$$self.$$.props['categories']])) {
+    			console.warn("<Filters> was created without expected prop 'categories'");
+    		}
+    	});
+
+    	const writable_props = ['filters', 'categories'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Filters> was created with unknown prop '${key}'`);
+    	});
+
+    	const click_handler = () => {
+    		$$invalidate(0, open = !open);
+    	};
+
+    	$$self.$$set = $$props => {
+    		if ('filters' in $$props) $$invalidate(2, filters = $$props.filters);
+    		if ('categories' in $$props) $$invalidate(3, categories = $$props.categories);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		slide,
+    		filters,
+    		categories,
+    		open,
+    		categoriesArray
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('filters' in $$props) $$invalidate(2, filters = $$props.filters);
+    		if ('categories' in $$props) $$invalidate(3, categories = $$props.categories);
+    		if ('open' in $$props) $$invalidate(0, open = $$props.open);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [open, categoriesArray, filters, categories, click_handler];
+    }
+
+    class Filters extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { filters: 2, categories: 3 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Filters",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+
+    	get filters() {
+    		throw new Error("<Filters>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set filters(value) {
+    		throw new Error("<Filters>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get categories() {
+    		throw new Error("<Filters>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set categories(value) {
+    		throw new Error("<Filters>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
     /* src/App.svelte generated by Svelte v3.59.1 */
 
     const { console: console_1 } = globals;
@@ -1592,17 +2232,17 @@
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
+    	child_ctx[12] = list[i];
     	return child_ctx;
     }
 
-    // (55:12) {#each currentPageInsights as insight}
+    // (72:12) {#each currentPageInsights as insight}
     function create_each_block(ctx) {
     	let insightcard;
     	let current;
 
     	insightcard = new InsightCard({
-    			props: { insight: /*insight*/ ctx[9] },
+    			props: { insight: /*insight*/ ctx[12] },
     			$$inline: true
     		});
 
@@ -1616,7 +2256,7 @@
     		},
     		p: function update(ctx, dirty) {
     			const insightcard_changes = {};
-    			if (dirty & /*currentPageInsights*/ 2) insightcard_changes.insight = /*insight*/ ctx[9];
+    			if (dirty & /*currentPageInsights*/ 4) insightcard_changes.insight = /*insight*/ ctx[12];
     			insightcard.$set(insightcard_changes);
     		},
     		i: function intro(local) {
@@ -1637,24 +2277,24 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(55:12) {#each currentPageInsights as insight}",
+    		source: "(72:12) {#each currentPageInsights as insight}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (61:8) {#if totalPages > 1}
+    // (78:8) {#if totalPages > 1}
     function create_if_block(ctx) {
     	let pagination;
     	let updating_currentPage;
     	let current;
 
     	function pagination_currentPage_binding(value) {
-    		/*pagination_currentPage_binding*/ ctx[5](value);
+    		/*pagination_currentPage_binding*/ ctx[7](value);
     	}
 
-    	let pagination_props = { totalPages: /*totalPages*/ ctx[2] };
+    	let pagination_props = { totalPages: /*totalPages*/ ctx[3] };
 
     	if (/*currentPage*/ ctx[0] !== void 0) {
     		pagination_props.currentPage = /*currentPage*/ ctx[0];
@@ -1673,7 +2313,7 @@
     		},
     		p: function update(ctx, dirty) {
     			const pagination_changes = {};
-    			if (dirty & /*totalPages*/ 4) pagination_changes.totalPages = /*totalPages*/ ctx[2];
+    			if (dirty & /*totalPages*/ 8) pagination_changes.totalPages = /*totalPages*/ ctx[3];
 
     			if (!updating_currentPage && dirty & /*currentPage*/ 1) {
     				updating_currentPage = true;
@@ -1701,7 +2341,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(61:8) {#if totalPages > 1}",
+    		source: "(78:8) {#if totalPages > 1}",
     		ctx
     	});
 
@@ -1709,13 +2349,30 @@
     }
 
     function create_fragment(ctx) {
-    	let section;
     	let div0;
-    	let ul;
-    	let t;
+    	let filters_1;
+    	let updating_filters;
+    	let t0;
+    	let section;
     	let div1;
+    	let ul;
+    	let t1;
+    	let div2;
     	let current;
-    	let each_value = /*currentPageInsights*/ ctx[1];
+
+    	function filters_1_filters_binding(value) {
+    		/*filters_1_filters_binding*/ ctx[6](value);
+    	}
+
+    	let filters_1_props = { categories: /*categories*/ ctx[4] };
+
+    	if (/*filters*/ ctx[1] !== void 0) {
+    		filters_1_props.filters = /*filters*/ ctx[1];
+    	}
+
+    	filters_1 = new Filters({ props: filters_1_props, $$inline: true });
+    	binding_callbacks.push(() => bind(filters_1, 'filters', filters_1_filters_binding));
+    	let each_value = /*currentPageInsights*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -1727,41 +2384,45 @@
     		each_blocks[i] = null;
     	});
 
-    	let if_block = /*totalPages*/ ctx[2] > 1 && create_if_block(ctx);
+    	let if_block = /*totalPages*/ ctx[3] > 1 && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
-    			section = element("section");
     			div0 = element("div");
+    			create_component(filters_1.$$.fragment);
+    			t0 = space();
+    			section = element("section");
+    			div1 = element("div");
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t = space();
-    			div1 = element("div");
+    			t1 = space();
+    			div2 = element("div");
     			if (if_block) if_block.c();
-
-    			attr_dev(ul, "class", /*gridStyle*/ ctx[3]
-    			? "product-archive-grid columns"
-    			: "product-archive-grid rows");
-
-    			add_location(ul, file, 49, 8, 1491);
-    			attr_dev(div0, "class", "product-archive-grid-container");
-    			add_location(div0, file, 48, 4, 1438);
-    			attr_dev(div1, "class", "pagination-container");
-    			add_location(div1, file, 59, 4, 1772);
-    			attr_dev(section, "class", "product-archive hide-filters");
-    			add_location(section, file, 47, 0, 1387);
+    			attr_dev(div0, "class", "insight-archive-filters-container");
+    			add_location(div0, file, 65, 0, 1949);
+    			attr_dev(ul, "class", "insight-archive-grid");
+    			add_location(ul, file, 70, 8, 2137);
+    			attr_dev(div1, "class", "insight-archive-grid-container");
+    			add_location(div1, file, 69, 4, 2084);
+    			attr_dev(div2, "class", "pagination-container");
+    			add_location(div2, file, 76, 4, 2313);
+    			attr_dev(section, "class", "insight-archive");
+    			add_location(section, file, 68, 0, 2046);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			mount_component(filters_1, div0, null);
+    			insert_dev(target, t0, anchor);
     			insert_dev(target, section, anchor);
-    			append_dev(section, div0);
-    			append_dev(div0, ul);
+    			append_dev(section, div1);
+    			append_dev(div1, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -1769,14 +2430,24 @@
     				}
     			}
 
-    			append_dev(section, t);
-    			append_dev(section, div1);
-    			if (if_block) if_block.m(div1, null);
+    			append_dev(section, t1);
+    			append_dev(section, div2);
+    			if (if_block) if_block.m(div2, null);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*currentPageInsights*/ 2) {
-    				each_value = /*currentPageInsights*/ ctx[1];
+    			const filters_1_changes = {};
+
+    			if (!updating_filters && dirty & /*filters*/ 2) {
+    				updating_filters = true;
+    				filters_1_changes.filters = /*filters*/ ctx[1];
+    				add_flush_callback(() => updating_filters = false);
+    			}
+
+    			filters_1.$set(filters_1_changes);
+
+    			if (dirty & /*currentPageInsights*/ 4) {
+    				each_value = /*currentPageInsights*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -1803,18 +2474,18 @@
     				check_outros();
     			}
 
-    			if (/*totalPages*/ ctx[2] > 1) {
+    			if (/*totalPages*/ ctx[3] > 1) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*totalPages*/ 4) {
+    					if (dirty & /*totalPages*/ 8) {
     						transition_in(if_block, 1);
     					}
     				} else {
     					if_block = create_if_block(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
-    					if_block.m(div1, null);
+    					if_block.m(div2, null);
     				}
     			} else if (if_block) {
     				group_outros();
@@ -1828,6 +2499,7 @@
     		},
     		i: function intro(local) {
     			if (current) return;
+    			transition_in(filters_1.$$.fragment, local);
 
     			for (let i = 0; i < each_value.length; i += 1) {
     				transition_in(each_blocks[i]);
@@ -1837,6 +2509,7 @@
     			current = true;
     		},
     		o: function outro(local) {
+    			transition_out(filters_1.$$.fragment, local);
     			each_blocks = each_blocks.filter(Boolean);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -1847,6 +2520,9 @@
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			destroy_component(filters_1);
+    			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(section);
     			destroy_each(each_blocks, detaching);
     			if (if_block) if_block.d();
@@ -1871,9 +2547,21 @@
     	validate_slots('App', slots, []);
     	let { allInsights = [] } = $$props;
     	let currentPage = 1;
-    	let gridStyle = true;
     	let postsPerPage = 16;
     	let insightsDividedIntoPages = divideInsightsIntoPages();
+    	let filters = [];
+    	let categories = getCategories();
+
+    	function getCategories() {
+    		const categories = new Set();
+
+    		allInsights.forEach(insight => {
+    			categories.add(insight.identifier);
+    		});
+
+    		console.log([...categories]);
+    		return categories;
+    	}
 
     	function divideInsightsIntoPages() {
     		let count = 0;
@@ -1899,6 +2587,14 @@
     				}
     			}
 
+    			if (postsPerPage > page.length) {
+    				page.push(insight);
+    				pagesArray.push(page);
+    				return;
+    			}
+
+    			pagesArray.push(page);
+    			page = [];
     			page.push(insight);
     			pagesArray.push(page);
     		});
@@ -1913,36 +2609,45 @@
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function filters_1_filters_binding(value) {
+    		filters = value;
+    		$$invalidate(1, filters);
+    	}
+
     	function pagination_currentPage_binding(value) {
     		currentPage = value;
     		$$invalidate(0, currentPage);
     	}
 
     	$$self.$$set = $$props => {
-    		if ('allInsights' in $$props) $$invalidate(4, allInsights = $$props.allInsights);
+    		if ('allInsights' in $$props) $$invalidate(5, allInsights = $$props.allInsights);
     	};
 
     	$$self.$capture_state = () => ({
     		allInsights,
     		InsightCard,
     		Pagination,
+    		Filters,
     		currentPage,
-    		gridStyle,
     		postsPerPage,
     		insightsDividedIntoPages,
+    		filters,
+    		categories,
+    		getCategories,
     		divideInsightsIntoPages,
     		currentPageInsights,
     		totalPages
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('allInsights' in $$props) $$invalidate(4, allInsights = $$props.allInsights);
+    		if ('allInsights' in $$props) $$invalidate(5, allInsights = $$props.allInsights);
     		if ('currentPage' in $$props) $$invalidate(0, currentPage = $$props.currentPage);
-    		if ('gridStyle' in $$props) $$invalidate(3, gridStyle = $$props.gridStyle);
     		if ('postsPerPage' in $$props) postsPerPage = $$props.postsPerPage;
-    		if ('insightsDividedIntoPages' in $$props) $$invalidate(7, insightsDividedIntoPages = $$props.insightsDividedIntoPages);
-    		if ('currentPageInsights' in $$props) $$invalidate(1, currentPageInsights = $$props.currentPageInsights);
-    		if ('totalPages' in $$props) $$invalidate(2, totalPages = $$props.totalPages);
+    		if ('insightsDividedIntoPages' in $$props) $$invalidate(9, insightsDividedIntoPages = $$props.insightsDividedIntoPages);
+    		if ('filters' in $$props) $$invalidate(1, filters = $$props.filters);
+    		if ('categories' in $$props) $$invalidate(4, categories = $$props.categories);
+    		if ('currentPageInsights' in $$props) $$invalidate(2, currentPageInsights = $$props.currentPageInsights);
+    		if ('totalPages' in $$props) $$invalidate(3, totalPages = $$props.totalPages);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1951,18 +2656,20 @@
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*currentPage*/ 1) {
-    			$$invalidate(1, currentPageInsights = insightsDividedIntoPages[currentPage - 1]);
+    			$$invalidate(2, currentPageInsights = insightsDividedIntoPages[currentPage - 1]);
     		}
     	};
 
-    	$$invalidate(2, totalPages = insightsDividedIntoPages.length);
+    	$$invalidate(3, totalPages = insightsDividedIntoPages.length);
 
     	return [
     		currentPage,
+    		filters,
     		currentPageInsights,
     		totalPages,
-    		gridStyle,
+    		categories,
     		allInsights,
+    		filters_1_filters_binding,
     		pagination_currentPage_binding
     	];
     }
@@ -1970,7 +2677,7 @@
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, { allInsights: 4 });
+    		init(this, options, instance, create_fragment, safe_not_equal, { allInsights: 5 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

@@ -1,20 +1,16 @@
-#insight-archive {
-  margin: 0;
-  padding: 0;
-  padding-top: 2rem;
-}
-
 .insight-card {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 2.875rem;
-  height: 424px;
+  aspect-ratio: 1;
+  max-height: 424px;
   cursor: pointer;
   overflow: hidden;
   grid-column: span 1;
-
+  container-type: inline-size;
+  container-name: insight-card;
   &.col-2 {
     grid-column: span 2;
   }
@@ -69,6 +65,12 @@
     max-width: 332px;
     h6 {
       padding-bottom: 1.25rem;
+      font-size: 14px;
+    }
+
+    h3 {
+      font-size: 1.424rem;
+      padding-right: 0.5rem;
     }
   }
 
@@ -105,7 +107,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &.mobile-show {
     .insight-card-image-container {
       .insight-card-hover-gradient {
         opacity: 0.5;
@@ -120,6 +123,72 @@
 
         .insight-link-arrow {
           transform: translateX(0%);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .insight-card {
+    &.mobile-show {
+      .insight-card-image-container {
+        .insight-card-hover-gradient {
+          opacity: 0;
+        }
+      }
+
+      .insight-card-link {
+        a {
+          span {
+            opacity: 0;
+          }
+
+          .insight-link-arrow {
+            transform: translateX(100%);
+          }
+        }
+      }
+
+      &:hover {
+        .insight-card-image-container {
+          .insight-card-hover-gradient {
+            opacity: 0.5;
+          }
+        }
+
+        .insight-card-link {
+          a {
+            span {
+              opacity: 1;
+            }
+
+            .insight-link-arrow {
+              transform: translateX(0%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@supports (contain: inline-size) {
+  @container insight-card (min-width: 320px) {
+    .insight-card {
+      .insight-card-text {
+        h3 {
+          font-size: 1.424rem;
+          font-size: clamp(1.424rem, calc(-0.3483rem + 8.8615cqw), 2rem);
+        }
+      }
+    }
+  }
+  @container insight-card (min-width: 424px) {
+    .insight-card {
+      .insight-card-text {
+        h3 {
+          font-size: 2rem;
         }
       }
     }

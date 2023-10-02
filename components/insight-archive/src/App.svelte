@@ -3,11 +3,23 @@
 
     import InsightCard from "./InsightCard.svelte";
     import Pagination from "./Pagination.svelte";
+    import Filters from "./Filters.svelte";
 
     let currentPage = 1;
-    let gridStyle = true;
     let postsPerPage = 16;
     let insightsDividedIntoPages = divideInsightsIntoPages();
+    let filters = [];
+    let categories = getCategories();
+
+    function getCategories() {
+        const categories = new Set();
+
+        allInsights.forEach((insight) => {
+            categories.add(insight.identifier);
+        });
+        console.log([...categories]);
+        return categories;
+    }
 
     function divideInsightsIntoPages() {
         let count = 0;
@@ -22,7 +34,8 @@
                     return;
                 }
                 if (postsPerPage - count < insight.columnWidth) {
-                    page[page.length - 1].columnWidth = postsPerPage - count + 1;
+                    page[page.length - 1].columnWidth =
+                        postsPerPage - count + 1;
                     pagesArray.push(page);
                     page = [];
                     count = 0;
@@ -31,27 +44,31 @@
                     return;
                 }
             }
+            if (postsPerPage > page.length) {
+                page.push(insight);
+                pagesArray.push(page);
+                return;
+            }
+            pagesArray.push(page);
+            page = [];
             page.push(insight);
             pagesArray.push(page);
         });
-        console.log(pagesArray)
+        console.log(pagesArray);
         return pagesArray;
     }
-
- 
 
     $: totalPages = insightsDividedIntoPages.length;
 
     $: currentPageInsights = insightsDividedIntoPages[currentPage - 1];
 </script>
 
-<section class="product-archive hide-filters">
-    <div class="product-archive-grid-container">
-        <ul
-            class={gridStyle
-                ? "product-archive-grid columns"
-                : "product-archive-grid rows"}
-        >
+<div class="insight-archive-filters-container">
+    <Filters bind:filters {categories} />
+</div>
+<section class="insight-archive">
+    <div class="insight-archive-grid-container">
+        <ul class="insight-archive-grid">
             {#each currentPageInsights as insight}
                 <InsightCard {insight} />
             {/each}

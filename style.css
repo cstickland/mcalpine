@@ -863,9 +863,10 @@ table {
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		max-width: 115rem;
+		max-width: 110.25rem;
 		margin: 0 auto;
 		padding: 2.1875rem 1.25rem;
+		max-width: 115rem;
 		padding-top: 15px !important;
 		padding-bottom: 15px !important;
 	}
@@ -1043,7 +1044,7 @@ table {
 	}
 	.site-footer .footer-container {
 		width: 100%;
-		max-width: 115rem;
+		max-width: 110.25rem;
 		margin: 0 auto;
 		padding: 2.1875rem 1.25rem;
 		padding-top: 0 !important;
@@ -1565,22 +1566,19 @@ table {
 	white-space: nowrap;
 }
 
-#insight-archive {
-	margin: 0;
-	padding: 0;
-	padding-top: 2rem;
-}
-
 .insight-card {
 	width: 100%;
 	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 2.875rem;
-	height: 424px;
+	aspect-ratio: 1;
+	max-height: 424px;
 	cursor: pointer;
 	overflow: hidden;
 	grid-column: span 1;
+	container-type: inline-size;
+	container-name: insight-card;
 }
 
 .insight-card.col-2 {
@@ -1637,6 +1635,12 @@ table {
 
 .insight-card .insight-card-text h6 {
 	padding-bottom: 1.25rem;
+	font-size: 14px;
+}
+
+.insight-card .insight-card-text h3 {
+	font-size: 1.424rem;
+	padding-right: 0.5rem;
 }
 
 .insight-card .insight-card-link {
@@ -1673,16 +1677,51 @@ table {
 	transition: transform 0.2s ease-in-out;
 }
 
-.insight-card:hover .insight-card-image-container .insight-card-hover-gradient {
+.insight-card:hover .insight-card-image-container .insight-card-hover-gradient, .insight-card.mobile-show .insight-card-image-container .insight-card-hover-gradient {
 	opacity: 0.5;
 }
 
-.insight-card:hover .insight-card-link a span {
+.insight-card:hover .insight-card-link a span, .insight-card.mobile-show .insight-card-link a span {
 	opacity: 1;
 }
 
-.insight-card:hover .insight-card-link a .insight-link-arrow {
+.insight-card:hover .insight-card-link a .insight-link-arrow, .insight-card.mobile-show .insight-card-link a .insight-link-arrow {
 	transform: translateX(0%);
+}
+
+@media only screen and (min-width: 64rem) {
+	.insight-card.mobile-show .insight-card-image-container .insight-card-hover-gradient {
+		opacity: 0;
+	}
+	.insight-card.mobile-show .insight-card-link a span {
+		opacity: 0;
+	}
+	.insight-card.mobile-show .insight-card-link a .insight-link-arrow {
+		transform: translateX(100%);
+	}
+	.insight-card.mobile-show:hover .insight-card-image-container .insight-card-hover-gradient {
+		opacity: 0.5;
+	}
+	.insight-card.mobile-show:hover .insight-card-link a span {
+		opacity: 1;
+	}
+	.insight-card.mobile-show:hover .insight-card-link a .insight-link-arrow {
+		transform: translateX(0%);
+	}
+}
+
+@supports (contain: inline-size) {
+	@container insight-card (min-width: 320px) {
+		.insight-card .insight-card-text h3 {
+			font-size: 1.424rem;
+			font-size: clamp(1.424rem, calc(-0.3483rem + 8.8615cqw), 2rem);
+		}
+	}
+	@container insight-card (min-width: 424px) {
+		.insight-card .insight-card-text h3 {
+			font-size: 2rem;
+		}
+	}
 }
 
 .product-archive {
@@ -1690,7 +1729,7 @@ table {
 	grid-template-columns: 25% 75%;
 	grid-template-areas: 'filters-heading controls' 'filters product-grid' 'pagination pagination';
 	width: 100%;
-	max-width: 115rem;
+	max-width: 110.25rem;
 	margin: 0 auto;
 	padding: 2.1875rem 1.25rem;
 	padding-top: 0 !important;
@@ -2058,12 +2097,169 @@ table {
 	}
 }
 
+.insight-archive-container {
+	margin: 0;
+	padding: 0;
+}
+
+.insight-archive {
+	width: 100%;
+	max-width: 110.25rem;
+	margin: 0 auto;
+	padding: 2.1875rem 1.25rem;
+	padding-top: 2rem !important;
+}
+
+@media only screen and (min-width: 48rem) {
+	.insight-archive {
+		padding: 3.75rem 2.5rem;
+	}
+}
+
+@media only screen and (min-width: 64rem) {
+	.insight-archive {
+		padding: 5rem 3.75rem;
+	}
+}
+
+@media only screen and (min-width: 120rem) {
+	.insight-archive {
+		padding-top: 5rem;
+	}
+}
+
+.insight-archive .insight-archive-grid-container {
+	container-type: inline-size;
+	container-name: insight-grid-container;
+}
+
+.insight-archive-filters-container {
+	border-top: solid 1px #f4f4f4;
+	border-bottom: solid 1px #f4f4f4;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.insight-archive-filters-container .insight-archive-filters {
+	display: flex;
+	width: 100%;
+	max-width: 110.25rem;
+	margin: 0 auto;
+	padding: 2.1875rem 1.25rem;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+@media only screen and (min-width: 48rem) {
+	.insight-archive-filters-container .insight-archive-filters {
+		padding: 3.75rem 2.5rem;
+	}
+}
+
+@media only screen and (min-width: 64rem) {
+	.insight-archive-filters-container .insight-archive-filters {
+		padding: 5rem 3.75rem;
+	}
+}
+
+@media only screen and (min-width: 120rem) {
+	.insight-archive-filters-container .insight-archive-filters {
+		padding-top: 5rem;
+	}
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories {
+	width: min-content;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories .dropdown-toggle {
+	display: flex;
+	align-items: center;
+	font-size: 1.5rem;
+	color: #222222;
+	padding-bottom: 0.25rem;
+	border-bottom: solid 2px #e63128;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories .dropdown-toggle svg {
+	width: 1.5rem;
+	margin-left: 1rem;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories .dropdown-toggle svg rect,
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories .dropdown-toggle svg path {
+	fill: #222222;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-filter-categories .insight-archive-filter-dropdown {
+	margin: 0;
+	padding: 0;
+	padding-top: 1rem;
+	list-style: none;
+	font-size: 0.875rem;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-rounded-buttons {
+	margin: 0;
+	display: flex;
+	gap: 1.25rem;
+	margin-left: 3rem;
+	padding: 0;
+	list-style: none;
+	height: min-content;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-rounded-buttons li {
+	border: solid 1px #5a5a5a;
+	border-radius: 30px;
+	padding: 10px 30px;
+	color: #5a5a5a;
+	cursor: pointer;
+	background-color: #ffffff;
+	transition: all 0.2s ease-in-out;
+	font-size: 0.875rem;
+}
+
+.insight-archive-filters-container .insight-archive-filters .insight-archive-rounded-buttons li:hover, .insight-archive-filters-container .insight-archive-filters .insight-archive-rounded-buttons li:active {
+	background-color: #222222;
+	color: #ffffff;
+}
+
+.insight-archive-grid {
+	display: grid;
+	padding: 0;
+	margin: 0;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+}
+
+@supports (container-type: inline-size) {
+	@container insight-grid-container (min-width: 600px) {
+		.insight-archive-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+		.insight-archive-grid.rows {
+			grid-template-columns: 1fr;
+		}
+	}
+	@container insight-grid-container (min-width: 1000px) {
+		.insight-archive-grid {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
+	@container insight-grid-container (min-width: 1400px) {
+		.insight-archive-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}
+
 html {
 	scroll-behavior: smooth;
 }
 
 html :where(.wp-block) {
-	max-width: 115rem;
+	max-width: 110.25rem;
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
