@@ -1,33 +1,53 @@
 <script>
     export let allInsights = [];
 
+
     import InsightCard from "./InsightCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
 
+    import { filters } from './stores.js';
+
     let currentPage = 1;
     let postsPerPage = 16;
-    let insightsDividedIntoPages = divideInsightsIntoPages();
-    let filters = [];
     let categories = getCategories();
-
+    
+    $: totalPages = insightsDividedIntoPages.length;
+    $: insightsDividedIntoPages = divideInsightsIntoPages($filters);
+    $: currentPageInsights = insightsDividedIntoPages[currentPage - 1];
+    
     function getCategories() {
         const categories = new Set();
 
         allInsights.forEach((insight) => {
             categories.add(insight.identifier);
         });
-        console.log([...categories]);
-        return categories;
+              return categories;
     }
 
-    function divideInsightsIntoPages() {
+    function divideInsightsIntoPages(filters) {
         let count = 0;
         let page = [];
         let pagesArray = [];
+        let insights = [];
 
-        allInsights.forEach((insight, i) => {
-            if (i < allInsights.length - 1) {
+        currentPage = 1;
+
+        if(filters.size == 0) {
+            insights = allInsights;
+        }
+
+        if(filters.size > 0) {
+            insights = [];
+            allInsights.forEach((insight) => {
+                if(filters.has(insight.identifier)) {
+                    insights.push(insight);
+                }
+            })
+        }
+
+        insights.forEach((insight, i) => {
+            if (i < insights.length - 1) {
                 if (postsPerPage - count >= insight.columnWidth) {
                     count += insight.columnWidth;
                     page.push(insight);
@@ -54,17 +74,14 @@
             page.push(insight);
             pagesArray.push(page);
         });
-        console.log(pagesArray);
         return pagesArray;
     }
 
-    $: totalPages = insightsDividedIntoPages.length;
 
-    $: currentPageInsights = insightsDividedIntoPages[currentPage - 1];
 </script>
 
 <div class="insight-archive-filters-container">
-    <Filters bind:filters {categories} />
+    <Filters  {categories} />
 </div>
 <section class="insight-archive">
     <div class="insight-archive-grid-container">

@@ -1,6 +1,8 @@
 <script>
-    import { slide } from "svelte/transition";
-    export let filters = [];
+    import { slide, fade } from "svelte/transition";
+
+    import { filters } from "./stores.js";
+
     export let categories;
     let open = false;
     const categoriesArray = [...categories];
@@ -11,6 +13,9 @@
         <div
             class="dropdown-toggle"
             on:click={() => {
+                open = !open;
+            }}
+            on:keydown={() => {
                 open = !open;
             }}
         >
@@ -43,18 +48,43 @@
             {/if}
         </div>
         {#if open}
-            <ul class="insight-archive-filter-dropdown" transition:slide>
+            <ul class="insight-archive-filter-dropdown" transition:slide={{ duration: 200 }}>
                 {#each categoriesArray as category}
-                    <li>{category}</li>
+                    <li
+                        on:click={() => {
+                            if (!$filters.has(category)) {
+                                $filters = $filters.add(category);
+                            } else {
+                                if ($filters.delete(category)) {
+                                    $filters = $filters;
+                                    console.log($filters);
+                                }
+                            }
+                        }}
+                        on:keydown
+                    >
+                            <div class="category-toggle {$filters.has(category) ? "checked" : "unchecked"}">
+                                <div class="toggle-circle" />
+                            </div>
+                                             {category}
+                    </li>
                 {/each}
             </ul>
         {/if}
     </div>
     <ul class="insight-archive-rounded-buttons">
-        <li>News</li>
-        <li>Inspiration</li>
-        <li>Architects</li>
-        <li>Careers</li>
-        <li>Etc</li>
+        {#each [...$filters] as filter}
+            <li
+                on:keydown
+                on:click={() => {
+                    if ($filters.delete(filter)) {
+                        $filters = $filters;
+                        console.log($filters);
+                    }
+                }}
+            >
+                {filter}
+            </li>
+        {/each}
     </ul>
 </div>

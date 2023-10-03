@@ -1,11 +1,10 @@
 <script>
     export let insight = [];
-    import { fade } from "svelte/transition";
+    import { fade, slide } from "svelte/transition";
     let open = false;
-    $: openClass = open ? "open" : "closed";
 </script>
 
-<div class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }}>
+<div class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
     <div class="insight-card-text">
         <h6 class="insight-identifier">{insight.identifier}</h6>
         <h3 class="insight-card-title">{insight.title}</h3>
