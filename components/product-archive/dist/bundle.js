@@ -74,6 +74,12 @@
             }
         };
     }
+
+    const globals = (typeof window !== 'undefined'
+        ? window
+        : typeof globalThis !== 'undefined'
+            ? globalThis
+            : global);
     function append(target, node) {
         target.appendChild(node);
     }
@@ -279,6 +285,16 @@
     let current_component;
     function set_current_component(component) {
         current_component = component;
+    }
+    // TODO figure out if we still want to support
+    // shorthand events, or if we want to implement
+    // a real bubbling mechanism
+    function bubble(component, event) {
+        const callbacks = component.$$.callbacks[event.type];
+        if (callbacks) {
+            // @ts-ignore
+            callbacks.slice().forEach(fn => fn.call(this, event));
+        }
     }
 
     const dirty_components = [];
@@ -503,63 +519,6 @@
             end() {
                 if (running) {
                     cleanup();
-                    running = false;
-                }
-            }
-        };
-    }
-    function create_out_transition(node, fn, params) {
-        const options = { direction: 'out' };
-        let config = fn(node, params, options);
-        let running = true;
-        let animation_name;
-        const group = outros;
-        group.r += 1;
-        function go() {
-            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
-            if (css)
-                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
-            const start_time = now() + delay;
-            const end_time = start_time + duration;
-            add_render_callback(() => dispatch(node, false, 'start'));
-            loop(now => {
-                if (running) {
-                    if (now >= end_time) {
-                        tick(0, 1);
-                        dispatch(node, false, 'end');
-                        if (!--group.r) {
-                            // this will result in `end()` being called,
-                            // so we don't need to clean up here
-                            run_all(group.c);
-                        }
-                        return false;
-                    }
-                    if (now >= start_time) {
-                        const t = easing((now - start_time) / duration);
-                        tick(1 - t, t);
-                    }
-                }
-                return running;
-            });
-        }
-        if (is_function(config)) {
-            wait().then(() => {
-                // @ts-ignore
-                config = config(options);
-                go();
-            });
-        }
-        else {
-            go();
-        }
-        return {
-            end(reset) {
-                if (reset && config.tick) {
-                    config.tick(1, 0);
-                }
-                if (running) {
-                    if (animation_name)
-                        delete_rule(node, animation_name);
                     running = false;
                 }
             }
@@ -947,11 +906,11 @@
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
+    	child_ctx[7] = list[i];
     	return child_ctx;
     }
 
-    // (15:12) {#if product.skus.length == 1}
+    // (22:20) {#if product.skus.length == 1}
     function create_if_block_1$4(ctx) {
     	let t;
 
@@ -971,14 +930,14 @@
     		block,
     		id: create_if_block_1$4.name,
     		type: "if",
-    		source: "(15:12) {#if product.skus.length == 1}",
+    		source: "(22:20) {#if product.skus.length == 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:51) {#if product.skus.length > 1}
+    // (23:32) {#if product.skus.length > 1}
     function create_if_block$5(ctx) {
     	let t;
 
@@ -998,17 +957,17 @@
     		block,
     		id: create_if_block$5.name,
     		type: "if",
-    		source: "(15:51) {#if product.skus.length > 1}",
+    		source: "(23:32) {#if product.skus.length > 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (22:12) {#each product.skus as sku}
+    // (42:16) {#each product.skus as sku}
     function create_each_block$2(ctx) {
     	let span;
-    	let t0_value = /*sku*/ ctx[5] + "";
+    	let t0_value = /*sku*/ ctx[7] + "";
     	let t0;
     	let t1;
 
@@ -1017,7 +976,7 @@
     			span = element("span");
     			t0 = text(t0_value);
     			t1 = space();
-    			add_location(span, file$6, 22, 16, 782);
+    			add_location(span, file$6, 42, 20, 1549);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -1025,7 +984,7 @@
     			append_dev(span, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*product*/ 1 && t0_value !== (t0_value = /*sku*/ ctx[5] + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*product*/ 1 && t0_value !== (t0_value = /*sku*/ ctx[7] + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(span);
@@ -1036,7 +995,7 @@
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(22:12) {#each product.skus as sku}",
+    		source: "(42:16) {#each product.skus as sku}",
     		ctx
     	});
 
@@ -1044,6 +1003,7 @@
     }
 
     function create_fragment$6(ctx) {
+    	let div8;
     	let div7;
     	let div2;
     	let img;
@@ -1053,33 +1013,42 @@
     	let raw0_value = /*product*/ ctx[0].title + "";
     	let t1;
     	let div1;
+    	let span0;
     	let t2_value = /*product*/ ctx[0].skus.length + "";
     	let t2;
     	let t3;
     	let if_block0_anchor;
     	let t4;
-    	let a0;
-    	let t5;
-    	let a0_href_value;
+    	let span1;
     	let t6;
+    	let a0;
+    	let svg0;
+    	let path0;
+    	let a0_href_value;
+    	let t7;
     	let div6;
     	let div3;
-    	let t7;
+    	let t8;
     	let div4;
     	let raw1_value = /*product*/ ctx[0].title + "";
-    	let t8;
+    	let t9;
     	let div5;
-    	let svg;
+    	let svg1;
     	let g1;
     	let g0;
     	let rect;
-    	let path;
-    	let t9;
-    	let a1;
+    	let path1;
     	let t10;
+    	let a1;
+    	let svg2;
+    	let path2;
     	let a1_href_value;
     	let div7_class_value;
     	let div7_intro;
+    	let t11;
+    	let a2;
+    	let raw2_value = /*product*/ ctx[0].title + "";
+    	let a2_href_value;
     	let mounted;
     	let dispose;
     	let if_block0 = /*product*/ ctx[0].skus.length == 1 && create_if_block_1$4(ctx);
@@ -1094,6 +1063,7 @@
 
     	const block = {
     		c: function create() {
+    			div8 = element("div");
     			div7 = element("div");
     			div2 = element("div");
     			img = element("img");
@@ -1101,15 +1071,20 @@
     			div0 = element("div");
     			t1 = space();
     			div1 = element("div");
+    			span0 = element("span");
     			t2 = text(t2_value);
     			t3 = space();
     			if (if_block0) if_block0.c();
     			if_block0_anchor = empty();
     			if (if_block1) if_block1.c();
     			t4 = space();
-    			a0 = element("a");
-    			t5 = text(">");
+    			span1 = element("span");
+    			span1.textContent = "SKUs";
     			t6 = space();
+    			a0 = element("a");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			t7 = space();
     			div6 = element("div");
     			div3 = element("div");
 
@@ -1117,63 +1092,92 @@
     				each_blocks[i].c();
     			}
 
-    			t7 = space();
-    			div4 = element("div");
     			t8 = space();
+    			div4 = element("div");
+    			t9 = space();
     			div5 = element("div");
-    			svg = svg_element("svg");
+    			svg1 = svg_element("svg");
     			g1 = svg_element("g");
     			g0 = svg_element("g");
     			rect = svg_element("rect");
-    			path = svg_element("path");
-    			t9 = space();
+    			path1 = svg_element("path");
+    			t10 = space();
     			a1 = element("a");
-    			t10 = text(">");
+    			svg2 = svg_element("svg");
+    			path2 = svg_element("path");
+    			t11 = space();
+    			a2 = element("a");
     			if (!src_url_equal(img.src, img_src_value = /*product*/ ctx[0].image_url)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$6, 10, 8, 278);
+    			add_location(img, file$6, 10, 12, 324);
     			attr_dev(div0, "class", "product-title");
-    			add_location(div0, file$6, 11, 8, 325);
+    			add_location(div0, file$6, 11, 12, 375);
+    			attr_dev(span0, "class", "sku-count-default");
+    			add_location(span0, file$6, 19, 16, 624);
+    			attr_dev(span1, "class", "sku-count-small");
+    			add_location(span1, file$6, 24, 16, 862);
     			attr_dev(div1, "class", "sku-count");
-    			add_location(div1, file$6, 12, 8, 388);
+    			add_location(div1, file$6, 12, 12, 442);
+    			attr_dev(path0, "d", "M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z");
+    			attr_dev(path0, "fill", "#fff");
+    			add_location(path0, file$6, 32, 21, 1201);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "width", "13.922");
+    			attr_dev(svg0, "height", "16.245");
+    			attr_dev(svg0, "viewBox", "0 0 13.922 16.245");
+    			add_location(svg0, file$6, 27, 16, 1001);
     			attr_dev(a0, "class", "product-card-link");
     			attr_dev(a0, "href", a0_href_value = /*product*/ ctx[0].link);
-    			add_location(a0, file$6, 17, 8, 592);
+    			add_location(a0, file$6, 26, 12, 935);
     			attr_dev(div2, "class", "product-block-image");
-    			add_location(div2, file$6, 9, 4, 236);
+    			add_location(div2, file$6, 9, 8, 278);
     			attr_dev(div3, "class", "sku-list");
-    			add_location(div3, file$6, 20, 8, 703);
+    			add_location(div3, file$6, 40, 12, 1462);
     			attr_dev(div4, "class", "product-title");
-    			add_location(div4, file$6, 28, 8, 888);
+    			add_location(div4, file$6, 47, 12, 1669);
     			attr_dev(rect, "width", "24");
     			attr_dev(rect, "height", "24");
     			attr_dev(rect, "transform", "rotate(180 12 12)");
     			attr_dev(rect, "opacity", "0");
-    			add_location(rect, file$6, 30, 116, 1123);
-    			attr_dev(path, "d", "M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z");
-    			add_location(path, file$6, 30, 188, 1195);
+    			add_location(rect, file$6, 58, 29, 2098);
+    			attr_dev(path1, "d", "M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z");
+    			add_location(path1, file$6, 63, 30, 2327);
     			attr_dev(g0, "data-name", "close");
-    			add_location(g0, file$6, 30, 95, 1102);
+    			add_location(g0, file$6, 57, 25, 2048);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file$6, 30, 72, 1079);
-    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$6, 30, 12, 1019);
+    			add_location(g1, file$6, 56, 21, 2000);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			add_location(svg1, file$6, 55, 16, 1919);
     			attr_dev(div5, "class", "sku-close");
-    			add_location(div5, file$6, 29, 8, 951);
+    			add_location(div5, file$6, 48, 12, 1736);
+    			attr_dev(path2, "d", "M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z");
+    			attr_dev(path2, "fill", "#fff");
+    			add_location(path2, file$6, 76, 21, 2957);
+    			attr_dev(svg2, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg2, "width", "13.922");
+    			attr_dev(svg2, "height", "16.245");
+    			attr_dev(svg2, "viewBox", "0 0 13.922 16.245");
+    			add_location(svg2, file$6, 71, 16, 2757);
     			attr_dev(a1, "class", "product-card-link");
     			attr_dev(a1, "href", a1_href_value = /*product*/ ctx[0].link);
-    			add_location(a1, file$6, 32, 8, 1427);
+    			add_location(a1, file$6, 70, 12, 2691);
     			attr_dev(div6, "class", "sku-list-container");
-    			add_location(div6, file$6, 19, 4, 662);
+    			add_location(div6, file$6, 39, 8, 1417);
     			attr_dev(div7, "class", div7_class_value = "product-card " + /*openClass*/ ctx[2]);
-    			add_location(div7, file$6, 8, 0, 166);
+    			add_location(div7, file$6, 8, 4, 203);
+    			attr_dev(a2, "href", a2_href_value = /*product*/ ctx[0].link);
+    			attr_dev(a2, "class", "product-title-small");
+    			add_location(a2, file$6, 84, 4, 3180);
+    			attr_dev(div8, "class", "product-card-container");
+    			add_location(div8, file$6, 7, 0, 162);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div7, anchor);
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, div7);
     			append_dev(div7, div2);
     			append_dev(div2, img);
     			append_dev(div2, t0);
@@ -1181,15 +1185,19 @@
     			div0.innerHTML = raw0_value;
     			append_dev(div2, t1);
     			append_dev(div2, div1);
-    			append_dev(div1, t2);
-    			append_dev(div1, t3);
-    			if (if_block0) if_block0.m(div1, null);
-    			append_dev(div1, if_block0_anchor);
-    			if (if_block1) if_block1.m(div1, null);
-    			append_dev(div2, t4);
+    			append_dev(div1, span0);
+    			append_dev(span0, t2);
+    			append_dev(span0, t3);
+    			if (if_block0) if_block0.m(span0, null);
+    			append_dev(span0, if_block0_anchor);
+    			if (if_block1) if_block1.m(span0, null);
+    			append_dev(div1, t4);
+    			append_dev(div1, span1);
+    			append_dev(div2, t6);
     			append_dev(div2, a0);
-    			append_dev(a0, t5);
-    			append_dev(div7, t6);
+    			append_dev(a0, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(div7, t7);
     			append_dev(div7, div6);
     			append_dev(div6, div3);
 
@@ -1199,24 +1207,30 @@
     				}
     			}
 
-    			append_dev(div6, t7);
+    			append_dev(div6, t8);
     			append_dev(div6, div4);
     			div4.innerHTML = raw1_value;
-    			append_dev(div6, t8);
+    			append_dev(div6, t9);
     			append_dev(div6, div5);
-    			append_dev(div5, svg);
-    			append_dev(svg, g1);
+    			append_dev(div5, svg1);
+    			append_dev(svg1, g1);
     			append_dev(g1, g0);
     			append_dev(g0, rect);
-    			append_dev(g0, path);
-    			append_dev(div6, t9);
+    			append_dev(g0, path1);
+    			append_dev(div6, t10);
     			append_dev(div6, a1);
-    			append_dev(a1, t10);
+    			append_dev(a1, svg2);
+    			append_dev(svg2, path2);
+    			append_dev(div8, t11);
+    			append_dev(div8, a2);
+    			a2.innerHTML = raw2_value;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div1, "click", /*click_handler*/ ctx[3], false, false, false, false),
-    					listen_dev(div5, "click", /*click_handler_1*/ ctx[4], false, false, false, false)
+    					listen_dev(div1, "click", /*click_handler*/ ctx[5], false, false, false, false),
+    					listen_dev(div1, "keydown", /*keydown_handler*/ ctx[4], false, false, false, false),
+    					listen_dev(div5, "click", /*click_handler_1*/ ctx[6], false, false, false, false),
+    					listen_dev(div5, "keydown", /*keydown_handler_1*/ ctx[3], false, false, false, false)
     				];
 
     				mounted = true;
@@ -1233,7 +1247,7 @@
     				if (if_block0) ; else {
     					if_block0 = create_if_block_1$4(ctx);
     					if_block0.c();
-    					if_block0.m(div1, if_block0_anchor);
+    					if_block0.m(span0, if_block0_anchor);
     				}
     			} else if (if_block0) {
     				if_block0.d(1);
@@ -1244,7 +1258,7 @@
     				if (if_block1) ; else {
     					if_block1 = create_if_block$5(ctx);
     					if_block1.c();
-    					if_block1.m(div1, null);
+    					if_block1.m(span0, null);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
@@ -1287,6 +1301,11 @@
     			if (dirty & /*openClass*/ 4 && div7_class_value !== (div7_class_value = "product-card " + /*openClass*/ ctx[2])) {
     				attr_dev(div7, "class", div7_class_value);
     			}
+
+    			if (dirty & /*product*/ 1 && raw2_value !== (raw2_value = /*product*/ ctx[0].title + "")) a2.innerHTML = raw2_value;
+    			if (dirty & /*product*/ 1 && a2_href_value !== (a2_href_value = /*product*/ ctx[0].link)) {
+    				attr_dev(a2, "href", a2_href_value);
+    			}
     		},
     		i: function intro(local) {
     			if (!div7_intro) {
@@ -1298,7 +1317,7 @@
     		},
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div7);
+    			if (detaching) detach_dev(div8);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
     			destroy_each(each_blocks, detaching);
@@ -1330,6 +1349,14 @@
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<ProductCard> was created with unknown prop '${key}'`);
     	});
 
+    	function keydown_handler_1(event) {
+    		bubble.call(this, $$self, event);
+    	}
+
+    	function keydown_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
+
     	const click_handler = () => {
     		$$invalidate(1, open = true);
     	};
@@ -1356,11 +1383,19 @@
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*open*/ 2) {
-    			$$invalidate(2, openClass = open ? 'open' : 'closed');
+    			$$invalidate(2, openClass = open ? "open" : "closed");
     		}
     	};
 
-    	return [product, open, openClass, click_handler, click_handler_1];
+    	return [
+    		product,
+    		open,
+    		openClass,
+    		keydown_handler_1,
+    		keydown_handler,
+    		click_handler,
+    		click_handler_1
+    	];
     }
 
     class ProductCard extends SvelteComponentDev {
@@ -1462,7 +1497,7 @@
     }
 
     // (22:4) {#if currentPage == totalPages && totalPages > 2}
-    function create_if_block_5(ctx) {
+    function create_if_block_5$1(ctx) {
     	let button;
     	let t_value = /*currentPage*/ ctx[0] - 2 + "";
     	let t;
@@ -1497,7 +1532,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5.name,
+    		id: create_if_block_5$1.name,
     		type: "if",
     		source: "(22:4) {#if currentPage == totalPages && totalPages > 2}",
     		ctx
@@ -1792,7 +1827,7 @@
 
     	let current_block_type = select_block_type(ctx);
     	let if_block0 = current_block_type(ctx);
-    	let if_block1 = /*currentPage*/ ctx[0] == /*totalPages*/ ctx[1] && /*totalPages*/ ctx[1] > 2 && create_if_block_5(ctx);
+    	let if_block1 = /*currentPage*/ ctx[0] == /*totalPages*/ ctx[1] && /*totalPages*/ ctx[1] > 2 && create_if_block_5$1(ctx);
     	let if_block2 = /*currentPage*/ ctx[0] > 1 && create_if_block_4$1(ctx);
     	let if_block3 = /*currentPage*/ ctx[0] < /*totalPages*/ ctx[1] && create_if_block_3$1(ctx);
     	let if_block4 = /*currentPage*/ ctx[0] == 1 && /*totalPages*/ ctx[1] > 2 && create_if_block_2$1(ctx);
@@ -1871,7 +1906,7 @@
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block_5(ctx);
+    					if_block1 = create_if_block_5$1(ctx);
     					if_block1.c();
     					if_block1.m(div, t1);
     				}
@@ -2562,15 +2597,17 @@
     }
 
     /* src/FilterSection.svelte generated by Svelte v3.59.2 */
+
+    const { console: console_1 } = globals;
     const file$2 = "src/FilterSection.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[10] = list[i];
+    	child_ctx[12] = list[i];
     	return child_ctx;
     }
 
-    // (33:7) {:else}
+    // (34:7) {:else}
     function create_else_block(ctx) {
     	let span;
     	let svg;
@@ -2590,17 +2627,17 @@
     			attr_dev(rect, "width", "24");
     			attr_dev(rect, "height", "24");
     			attr_dev(rect, "opacity", "0");
-    			add_location(rect, file$2, 37, 28, 1253);
+    			add_location(rect, file$2, 38, 28, 1293);
     			attr_dev(path, "d", "M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z");
-    			add_location(path, file$2, 38, 28, 1324);
+    			add_location(path, file$2, 39, 28, 1364);
     			attr_dev(g0, "data-name", "chevron-down");
-    			add_location(g0, file$2, 36, 24, 1196);
+    			add_location(g0, file$2, 37, 24, 1236);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file$2, 35, 20, 1148);
+    			add_location(g1, file$2, 36, 20, 1188);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$2, 34, 16, 1067);
-    			add_location(span, file$2, 33, 12, 1044);
+    			add_location(svg, file$2, 35, 16, 1107);
+    			add_location(span, file$2, 34, 12, 1084);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -2619,14 +2656,14 @@
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(33:7) {:else}",
+    		source: "(34:7) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:8) {#if openCategory}
+    // (31:8) {#if openCategory}
     function create_if_block_1$2(ctx) {
     	let span;
     	let svg;
@@ -2647,17 +2684,17 @@
     			attr_dev(rect, "height", "24");
     			attr_dev(rect, "transform", "rotate(180 12 12)");
     			attr_dev(rect, "opacity", "0");
-    			add_location(rect, file$2, 30, 127, 769);
+    			add_location(rect, file$2, 31, 127, 809);
     			attr_dev(path, "d", "M16 14.5a1 1 0 0 1-.71-.29L12 10.9l-3.3 3.18a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.42l4-3.86a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.42 1 1 0 0 1-.69.28z");
-    			add_location(path, file$2, 30, 199, 841);
+    			add_location(path, file$2, 31, 199, 881);
     			attr_dev(g0, "data-name", "chevron-up");
-    			add_location(g0, file$2, 30, 101, 743);
+    			add_location(g0, file$2, 31, 101, 783);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file$2, 30, 78, 720);
+    			add_location(g1, file$2, 31, 78, 760);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$2, 30, 18, 660);
-    			add_location(span, file$2, 30, 12, 654);
+    			add_location(svg, file$2, 31, 18, 700);
+    			add_location(span, file$2, 31, 12, 694);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -2676,14 +2713,14 @@
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(30:8) {#if openCategory}",
+    		source: "(31:8) {#if openCategory}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (46:4) {#if openCategory}
+    // (47:4) {#if openCategory}
     function create_if_block$2(ctx) {
     	let div;
     	let div_transition;
@@ -2704,7 +2741,8 @@
     				each_blocks[i].c();
     			}
 
-    			add_location(div, file$2, 46, 4, 1603);
+    			attr_dev(div, "class", "product-archive-category-list");
+    			add_location(div, file$2, 47, 4, 1643);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2718,7 +2756,7 @@
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*categories, filters*/ 3) {
+    			if (dirty & /*filters, categories, console*/ 3) {
     				each_value = /*categories*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
@@ -2769,64 +2807,89 @@
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(46:4) {#if openCategory}",
+    		source: "(47:4) {#if openCategory}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (48:8) {#each categories as category}
+    // (49:8) {#each categories as category}
     function create_each_block$1(ctx) {
     	let li;
+    	let div1;
+    	let div0;
+    	let t0;
     	let input;
     	let input_name_value;
     	let input_value_value;
     	let value_has_changed = false;
-    	let t0;
-    	let html_tag;
-    	let raw_value = /*category*/ ctx[10].name + "";
     	let t1;
+    	let html_tag;
+    	let raw_value = /*category*/ ctx[12].name + "";
+    	let t2;
     	let binding_group;
     	let mounted;
     	let dispose;
-    	binding_group = init_binding_group(/*$$binding_groups*/ ctx[9][0]);
+
+    	function click_handler_1() {
+    		return /*click_handler_1*/ ctx[11](/*category*/ ctx[12]);
+    	}
+
+    	binding_group = init_binding_group(/*$$binding_groups*/ ctx[10][0]);
 
     	const block = {
     		c: function create() {
     			li = element("li");
-    			input = element("input");
+    			div1 = element("div");
+    			div0 = element("div");
     			t0 = space();
-    			html_tag = new HtmlTag(false);
+    			input = element("input");
     			t1 = space();
+    			html_tag = new HtmlTag(false);
+    			t2 = space();
+    			attr_dev(div0, "class", "toggle-circle");
+    			add_location(div0, file$2, 60, 20, 2255);
+    			attr_dev(div1, "class", "category-toggle checked");
+    			add_location(div1, file$2, 59, 16, 2197);
     			attr_dev(input, "type", "checkbox");
-    			attr_dev(input, "name", input_name_value = /*category*/ ctx[10].name);
-    			input.__value = input_value_value = /*category*/ ctx[10].id;
+    			attr_dev(input, "name", input_name_value = /*category*/ ctx[12].name);
+    			input.__value = input_value_value = /*category*/ ctx[12].id;
     			input.value = input.__value;
-    			add_location(input, file$2, 49, 16, 1727);
-    			html_tag.a = t1;
-    			add_location(li, file$2, 48, 12, 1706);
+    			add_location(input, file$2, 62, 16, 2324);
+    			html_tag.a = t2;
+    			add_location(li, file$2, 49, 12, 1784);
     			binding_group.p(input);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
+    			append_dev(li, div1);
+    			append_dev(div1, div0);
+    			append_dev(li, t0);
     			append_dev(li, input);
     			input.checked = ~(/*filters*/ ctx[0] || []).indexOf(input.__value);
-    			append_dev(li, t0);
-    			html_tag.m(raw_value, li);
     			append_dev(li, t1);
+    			html_tag.m(raw_value, li);
+    			append_dev(li, t2);
 
     			if (!mounted) {
-    				dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[8]);
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_handler*/ ctx[9]),
+    					listen_dev(li, "click", click_handler_1, false, false, false, false),
+    					listen_dev(li, "keydown", /*keydown_handler*/ ctx[7], false, false, false, false)
+    				];
+
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, dirty) {
-    			if (dirty & /*categories*/ 2 && input_name_value !== (input_name_value = /*category*/ ctx[10].name)) {
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*categories*/ 2 && input_name_value !== (input_name_value = /*category*/ ctx[12].name)) {
     				attr_dev(input, "name", input_name_value);
     			}
 
-    			if (dirty & /*categories*/ 2 && input_value_value !== (input_value_value = /*category*/ ctx[10].id)) {
+    			if (dirty & /*categories*/ 2 && input_value_value !== (input_value_value = /*category*/ ctx[12].id)) {
     				prop_dev(input, "__value", input_value_value);
     				input.value = input.__value;
     				value_has_changed = true;
@@ -2836,13 +2899,13 @@
     				input.checked = ~(/*filters*/ ctx[0] || []).indexOf(input.__value);
     			}
 
-    			if (dirty & /*categories*/ 2 && raw_value !== (raw_value = /*category*/ ctx[10].name + "")) html_tag.p(raw_value);
+    			if (dirty & /*categories*/ 2 && raw_value !== (raw_value = /*category*/ ctx[12].name + "")) html_tag.p(raw_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
     			binding_group.r();
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -2850,7 +2913,7 @@
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(48:8) {#each categories as category}",
+    		source: "(49:8) {#each categories as category}",
     		ctx
     	});
 
@@ -2887,11 +2950,11 @@
     			if_block0.c();
     			t2 = space();
     			if (if_block1) if_block1.c();
-    			add_location(h4, file$2, 28, 8, 598);
+    			add_location(h4, file$2, 29, 8, 638);
     			attr_dev(button, "class", "filter-category-title");
-    			add_location(button, file$2, 22, 4, 459);
+    			add_location(button, file$2, 23, 4, 499);
     			attr_dev(ul, "class", "product-archive-filters-section");
-    			add_location(ul, file$2, 21, 0, 410);
+    			add_location(ul, file$2, 22, 0, 450);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2908,7 +2971,7 @@
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[7], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[8], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -2990,25 +3053,29 @@
 
     	$$self.$$.on_mount.push(function () {
     		if (currentPage === undefined && !('currentPage' in $$props || $$self.$$.bound[$$self.$$.props['currentPage']])) {
-    			console.warn("<FilterSection> was created without expected prop 'currentPage'");
+    			console_1.warn("<FilterSection> was created without expected prop 'currentPage'");
     		}
 
     		if (isParent === undefined && !('isParent' in $$props || $$self.$$.bound[$$self.$$.props['isParent']])) {
-    			console.warn("<FilterSection> was created without expected prop 'isParent'");
+    			console_1.warn("<FilterSection> was created without expected prop 'isParent'");
     		}
 
     		if (childFilters === undefined && !('childFilters' in $$props || $$self.$$.bound[$$self.$$.props['childFilters']])) {
-    			console.warn("<FilterSection> was created without expected prop 'childFilters'");
+    			console_1.warn("<FilterSection> was created without expected prop 'childFilters'");
     		}
     	});
 
     	const writable_props = ['categories', 'filters', 'title', 'currentPage', 'isParent', 'childFilters'];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<FilterSection> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<FilterSection> was created with unknown prop '${key}'`);
     	});
 
     	const $$binding_groups = [[]];
+
+    	function keydown_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
 
     	const click_handler = () => {
     		$$invalidate(3, openCategory = !openCategory);
@@ -3018,6 +3085,17 @@
     		filters = get_binding_group_value($$binding_groups[0], this.__value, this.checked);
     		$$invalidate(0, filters);
     	}
+
+    	const click_handler_1 = category => {
+    		if (filters.indexOf(category.id) == -1) {
+    			filters.push(category.id);
+    			console.log(filters);
+    		} else {
+    			let spliceValue = filters.indexOf(category.id);
+    			filters.splice(spliceValue, 1);
+    			console.log(filters);
+    		}
+    	};
 
     	$$self.$$set = $$props => {
     		if ('categories' in $$props) $$invalidate(1, categories = $$props.categories);
@@ -3055,8 +3133,9 @@
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*filters*/ 1) {
-    			if (filters.length) {
+    			if (filters.length && filters) {
     				$$invalidate(4, currentPage = 1);
+    				console.log(filters);
     			}
     		}
 
@@ -3075,9 +3154,11 @@
     		currentPage,
     		childFilters,
     		isParent,
+    		keydown_handler,
     		click_handler,
     		input_change_handler,
-    		$$binding_groups
+    		$$binding_groups,
+    		click_handler_1
     	];
     }
 
@@ -3338,8 +3419,7 @@
     	let updating_childFilters;
     	let t0;
     	let t1;
-    	let div_intro;
-    	let div_outro;
+    	let div_transition;
     	let current;
 
     	function filtersection_filters_binding(value) {
@@ -3392,7 +3472,7 @@
     			t1 = space();
     			if (if_block1) if_block1.c();
     			attr_dev(div, "class", "product-archive-filters");
-    			add_location(div, file$1, 23, 0, 631);
+    			add_location(div, file$1, 23, 0, 632);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3484,9 +3564,8 @@
 
     			add_render_callback(() => {
     				if (!current) return;
-    				if (div_outro) div_outro.end(1);
-    				div_intro = create_in_transition(div, fade, { duration: 300 });
-    				div_intro.start();
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 300 }, true);
+    				div_transition.run(1);
     			});
 
     			current = true;
@@ -3495,8 +3574,8 @@
     			transition_out(filtersection.$$.fragment, local);
     			transition_out(if_block0);
     			transition_out(if_block1);
-    			if (div_intro) div_intro.invalidate();
-    			div_outro = create_out_transition(div, fade, { duration: 300 });
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 300 }, false);
+    			div_transition.run(0);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -3504,7 +3583,7 @@
     			destroy_component(filtersection);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
-    			if (detaching && div_outro) div_outro.end();
+    			if (detaching && div_transition) div_transition.end();
     		}
     	};
 
@@ -3594,7 +3673,7 @@
 
     	$$self.$capture_state = () => ({
     		FilterSection,
-    		fade,
+    		slide,
     		parentCategories,
     		childCategories,
     		childFilters,
@@ -3722,13 +3801,14 @@
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[26] = list[i];
-    	child_ctx[28] = i;
+    	child_ctx[28] = list[i];
+    	child_ctx[30] = i;
     	return child_ctx;
     }
 
-    // (57:4) {#if showFilters}
+    // (55:4) {#if showFilters}
     function create_if_block_3(ctx) {
+    	let div10;
     	let button;
     	let div9;
     	let div2;
@@ -3747,14 +3827,17 @@
     	let div7;
     	let t5;
     	let t6;
-    	let if_block_anchor;
+    	let t7;
+    	let if_block1_anchor;
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block = /*openFilters*/ ctx[11] && create_if_block_4(ctx);
+    	let if_block0 = (/*parentFilters*/ ctx[5].length > 0 || /*childFilters*/ ctx[6].length > 0) && create_if_block_5(ctx);
+    	let if_block1 = /*openFilters*/ ctx[11] && create_if_block_4(ctx);
 
     	const block = {
     		c: function create() {
+    			div10 = element("div");
     			button = element("button");
     			div9 = element("div");
     			div2 = element("div");
@@ -3771,35 +3854,40 @@
     			div6 = element("div");
     			t4 = space();
     			div7 = element("div");
-    			t5 = text("\n        Filters");
+    			t5 = text("\n                Filters");
     			t6 = space();
-    			if (if_block) if_block.c();
-    			if_block_anchor = empty();
+    			if (if_block0) if_block0.c();
+    			t7 = space();
+    			if (if_block1) if_block1.c();
+    			if_block1_anchor = empty();
     			attr_dev(div0, "class", "filter-line-black");
-    			add_location(div0, file, 60, 16, 1836);
+    			add_location(div0, file, 64, 24, 1990);
     			attr_dev(div1, "class", "filter-line-red");
-    			add_location(div1, file, 61, 16, 1890);
+    			add_location(div1, file, 65, 24, 2048);
     			attr_dev(div2, "class", "filter-line line-one");
-    			add_location(div2, file, 59, 12, 1785);
+    			add_location(div2, file, 63, 20, 1931);
     			attr_dev(div3, "class", "filter-line-black");
-    			add_location(div3, file, 64, 16, 2008);
+    			add_location(div3, file, 68, 24, 2186);
     			attr_dev(div4, "class", "filter-line-red");
-    			add_location(div4, file, 65, 16, 2062);
+    			add_location(div4, file, 69, 24, 2244);
     			attr_dev(div5, "class", "filter-line line-two");
-    			add_location(div5, file, 63, 12, 1957);
+    			add_location(div5, file, 67, 20, 2127);
     			attr_dev(div6, "class", "filter-line-black");
-    			add_location(div6, file, 68, 16, 2182);
+    			add_location(div6, file, 72, 24, 2384);
     			attr_dev(div7, "class", "filter-line-red");
-    			add_location(div7, file, 69, 16, 2236);
+    			add_location(div7, file, 73, 24, 2442);
     			attr_dev(div8, "class", "filter-line line-three");
-    			add_location(div8, file, 67, 12, 2129);
+    			add_location(div8, file, 71, 20, 2323);
     			attr_dev(div9, "class", "filters-icon");
-    			add_location(div9, file, 58, 8, 1746);
-    			attr_dev(button, "class", "filters-heading");
-    			add_location(button, file, 57, 4, 1659);
+    			add_location(div9, file, 62, 16, 1884);
+    			attr_dev(button, "class", "filters-heading-open");
+    			add_location(button, file, 56, 12, 1700);
+    			attr_dev(div10, "class", "filters-heading");
+    			add_location(div10, file, 55, 8, 1658);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, button, anchor);
+    			insert_dev(target, div10, anchor);
+    			append_dev(div10, button);
     			append_dev(button, div9);
     			append_dev(div9, div2);
     			append_dev(div2, div0);
@@ -3816,35 +3904,50 @@
     			append_dev(div8, t4);
     			append_dev(div8, div7);
     			append_dev(button, t5);
-    			insert_dev(target, t6, anchor);
-    			if (if_block) if_block.m(target, anchor);
-    			insert_dev(target, if_block_anchor, anchor);
+    			append_dev(div10, t6);
+    			if (if_block0) if_block0.m(div10, null);
+    			insert_dev(target, t7, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, if_block1_anchor, anchor);
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[17], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[18], false, false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, dirty) {
+    			if (/*parentFilters*/ ctx[5].length > 0 || /*childFilters*/ ctx[6].length > 0) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_5(ctx);
+    					if_block0.c();
+    					if_block0.m(div10, null);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
     			if (/*openFilters*/ ctx[11]) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
 
     					if (dirty & /*openFilters*/ 2048) {
-    						transition_in(if_block, 1);
+    						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block = create_if_block_4(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    					if_block1 = create_if_block_4(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
     				}
-    			} else if (if_block) {
+    			} else if (if_block1) {
     				group_outros();
 
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
     				});
 
     				check_outros();
@@ -3852,18 +3955,19 @@
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(if_block);
+    			transition_in(if_block1);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(if_block);
+    			transition_out(if_block1);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(button);
-    			if (detaching) detach_dev(t6);
-    			if (if_block) if_block.d(detaching);
-    			if (detaching) detach_dev(if_block_anchor);
+    			if (detaching) detach_dev(div10);
+    			if (if_block0) if_block0.d();
+    			if (detaching) detach_dev(t7);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(if_block1_anchor);
     			mounted = false;
     			dispose();
     		}
@@ -3873,14 +3977,58 @@
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(57:4) {#if showFilters}",
+    		source: "(55:4) {#if showFilters}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (75:4) {#if openFilters}
+    // (79:12) {#if parentFilters.length > 0 || childFilters.length > 0}
+    function create_if_block_5(ctx) {
+    	let div;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "Clear selection";
+    			attr_dev(div, "class", "clear-filters");
+    			add_location(div, file, 79, 16, 2656);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(div, "click", /*click_handler_1*/ ctx[19], false, false, false, false),
+    					listen_dev(div, "keydown", /*keydown_handler*/ ctx[17], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(79:12) {#if parentFilters.length > 0 || childFilters.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (91:8) {#if openFilters}
     function create_if_block_4(ctx) {
     	let filters;
     	let updating_childCategories;
@@ -3891,23 +4039,23 @@
     	let current;
 
     	function filters_childCategories_binding(value) {
-    		/*filters_childCategories_binding*/ ctx[18](value);
+    		/*filters_childCategories_binding*/ ctx[20](value);
     	}
 
     	function filters_parentCategories_binding(value) {
-    		/*filters_parentCategories_binding*/ ctx[19](value);
+    		/*filters_parentCategories_binding*/ ctx[21](value);
     	}
 
     	function filters_parentFilters_binding(value) {
-    		/*filters_parentFilters_binding*/ ctx[20](value);
+    		/*filters_parentFilters_binding*/ ctx[22](value);
     	}
 
     	function filters_childFilters_binding(value) {
-    		/*filters_childFilters_binding*/ ctx[21](value);
+    		/*filters_childFilters_binding*/ ctx[23](value);
     	}
 
     	function filters_currentPage_binding(value) {
-    		/*filters_currentPage_binding*/ ctx[22](value);
+    		/*filters_currentPage_binding*/ ctx[24](value);
     	}
 
     	let filters_props = {};
@@ -4000,14 +4148,14 @@
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(75:4) {#if openFilters}",
+    		source: "(91:8) {#if openFilters}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (85:8) {#if parentFilters.length > 0 || childFilters.length > 0}
+    // (101:8) {#if parentFilters.length > 0 || childFilters.length > 0}
     function create_if_block_2(ctx) {
     	let div;
     	let t0;
@@ -4023,9 +4171,9 @@
     			t1 = text(" Results matching your selection.\n                ");
     			button = element("button");
     			button.textContent = "x";
-    			add_location(button, file, 87, 16, 2768);
+    			add_location(button, file, 103, 16, 3441);
     			attr_dev(div, "class", "product-archive-total-results");
-    			add_location(div, file, 85, 12, 2643);
+    			add_location(div, file, 101, 12, 3316);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4052,20 +4200,20 @@
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(85:8) {#if parentFilters.length > 0 || childFilters.length > 0}",
+    		source: "(101:8) {#if parentFilters.length > 0 || childFilters.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (97:12) {#if i >= postRangeLow && i < postRangeHigh}
+    // (117:16) {#if i >= postRangeLow && i < postRangeHigh}
     function create_if_block_1(ctx) {
     	let productcard;
     	let current;
 
     	productcard = new ProductCard({
-    			props: { product: /*product*/ ctx[26] },
+    			props: { product: /*product*/ ctx[28] },
     			$$inline: true
     		});
 
@@ -4079,7 +4227,7 @@
     		},
     		p: function update(ctx, dirty) {
     			const productcard_changes = {};
-    			if (dirty & /*allProductsList*/ 128) productcard_changes.product = /*product*/ ctx[26];
+    			if (dirty & /*allProductsList*/ 128) productcard_changes.product = /*product*/ ctx[28];
     			productcard.$set(productcard_changes);
     		},
     		i: function intro(local) {
@@ -4100,18 +4248,18 @@
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(97:12) {#if i >= postRangeLow && i < postRangeHigh}",
+    		source: "(117:16) {#if i >= postRangeLow && i < postRangeHigh}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (96:8) {#each allProductsList as product, i}
+    // (116:12) {#each allProductsList as product, i}
     function create_each_block(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*i*/ ctx[28] >= /*postRangeLow*/ ctx[13] && /*i*/ ctx[28] < /*postRangeHigh*/ ctx[8] && create_if_block_1(ctx);
+    	let if_block = /*i*/ ctx[30] >= /*postRangeLow*/ ctx[13] && /*i*/ ctx[30] < /*postRangeHigh*/ ctx[8] && create_if_block_1(ctx);
 
     	const block = {
     		c: function create() {
@@ -4124,7 +4272,7 @@
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*i*/ ctx[28] >= /*postRangeLow*/ ctx[13] && /*i*/ ctx[28] < /*postRangeHigh*/ ctx[8]) {
+    			if (/*i*/ ctx[30] >= /*postRangeLow*/ ctx[13] && /*i*/ ctx[30] < /*postRangeHigh*/ ctx[8]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
@@ -4166,21 +4314,21 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(96:8) {#each allProductsList as product, i}",
+    		source: "(116:12) {#each allProductsList as product, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (104:8) {#if totalPages > 1}
+    // (124:8) {#if totalPages > 1}
     function create_if_block(ctx) {
     	let pagination;
     	let updating_currentPage;
     	let current;
 
     	function pagination_currentPage_binding(value) {
-    		/*pagination_currentPage_binding*/ ctx[25](value);
+    		/*pagination_currentPage_binding*/ ctx[27](value);
     	}
 
     	let pagination_props = { totalPages: /*totalPages*/ ctx[14] };
@@ -4230,7 +4378,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(104:8) {#if totalPages > 1}",
+    		source: "(124:8) {#if totalPages > 1}",
     		ctx
     	});
 
@@ -4259,7 +4407,7 @@
     	let if_block1 = (/*parentFilters*/ ctx[5].length > 0 || /*childFilters*/ ctx[6].length > 0) && create_if_block_2(ctx);
 
     	function cardsperpage_postsPerPage_binding(value) {
-    		/*cardsperpage_postsPerPage_binding*/ ctx[23](value);
+    		/*cardsperpage_postsPerPage_binding*/ ctx[25](value);
     	}
 
     	let cardsperpage_props = {};
@@ -4276,7 +4424,7 @@
     	binding_callbacks.push(() => bind(cardsperpage, 'postsPerPage', cardsperpage_postsPerPage_binding));
 
     	function gridtogglebuttons_gridStyle_binding(value) {
-    		/*gridtogglebuttons_gridStyle_binding*/ ctx[24](value);
+    		/*gridtogglebuttons_gridStyle_binding*/ ctx[26](value);
     	}
 
     	let gridtogglebuttons_props = {};
@@ -4328,19 +4476,19 @@
     			div2 = element("div");
     			if (if_block2) if_block2.c();
     			attr_dev(div0, "class", "archive-controls");
-    			add_location(div0, file, 83, 4, 2534);
+    			add_location(div0, file, 99, 4, 3207);
 
     			attr_dev(ul, "class", ul_class_value = /*gridStyle*/ ctx[10]
-    			? 'product-archive-grid columns'
-    			: 'product-archive-grid rows');
+    			? "product-archive-grid columns"
+    			: "product-archive-grid rows");
 
-    			add_location(ul, file, 94, 4, 2996);
+    			add_location(ul, file, 110, 8, 3673);
     			attr_dev(div1, "class", "product-archive-grid-container");
-    			add_location(div1, file, 93, 4, 2947);
+    			add_location(div1, file, 109, 4, 3620);
     			attr_dev(div2, "class", "pagination-container");
-    			add_location(div2, file, 102, 4, 3286);
+    			add_location(div2, file, 122, 4, 4040);
     			attr_dev(section, "class", section_class_value = "product-archive " + /*filtersClass*/ ctx[12]);
-    			add_location(section, file, 55, 0, 1584);
+    			add_location(section, file, 53, 0, 1579);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4455,8 +4603,8 @@
     			}
 
     			if (!current || dirty & /*gridStyle*/ 1024 && ul_class_value !== (ul_class_value = /*gridStyle*/ ctx[10]
-    			? 'product-archive-grid columns'
-    			: 'product-archive-grid rows')) {
+    			? "product-archive-grid columns"
+    			: "product-archive-grid rows")) {
     				attr_dev(ul, "class", ul_class_value);
     			}
 
@@ -4572,8 +4720,16 @@
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function keydown_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
+
     	const click_handler = () => {
     		$$invalidate(11, openFilters = !openFilters);
+    	};
+
+    	const click_handler_1 = () => {
+    		resetFilters();
     	};
 
     	function filters_childCategories_binding(value) {
@@ -4729,7 +4885,9 @@
     		totalPages,
     		resetFilters,
     		allProducts,
+    		keydown_handler,
     		click_handler,
+    		click_handler_1,
     		filters_childCategories_binding,
     		filters_parentCategories_binding,
     		filters_parentFilters_binding,

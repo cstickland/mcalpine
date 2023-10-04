@@ -1,10 +1,12 @@
 .product-archive {
   display: grid;
 
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 55% 45%;
+
   grid-template-areas:
     'filters-heading controls'
-    'filters product-grid'
+    'filters filters'
+    'product-grid product-grid'
     'pagination pagination';
   @include container-large;
   padding-top: 0 !important;
@@ -18,18 +20,41 @@
   }
   .filters-heading {
     grid-area: filters-heading;
-    margin-bottom: 1.25rem;
     margin-right: 1.25rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 1.25rem;
     color: $color__mcalpine-black;
     background-color: transparent;
-    border: 0;
-    cursor: pointer;
 
+    border-bottom: solid 1px #f4f4f4;
+    .filters-heading-open {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border: 0;
+      font-size: 1.25rem;
+      background-color: transparent;
+
+      &:hover,
+      &:active {
+        color: $color__mcalpine-red;
+      }
+    }
+
+    .clear-filters {
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 1.125rem;
+      font-weight: 400;
+      &:hover,
+      &:active {
+        color: $color__mcalpine-red;
+      }
+    }
     .filters-icon {
       height: 100%;
       aspect-ratio: 1;
@@ -79,19 +104,28 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      margin-bottom: 3rem;
-      max-height: 465px;
-      overflow-y: scroll;
-      scrollbar-color: #e63128 #ffffff;
-      scrollbar-width: auto;
 
+      .product-archive-category-list {
+        max-height: 465px;
+        overflow-y: scroll;
+        scrollbar-color: #e63128 #ffffff;
+        scrollbar-width: auto;
+      }
       li {
         display: flex;
         flex-direction: row;
+        align-items: center;
         gap: 1.25rem;
-
+        background-color: #c4cad114;
         color: $color__mcalpine-black;
-
+        padding: 0.875rem 1.5rem;
+        font-size: 1.125rem;
+        cursor: pointer;
+        transition: all 100ms ease-in-out;
+        &:hover,
+        &:active {
+          background-color: #c4cad133;
+        }
         input {
           border: 1px solid #c7c7c7;
           border-radius: 3px;
@@ -107,10 +141,13 @@
         width: 100%;
         align-items: center;
         background-color: transparent;
-        color: $color__mcalpine-red;
+        color: $color__mcalpine-black;
         border: 0;
         outline: 0;
         justify-content: space-between;
+        padding-bottom: 1rem;
+        cursor: pointer;
+        padding: 1.25rem;
         span {
           display: inline-flex;
           align-items: center;
@@ -201,5 +238,15 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-archive {
+    grid-template-columns: 25% 75%;
+    grid-template-areas:
+      'filters-heading controls'
+      'filters product-grid'
+      'pagination pagination';
   }
 }

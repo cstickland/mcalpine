@@ -2,8 +2,8 @@
 $term = get_queried_object();
 $link = !empty(get_field('breadcrumb_middle_link')) ? get_field('breadcrumb_middle_link') : array('title' => 'Products', 'url' => get_site_url() . '/products');
 $title = !empty(get_field('title')) ? get_field('title') : $term->name;
-$message =  !empty(get_field('message')) ? get_field('message') : get_field('hero_message', $term);
-$image = !empty(get_field('image')) ? get_field('image') : get_field('category_image', $term);
+$message =  !empty(get_field('message')) ? get_field('message') : get_field('category_hero_message', $term);
+$image = !empty(get_field('image')) ? get_field('image') : get_field('category_hero_image', $term);
 ?>
 
 

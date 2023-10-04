@@ -8,8 +8,9 @@
     export let isParent;
     export let childFilters;
 
-    $: if (filters.length) {
+    $: if (filters.length && filters) {
         currentPage = 1;
+        console.log(filters)
     }
 
     $: if (isParent && filters.length) {
@@ -44,9 +45,21 @@
         {/if}
     </button>
     {#if openCategory}
-    <div transition:slide={{axis: "y", duration: 300}}>
+    <div class="product-archive-category-list" transition:slide={{axis: "y", duration: 300}}>
         {#each categories as category}
-            <li>
+            <li on:click={() => {
+                if(filters.indexOf(category.id) == -1) {
+                    filters.push(category.id);
+                    console.log(filters)
+                } else {
+                    let spliceValue = filters.indexOf(category.id);
+                    filters.splice(spliceValue, 1)
+                    console.log(filters)
+                }
+            }} on:keydown>
+                <div class="category-toggle checked">
+                    <div class="toggle-circle" />
+                </div>
                 <input
                     type="checkbox"
                     bind:group={filters}

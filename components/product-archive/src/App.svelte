@@ -19,10 +19,10 @@
     let openFilters = false;
     let filtersClass;
 
-    if(showFilters) {
-        filtersClass = ""
+    if (showFilters) {
+        filtersClass = "";
     } else {
-        filtersClass = "hide-filters"
+        filtersClass = "hide-filters";
     }
 
     $: totalProducts = allProductsList.length;
@@ -35,7 +35,7 @@
     }
 
     $: if (childFilters.length == 0 && parentFilters.length == 0) {
-         allProductsList = [...allProducts];
+        allProductsList = [...allProducts];
     }
 
     $: if (childFilters.length > 0) {
@@ -44,43 +44,59 @@
         });
     }
 
-    $: if(parentFilters.length > 0 && childFilters.length == 0)  {
-         allProductsList = allProducts.filter(function (product) {
+    $: if (parentFilters.length > 0 && childFilters.length == 0) {
+        allProductsList = allProducts.filter(function (product) {
             return parentFilters.indexOf(product.categoryId) !== -1;
         });
     }
-    
-
 </script>
 
 <section class="product-archive {filtersClass}">
     {#if showFilters}
-    <button on:click={() => {openFilters = !openFilters}} class="filters-heading">
-        <div class="filters-icon">
-            <div class="filter-line line-one">
-                <div class="filter-line-black"></div>
-                <div class="filter-line-red"></div>
-            </div>
-            <div class="filter-line line-two">
-                <div class="filter-line-black"></div>
-                <div class="filter-line-red"></div>
-            </div>
-            <div class="filter-line line-three">
-                <div class="filter-line-black"></div>
-                <div class="filter-line-red"></div>
-            </div>
+        <div class="filters-heading">
+            <button
+                on:click={() => {
+                    openFilters = !openFilters;
+                }}
+                class="filters-heading-open"
+            >
+                <div class="filters-icon">
+                    <div class="filter-line line-one">
+                        <div class="filter-line-black" />
+                        <div class="filter-line-red" />
+                    </div>
+                    <div class="filter-line line-two">
+                        <div class="filter-line-black" />
+                        <div class="filter-line-red" />
+                    </div>
+                    <div class="filter-line line-three">
+                        <div class="filter-line-black" />
+                        <div class="filter-line-red" />
+                    </div>
+                </div>
+                Filters
+            </button>
+            {#if parentFilters.length > 0 || childFilters.length > 0}
+                <div
+                    class="clear-filters"
+                    on:click={() => {
+                        resetFilters();
+                    }}
+                    on:keydown
+                >
+                    Clear selection
+                </div>
+            {/if}
         </div>
-        Filters
-    </button>
-    {#if openFilters}
-    <Filters
-        bind:childCategories
-        bind:parentCategories
-        bind:parentFilters
-        bind:childFilters
-        bind:currentPage
-    />
-    {/if}{/if}
+        {#if openFilters}
+            <Filters
+                bind:childCategories
+                bind:parentCategories
+                bind:parentFilters
+                bind:childFilters
+                bind:currentPage
+            />
+        {/if}{/if}
     <div class="archive-controls">
         {#if parentFilters.length > 0 || childFilters.length > 0}
             <div class="product-archive-total-results">
@@ -92,13 +108,17 @@
         <GridToggleButtons bind:gridStyle />
     </div>
     <div class="product-archive-grid-container">
-    <ul class={gridStyle ? 'product-archive-grid columns' : 'product-archive-grid rows'}>
-        {#each allProductsList as product, i}
-            {#if i >= postRangeLow && i < postRangeHigh}
-                <ProductCard {product} />
-            {/if}
-        {/each}
-    </ul>
+        <ul
+            class={gridStyle
+                ? "product-archive-grid columns"
+                : "product-archive-grid rows"}
+        >
+            {#each allProductsList as product, i}
+                {#if i >= postRangeLow && i < postRangeHigh}
+                    <ProductCard {product} />
+                {/if}
+            {/each}
+        </ul>
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}

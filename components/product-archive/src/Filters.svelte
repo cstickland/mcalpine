@@ -1,6 +1,6 @@
 <script>
     import FilterSection from "./FilterSection.svelte";
-    import { fade } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     export let parentCategories = [];
     export let childCategories = [];
@@ -21,7 +21,7 @@
     }
 </script>
 
-<div class="product-archive-filters" in:fade={{duration: 300}} out:fade={{duration: 300}}>
+<div class="product-archive-filters" transition:slide={{duration: 300}} >
     <FilterSection
         title="Category"
         categories={parentCategories}
@@ -42,7 +42,7 @@
     {#if parentFilters.length > 0}
         <FilterSection
             title="Subcategory"
-        categories={currentChildCategories}
+            categories={currentChildCategories}
             bind:filters={childFilters}
             bind:currentPage
             isParent={false}

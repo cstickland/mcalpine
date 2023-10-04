@@ -1,3 +1,8 @@
+.product-card-container {
+  container-type: inline-size;
+  container-name: product-card;
+}
+
 .product-card {
   position: relative;
   aspect-ratio: 1;
@@ -6,8 +11,6 @@
   padding-top: 2rem;
   border: 1px solid #f4f4f4;
   background-color: #f9f9f9;
-  container-type: inline-size;
-  container-name: product-card;
 
   .sku-list-container {
     display: none;
@@ -54,6 +57,9 @@
     width: max-content;
     margin-right: 1.5rem;
     margin-left: auto;
+    .sku-count-small {
+      display: none;
+    }
   }
   &:hover,
   &.open {
@@ -159,11 +165,10 @@
       'image image .'
       'name name link';
     img {
-      max-height: 80%;
+      max-height: 95%;
       margin: 0 auto;
       grid-area: image;
       align-self: center;
-      padding-right: 1rem;
     }
 
     .product-card-link {
@@ -172,7 +177,69 @@
   }
 }
 
+.product-title-small {
+  display: none;
+}
+
 @supports (contain: inline-size) {
+  @container product-card (max-width: 250px) {
+    .product-card {
+      position: relative;
+      padding-top: 1rem;
+      .product-title,
+      .product-card-link {
+        display: none !important;
+      }
+
+      &.open,
+      &:hover {
+        .sku-list-container {
+          padding-top: 1rem;
+          .sku-close {
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      .sku-count {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        margin: 0;
+        .sku-count-small {
+          display: block;
+        }
+
+        .sku-count-default {
+          display: none;
+        }
+      }
+
+      .product-block-image {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1rem;
+        img {
+          height: 90%;
+          max-height: 90%;
+          padding: 0;
+        }
+      }
+    }
+
+    .product-title-small {
+      text-decoration: none;
+      padding-top: 1.25rem;
+      display: block;
+      font-size: 0.875rem;
+      color: #5a5a5a;
+      padding-right: 0.75rem;
+      &:hover,
+      &:active {
+        color: $color__mcalpine-red;
+      }
+    }
+  }
   @container product-card (min-width: 350px) {
     .product-card {
       .sku-count {
