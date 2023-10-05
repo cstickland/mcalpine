@@ -1,0 +1,56 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.home-hero-block {
+}
+
+@media only screen and (min-width: $desktop) {
+  .home-hero-block {
+    display: flex;
+    position: relative;
+    .home-hero-background-red {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      min-height: 100%;
+      background-color: $color__mcalpine-red;
+      z-index: -1;
+    }
+    .home-hero-background-gradient {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      min-height: 100%;
+      background: transparent
+        linear-gradient(190deg, #7caef2 0%, #7caef200 100%) 0% 0% no-repeat
+        padding-box;
+      opacity: 0.12;
+      z-index: -1;
+    }
+
+    .home-hero-content {
+      @include container-large;
+      background-color: #0b113e66;
+      background-clip: content-box;
+      height: min-content;
+      display: flex;
+      aspect-ratio: 16 / 9;
+      background-size: cover;
+      color: #ffffff;
+
+      h1 {
+        * {
+          font-size: 100px;
+          display: inline;
+          margin: 0;
+        }
+
+        ul {
+          text-decoration: underline;
+          text-decoration-color: #7caef2;
+        }
+      }
+    }
+  }
+}

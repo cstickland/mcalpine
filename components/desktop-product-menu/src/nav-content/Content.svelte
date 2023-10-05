@@ -3,7 +3,7 @@
     import { open } from "../stores.js";
     import { fade } from "svelte/transition";
 
-    export const allProductsLink = "";
+    export let allProductsLink = "";
     export const menus = {};
 </script>
 

@@ -5,7 +5,6 @@
 </script>
 
 <svelte:window bind:innerWidth={innerWidth} />
-
 {#if innerWidth < 650}
 <button class="layout-button grid-layout-button-mobile" on:click={() => (gridStyle = !gridStyle)}>
 

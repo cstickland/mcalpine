@@ -1,0 +1,13 @@
+{
+    "name": "mcalpine/home-hero",
+    "title": "Home Hero Block",
+    "description": "A custom hero block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "admin-home",
+    "keywords": ["hero", "home"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

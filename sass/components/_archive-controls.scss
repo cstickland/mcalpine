@@ -2,11 +2,15 @@
   grid-area: controls;
   display: flex;
   flex-direction: row;
-  align-items: center;
   height: 2.375rem;
   gap: 1rem;
   margin-bottom: 1.25rem;
-  justify-content: end;
+  justify-content: space-between;
+
+  .archive-controls-button-container {
+    display: flex;
+    gap: 10px;
+  }
 
   .product-archive-total-results {
     background-color: #f4f4f4;
@@ -92,17 +96,18 @@
 
 @media only screen and (min-width: $desktop) {
   .archive-controls {
-    height: 3.75rem;
+    height: 2.5rem;
     gap: 1.25rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
     input {
-      width: 3.75rem;
+      width: 2.5rem;
     }
 
     .layout-button {
-      width: 3.75rem;
+      width: 2.5rem;
 
-      padding: 1rem;
+      padding: 0.5rem;
     }
   }
 }

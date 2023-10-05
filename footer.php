@@ -99,7 +99,10 @@ if (get_field('footer_version', 'option') == 2) {
     productMenu.innerHTML = ''
 
     new ProductMenu({
-        target: productMenu
+        target: productMenu,
+        props: {
+            allProductsLink: "<?php echo site_url() . '/products'; ?>"
+        }
     })
 </script>
 

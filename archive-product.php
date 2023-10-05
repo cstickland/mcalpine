@@ -71,12 +71,12 @@ foreach ($categories as $category) {
                         endwhile;
                     endif;
                     $product_categories = wp_get_object_terms($post_id, 'product_categories');
-
+                    $child_category = [];
                     foreach ($product_categories as $category) {
                         if ($category->parent == 0) {
                             $parent_category = $category->term_id;
                         } else {
-                            $child_category = $category->term_id;
+                            $child_category[] = $category->term_id;
                         }
                     }
 

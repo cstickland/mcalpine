@@ -7,7 +7,6 @@ $blocks = parse_blocks($post->post_content);
 ?>
 
 <main id="primary" class="site-main">
-    <h1>Hi</h1>
     <section class="faq-links">
         <h4 class="scroll-to">Scroll To Queries:</h4>
         <?php

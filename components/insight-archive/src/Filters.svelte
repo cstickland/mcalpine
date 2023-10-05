@@ -57,7 +57,6 @@
                             } else {
                                 if ($filters.delete(category)) {
                                     $filters = $filters;
-                                    console.log($filters);
                                 }
                             }
                         }}
@@ -79,7 +78,6 @@
                 on:click={() => {
                     if ($filters.delete(filter)) {
                         $filters = $filters;
-                        console.log($filters);
                     }
                 }}
             >

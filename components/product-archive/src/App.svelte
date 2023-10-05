@@ -9,49 +9,65 @@
     import CardsPerPage from "./CardsPerPage.svelte";
     import GridToggleButtons from "./GridToggleButtons.svelte";
     import Filters from "./Filters.svelte";
+    import ActiveFilters from "./ActiveFilters.svelte";
 
-    let currentPage = 1;
-    let postsPerPage;
-    let parentFilters = [];
-    let childFilters = [];
+    import { parentFilters, childFilters, currentPage, postsPerPage } from './stores.js';
+
     let allProductsList;
     let gridStyle = true;
-    let openFilters = false;
+    let openFilters = true;
     let filtersClass;
+    let filtersClosedClass;
 
     if (showFilters) {
         filtersClass = "";
     } else {
         filtersClass = "hide-filters";
     }
-
-    $: totalProducts = allProductsList.length;
-    $: totalPages = Math.ceil(totalProducts / postsPerPage);
-    $: postRangeHigh = currentPage * postsPerPage;
-    $: postRangeLow = postRangeHigh - postsPerPage;
-    function resetFilters() {
-        parentFilters = [];
-        childFilters = [];
+    
+    $: if(openFilters) {
+        filtersClosedClass = 'filters-open';
+    } else {
+        filtersClosedClass = 'filters-closed';
     }
 
-    $: if (childFilters.length == 0 && parentFilters.length == 0) {
+    $: totalProducts = allProductsList.length;
+    $: totalPages = Math.ceil(totalProducts / $postsPerPage);
+    $: postRangeHigh = $currentPage * $postsPerPage;
+    $: postRangeLow = postRangeHigh - $postsPerPage;
+
+    function resetFilters() {
+        parentFilters.set(new Set());
+        childFilters.set(new Set());
+    }
+
+    $: if ($childFilters.size == 0 && $parentFilters.size == 0) {
         allProductsList = [...allProducts];
     }
 
-    $: if (childFilters.length > 0) {
+    $: if ($childFilters.size > 0) {
         allProductsList = allProducts.filter(function (product) {
-            return childFilters.indexOf(product.subcategoryId) !== -1;
+            let productFound = false;
+            
+            product.subcategoryId.forEach((subCategory) => {
+                if($childFilters.has(subCategory)) {
+                    productFound = true;
+                }
+            })
+            console.log($childFilters)
+            return productFound;
         });
+        console.log(allProductsList)
     }
 
-    $: if (parentFilters.length > 0 && childFilters.length == 0) {
+    $: if ($parentFilters.size > 0 && $childFilters.size == 0) {
         allProductsList = allProducts.filter(function (product) {
-            return parentFilters.indexOf(product.categoryId) !== -1;
+            return $parentFilters.has(product.categoryId);
         });
     }
 </script>
 
-<section class="product-archive {filtersClass}">
+<section class="product-archive {filtersClass} {filtersClosedClass}">
     {#if showFilters}
         <div class="filters-heading">
             <button
@@ -76,7 +92,7 @@
                 </div>
                 Filters
             </button>
-            {#if parentFilters.length > 0 || childFilters.length > 0}
+            {#if $parentFilters.size > 0 || $childFilters.size > 0}
                 <div
                     class="clear-filters"
                     on:click={() => {
@@ -90,22 +106,19 @@
         </div>
         {#if openFilters}
             <Filters
-                bind:childCategories
-                bind:parentCategories
-                bind:parentFilters
-                bind:childFilters
-                bind:currentPage
+                {childCategories} {parentCategories}
             />
         {/if}{/if}
     <div class="archive-controls">
-        {#if parentFilters.length > 0 || childFilters.length > 0}
-            <div class="product-archive-total-results">
-                {totalProducts} Results matching your selection.
-                <button on:click={resetFilters}>x</button>
-            </div>
+        {#if $parentFilters.size > 0 || $childFilters.size > 0}
+           <ActiveFilters />
+           {:else}
+           <div></div>
         {/if}
-        <CardsPerPage bind:postsPerPage />
-        <GridToggleButtons bind:gridStyle />
+        <div class="archive-controls-button-container">
+            <CardsPerPage />
+            <GridToggleButtons bind:gridStyle />
+        </div>
     </div>
     <div class="product-archive-grid-container">
         <ul
@@ -122,7 +135,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage {totalPages} />
+            <Pagination  {totalPages} />
         {/if}
     </div>
 </section>

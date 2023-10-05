@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -1979,25 +1979,25 @@
     			attr_dev(rect, "transform", "rotate(-90 12 12)");
     			attr_dev(rect, "opacity", "0");
     			attr_dev(rect, "class", "svelte-psjezl");
-    			add_location(rect, file$1, 23, 29, 762);
+    			add_location(rect, file$1, 23, 29, 760);
     			attr_dev(path, "d", "M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z");
     			attr_dev(path, "class", "svelte-psjezl");
-    			add_location(path, file$1, 28, 30, 991);
+    			add_location(path, file$1, 28, 30, 989);
     			attr_dev(g0, "data-name", "chevron-right");
-    			add_location(g0, file$1, 22, 25, 704);
+    			add_location(g0, file$1, 22, 25, 702);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file$1, 21, 21, 656);
+    			add_location(g1, file$1, 21, 21, 654);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "class", "svelte-psjezl");
-    			add_location(svg, file$1, 20, 16, 575);
+    			add_location(svg, file$1, 20, 16, 573);
     			attr_dev(div0, "class", "all-products-link-arrow svelte-psjezl");
-    			add_location(div0, file$1, 19, 12, 521);
+    			add_location(div0, file$1, 19, 12, 519);
     			attr_dev(a, "class", "all-products-link svelte-psjezl");
     			attr_dev(a, "href", /*allProductsLink*/ ctx[0]);
-    			add_location(a, file$1, 17, 8, 426);
+    			add_location(a, file$1, 17, 8, 424);
     			attr_dev(div1, "class", "nav-content-container svelte-psjezl");
-    			add_location(div1, file$1, 10, 4, 249);
+    			add_location(div1, file$1, 10, 4, 247);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -2013,7 +2013,11 @@
     			append_dev(g0, path);
     			current = true;
     		},
-    		p: noop,
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty & /*allProductsLink*/ 1) {
+    				attr_dev(a, "href", /*allProductsLink*/ ctx[0]);
+    			}
+    		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(productmenu.$$.fragment, local);
@@ -2125,13 +2129,17 @@
     	component_subscribe($$self, open, $$value => $$invalidate(1, $open = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Content', slots, []);
-    	const allProductsLink = "";
+    	let { allProductsLink = "" } = $$props;
     	const menus = {};
-    	const writable_props = [];
+    	const writable_props = ['allProductsLink'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Content> was created with unknown prop '${key}'`);
     	});
+
+    	$$self.$$set = $$props => {
+    		if ('allProductsLink' in $$props) $$invalidate(0, allProductsLink = $$props.allProductsLink);
+    	};
 
     	$$self.$capture_state = () => ({
     		ProductMenu,
@@ -2141,6 +2149,14 @@
     		menus,
     		$open
     	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('allProductsLink' in $$props) $$invalidate(0, allProductsLink = $$props.allProductsLink);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
 
     	return [allProductsLink, $open, menus];
     }
@@ -2159,7 +2175,7 @@
     	}
 
     	get allProductsLink() {
-    		return this.$$.ctx[0];
+    		throw new Error("<Content>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set allProductsLink(value) {

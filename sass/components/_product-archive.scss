@@ -148,6 +148,7 @@
         padding-bottom: 1rem;
         cursor: pointer;
         padding: 1.25rem;
+
         span {
           display: inline-flex;
           align-items: center;
@@ -248,5 +249,61 @@
       'filters-heading controls'
       'filters product-grid'
       'pagination pagination';
+
+    &.filters-closed {
+      grid-template-areas:
+        'filters-heading controls'
+        'product-grid product-grid'
+        'pagination pagination';
+
+      .product-archive-grid-container {
+        width: 75%;
+        align-self: end;
+        justify-self: end;
+        animation-name: stretch;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+      }
+    }
+  }
+}
+
+@keyframes stretch {
+  from {
+    width: 75%;
+    margin-left: auto;
+  }
+  to {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.active-filters {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  li {
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: solid 1px #f4f4f4;
+    padding: 0.25rem 1rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    span {
+      display: flex;
+      align-items: center;
+      svg {
+        height: 1rem;
+        width: 1rem;
+        path {
+          fill: $color__mcalpine-red;
+        }
+      }
+    }
   }
 }
