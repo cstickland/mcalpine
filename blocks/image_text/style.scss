@@ -57,8 +57,16 @@
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       &.color-red {
-        grid-template-rows: 1fr 8fr 1fr;
+        grid-template-rows: 1fr 8fr 80px;
 
+        .text-block-hash {
+          grid-area: 3 / 2 / span 1 / span 2;
+          overflow: hidden;
+          img {
+            width: 1400px;
+            max-width: none;
+          }
+        }
         .image-container {
           height: 100%;
           width: auto;

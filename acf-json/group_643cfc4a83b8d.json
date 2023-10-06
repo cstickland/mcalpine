@@ -260,7 +260,7 @@
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -268,5 +268,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1685455068
+    "show_in_graphql": 0,
+    "graphql_field_name": "products",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1696603116
 }

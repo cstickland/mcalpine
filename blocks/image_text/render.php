@@ -33,6 +33,9 @@
                 <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
             <?php endif; ?>
         </div>
+        <div class="text-block-hash">
+            <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+        </div>
     </div>
-    <div class="text-block-hash"></div>
+
 </div>

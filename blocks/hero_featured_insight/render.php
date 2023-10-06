@@ -27,6 +27,8 @@ $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
                 </svg>
             </a>
         </div>
-        <div class="featured-insight-hatching"><img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching"></div>
+        <div class="featured-insight-hatching">
+            <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+        </div>
     </div>
 </div>

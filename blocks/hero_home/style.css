@@ -22,6 +22,10 @@
     opacity: 0.12;
     z-index: -1;
   }
+  .home-hero-block .home-hero-background-gradient .gradient-hatching img,
+  .home-hero-block .home-hero-background-gradient .gradient-hatching-bottom img {
+    width: 10px;
+  }
   .home-hero-block .home-hero-content {
     width: 100%;
     max-width: 110.25rem;
@@ -31,7 +35,7 @@
     background-clip: content-box;
     height: min-content;
     display: flex;
-    aspect-ratio: 16/9;
+    align-items: center;
     background-size: cover;
     color: #ffffff;
   }
@@ -52,14 +56,31 @@
   }
 }
 @media only screen and (min-width: 64rem) {
+  .home-hero-block .home-hero-content .home-hero-text {
+    padding-bottom: 192px;
+  }
+  .home-hero-block .home-hero-content h1 {
+    padding-left: 50px;
+    max-width: 1416px;
+    padding-top: 178px;
+  }
   .home-hero-block .home-hero-content h1 * {
     font-size: 100px;
     display: inline;
     margin: 0;
+    padding: 0;
+  }
+  .home-hero-block .home-hero-content h1 p {
+    padding-left: 0;
+    max-width: 100%;
   }
   .home-hero-block .home-hero-content h1 ul {
     text-decoration: underline;
     text-decoration-color: #7caef2;
+  }
+  .home-hero-block .home-hero-content p {
+    max-width: 650px;
+    padding-left: 50px;
   }
 }
 

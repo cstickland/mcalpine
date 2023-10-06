@@ -27,6 +27,13 @@
         padding-box;
       opacity: 0.12;
       z-index: -1;
+
+      .gradient-hatching,
+      .gradient-hatching-bottom {
+        img {
+          width: 10px;
+        }
+      }
     }
 
     .home-hero-content {
@@ -35,21 +42,38 @@
       background-clip: content-box;
       height: min-content;
       display: flex;
-      aspect-ratio: 16 / 9;
+      align-items: center;
+
       background-size: cover;
       color: #ffffff;
 
+      .home-hero-text {
+        padding-bottom: 192px;
+      }
       h1 {
+        padding-left: 50px;
+        max-width: 1416px;
+        padding-top: 178px;
+
         * {
           font-size: 100px;
           display: inline;
           margin: 0;
+          padding: 0;
         }
-
+        p {
+          padding-left: 0;
+          max-width: 100%;
+        }
         ul {
           text-decoration: underline;
           text-decoration-color: #7caef2;
         }
+      }
+
+      p {
+        max-width: 650px;
+        padding-left: 50px;
       }
     }
   }

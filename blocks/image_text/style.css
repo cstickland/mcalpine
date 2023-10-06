@@ -1,6 +1,6 @@
 .image-text-block .image-text-container {
   width: 100%;
-  max-width: 115rem;
+  max-width: 110.25rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   display: flex;
@@ -64,7 +64,15 @@
     grid-template-columns: repeat(12, 1fr);
   }
   .image-text-block .image-text-container.color-red {
-    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 8fr 80px;
+  }
+  .image-text-block .image-text-container.color-red .text-block-hash {
+    grid-area: 3/2/span 1/span 2;
+    overflow: hidden;
+  }
+  .image-text-block .image-text-container.color-red .text-block-hash img {
+    width: 1400px;
+    max-width: none;
   }
   .image-text-block .image-text-container.color-red .image-container {
     height: 100%;
