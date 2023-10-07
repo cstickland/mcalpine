@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -2368,7 +2368,7 @@
     	return block;
     }
 
-    // (52:16) {#each categoriesArray as category}
+    // (55:16) {#each categoriesArray as category}
     function create_each_block_1(ctx) {
     	let li;
     	let div1;
@@ -2394,14 +2394,14 @@
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(div0, "class", "toggle-circle");
-    			add_location(div0, file$1, 65, 32, 2647);
+    			add_location(div0, file$1, 72, 28, 2801);
 
     			attr_dev(div1, "class", div1_class_value = "category-toggle " + (/*$filters*/ ctx[1].has(/*category*/ ctx[13])
-    			? "checked"
-    			: "unchecked"));
+    			? 'checked'
+    			: 'unchecked'));
 
-    			add_location(div1, file$1, 64, 28, 2534);
-    			add_location(li, file$1, 52, 20, 2027);
+    			add_location(div1, file$1, 67, 24, 2575);
+    			add_location(li, file$1, 55, 20, 2072);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -2424,8 +2424,8 @@
     			ctx = new_ctx;
 
     			if (dirty & /*$filters*/ 2 && div1_class_value !== (div1_class_value = "category-toggle " + (/*$filters*/ ctx[1].has(/*category*/ ctx[13])
-    			? "checked"
-    			: "unchecked"))) {
+    			? 'checked'
+    			: 'unchecked'))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
     		},
@@ -2440,19 +2440,25 @@
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(52:16) {#each categoriesArray as category}",
+    		source: "(55:16) {#each categoriesArray as category}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (75:8) {#each [...$filters] as filter}
+    // (82:8) {#each [...$filters] as filter}
     function create_each_block$1(ctx) {
     	let li;
     	let t0_value = /*filter*/ ctx[10] + "";
     	let t0;
     	let t1;
+    	let svg;
+    	let g1;
+    	let g0;
+    	let rect;
+    	let path;
+    	let t2;
     	let mounted;
     	let dispose;
 
@@ -2465,12 +2471,38 @@
     			li = element("li");
     			t0 = text(t0_value);
     			t1 = space();
-    			add_location(li, file$1, 75, 12, 2962);
+    			svg = svg_element("svg");
+    			g1 = svg_element("g");
+    			g0 = svg_element("g");
+    			rect = svg_element("rect");
+    			path = svg_element("path");
+    			t2 = space();
+    			attr_dev(rect, "width", "24");
+    			attr_dev(rect, "height", "24");
+    			attr_dev(rect, "transform", "rotate(180 12 12)");
+    			attr_dev(rect, "opacity", "0");
+    			add_location(rect, file$1, 95, 29, 3528);
+    			attr_dev(path, "d", "M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z");
+    			add_location(path, file$1, 100, 30, 3757);
+    			attr_dev(g0, "data-name", "close");
+    			add_location(g0, file$1, 94, 25, 3478);
+    			attr_dev(g1, "data-name", "Layer 2");
+    			add_location(g1, file$1, 93, 21, 3430);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			add_location(svg, file$1, 92, 16, 3349);
+    			add_location(li, file$1, 82, 12, 3091);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
     			append_dev(li, t0);
     			append_dev(li, t1);
+    			append_dev(li, svg);
+    			append_dev(svg, g1);
+    			append_dev(g1, g0);
+    			append_dev(g0, rect);
+    			append_dev(g0, path);
+    			append_dev(li, t2);
 
     			if (!mounted) {
     				dispose = [
@@ -2496,7 +2528,7 @@
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(75:8) {#each [...$filters] as filter}",
+    		source: "(82:8) {#each [...$filters] as filter}",
     		ctx
     	});
 
@@ -2552,7 +2584,7 @@
     			attr_dev(div1, "class", "insight-archive-filter-categories");
     			add_location(div1, file$1, 11, 4, 254);
     			attr_dev(ul, "class", "insight-archive-rounded-buttons");
-    			add_location(ul, file$1, 73, 4, 2865);
+    			add_location(ul, file$1, 80, 4, 2994);
     			attr_dev(div2, "class", "insight-archive-filters");
     			add_location(div2, file$1, 10, 0, 212);
     		},

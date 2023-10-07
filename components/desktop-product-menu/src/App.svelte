@@ -21,9 +21,9 @@
 </script>
 
 <svelte:window bind:innerHeight />
-
-<div class="product-text" on:click={() => { open.set(!$open), console.log('click')}}>Product</div>
+<div on:mouseenter={() => { open.set(true)}} on:mouseleave={() => {open.set(false)}}><div class="product-text" >Product</div>
 <Content {allProductsLink} />
+</div>
 
 <style lang="scss">
     .product-text {
