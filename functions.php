@@ -10,4 +10,4 @@ require_once('inc/wpai-setup.php');
 
 
 // help prevent cross site scripting by setting X-frame-options to SAMEORIGIN
-// add_action('send_headers', 'send_frame_options_header', 10, 0);
+add_action('send_headers', 'send_frame_options_header', 10, 0);
