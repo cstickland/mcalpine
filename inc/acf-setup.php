@@ -7,7 +7,8 @@ if (function_exists('acf_add_options_page')) {
         'menu_title'    => 'Theme Settings',
         'menu_slug'     => 'theme-general-settings',
         'capability'    => 'edit_posts',
-        'redirect'      => false
+        'redirect'      => false,
+        'show_in_graphql' => true
     ));
 }
 add_action('pre_get_posts', function ($query) {
@@ -27,4 +28,4 @@ function my_acf_google_map_api($api)
     $api['key'] = 'AIzaSyD5zYzn6gCx_zKuQWuVM7irstRvmG7-7bs';
     return $api;
 }
-add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');;
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');

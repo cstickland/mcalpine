@@ -7,6 +7,12 @@
 .map-search {
   background-color: $color__mcalpine-red;
   color: #ffffff;
+  max-width: 424px;
+  max-height: 845px;
+
+  input {
+    margin-bottom: 2.25rem;
+  }
   .marker {
     padding: 1.25rem 2rem;
     padding-top: 0;
@@ -15,4 +21,8 @@
       border-bottom: solid 1px #ffffff;
     }
   }
+}
+
+#map {
+  height: 100vh;
 }

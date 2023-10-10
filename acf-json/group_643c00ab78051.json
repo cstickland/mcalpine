@@ -865,7 +865,9 @@
     "show_in_rest": 0,
     "show_in_graphql": 1,
     "graphql_field_name": "themeSettings",
-    "map_graphql_types_from_location_rules": 0,
-    "graphql_types": "",
-    "modified": 1696782329
+    "map_graphql_types_from_location_rules": 1,
+    "graphql_types": [
+        "ThemeGeneralSettings"
+    ],
+    "modified": 1696938768
 }
