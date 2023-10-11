@@ -1,0 +1,70 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.vertical-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+
+  max-width: 1154px !important;
+
+  .h1 {
+    text-align: center;
+    color: $color__mcalpine-red;
+    font-size: 2.81rem;
+
+    @media only screen and (min-width: $tablet) {
+      font-size: 2.81rem;
+      font-size: clamp(2.81rem, calc(-2.26rem + 10.563vw), 4.5rem);
+    }
+
+    @media only screen and (min-width: $desktop) {
+      font-size: 4.5rem;
+    }
+
+    * {
+      font-size: inherit;
+      display: inline;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  .vertical-text_message {
+    max-width: 875px;
+    padding-top: 2rem;
+    font-size: 1rem;
+
+    @media only screen and (min-width: $tablet) {
+      font-size: 1rem;
+      font-size: clamp(1rem, calc(-0.5rem + 3.125vw), 1.5rem);
+    }
+
+    @media only screen and (min-width: $desktop) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .vertical-line {
+    width: 2px;
+    background-color: $color__mcalpine-red;
+    height: 80px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .vertical-text {
+    .vertical-line {
+      height: 136px;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .vertical-text_message {
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -54,8 +54,13 @@ function mcalpine_register_scripts()
     wp_enqueue_script('mobile-nav-js', get_template_directory_uri() . "/components/mobile-nav/dist/mobile-nav.js", array(), array());
     wp_enqueue_script('product-menu-js', get_template_directory_uri() . "/components/desktop-product-menu/dist/product-menu.js", array(), array());
 
-    wp_enqueue_script('insight-archive-js', get_template_directory_uri() . "/components/insight-archive/dist/insight-archive.js", array(), array());
-    wp_enqueue_script('where-to-find-us-js', get_template_directory_uri() . "/components/where-to-find-us/dist/map-component.js", array(), array());
+    if (is_home()) {
+        wp_enqueue_script('insight-archive-js', get_template_directory_uri() . "/components/insight-archive/dist/insight-archive.js", array(), array());
+    }
+
+    if (is_page_template('where-to-buy.php')) {
+        wp_enqueue_script('where-to-find-us-js', get_template_directory_uri() . "/components/where-to-find-us/dist/map-component.js", array(), array());
+    }
 }
 
 

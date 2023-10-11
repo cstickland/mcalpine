@@ -9,6 +9,7 @@ get_header();
         the_content();
     endwhile; // End of the loop.
     ?>
+
 </main>
 
 

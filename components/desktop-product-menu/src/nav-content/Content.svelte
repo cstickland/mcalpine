@@ -1,7 +1,7 @@
 <script>
     import ProductMenu from "./menu/ProductMenu.svelte";
     import { open } from "../stores.js";
-    import { fade } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     export let allProductsLink = "";
     export const menus = {};
@@ -10,8 +10,8 @@
 {#if $open}
     <div
         class="nav-content-container"
-        in:fade={{ axis: "y", duration: 300 }}
-        out:fade={{ axis: "y", duration: 300 }}
+        in:slide={{ axis: "y", duration: 300 }}
+        out:slide={{ axis: "y", duration: 200 }}
     >
         <ProductMenu />
 
@@ -44,8 +44,7 @@
         padding: 75px 0;
         position: absolute;
         left: 0;
-        top: 87px;
-        height: calc(100vh - 86px);
+        top: 111px;
         background-color: #ffffff;
         width: 100%;
         flex-grow: 1;
@@ -56,6 +55,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        box-shadow: 0px 25px 25px #00000014;
     }
 
     .all-products-link {
@@ -68,7 +68,7 @@
         gap: 1.25rem;
         display: flex;
         align-items: center;
-
+        margin-top: 50px;
         .all-products-link-arrow {
             background-color: $color__mcalpine-red;
             height: 3.5rem;

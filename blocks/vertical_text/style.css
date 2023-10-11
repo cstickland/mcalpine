@@ -1,0 +1,67 @@
+.vertical-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  max-width: 1154px !important;
+}
+.vertical-text .h1 {
+  text-align: center;
+  color: #e63128;
+  font-size: 2.81rem;
+}
+@media only screen and (min-width: 48rem) {
+  .vertical-text .h1 {
+    font-size: 2.81rem;
+    font-size: clamp(2.81rem, -2.26rem + 10.563vw, 4.5rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .vertical-text .h1 {
+    font-size: 4.5rem;
+  }
+}
+.vertical-text .h1 * {
+  font-size: inherit;
+  display: inline;
+  font-weight: 400;
+  margin: 0;
+}
+.vertical-text .vertical-text_message {
+  max-width: 875px;
+  padding-top: 2rem;
+  font-size: 1rem;
+}
+@media only screen and (min-width: 48rem) {
+  .vertical-text .vertical-text_message {
+    font-size: 1rem;
+    font-size: clamp(1rem, -0.5rem + 3.125vw, 1.5rem);
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .vertical-text .vertical-text_message {
+    font-size: 1.5rem;
+  }
+}
+.vertical-text .vertical-line {
+  width: 2px;
+  background-color: #e63128;
+  height: 80px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 64rem) {
+  .vertical-text .vertical-line {
+    height: 136px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .vertical-text .vertical-text_message {
+    font-size: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

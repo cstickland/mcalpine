@@ -1,4 +1,5 @@
-.btn {
+.btn,
+.button {
   font-size: 1rem;
   padding: 1rem 1.6875rem;
   line-height: 1;
@@ -33,7 +34,9 @@
       }
     }
   }
-
+  &.btn-arrow {
+    background-image: url('../../../assets/icons/icon_forward.svg');
+  }
   &.btn-red {
     background-color: $color__mcalpine-red;
     color: #ffffff;

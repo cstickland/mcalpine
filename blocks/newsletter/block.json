@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "mcalpine/newsletter",
+	"version": "0.1.0",
+	"title": "Newsletter",
+	"category": "widgets",
+	"icon": "email-alt",
+	"description": "Newsletter Sign up Block",
+	"supports": {
+		"html": false},
+	"textdomain": "mcalpine",
+	"style": "file:./style.css",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	}
+}

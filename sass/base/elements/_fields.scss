@@ -1,1 +1,76 @@
+input[type='text'],
+input[type='email'] {
+  padding: 1.25rem 1.5rem;
+  border: solid 1px #cfcfcf;
+  border-radius: 0.5rem;
 
+  &:hover {
+    box-shadow: 5px 15px 15px #00000000;
+    border: 1px solid #7caef2;
+  }
+
+  &:focus-visible {
+    box-shadow: 0px 0px 10px #7caef2bf;
+    border: 1px solid #7caef2;
+    outline: 0;
+  }
+}
+
+.ginput_container {
+  outline: 0;
+  border: 0;
+}
+
+legend {
+  display: none;
+}
+
+fieldset {
+  outline: 0;
+  border: 0;
+  padding: 0;
+}
+.gfield--type-honeypot {
+  display: none;
+}
+
+.gform_heading {
+  display: none;
+}
+
+.gfield_label {
+  display: none;
+}
+
+.gform_submission_error {
+  font-size: 1rem;
+}
+
+.installer-form {
+  display: flex;
+  flex-direction: row;
+
+  .gform_body {
+    .gform_fields {
+      display: flex;
+    }
+  }
+}
+
+.gfield_validation_message {
+  font-size: 0.75rem;
+  width: 500px;
+}
+
+.ginput_container {
+  width: 100%;
+  display: flex;
+  span {
+    width: 100%;
+    display: block;
+
+    input {
+      width: 100%;
+    }
+  }
+}

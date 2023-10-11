@@ -34,7 +34,6 @@
       .desktop-mega-menu {
         color: $color__mcalpine-red;
         font: normal normal bold 16px/18px 'TheSans';
-        text-transform: uppercase;
         padding-left: 25px;
       }
       ul {
@@ -50,7 +49,6 @@
           a {
             text-decoration: none;
             color: $color__mcalpine-red;
-            text-transform: uppercase;
             font: normal normal bold 16px/18px 'TheSans';
             &:hover {
               color: $color__mcalpine-red;
