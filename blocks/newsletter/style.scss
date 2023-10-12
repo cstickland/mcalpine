@@ -1,70 +1,149 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-.vertical-text {
-  text-align: center;
+.newsletter-block {
+  background-size: 1920px;
+  max-width: 1920px;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 1.25rem;
+  padding-top: 2.1875rem;
+  .newsletter-container {
+    background-color: #ffffff;
+    background-clip: content-box;
 
-  max-width: 1154px !important;
-
-  .h1 {
-    text-align: center;
-    color: $color__mcalpine-red;
-    font-size: 2.81rem;
-
-    @media only screen and (min-width: $tablet) {
+    .newsletter-block-title {
+      text-align: center;
+      color: $color__mcalpine-black;
       font-size: 2.81rem;
-      font-size: clamp(2.81rem, calc(-2.26rem + 10.563vw), 4.5rem);
+      padding-top: 1.5rem;
+      padding-right: 1.25rem;
+      padding-left: 1.25rem;
+      @media only screen and (min-width: $tablet) {
+        font-size: 2.81rem;
+        font-size: clamp(2.81rem, calc(-2.26rem + 10.563vw), 4.5rem);
+      }
+
+      @media only screen and (min-width: $desktop) {
+        font-size: 4.5rem;
+      }
+
+      * {
+        font-size: inherit;
+        display: inline;
+        font-weight: 400;
+        margin: 0;
+      }
+
+      a {
+        color: $color__mcalpine-red;
+
+        &:hover {
+          color: $color__mcalpine-black;
+        }
+      }
     }
 
-    @media only screen and (min-width: $desktop) {
-      font-size: 4.5rem;
-    }
-
-    * {
-      font-size: inherit;
-      display: inline;
-      font-weight: 400;
-      margin: 0;
+    .newsletter-block-message {
+      max-width: 875px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      margin: 0 auto;
+      color: $color__mcalpine-black;
     }
   }
+  .installer-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .gform-body {
+      flex-grow: 1;
+      max-width: 960px;
+      .gform_fields {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+        padding-bottom: 1.25rem;
+        .gfield--type-email {
+          flex-grow: 1;
 
-  .vertical-text_message {
-    max-width: 875px;
-    padding-top: 2rem;
-    font-size: 1rem;
-
-    @media only screen and (min-width: $tablet) {
-      font-size: 1rem;
-      font-size: clamp(1rem, calc(-0.5rem + 3.125vw), 1.5rem);
+          input {
+            width: 100%;
+          }
+        }
+      }
     }
+    .gform_footer {
+      display: flex;
+      align-items: center;
+      padding-right: 1.25rem;
+      padding-left: 1.25rem;
+      padding-bottom: 5rem;
 
-    @media only screen and (min-width: $desktop) {
-      font-size: 1.5rem;
+      input {
+        width: 100%;
+      }
     }
   }
-
-  .vertical-line {
-    width: 2px;
-    background-color: $color__mcalpine-red;
-    height: 80px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  .white-cover {
+    background-color: #ffffff;
+    min-width: 2.1875rem;
+    margin: 0 auto;
+    background-clip: content-box;
+    padding-top: 12.5rem;
   }
 }
 
 @media only screen and (min-width: $desktop) {
-  .vertical-text {
-    .vertical-line {
-      height: 136px;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
+  .newsletter-block {
+    padding-top: 0;
+    display: block;
+    .white-cover {
+      background-color: #ffffff;
+      max-width: 914px;
+      margin: 0 auto;
+      height: 3.75rem;
+      padding-top: 0;
     }
-    .vertical-text_message {
-      font-size: 1.5rem;
+    .newsletter-container {
+      @include container-large;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      .newsletter-content {
+        padding-top: 120px !important;
+        padding-bottom: 120px !important;
+      }
+    }
+
+    .installer-form {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 0 10%;
+      .gform-body {
+        flex-grow: 1;
+        max-width: 960px;
+        .gform_fields {
+          flex-direction: row;
+          gap: 1.5rem;
+          padding-right: 1.5rem;
+
+          .gfield--type-name {
+            width: 274px;
+          }
+          .gfield--type-email {
+            flex-grow: 1;
+            max-width: 662px;
+
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .gform_footer {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

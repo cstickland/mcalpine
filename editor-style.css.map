@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "editor-style.css",
-	"sources": [
-		"sass/editor-style.scss"
-	],
-	"names": [],
-	"mappings": ""
-}

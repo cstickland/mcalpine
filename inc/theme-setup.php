@@ -7,6 +7,7 @@ function mcalpine_setup()
     add_editor_style('style.css');
     add_theme_support('title-tag');
     add_theme_support('editor-styles');
+    add_theme_support('wp_block_styles');
     add_theme_support('post-thumbnails');
     add_theme_support('responsive-embeds');
     add_theme_support('wp-block-styles');
@@ -40,6 +41,8 @@ function mcalpine_setup()
 }
 
 add_action('after_setup_theme', 'mcalpine_setup');
+
+add_editor_style('editor-style.css');
 
 function mcalpine_register_scripts()
 {

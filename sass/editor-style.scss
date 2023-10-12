@@ -1,0 +1,29 @@
+@import 'abstracts/abstracts';
+
+/* Normalize
+--------------------------------------------- */
+@import 'generic/normalize';
+
+/* Box sizing
+--------------------------------------------- */
+@import 'generic/box-sizing';
+
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+@import 'base/base';
+
+html {
+  scroll-behavior: smooth;
+}
+
+html :where(.wp-block) {
+  max-width: $container__large;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-red {
+  color: $color__mcalpine-red;
+}
