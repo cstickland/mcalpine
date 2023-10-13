@@ -17,3 +17,4 @@ require_once('hero_home/hero-home.php');
 require_once('vertical_text/vertical_text.php');
 require_once('newsletter/newsletter.php');
 require_once('product_guide_cta/product_guide_cta.php');
+require_once('help_card/help_card.php');

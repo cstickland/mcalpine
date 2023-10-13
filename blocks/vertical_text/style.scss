@@ -9,10 +9,29 @@
   padding: 0 1.25rem;
 
   max-width: 1154px !important;
-
-  .h1 {
+  .border-subtitle {
+    font-size: 0.875rem;
+    color: $color__mcalpine-red;
+    border: solid 1px $color__mcalpine-red;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+  }
+  .h1,
+  .h2 {
     text-align: center;
     color: $color__mcalpine-red;
+
+    * {
+      font-size: inherit;
+      display: inline;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  .h1 {
+    padding-top: 1rem;
     font-size: 2.81rem;
 
     @media only screen and (min-width: $tablet) {
@@ -23,15 +42,10 @@
     @media only screen and (min-width: $desktop) {
       font-size: 4.5rem;
     }
-
-    * {
-      font-size: inherit;
-      display: inline;
-      font-weight: 400;
-      margin: 0;
-    }
   }
-
+  .h2 {
+    padding-top: 1.5rem;
+  }
   .vertical-text_message {
     max-width: 875px;
     padding-top: 2rem;

@@ -7,9 +7,28 @@
   padding: 0 1.25rem;
   max-width: 1154px !important;
 }
-.vertical-text .h1 {
+.vertical-text .border-subtitle {
+  font-size: 0.875rem;
+  color: #e63128;
+  border: solid 1px #e63128;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+}
+.vertical-text .h1,
+.vertical-text .h2 {
   text-align: center;
   color: #e63128;
+}
+.vertical-text .h1 *,
+.vertical-text .h2 * {
+  font-size: inherit;
+  display: inline;
+  font-weight: 400;
+  margin: 0;
+}
+.vertical-text .h1 {
+  padding-top: 1rem;
   font-size: 2.81rem;
 }
 @media only screen and (min-width: 48rem) {
@@ -23,11 +42,8 @@
     font-size: 4.5rem;
   }
 }
-.vertical-text .h1 * {
-  font-size: inherit;
-  display: inline;
-  font-weight: 400;
-  margin: 0;
+.vertical-text .h2 {
+  padding-top: 1.5rem;
 }
 .vertical-text .vertical-text_message {
   max-width: 875px;
