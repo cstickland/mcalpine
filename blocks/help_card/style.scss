@@ -57,7 +57,7 @@
     .help-card {
       .help-card-content {
         .help-card-image {
-          padding-bottom: clamp(4.125rem, calc(12.25rem + -37.143cqw), 2.5rem);
+          padding-bottom: calc(12.25rem - 37.143cqw);
           width: clamp(3.25rem, calc(-9.875rem + 60cqw), 5.875rem);
         }
 

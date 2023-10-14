@@ -62,6 +62,27 @@
             "return_format": "array"
         },
         {
+            "key": "field_652a851e29e8f",
+            "label": "Image Full Width",
+            "name": "image_full_width",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_651025764d742",
             "label": "Image Alignment Desktop",
             "name": "image_alignment_desktop",
@@ -69,7 +90,15 @@
             "type": "select",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_652a851e29e8f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -81,6 +110,41 @@
                 "i-right": "Image Right"
             },
             "default_value": "i-right",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_652a875129e90",
+            "label": "Text Alignment Desktop",
+            "name": "text_alignment_desktop",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_652a851e29e8f",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "align-left": "Left",
+                "align-right": "Right"
+            },
+            "default_value": false,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -123,7 +187,15 @@
             "type": "select",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_652a851e29e8f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -191,5 +263,5 @@
     "graphql_field_name": "image&TextBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1695558321
+    "modified": 1697287283
 }

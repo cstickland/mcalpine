@@ -45,7 +45,7 @@
 @supports (contain: inline-size) {
   @container help-card (min-width: 350px) {
     .help-card .help-card-content .help-card-image {
-      padding-bottom: clamp(4.125rem, 12.25rem - 37.143cqw, 2.5rem);
+      padding-bottom: calc(12.25rem - 37.143cqw);
       width: clamp(3.25rem, -9.875rem + 60cqw, 5.875rem);
     }
     .help-card .help-card-content .help-card-text {

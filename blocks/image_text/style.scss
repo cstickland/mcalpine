@@ -12,12 +12,17 @@
     &.i-bottom {
       flex-direction: column;
     }
-
+    .image-container {
+      display: flex;
+    }
     .text-container {
       padding: 2rem;
       p {
         margin-bottom: 2rem;
         max-width: 405px;
+      }
+      h2 {
+        max-width: 350px;
       }
       .color-block {
         height: 0.75rem;
@@ -48,6 +53,19 @@
         }
       }
     }
+    .text-block-hash {
+      display: none;
+    }
+    &.image-full-width {
+      .text-container {
+        background-color: $color__mcalpine-red;
+        color: #ffffff;
+
+        .color-block {
+          background-color: #ffffff;
+        }
+      }
+    }
   }
 }
 
@@ -56,6 +74,66 @@
     .image-text-container {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
+
+      .text-block-hash {
+        display: block;
+      }
+
+      .text-container {
+        h2 {
+          max-width: 420px;
+        }
+      }
+      &.image-full-width {
+        grid-template-rows: 3fr 2fr 80px;
+
+        .image-container {
+          grid-area: 1 / 1 / span 2 / span 12;
+          width: 100%;
+          z-index: 1;
+          img {
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+
+        .text-container {
+          background-color: $color__mcalpine-red;
+          width: 100%;
+          color: white;
+          padding-left: 5rem;
+          &.align-left {
+            grid-area: 2 / 1 / span 1 / span 4;
+          }
+
+          &.align-right {
+            grid-area: 2 / 9 / span 1 / span 4;
+          }
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .color-block {
+            background-color: #fff;
+          }
+        }
+
+        .text-block-hash {
+          &.align-left {
+            grid-area: 3 / 1 / span 1 / span 3;
+          }
+          &.align-right {
+            grid-area: 3 / 10 / span 1 / span 3;
+          }
+          overflow: hidden;
+          img {
+            width: 1400px;
+            max-width: none;
+          }
+        }
+      }
       &.color-red {
         grid-template-rows: 1fr 8fr 80px;
 
