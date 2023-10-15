@@ -3,34 +3,6 @@
     "title": "Post FAQ",
     "fields": [
         {
-            "key": "field_6512e76a4546f",
-            "label": "Question",
-            "name": "question",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6512e78c45470",
-                        "operator": "!=empty"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_6512e78c45470",
             "label": "Answer",
             "name": "answer",
@@ -75,9 +47,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "show_in_graphql": 0,
-    "graphql_field_name": "posts",
+    "show_in_graphql": 1,
+    "graphql_field_name": "faqFields",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1695737910
+    "modified": 1697383147
 }

@@ -42,7 +42,7 @@ function mcalpine_setup()
 
 add_action('after_setup_theme', 'mcalpine_setup');
 
-add_editor_style('editor-style.css');
+add_editor_style();
 
 function mcalpine_register_scripts()
 {
@@ -63,6 +63,10 @@ function mcalpine_register_scripts()
 
     if (is_page_template('where-to-buy.php')) {
         wp_enqueue_script('where-to-find-us-js', get_template_directory_uri() . "/components/where-to-find-us/dist/map-component.js", array(), array());
+    }
+    if (is_page_template('faq.php')) {
+
+        wp_enqueue_script('faq-js', get_template_directory_uri() . "/components/faq/dist/faq-archive.js", array(), array());
     }
 }
 

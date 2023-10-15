@@ -18,6 +18,15 @@ $blocks = parse_blocks($post->post_content);
     ?>
 
 </main><!-- #main -->
+<div id="faq"></div>
+<script>
+    const faq = document.getElementById('faq');
+    faq.innerHTML = ''
+
+    new FaqArchive({
+        target: faq,
+    })
+</script>
 
 <?php
 get_footer();

@@ -34,7 +34,6 @@
 
     onMount(async () => {
         let fetchMenu = await getData(menuQuery);
-        console.log(fetchMenu);
 
         menu = fetchMenu.data.menus.edges[0].node;
     });

@@ -25,25 +25,16 @@ get_header();
 
                 $post_id = get_the_ID();
                 $insight_image = get_the_post_thumbnail_url();
-                $product_categories = wp_get_object_terms($post_id, 'product_categories');
-
-                foreach ($product_categories as $category) {
-                    if ($category->parent == 0) {
-                        $parent_category = $category->term_id;
-                    } else {
-                        $child_category = $category->term_id;
-                    }
-                }
-
                 $new_insight = new Insight();
                 $new_insight->title = get_the_title();
                 $new_insight->permalink = get_the_permalink();
                 $category;
                 foreach ((get_the_category()) as $cat) {
-                    $category = $cat->cat_name;
+                    if ($cat->parent == 0) {
+                        $category = $cat->cat_name;
+                    }
                 };
                 $new_insight->identifier = $category;
-                $new_insight->alt = $alt;
                 $new_insight->img = $insight_image;
                 $new_insight->columnWidth = 1;
                 // $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
@@ -65,7 +56,6 @@ get_header();
     const insightArchiveContainer = document.getElementById('insight-archive');
     const allInsights = <?php echo json_encode($insights); ?>;
     insightArchiveContainer.innerHTML = '';
-
     new InsightArchive({
         target: insightArchiveContainer,
         props: {
