@@ -126,6 +126,9 @@
     function children(element) {
         return Array.from(element.childNodes);
     }
+    function set_input_value(input, value) {
+        input.value = value == null ? '' : value;
+    }
     function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
         const e = document.createEvent('CustomEvent');
         e.initCustomEvent(type, bubbles, cancelable, detail);
@@ -1046,17 +1049,127 @@
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[2] = list[i];
+    	child_ctx[4] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
+    	child_ctx[7] = list[i];
     	return child_ctx;
     }
 
-    // (25:12) {#if questions.length > 0}
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[4] = list[i];
+    	return child_ctx;
+    }
+
+    // (32:12) {#if questions.length > 0}
+    function create_if_block_2(ctx) {
+    	let each_1_anchor;
+    	let each_value_2 = [.../*categories*/ ctx[2]];
+    	validate_each_argument(each_value_2);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*categories*/ 4) {
+    				each_value_2 = [.../*categories*/ ctx[2]];
+    				validate_each_argument(each_value_2);
+    				let i;
+
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_2(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_2.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(32:12) {#if questions.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (33:16) {#each [...categories] as category}
+    function create_each_block_2(ctx) {
+    	let a;
+    	let t_value = /*category*/ ctx[4] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			a = element("a");
+    			t = text(t_value);
+    			attr_dev(a, "href", "#" + /*category*/ ctx[4]);
+    			add_location(a, file, 33, 20, 952);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, a, anchor);
+    			append_dev(a, t);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(a);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_2.name,
+    		type: "each",
+    		source: "(33:16) {#each [...categories] as category}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (43:16) {#if questions.length > 0}
     function create_if_block(ctx) {
     	let each_1_anchor;
     	let current;
@@ -1091,7 +1204,7 @@
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*questions, categories*/ 3) {
+    			if (dirty & /*questions, categories*/ 5) {
     				each_value_1 = /*questions*/ ctx[0];
     				validate_each_argument(each_value_1);
     				let i;
@@ -1147,22 +1260,22 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(25:12) {#if questions.length > 0}",
+    		source: "(43:16) {#if questions.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:20) {#if question.node.categories.edges[0].node.name == category}
+    // (45:24) {#if question.node.categories.edges[0].node.name == category}
     function create_if_block_1(ctx) {
     	let accordion;
     	let current;
 
     	accordion = new Accordion({
     			props: {
-    				question: /*question*/ ctx[5].node.title,
-    				answer: /*question*/ ctx[5].node.faqFields.answer
+    				question: /*question*/ ctx[7].node.title,
+    				answer: /*question*/ ctx[7].node.faqFields.answer
     			},
     			$$inline: true
     		});
@@ -1177,8 +1290,8 @@
     		},
     		p: function update(ctx, dirty) {
     			const accordion_changes = {};
-    			if (dirty & /*questions*/ 1) accordion_changes.question = /*question*/ ctx[5].node.title;
-    			if (dirty & /*questions*/ 1) accordion_changes.answer = /*question*/ ctx[5].node.faqFields.answer;
+    			if (dirty & /*questions*/ 1) accordion_changes.question = /*question*/ ctx[7].node.title;
+    			if (dirty & /*questions*/ 1) accordion_changes.answer = /*question*/ ctx[7].node.faqFields.answer;
     			accordion.$set(accordion_changes);
     		},
     		i: function intro(local) {
@@ -1199,18 +1312,18 @@
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(27:20) {#if question.node.categories.edges[0].node.name == category}",
+    		source: "(45:24) {#if question.node.categories.edges[0].node.name == category}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (26:16) {#each questions as question}
+    // (44:20) {#each questions as question}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*question*/ ctx[5].node.categories.edges[0].node.name == /*category*/ ctx[2] && create_if_block_1(ctx);
+    	let if_block = /*question*/ ctx[7].node.categories.edges[0].node.name == /*category*/ ctx[4] && create_if_block_1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1223,7 +1336,7 @@
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*question*/ ctx[5].node.categories.edges[0].node.name == /*category*/ ctx[2]) {
+    			if (/*question*/ ctx[7].node.categories.edges[0].node.name == /*category*/ ctx[4]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
@@ -1265,18 +1378,18 @@
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(26:16) {#each questions as question}",
+    		source: "(44:20) {#each questions as question}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (22:4) {#each [...categories] as category}
+    // (40:8) {#each [...categories] as category}
     function create_each_block(ctx) {
     	let div;
     	let h3;
-    	let t0_value = /*category*/ ctx[2] + "";
+    	let t0_value = /*category*/ ctx[4] + "";
     	let t0;
     	let t1;
     	let t2;
@@ -1293,8 +1406,9 @@
     			if (if_block) if_block.c();
     			t2 = space();
     			attr_dev(h3, "class", "faq-category-title");
-    			add_location(h3, file, 23, 12, 629);
-    			add_location(div, file, 22, 8, 594);
+    			add_location(h3, file, 41, 16, 1207);
+    			attr_dev(div, "id", /*category*/ ctx[4]);
+    			add_location(div, file, 40, 12, 1154);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1358,7 +1472,7 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(22:4) {#each [...categories] as category}",
+    		source: "(40:8) {#each [...categories] as category}",
     		ctx
     	});
 
@@ -1367,8 +1481,19 @@
 
     function create_fragment(ctx) {
     	let section;
+    	let div1;
+    	let input;
+    	let t0;
+    	let div0;
+    	let h5;
+    	let t2;
+    	let t3;
+    	let div2;
     	let current;
-    	let each_value = [.../*categories*/ ctx[1]];
+    	let mounted;
+    	let dispose;
+    	let if_block = /*questions*/ ctx[0].length > 0 && create_if_block_2(ctx);
+    	let each_value = [.../*categories*/ ctx[2]];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -1383,31 +1508,84 @@
     	const block = {
     		c: function create() {
     			section = element("section");
+    			div1 = element("div");
+    			input = element("input");
+    			t0 = space();
+    			div0 = element("div");
+    			h5 = element("h5");
+    			h5.textContent = "Topics";
+    			t2 = space();
+    			if (if_block) if_block.c();
+    			t3 = space();
+    			div2 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
+    			attr_dev(input, "class", "faq-filter-search");
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "placeholder", "Filter by term...");
+    			add_location(input, file, 23, 8, 616);
+    			add_location(h5, file, 30, 12, 825);
+    			attr_dev(div0, "class", "category-links");
+    			add_location(div0, file, 29, 8, 784);
+    			attr_dev(div1, "class", "categories-container");
+    			add_location(div1, file, 22, 4, 573);
+    			attr_dev(div2, "class", "questions-container");
+    			add_location(div2, file, 38, 4, 1064);
     			attr_dev(section, "class", "faq-archive");
-    			add_location(section, file, 20, 0, 516);
+    			add_location(section, file, 21, 0, 539);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, section, anchor);
+    			append_dev(section, div1);
+    			append_dev(div1, input);
+    			set_input_value(input, /*searchTerm*/ ctx[1]);
+    			append_dev(div1, t0);
+    			append_dev(div1, div0);
+    			append_dev(div0, h5);
+    			append_dev(div0, t2);
+    			if (if_block) if_block.m(div0, null);
+    			append_dev(section, t3);
+    			append_dev(section, div2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
-    					each_blocks[i].m(section, null);
+    					each_blocks[i].m(div2, null);
     				}
     			}
 
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(input, "input", /*input_input_handler*/ ctx[3]);
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*questions, categories*/ 3) {
-    				each_value = [.../*categories*/ ctx[1]];
+    			if (dirty & /*searchTerm*/ 2 && input.value !== /*searchTerm*/ ctx[1]) {
+    				set_input_value(input, /*searchTerm*/ ctx[1]);
+    			}
+
+    			if (/*questions*/ ctx[0].length > 0) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_2(ctx);
+    					if_block.c();
+    					if_block.m(div0, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (dirty & /*categories, questions*/ 5) {
+    				each_value = [.../*categories*/ ctx[2]];
     				validate_each_argument(each_value);
     				let i;
 
@@ -1421,7 +1599,7 @@
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(section, null);
+    						each_blocks[i].m(div2, null);
     					}
     				}
 
@@ -1454,7 +1632,10 @@
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(section);
+    			if (if_block) if_block.d();
     			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -1473,7 +1654,8 @@
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
     	let questions = [];
-    	const categories = new Set();
+    	let categories = new Set();
+    	let searchTerm = "";
 
     	onMount(async () => {
     		let results = await getData(query);
@@ -1490,6 +1672,11 @@
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function input_input_handler() {
+    		searchTerm = this.value;
+    		$$invalidate(1, searchTerm);
+    	}
+
     	$$self.$capture_state = () => ({
     		query,
     		getData,
@@ -1497,18 +1684,21 @@
     		slide,
     		Accordion,
     		questions,
-    		categories
+    		categories,
+    		searchTerm
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('questions' in $$props) $$invalidate(0, questions = $$props.questions);
+    		if ('categories' in $$props) $$invalidate(2, categories = $$props.categories);
+    		if ('searchTerm' in $$props) $$invalidate(1, searchTerm = $$props.searchTerm);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [questions, categories];
+    	return [questions, searchTerm, categories, input_input_handler];
     }
 
     class App extends SvelteComponentDev {

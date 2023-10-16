@@ -527,8 +527,7 @@ table {
 --------------------------------------------- */
 /* Forms
 --------------------------------------------- */
-.btn,
-.button {
+.btn {
   font-size: 1rem;
   padding: 1rem 1.6875rem;
   line-height: 1;
@@ -540,50 +539,42 @@ table {
   display: block;
   width: fit-content;
   transition: all 100ms ease-in-out; }
-  .btn.btn-black,
-  .button.btn-black {
+  .btn.btn-black {
     background-color: #222222;
     border: solid 1px #222222;
     color: #ffffff; }
-    .btn.btn-black:hover,
-    .button.btn-black:hover {
+    .btn.btn-black:hover {
       background-color: #4e4e4e;
       border: solid 1px #4e4e4e; }
-    .btn.btn-black.btn-outline,
-    .button.btn-black.btn-outline {
+    .btn.btn-black.btn-outline {
       background-color: #ffffff;
       border: solid 1px #222222;
       color: #222222; }
-      .btn.btn-black.btn-outline:hover,
-      .button.btn-black.btn-outline:hover {
+      .btn.btn-black.btn-outline:hover {
         background-color: #222222;
         color: #ffffff; }
-  .btn.btn-arrow,
-  .button.btn-arrow {
-    background-image: url("../../../assets/icons/icon_forward.svg"); }
-  .btn.btn-red,
-  .button.btn-red {
+  .btn.btn-arrow {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245"><path d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z" fill="%23fff"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 1.5rem) center;
+    padding-right: 4rem; }
+  .btn.btn-red {
     background-color: #e63128;
     color: #ffffff; }
-    .btn.btn-red:hover,
-    .button.btn-red:hover {
+    .btn.btn-red:hover {
       background-color: #eb5a53; }
-    .btn.btn-red.btn-outline,
-    .button.btn-red.btn-outline {
+    .btn.btn-red.btn-outline {
       background-color: #ffffff;
       color: #222222;
       border: solid 1px #e63128; }
-      .btn.btn-red.btn-outline:hover,
-      .button.btn-red.btn-outline:hover {
+      .btn.btn-red.btn-outline:hover {
         background-color: #e63128;
         color: #ffffff; }
-  .btn.btn-white,
-  .button.btn-white {
+  .btn.btn-white {
     background-color: #ffffff;
     color: #222222;
     border: 0; }
-    .btn.btn-white:hover,
-    .button.btn-white:hover {
+    .btn.btn-white:hover {
       background-color: #222222;
       color: #ffffff; }
 
@@ -1960,22 +1951,51 @@ fieldset {
     height: 10px; }
 
 .faq-archive {
-  width: 100%;
-  max-width: 110.25rem;
-  margin: 0 auto;
-  padding: 2.1875rem 1.25rem; }
-  @media only screen and (min-width: 48rem) {
-    .faq-archive {
-      padding: 3.75rem 2.5rem; } }
-  @media only screen and (min-width: 64rem) {
-    .faq-archive {
-      padding: 5rem 3.75rem; } }
-  @media only screen and (min-width: 120rem) {
-    .faq-archive {
-      padding-top: 5rem; } }
+  padding-top: 0 !important; }
+  .faq-archive .categories-container {
+    border-bottom: solid 1px #f4f4f4;
+    border-top: solid 1px #f4f4f4;
+    display: flex; }
+    .faq-archive .categories-container .faq-filter-search {
+      border: 0;
+      border-right: solid 1px #f4f4f4;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
+      background-repeat: no-repeat;
+      background-size: 1.125rem;
+      background-position: 1rem center;
+      padding-left: 3rem;
+      border-bottom: #f4f4f4;
+      width: 10%;
+      animation-name: compress;
+      animation-fill-mode: forwards;
+      animation-duration: 500ms;
+      animation-timeline: ease-in-out; }
+      .faq-archive .categories-container .faq-filter-search:active, .faq-archive .categories-container .faq-filter-search:hover, .faq-archive .categories-container .faq-filter-search:focus-visible {
+        box-shadow: none; }
+      .faq-archive .categories-container .faq-filter-search:active, .faq-archive .categories-container .faq-filter-search:focus-visible {
+        animation-name: expand;
+        animation-duration: 500ms;
+        animation-timeline: ease-in-out;
+        animation-fill-mode: forwards;
+        animation-play-state: running; }
+    .faq-archive .categories-container .category-links {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      align-items: center;
+      padding-left: 1rem; }
+      .faq-archive .categories-container .category-links h5 {
+        display: none;
+        color: #222222;
+        padding-bottom: 1.5rem; }
+      .faq-archive .categories-container .category-links a {
+        color: #5a5a5a;
+        display: block; }
+        .faq-archive .categories-container .category-links a:hover {
+          color: #e63128; }
   .faq-archive .faq-category-title {
     padding-bottom: 2.5rem;
-    padding-top: 2.5rem;
+    padding-top: 2rem;
     color: #e63128; }
 
 .accordion {
@@ -2055,9 +2075,33 @@ fieldset {
       padding-top: 3.5rem; } }
 
 @media only screen and (min-width: 64rem) {
-  .faq-archive .faq-category-title {
-    padding-bottom: 4.5rem;
-    padding-top: 4.5rem; }
+  .faq-archive {
+    display: flex; }
+    .faq-archive .faq-category-title {
+      padding-bottom: 4.5rem;
+      padding-top: 4.5rem; }
+    .faq-archive .categories-container .faq-filter-search {
+      border: 0;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
+      background-repeat: no-repeat;
+      background-size: 1.125rem;
+      background-position: left center;
+      padding-left: 2rem;
+      border-bottom: #f4f4f4; }
+      .faq-archive .categories-container .faq-filter-search:active, .faq-archive .categories-container .faq-filter-search:hover, .faq-archive .categories-container .faq-filter-search:focus-visible {
+        border: 0;
+        box-shadow: none; }
+    .faq-archive .categories-container .category-links {
+      border-top: solid 1px #f4f4f4; }
+      .faq-archive .categories-container .category-links h5 {
+        display: block;
+        padding-top: 54px; }
+      .faq-archive .categories-container .category-links a {
+        padding-bottom: 2rem; }
+  .questions-container {
+    border-left: solid 1px #f4f4f4;
+    padding-left: 88px;
+    flex-grow: 1; }
   .accordion {
     padding: 2rem; }
     .accordion .accordion-question-container .accordion-toggle-icon {
@@ -2067,6 +2111,18 @@ fieldset {
       width: 24px; }
     .accordion .accordion-answer {
       padding-top: 3.5rem; } }
+
+@keyframes expand {
+  from {
+    width: 10%; }
+  to {
+    width: 100%; } }
+
+@keyframes compress {
+  from {
+    width: 100%; }
+  to {
+    width: 10%; } }
 
 html {
   scroll-behavior: smooth; }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "mcalpine/international-contact",
+  "version": "0.1.0",
+  "title": "International Contacts",
+  "category": "widgets",
+  "icon": "flag",
+  "description": "Example block scaffolded with Create Block tool.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "mcalpine",
+  "style": "file:./style.css",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  }
+}

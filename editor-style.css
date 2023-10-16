@@ -513,8 +513,7 @@ table {
 --------------------------------------------- */
 /* Forms
 --------------------------------------------- */
-.btn,
-.button {
+.btn {
   font-size: 1rem;
   padding: 1rem 1.6875rem;
   line-height: 1;
@@ -526,50 +525,42 @@ table {
   display: block;
   width: fit-content;
   transition: all 100ms ease-in-out; }
-  .btn.btn-black,
-  .button.btn-black {
+  .btn.btn-black {
     background-color: #222222;
     border: solid 1px #222222;
     color: #ffffff; }
-    .btn.btn-black:hover,
-    .button.btn-black:hover {
+    .btn.btn-black:hover {
       background-color: #4e4e4e;
       border: solid 1px #4e4e4e; }
-    .btn.btn-black.btn-outline,
-    .button.btn-black.btn-outline {
+    .btn.btn-black.btn-outline {
       background-color: #ffffff;
       border: solid 1px #222222;
       color: #222222; }
-      .btn.btn-black.btn-outline:hover,
-      .button.btn-black.btn-outline:hover {
+      .btn.btn-black.btn-outline:hover {
         background-color: #222222;
         color: #ffffff; }
-  .btn.btn-arrow,
-  .button.btn-arrow {
-    background-image: url("../../../assets/icons/icon_forward.svg"); }
-  .btn.btn-red,
-  .button.btn-red {
+  .btn.btn-arrow {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245"><path d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z" fill="%23fff"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 1.5rem) center;
+    padding-right: 4rem; }
+  .btn.btn-red {
     background-color: #e63128;
     color: #ffffff; }
-    .btn.btn-red:hover,
-    .button.btn-red:hover {
+    .btn.btn-red:hover {
       background-color: #eb5a53; }
-    .btn.btn-red.btn-outline,
-    .button.btn-red.btn-outline {
+    .btn.btn-red.btn-outline {
       background-color: #ffffff;
       color: #222222;
       border: solid 1px #e63128; }
-      .btn.btn-red.btn-outline:hover,
-      .button.btn-red.btn-outline:hover {
+      .btn.btn-red.btn-outline:hover {
         background-color: #e63128;
         color: #ffffff; }
-  .btn.btn-white,
-  .button.btn-white {
+  .btn.btn-white {
     background-color: #ffffff;
     color: #222222;
     border: 0; }
-    .btn.btn-white:hover,
-    .button.btn-white:hover {
+    .btn.btn-white:hover {
       background-color: #222222;
       color: #ffffff; }
 

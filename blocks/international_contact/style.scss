@@ -1,0 +1,69 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.international-contact {
+  @include container-large;
+  h2 {
+    color: $color__mcalpine-black;
+    padding-bottom: 2.5rem;
+  }
+  .international-contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.international-contact-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  .flag-images {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    img {
+      width: 3.125rem;
+    }
+  }
+
+  .contact-information {
+    h5 {
+      color: $color__mcalpine-black;
+    }
+    div {
+      color: $color__mcalpine-grey;
+    }
+
+    a {
+      color: #7caef2;
+
+      &:hover,
+      &:focus {
+        color: $color__mcalpine-red;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $tablet) {
+  .international-contact {
+    h2 {
+      padding-bottom: 5rem;
+    }
+    .international-contact-grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+  }
+
+  .international-contact-container {
+    margin-bottom: 80px;
+
+    .flag-images {
+      img {
+        width: 4.375rem;
+      }
+    }
+  }
+}
