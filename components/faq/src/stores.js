@@ -6,7 +6,7 @@ export const query = `{
   posts(where: {categoryName: "faq"}) {
     edges {
       node {
-        id
+        postId
         title
         faqFields {
           answer

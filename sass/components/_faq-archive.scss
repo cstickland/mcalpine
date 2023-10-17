@@ -1,3 +1,7 @@
+#faq {
+  min-height: 100vh;
+}
+
 .faq-archive {
   padding-top: 0 !important;
   .categories-container {
@@ -9,7 +13,7 @@
       border-right: solid 1px $color__border-grey;
       background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
       background-repeat: no-repeat;
-      background-size: 1.125rem;
+      background-size: 1.375rem;
       background-position: 1rem center;
       padding-left: 3rem;
       border-bottom: $color__border-grey;
@@ -59,13 +63,16 @@
     padding-top: 2rem;
     color: $color__mcalpine-red;
   }
+
+  .questions-container {
+    padding: 0 1.25rem;
+  }
 }
 
 .accordion {
   overflow: hidden;
   position: relative;
   color: #5a5a5a;
-  padding: 1rem;
   max-width: 1253px;
   border-bottom: solid 1px #f4f4f4;
 
@@ -90,7 +97,18 @@
       }
     }
   }
+  &:hover {
+    .open-gradient {
+      opacity: 0.18;
+    }
 
+    .accordion-question-container {
+      .accordion-question,
+      .accordion-toggle-icon {
+        color: $color__mcalpine-red;
+      }
+    }
+  }
   .open-gradient {
     top: 0;
     left: 0;
@@ -109,6 +127,7 @@
     justify-content: space-between;
     cursor: pointer;
 
+    padding: 1rem;
     .accordion-question {
       font-weight: 400;
     }
@@ -146,7 +165,7 @@
   }
 
   .accordion-answer {
-    padding-top: 2rem;
+    padding: 1rem;
   }
 }
 
@@ -157,10 +176,13 @@
       padding-top: 3.75rem;
     }
   }
-  .accordion {
-    padding: 1.5rem;
 
+  .questions-container {
+    padding: 0 1.25rem;
+  }
+  .accordion {
     .accordion-question-container {
+      padding: 1.5rem;
       .accordion-toggle-icon {
         min-height: 18px;
         min-width: 18px;
@@ -170,7 +192,7 @@
     }
 
     .accordion-answer {
-      padding-top: 3.5rem;
+      padding: 1.5rem;
     }
   }
 }
@@ -178,48 +200,65 @@
 @media only screen and (min-width: $desktop) {
   .faq-archive {
     display: flex;
+    max-width: 107.5rem;
+    margin: 0 auto;
+    padding: 0 3.75rem;
+    box-sizing: border-box;
     .faq-category-title {
       padding-bottom: 4.5rem;
       padding-top: 4.5rem;
     }
 
     .categories-container {
+      flex-direction: column;
+      border-top: 0;
+      padding-right: 0;
+      padding-top: 0;
+      width: auto;
+      max-width: 422px;
+      margin-left: auto;
+      border-left: solid 1px $color__border-grey;
+
       .faq-filter-search {
-        border: 0;
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
-        background-repeat: no-repeat;
-        background-size: 1.125rem;
-        background-position: left center;
-        padding-left: 2rem;
-        border-bottom: $color__border-grey;
+        padding-left: 3rem;
+        border-top: 0;
+        animation: unset;
+        width: auto;
+
+        border-right: 0;
         &:active,
         &:hover,
         &:focus-visible {
           border: 0;
           box-shadow: none;
+          animation: unset;
         }
       }
 
       .category-links {
         border-top: solid 1px $color__border-grey;
+        flex-direction: column;
+        align-items: start;
+        gap: 2rem;
+        padding-left: 2rem;
         h5 {
           display: block;
           padding-top: 54px;
-        }
-        a {
-          padding-bottom: 2rem;
+          padding-bottom: 0;
         }
       }
     }
-  }
-  .questions-container {
-    border-left: solid 1px $color__border-grey;
-    padding-left: 88px;
-    flex-grow: 1;
+    .questions-container {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-left: solid 1px $color__border-grey;
+      padding-left: 88px;
+      flex-grow: 1;
+    }
   }
   .accordion {
-    padding: 2rem;
     .accordion-question-container {
+      padding: 2rem;
       .accordion-toggle-icon {
         min-height: 24px;
         min-width: 24px;
@@ -229,7 +268,7 @@
     }
 
     .accordion-answer {
-      padding-top: 3.5rem;
+      padding: 2rem;
     }
   }
 }

@@ -231,6 +231,23 @@
     function set_current_component(component) {
         current_component = component;
     }
+    function get_current_component() {
+        if (!current_component)
+            throw new Error('Function called outside component initialization');
+        return current_component;
+    }
+    /**
+     * The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM.
+     * It must be called during the component's initialisation (but doesn't need to live *inside* the component;
+     * it can be called from an external module).
+     *
+     * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
+     *
+     * https://svelte.dev/docs#run-time-svelte-onmount
+     */
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
+    }
     // TODO figure out if we still want to support
     // shorthand events, or if we want to implement
     // a real bubbling mechanism
@@ -960,40 +977,40 @@
     			svg = svg_element("svg");
     			path = svg_element("path");
     			attr_dev(h6, "class", "insight-identifier");
-    			add_location(h6, file$3, 8, 8, 290);
+    			add_location(h6, file$3, 15, 8, 478);
     			attr_dev(h3, "class", "insight-card-title");
-    			add_location(h3, file$3, 9, 8, 355);
+    			add_location(h3, file$3, 16, 8, 543);
     			attr_dev(div0, "class", "insight-card-text");
-    			add_location(div0, file$3, 7, 4, 250);
+    			add_location(div0, file$3, 14, 4, 438);
     			attr_dev(img, "class", "insight-card-background-image");
     			if (!src_url_equal(img.src, img_src_value = /*insight*/ ctx[0].img)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*insight*/ ctx[0].alt ? /*insight*/ ctx[0].alt : "");
-    			add_location(img, file$3, 12, 8, 473);
+    			add_location(img, file$3, 19, 8, 661);
     			attr_dev(div1, "class", "insight-card-hover-gradient");
-    			add_location(div1, file$3, 17, 8, 626);
+    			add_location(div1, file$3, 24, 8, 814);
     			attr_dev(div2, "class", "insight-card-image-container");
-    			add_location(div2, file$3, 11, 4, 422);
-    			add_location(span, file$3, 22, 13, 792);
+    			add_location(div2, file$3, 18, 4, 610);
+    			add_location(span, file$3, 29, 13, 980);
     			attr_dev(path, "d", "M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z");
     			attr_dev(path, "fill", "#fff");
-    			add_location(path, file$3, 29, 21, 1080);
+    			add_location(path, file$3, 36, 21, 1268);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "width", "13.922");
     			attr_dev(svg, "height", "16.245");
     			attr_dev(svg, "viewBox", "0 0 13.922 16.245");
-    			add_location(svg, file$3, 24, 16, 880);
+    			add_location(svg, file$3, 31, 16, 1068);
     			attr_dev(div3, "class", "insight-link-arrow");
-    			add_location(div3, file$3, 23, 12, 831);
+    			add_location(div3, file$3, 30, 12, 1019);
 
     			attr_dev(a, "href", a_href_value = /*insight*/ ctx[0].permalink
     			? /*insight*/ ctx[0].permalink
     			: "");
 
-    			add_location(a, file$3, 21, 8, 726);
+    			add_location(a, file$3, 28, 8, 914);
     			attr_dev(div4, "class", "insight-card-link");
-    			add_location(div4, file$3, 20, 4, 686);
+    			add_location(div4, file$3, 27, 4, 874);
     			attr_dev(div5, "class", div5_class_value = "insight-card mobile-show col-" + /*insight*/ ctx[0].columnWidth);
-    			add_location(div5, file$3, 6, 0, 124);
+    			add_location(div5, file$3, 13, 0, 312);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1082,6 +1099,13 @@
     	validate_slots('InsightCard', slots, []);
     	let { insight = [] } = $$props;
     	let open = false;
+
+    	onMount(() => {
+    		if (insight.identifier.toLowerCase() == 'faq') {
+    			$$invalidate(0, insight.permalink = `/faq/?id=${insight.id}`, insight);
+    		}
+    	});
+
     	const writable_props = ['insight'];
 
     	Object.keys($$props).forEach(key => {
@@ -1092,7 +1116,7 @@
     		if ('insight' in $$props) $$invalidate(0, insight = $$props.insight);
     	};
 
-    	$$self.$capture_state = () => ({ insight, fade, slide, open });
+    	$$self.$capture_state = () => ({ insight, fade, slide, onMount, open });
 
     	$$self.$inject_state = $$props => {
     		if ('insight' in $$props) $$invalidate(0, insight = $$props.insight);

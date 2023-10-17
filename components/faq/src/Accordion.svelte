@@ -1,12 +1,28 @@
-<script lang="ts">
+<script>
     import { slide } from "svelte/transition";
+    import { onMount, tick } from "svelte";
     let open = false;
 
     export let question = "";
     export let answer = "";
+    export let id;
+    let accordionElement;
+
+    onMount(async () => {
+        await tick();
+        setTimeout(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get("id");
+            if (myParam == id) {
+                open = true;
+
+                accordionElement.scrollIntoView({ behaviour: "smooth" });
+            }
+        }, 300);
+    });
 </script>
 
-<div class="accordion {open ? 'open' : ''}">
+<div class="accordion {open ? 'open' : ''}" {id} bind:this={accordionElement}>
     <div class="open-gradient" />
     <div
         class="accordion-question-container"

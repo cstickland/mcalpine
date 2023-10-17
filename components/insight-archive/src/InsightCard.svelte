@@ -1,7 +1,14 @@
 <script>
     export let insight = [];
     import { fade, slide } from "svelte/transition";
+    import { onMount } from 'svelte'
     let open = false;
+
+    onMount(() => {
+        if(insight.identifier.toLowerCase() == 'faq') {
+            insight.permalink = `/faq/?id=${insight.id}`
+        }
+    })
 </script>
 
 <div class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>

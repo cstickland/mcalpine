@@ -1950,6 +1950,9 @@ fieldset {
     width: 10px;
     height: 10px; }
 
+#faq {
+  min-height: 100vh; }
+
 .faq-archive {
   padding-top: 0 !important; }
   .faq-archive .categories-container {
@@ -1961,7 +1964,7 @@ fieldset {
       border-right: solid 1px #f4f4f4;
       background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
       background-repeat: no-repeat;
-      background-size: 1.125rem;
+      background-size: 1.375rem;
       background-position: 1rem center;
       padding-left: 3rem;
       border-bottom: #f4f4f4;
@@ -1997,12 +2000,13 @@ fieldset {
     padding-bottom: 2.5rem;
     padding-top: 2rem;
     color: #e63128; }
+  .faq-archive .questions-container {
+    padding: 0 1.25rem; }
 
 .accordion {
   overflow: hidden;
   position: relative;
   color: #5a5a5a;
-  padding: 1rem;
   max-width: 1253px;
   border-bottom: solid 1px #f4f4f4; }
   .accordion.open .open-gradient {
@@ -2016,6 +2020,11 @@ fieldset {
     transition-duration: 0.2s; }
     .accordion.open .accordion-question-container .accordion-toggle-icon div {
       background-color: #e63128; }
+  .accordion:hover .open-gradient {
+    opacity: 0.18; }
+  .accordion:hover .accordion-question-container .accordion-question,
+  .accordion:hover .accordion-question-container .accordion-toggle-icon {
+    color: #e63128; }
   .accordion .open-gradient {
     top: 0;
     left: 0;
@@ -2029,7 +2038,8 @@ fieldset {
   .accordion .accordion-question-container {
     display: flex;
     justify-content: space-between;
-    cursor: pointer; }
+    cursor: pointer;
+    padding: 1rem; }
     .accordion .accordion-question-container .accordion-question {
       font-weight: 400; }
     .accordion .accordion-question-container .accordion-toggle-icon {
@@ -2058,59 +2068,78 @@ fieldset {
           height: 2px;
           width: 100%; }
   .accordion .accordion-answer {
-    padding-top: 2rem; }
+    padding: 1rem; }
 
 @media only screen and (min-width: 48rem) {
   .faq-archive .faq-category-title {
     padding-bottom: 3.75rem;
     padding-top: 3.75rem; }
-  .accordion {
+  .questions-container {
+    padding: 0 1.25rem; }
+  .accordion .accordion-question-container {
     padding: 1.5rem; }
     .accordion .accordion-question-container .accordion-toggle-icon {
       min-height: 18px;
       min-width: 18px;
       height: 18px;
       width: 18px; }
-    .accordion .accordion-answer {
-      padding-top: 3.5rem; } }
+  .accordion .accordion-answer {
+    padding: 1.5rem; } }
 
 @media only screen and (min-width: 64rem) {
   .faq-archive {
-    display: flex; }
+    display: flex;
+    max-width: 107.5rem;
+    margin: 0 auto;
+    padding: 0 3.75rem;
+    box-sizing: border-box; }
     .faq-archive .faq-category-title {
       padding-bottom: 4.5rem;
       padding-top: 4.5rem; }
-    .faq-archive .categories-container .faq-filter-search {
-      border: 0;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg>');
-      background-repeat: no-repeat;
-      background-size: 1.125rem;
-      background-position: left center;
-      padding-left: 2rem;
-      border-bottom: #f4f4f4; }
-      .faq-archive .categories-container .faq-filter-search:active, .faq-archive .categories-container .faq-filter-search:hover, .faq-archive .categories-container .faq-filter-search:focus-visible {
-        border: 0;
-        box-shadow: none; }
-    .faq-archive .categories-container .category-links {
-      border-top: solid 1px #f4f4f4; }
-      .faq-archive .categories-container .category-links h5 {
-        display: block;
-        padding-top: 54px; }
-      .faq-archive .categories-container .category-links a {
-        padding-bottom: 2rem; }
-  .questions-container {
-    border-left: solid 1px #f4f4f4;
-    padding-left: 88px;
-    flex-grow: 1; }
-  .accordion {
+    .faq-archive .categories-container {
+      flex-direction: column;
+      border-top: 0;
+      padding-right: 0;
+      padding-top: 0;
+      width: auto;
+      max-width: 422px;
+      margin-left: auto;
+      border-left: solid 1px #f4f4f4; }
+      .faq-archive .categories-container .faq-filter-search {
+        padding-left: 3rem;
+        border-top: 0;
+        animation: unset;
+        width: auto;
+        border-right: 0; }
+        .faq-archive .categories-container .faq-filter-search:active, .faq-archive .categories-container .faq-filter-search:hover, .faq-archive .categories-container .faq-filter-search:focus-visible {
+          border: 0;
+          box-shadow: none;
+          animation: unset; }
+      .faq-archive .categories-container .category-links {
+        border-top: solid 1px #f4f4f4;
+        flex-direction: column;
+        align-items: start;
+        gap: 2rem;
+        padding-left: 2rem; }
+        .faq-archive .categories-container .category-links h5 {
+          display: block;
+          padding-top: 54px;
+          padding-bottom: 0; }
+    .faq-archive .questions-container {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-left: solid 1px #f4f4f4;
+      padding-left: 88px;
+      flex-grow: 1; }
+  .accordion .accordion-question-container {
     padding: 2rem; }
     .accordion .accordion-question-container .accordion-toggle-icon {
       min-height: 24px;
       min-width: 24px;
       height: 24px;
       width: 24px; }
-    .accordion .accordion-answer {
-      padding-top: 3.5rem; } }
+  .accordion .accordion-answer {
+    padding: 2rem; } }
 
 @keyframes expand {
   from {

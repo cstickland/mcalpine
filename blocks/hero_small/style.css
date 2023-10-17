@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
-  margin-bottom: 2rem;
+  padding-bottom: 74px;
 }
 .small-hero-block .small-hero-content {
   z-index: 2;
@@ -77,8 +77,8 @@
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    margin-bottom: 76px;
     border-bottom: solid 1px #f4f4f4;
+    padding-bottom: 0;
   }
   .small-hero-block .small-hero-content {
     width: 50%;

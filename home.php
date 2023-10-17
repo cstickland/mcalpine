@@ -6,6 +6,7 @@ class Insight
     public $identifier;
     public $title;
     public $permalink;
+    public $id;
     public $img;
     public $alt;
     public $columnWidth;
@@ -37,6 +38,7 @@ get_header();
                 $new_insight->identifier = $category;
                 $new_insight->img = $insight_image;
                 $new_insight->columnWidth = 1;
+                $new_insight->id = $post_id;
                 // $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
                 $insights[] = $new_insight;
         ?>
