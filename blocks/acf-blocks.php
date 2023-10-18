@@ -19,3 +19,4 @@ require_once('newsletter/newsletter.php');
 require_once('product_guide_cta/product_guide_cta.php');
 require_once('help_card/help_card.php');
 require_once('international_contact/international_contact.php');
+require_once('faq_contact/faq_contact.php');

@@ -1,0 +1,97 @@
+.faq-contact {
+  width: 100%;
+  max-width: 110.25rem;
+  margin: 0 auto;
+  padding: 2.1875rem 1.25rem;
+}
+@media only screen and (min-width: 48rem) {
+  .faq-contact {
+    padding: 3.75rem 2.5rem;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .faq-contact {
+    padding: 5rem 3.75rem;
+  }
+}
+@media only screen and (min-width: 120rem) {
+  .faq-contact {
+    padding-top: 5rem;
+  }
+}
+.faq-contact .faq-contact-text-container {
+  color: #ffffff;
+  background-color: #e63128;
+}
+.faq-contact .faq-contact-text-container .color-block {
+  height: 0.75rem;
+  width: 56px;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+}
+.faq-contact .faq-contact-form-container {
+  background-color: #ffffff;
+}
+.faq-contact .faq-contact-form-container form .gform_fields {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1.25rem;
+  padding-bottom: 0.875rem;
+}
+.faq-contact .faq-contact-form-container form .gform_fields .faq-contact-email input {
+  width: 100%;
+}
+.faq-contact .faq-contact-form-container form .gform_fields .faq-contact-message textarea {
+  width: 100%;
+}
+.faq-contact .faq-contact-form-container form .gform_fields .faq-contact-message .ginput_counter {
+  display: none;
+}
+.faq-contact .faq-contact-form-container form .gform_footer {
+  display: flex;
+  justify-content: end;
+}
+.faq-contact .faq-contact-form-container form .gform_footer .btn {
+  width: 100%;
+}
+.faq-contact .faq-contact-form-container form .gform_footer .btn.btn-arrow {
+  background-image: none;
+  padding-right: 2rem;
+}
+
+@media only screen and (min-width: 64rem) {
+  .faq-contact form .gform_fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding-bottom: 0.875rem;
+  }
+  .faq-contact form .gform_fields .faq-contact-email input {
+    width: 100%;
+  }
+  .faq-contact form .gform_fields .faq-contact-message {
+    grid-area: 2/1/span 1/span 2;
+  }
+  .faq-contact form .gform_fields .faq-contact-message textarea {
+    width: 100%;
+  }
+  .faq-contact .faq-contact-text-container {
+    padding-left: 96px;
+    padding-bottom: 200px;
+    padding-top: 144px;
+  }
+  .faq-contact .faq-contact-text-container h2,
+  .faq-contact .faq-contact-text-container .faq-contact-text {
+    max-width: 351px;
+  }
+  .faq-contact .faq-contact-text-container h2 {
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .faq-contact .faq-contact-text-container .color-block {
+    width: 93px;
+    height: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

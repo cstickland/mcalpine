@@ -1,0 +1,13 @@
+{
+    "name": "acf/faq-contact",
+    "title": "Faq Page Contact Form",
+    "description": "A custom contact block.",
+    "style":  "file:./style.css",
+    "category": "formatting",
+    "icon": "email",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

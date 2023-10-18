@@ -1,9 +1,10 @@
 input[type='text'],
-input[type='email'] {
+input[type='email'],
+textarea {
   padding: 1.25rem 1.5rem;
   border: solid 1px #cfcfcf;
   border-radius: 0.5rem;
-
+  resize: none;
   &:hover {
     box-shadow: 5px 15px 15px #00000000;
     border: 1px solid #7caef2;

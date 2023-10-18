@@ -584,16 +584,20 @@ table {
     padding: 1.25rem 2rem; } }
 
 input[type='text'],
-input[type='email'] {
+input[type='email'],
+textarea {
   padding: 1.25rem 1.5rem;
   border: solid 1px #cfcfcf;
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem;
+  resize: none; }
   input[type='text']:hover,
-  input[type='email']:hover {
+  input[type='email']:hover,
+  textarea:hover {
     box-shadow: 5px 15px 15px #00000000;
     border: 1px solid #7caef2; }
   input[type='text']:focus-visible,
-  input[type='email']:focus-visible {
+  input[type='email']:focus-visible,
+  textarea:focus-visible {
     box-shadow: 0px 0px 10px #7caef2bf;
     border: 1px solid #7caef2;
     outline: 0; }
