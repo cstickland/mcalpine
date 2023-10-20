@@ -7,4 +7,8 @@
     <div class="faq-contact-form-container">
         <?php echo do_shortcode('[gravityform id="3" title="true"]'); ?>
     </div>
+    <div class="faq-contact-block-hash">
+        <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+    </div>
+    <div class="red-background"></div>
 </div>

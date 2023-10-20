@@ -1,6 +1,5 @@
 <?php
 
-require_once('faq/faq.php');
 require_once('hero_slider/hero-slider.php');
 require_once('contact/contact.php');
 require_once('reviews/reviews.php');
@@ -20,3 +19,4 @@ require_once('product_guide_cta/product_guide_cta.php');
 require_once('help_card/help_card.php');
 require_once('international_contact/international_contact.php');
 require_once('faq_contact/faq_contact.php');
+require_once('faq/faq_archive.php');

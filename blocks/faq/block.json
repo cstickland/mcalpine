@@ -1,0 +1,13 @@
+{
+    "name": "acf/faq-archive",
+    "title": "Faq Page Archive Form",
+    "description": "A custom faq block.",
+    "style":  "file:./style.css",
+    "category": "formatting",
+    "icon": "email",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}
