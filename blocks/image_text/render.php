@@ -11,7 +11,7 @@
             <div class="color-block"></div>
             <h2><?php the_field('title'); ?></h2>
             <?php if (get_field('text')) : ?>
-                <p><? the_field('text'); ?></p>
+                <p><?php the_field('text'); ?></p>
             <?php endif; ?>
             <?php $link = get_field('link');
             if ($link) :
