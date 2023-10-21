@@ -1,15 +1,13 @@
 <script>
+
     let container;
-    let map;
-    let zoom = 13;
     let center = { lat: 55.861, lng: -4.258 };
 
-    import { query, getData } from "./stores.js";
+    import { query, getData, initMap, initMarker, markers } from "./stores.js";
 
     import { onMount } from "svelte";
 
     let innerHeight;
-    let markers = [];
 
     onMount(async () => {
         if (navigator.geolocation) {
@@ -20,12 +18,10 @@
                 center = { lat: latitude, lng: longitude };
             });
         }
-        map = new google.maps.Map(container, {
-            zoom,
-            center,
-        });
-        markers = await getData(query);
-        console.log(markers);
+        const response = await getData(query);
+        markers.set(response.data.themeGeneralSettings.themeSettings.mapLocations);
+        console.log($markers)
+        const map = initMap(container, center, $markers);
     });
 </script>
 

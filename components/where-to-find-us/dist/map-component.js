@@ -38,6 +38,21 @@
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
 
     const globals = (typeof window !== 'undefined'
         ? window
@@ -53,6 +68,12 @@
     function detach(node) {
         if (node.parentNode) {
             node.parentNode.removeChild(node);
+        }
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
         }
     }
     function element(name) {
@@ -434,6 +455,22 @@
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
+    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -461,6 +498,56 @@
         $inject_state() { }
     }
 
+    const subscriber_queue = [];
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=} start
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = new Set();
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (stop) { // store is ready
+                    const run_queue = !subscriber_queue.length;
+                    for (const subscriber of subscribers) {
+                        subscriber[1]();
+                        subscriber_queue.push(subscriber, value);
+                    }
+                    if (run_queue) {
+                        for (let i = 0; i < subscriber_queue.length; i += 2) {
+                            subscriber_queue[i][0](subscriber_queue[i + 1]);
+                        }
+                        subscriber_queue.length = 0;
+                    }
+                }
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.add(subscriber);
+            if (subscribers.size === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                subscribers.delete(subscriber);
+                if (subscribers.size === 0 && stop) {
+                    stop();
+                    stop = null;
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+
+    const markers = writable([]);
+
     const query = `{
   themeGeneralSettings {
     themeSettings {
@@ -474,6 +561,8 @@
           streetName
           state
           countryShort
+          latitude
+          longitude
         }
       }
     }
@@ -496,12 +585,55 @@
       return response
     }
 
+    function initMap(container, center, markers) {
+      let map = new google.maps.Map(container, {
+        zoom: 13,
+        center: center,
+      });
+
+      map.markers = [];
+      markers.forEach((marker) => {
+        initMarker(marker, map);
+      });
+
+      return map
+    }
+
+    function initMarker(marker, map) {
+      // Get position from marker.
+      const lat = marker.location.latitude;
+      const lng = marker.location.longitude;
+      const markerText = '<div>Hiya</div>';
+      const latLng = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      };
+
+      // Create marker instance.
+      const newMarker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+      });
+      // Append to reference for later use.
+      map.markers.push(newMarker);
+
+      // Create info window.
+      let infowindow = new google.maps.InfoWindow({
+        content: markerText,
+      });
+
+      // Show info window when marker is clicked.
+      newMarker.addListener('click', function () {
+        infowindow.open(map, newMarker);
+      });
+    }
+
     /* src/Map.svelte generated by Svelte v3.59.1 */
 
     const { console: console_1 } = globals;
-    const file$1 = "src/Map.svelte";
+    const file$2 = "src/Map.svelte";
 
-    function create_fragment$1(ctx) {
+    function create_fragment$2(ctx) {
     	let div;
     	let mounted;
     	let dispose;
@@ -512,7 +644,7 @@
     			div = element("div");
     			attr_dev(div, "class", "full-screen svelte-f6e5lt");
     			set_style(div, "height", /*innerHeight*/ ctx[1] - 60 + 'px');
-    			add_location(div, file$1, 33, 0, 887);
+    			add_location(div, file$2, 29, 0, 916);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -543,7 +675,7 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$1.name,
+    		id: create_fragment$2.name,
     		type: "component",
     		source: "",
     		ctx
@@ -552,15 +684,15 @@
     	return block;
     }
 
-    function instance$1($$self, $$props, $$invalidate) {
+    function instance$2($$self, $$props, $$invalidate) {
+    	let $markers;
+    	validate_store(markers, 'markers');
+    	component_subscribe($$self, markers, $$value => $$invalidate(5, $markers = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Map', slots, []);
     	let container;
-    	let map;
-    	let zoom = 13;
     	let center = { lat: 55.861, lng: -4.258 };
     	let innerHeight;
-    	let markers = [];
 
     	onMount(async () => {
     		if (navigator.geolocation) {
@@ -572,9 +704,10 @@
     			});
     		}
 
-    		map = new google.maps.Map(container, { zoom, center });
-    		markers = await getData(query);
-    		console.log(markers);
+    		const response = await getData(query);
+    		markers.set(response.data.themeGeneralSettings.themeSettings.mapLocations);
+    		console.log($markers);
+    		initMap(container, center, $markers);
     	});
 
     	const writable_props = [];
@@ -596,23 +729,21 @@
 
     	$$self.$capture_state = () => ({
     		container,
-    		map,
-    		zoom,
     		center,
     		query,
     		getData,
+    		initMap,
+    		initMarker,
+    		markers,
     		onMount,
     		innerHeight,
-    		markers
+    		$markers
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('container' in $$props) $$invalidate(0, container = $$props.container);
-    		if ('map' in $$props) map = $$props.map;
-    		if ('zoom' in $$props) zoom = $$props.zoom;
     		if ('center' in $$props) center = $$props.center;
     		if ('innerHeight' in $$props) $$invalidate(1, innerHeight = $$props.innerHeight);
-    		if ('markers' in $$props) markers = $$props.markers;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -625,44 +756,451 @@
     let Map$1 = class Map extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Map",
     			options,
-    			id: create_fragment$1.name
+    			id: create_fragment$2.name
     		});
     	}
     };
 
+    /* src/Locations.svelte generated by Svelte v3.59.1 */
+    const file$1 = "src/Locations.svelte";
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[1] = list[i];
+    	return child_ctx;
+    }
+
+    // (8:8) {#if marker.location.streetNumber}
+    function create_if_block_3(ctx) {
+    	let p;
+    	let t_value = /*marker*/ ctx[1].location.streetNumber + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text(t_value);
+    			add_location(p, file$1, 8, 12, 215);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$markers*/ 1 && t_value !== (t_value = /*marker*/ ctx[1].location.streetNumber + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3.name,
+    		type: "if",
+    		source: "(8:8) {#if marker.location.streetNumber}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:8) {#if marker.location.streetName}
+    function create_if_block_2(ctx) {
+    	let p;
+    	let t_value = /*marker*/ ctx[1].location.streetName + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text(t_value);
+    			add_location(p, file$1, 11, 12, 320);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$markers*/ 1 && t_value !== (t_value = /*marker*/ ctx[1].location.streetName + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(11:8) {#if marker.location.streetName}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (15:12) {#if marker.location.postCode}
+    function create_if_block_1(ctx) {
+    	let span;
+    	let t0_value = /*marker*/ ctx[1].location.postCode + "";
+    	let t0;
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t0 = text(t0_value);
+    			t1 = text(",");
+    			add_location(span, file$1, 15, 16, 441);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t0);
+    			append_dev(span, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$markers*/ 1 && t0_value !== (t0_value = /*marker*/ ctx[1].location.postCode + "")) set_data_dev(t0, t0_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(15:12) {#if marker.location.postCode}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (19:8) {#if marker.phoneNumber}
+    function create_if_block$1(ctx) {
+    	let p;
+    	let t_value = /*marker*/ ctx[1].phoneNumber + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text(t_value);
+    			add_location(p, file$1, 19, 12, 583);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$markers*/ 1 && t_value !== (t_value = /*marker*/ ctx[1].phoneNumber + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(19:8) {#if marker.phoneNumber}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (6:4) {#each $markers as marker}
+    function create_each_block(ctx) {
+    	let h5;
+    	let t0_value = /*marker*/ ctx[1].title + "";
+    	let t0;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let p;
+    	let t4;
+    	let t5_value = /*marker*/ ctx[1].location.state + "";
+    	let t5;
+    	let t6;
+    	let if_block3_anchor;
+    	let if_block0 = /*marker*/ ctx[1].location.streetNumber && create_if_block_3(ctx);
+    	let if_block1 = /*marker*/ ctx[1].location.streetName && create_if_block_2(ctx);
+    	let if_block2 = /*marker*/ ctx[1].location.postCode && create_if_block_1(ctx);
+    	let if_block3 = /*marker*/ ctx[1].phoneNumber && create_if_block$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			h5 = element("h5");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			if (if_block0) if_block0.c();
+    			t2 = space();
+    			if (if_block1) if_block1.c();
+    			t3 = space();
+    			p = element("p");
+    			if (if_block2) if_block2.c();
+    			t4 = space();
+    			t5 = text(t5_value);
+    			t6 = space();
+    			if (if_block3) if_block3.c();
+    			if_block3_anchor = empty();
+    			add_location(h5, file$1, 6, 8, 136);
+    			add_location(p, file$1, 13, 8, 378);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h5, anchor);
+    			append_dev(h5, t0);
+    			insert_dev(target, t1, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t2, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, p, anchor);
+    			if (if_block2) if_block2.m(p, null);
+    			append_dev(p, t4);
+    			append_dev(p, t5);
+    			insert_dev(target, t6, anchor);
+    			if (if_block3) if_block3.m(target, anchor);
+    			insert_dev(target, if_block3_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$markers*/ 1 && t0_value !== (t0_value = /*marker*/ ctx[1].title + "")) set_data_dev(t0, t0_value);
+
+    			if (/*marker*/ ctx[1].location.streetNumber) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_3(ctx);
+    					if_block0.c();
+    					if_block0.m(t2.parentNode, t2);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (/*marker*/ ctx[1].location.streetName) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_2(ctx);
+    					if_block1.c();
+    					if_block1.m(t3.parentNode, t3);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (/*marker*/ ctx[1].location.postCode) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+    				} else {
+    					if_block2 = create_if_block_1(ctx);
+    					if_block2.c();
+    					if_block2.m(p, t4);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
+    			}
+
+    			if (dirty & /*$markers*/ 1 && t5_value !== (t5_value = /*marker*/ ctx[1].location.state + "")) set_data_dev(t5, t5_value);
+
+    			if (/*marker*/ ctx[1].phoneNumber) {
+    				if (if_block3) {
+    					if_block3.p(ctx, dirty);
+    				} else {
+    					if_block3 = create_if_block$1(ctx);
+    					if_block3.c();
+    					if_block3.m(if_block3_anchor.parentNode, if_block3_anchor);
+    				}
+    			} else if (if_block3) {
+    				if_block3.d(1);
+    				if_block3 = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h5);
+    			if (detaching) detach_dev(t1);
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t2);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(p);
+    			if (if_block2) if_block2.d();
+    			if (detaching) detach_dev(t6);
+    			if (if_block3) if_block3.d(detaching);
+    			if (detaching) detach_dev(if_block3_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(6:4) {#each $markers as marker}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let div;
+    	let each_value = /*$markers*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "class", "locations-container");
+    			add_location(div, file$1, 4, 0, 63);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div, null);
+    				}
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*$markers*/ 1) {
+    				each_value = /*$markers*/ ctx[0];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $markers;
+    	validate_store(markers, 'markers');
+    	component_subscribe($$self, markers, $$value => $$invalidate(0, $markers = $$value));
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Locations', slots, []);
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Locations> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$capture_state = () => ({ markers, $markers });
+    	return [$markers];
+    }
+
+    class Locations extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Locations",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+    }
+
     /* src/App.svelte generated by Svelte v3.59.1 */
     const file = "src/App.svelte";
 
-    // (16:0) { #if ready }
+    // (14:0) {#if ready}
     function create_if_block(ctx) {
+    	let locations;
+    	let t;
     	let map;
     	let current;
+    	locations = new Locations({ $$inline: true });
     	map = new Map$1({ $$inline: true });
 
     	const block = {
     		c: function create() {
+    			create_component(locations.$$.fragment);
+    			t = space();
     			create_component(map.$$.fragment);
     		},
     		m: function mount(target, anchor) {
+    			mount_component(locations, target, anchor);
+    			insert_dev(target, t, anchor);
     			mount_component(map, target, anchor);
     			current = true;
     		},
     		i: function intro(local) {
     			if (current) return;
+    			transition_in(locations.$$.fragment, local);
     			transition_in(map.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
+    			transition_out(locations.$$.fragment, local);
     			transition_out(map.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			destroy_component(locations, detaching);
+    			if (detaching) detach_dev(t);
     			destroy_component(map, detaching);
     		}
     	};
@@ -671,7 +1209,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(16:0) { #if ready }",
+    		source: "(14:0) {#if ready}",
     		ctx
     	});
 
@@ -695,7 +1233,7 @@
     			script.defer = true;
     			script.async = true;
     			if (!src_url_equal(script.src, script_src_value = /*src*/ ctx[1])) attr_dev(script, "src", script_src_value);
-    			add_location(script, file, 9, 1, 200);
+    			add_location(script, file, 9, 4, 257);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -785,7 +1323,7 @@
     		if ('apiKey' in $$props) $$invalidate(2, apiKey = $$props.apiKey);
     	};
 
-    	$$self.$capture_state = () => ({ Map: Map$1, ready, apiKey, src });
+    	$$self.$capture_state = () => ({ Map: Map$1, Locations, ready, apiKey, src });
 
     	$$self.$inject_state = $$props => {
     		if ('ready' in $$props) $$invalidate(0, ready = $$props.ready);
