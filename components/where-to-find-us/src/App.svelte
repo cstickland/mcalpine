@@ -3,6 +3,7 @@
     import Locations from "./Locations.svelte";
     export let ready;
     export let apiKey;
+    let map;
     const src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
 </script>
 
@@ -12,6 +13,6 @@
 </svelte:head>
 
 {#if ready}
-    <Locations />
-    <Map />
+    <Locations bind:map />
+    <Map bind:map />
 {/if}

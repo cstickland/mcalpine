@@ -4,25 +4,105 @@
   max-width: 1920px;
 }
 
-.map-search {
+.locations-container {
   background-color: $color__mcalpine-red;
   color: #ffffff;
-  max-width: 424px;
-  max-height: 845px;
+  max-width: calc(100% - 40px);
+  width: 424px;
+  max-height: 390px;
+  height: 845px;
+  position: absolute;
+  top: -340px;
+  left: 3.1875rem;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 
-  input {
-    margin-bottom: 2.25rem;
+  h2 {
+    font-size: 32px !important;
+    padding-bottom: 1.5rem;
   }
-  .marker {
-    padding: 1.25rem 2rem;
-    padding-top: 0;
-    cursor: pointer;
-    .marker-text {
+  input {
+    border-radius: 3px;
+    width: 100%;
+    box-shadow: inset 0px 0px 6px #0000001a;
+    margin-bottom: 0.25rem;
+  }
+  .locations {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    scrollbar-color: #fff $color__mcalpine-red;
+
+    .location {
+      cursor: pointer;
+      padding: 1.25rem 0;
       border-bottom: solid 1px #ffffff;
+
+      h5 {
+        margin-bottom: 1.125rem;
+      }
+      p {
+        margin: 0;
+      }
     }
   }
 }
 
 #map {
   height: 100vh;
+  max-height: 1080px;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  margin-top: 340px;
+}
+
+@media only screen and (min-width: $desktop) {
+  #map {
+    margin-top: 94px;
+  }
+  .locations-container {
+    background-color: $color__mcalpine-red;
+    color: #ffffff;
+    max-width: 424px;
+    width: 424px;
+    max-height: 845px;
+    height: 845px;
+    overflow-y: scroll;
+    position: absolute;
+    top: -94px;
+    left: 78px;
+    z-index: 2;
+    padding: 2rem;
+    h2 {
+      font-size: 32px !important;
+      padding-bottom: 1.5rem;
+    }
+    input {
+      border-radius: 3px;
+      width: 100%;
+      box-shadow: inset 0px 0px 6px #0000001a;
+    }
+    .locations {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      .location {
+        cursor: pointer;
+        padding: 1.25rem 0;
+        border-bottom: solid 1px #ffffff;
+
+        h5 {
+          margin-bottom: 1.125rem;
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

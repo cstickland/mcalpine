@@ -66,6 +66,11 @@ export function initMap(container, center, markers) {
   let map = new google.maps.Map(container, {
     zoom: 13,
     center: center,
+
+    disableDefaultUI: true,
+    zoomControl: true,
+    streetViewControl: true,
+    fullscreenControl: true,
   })
 
   map.markers = []

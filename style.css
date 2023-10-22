@@ -1443,22 +1443,86 @@ fieldset {
   height: 80vh;
   max-width: 1920px; }
 
-.map-search {
+.locations-container {
   background-color: #e63128;
   color: #ffffff;
-  max-width: 424px;
-  max-height: 845px; }
-  .map-search input {
-    margin-bottom: 2.25rem; }
-  .map-search .marker {
-    padding: 1.25rem 2rem;
-    padding-top: 0;
-    cursor: pointer; }
-    .map-search .marker .marker-text {
+  max-width: calc(100% - 40px);
+  width: 424px;
+  max-height: 390px;
+  height: 845px;
+  position: absolute;
+  top: -340px;
+  left: 3.1875rem;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column; }
+  .locations-container h2 {
+    font-size: 32px !important;
+    padding-bottom: 1.5rem; }
+  .locations-container input {
+    border-radius: 3px;
+    width: 100%;
+    box-shadow: inset 0px 0px 6px #0000001a;
+    margin-bottom: 0.25rem; }
+  .locations-container .locations {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    scrollbar-color: #fff #e63128; }
+    .locations-container .locations .location {
+      cursor: pointer;
+      padding: 1.25rem 0;
       border-bottom: solid 1px #ffffff; }
+      .locations-container .locations .location h5 {
+        margin-bottom: 1.125rem; }
+      .locations-container .locations .location p {
+        margin: 0; }
 
 #map {
-  height: 100vh; }
+  height: 100vh;
+  max-height: 1080px;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+  margin-top: 340px; }
+
+@media only screen and (min-width: 64rem) {
+  #map {
+    margin-top: 94px; }
+  .locations-container {
+    background-color: #e63128;
+    color: #ffffff;
+    max-width: 424px;
+    width: 424px;
+    max-height: 845px;
+    height: 845px;
+    overflow-y: scroll;
+    position: absolute;
+    top: -94px;
+    left: 78px;
+    z-index: 2;
+    padding: 2rem; }
+    .locations-container h2 {
+      font-size: 32px !important;
+      padding-bottom: 1.5rem; }
+    .locations-container input {
+      border-radius: 3px;
+      width: 100%;
+      box-shadow: inset 0px 0px 6px #0000001a; }
+    .locations-container .locations {
+      list-style: none;
+      margin: 0;
+      padding: 0; }
+      .locations-container .locations .location {
+        cursor: pointer;
+        padding: 1.25rem 0;
+        border-bottom: solid 1px #ffffff; }
+        .locations-container .locations .location h5 {
+          margin-bottom: 1.125rem; }
+        .locations-container .locations .location p {
+          margin: 0; } }
 
 .product-archive {
   display: grid;

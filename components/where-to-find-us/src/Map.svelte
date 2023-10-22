@@ -3,6 +3,8 @@
     let container;
     let center = { lat: 55.861, lng: -4.258 };
 
+    export let map;
+
     import { query, getData, initMap, initMarker, markers } from "./stores.js";
 
     import { onMount } from "svelte";
@@ -21,7 +23,7 @@
         const response = await getData(query);
         markers.set(response.data.themeGeneralSettings.themeSettings.mapLocations);
         console.log($markers)
-        const map = initMap(container, center, $markers);
+        map = initMap(container, center, $markers);
     });
 </script>
 
@@ -30,7 +32,7 @@
 <div
     class="full-screen"
     bind:this={container}
-    style="height: {innerHeight - 60 + 'px'}"
+    style="height: {innerHeight - 60 + 'px'}; max-height: 1080px;"
 />
 
 <style>

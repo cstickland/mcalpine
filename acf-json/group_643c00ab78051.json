@@ -754,50 +754,6 @@
                     "parent_repeater": "field_6522778074df1"
                 },
                 {
-                    "key": "field_65227b60fc26f",
-                    "label": "Address Line 1",
-                    "name": "address_line_1",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "show_in_graphql": 1,
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_6522778074df1"
-                },
-                {
-                    "key": "field_65227b6cfc270",
-                    "label": "Address Line 2",
-                    "name": "address_line_2",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "show_in_graphql": 1,
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_6522778074df1"
-                },
-                {
                     "key": "field_65227ba5fc271",
                     "label": "Phone Number",
                     "name": "phone_number",
@@ -869,5 +825,5 @@
     "graphql_types": [
         "ThemeGeneralSettings"
     ],
-    "modified": 1696938768
+    "modified": 1697978058
 }
