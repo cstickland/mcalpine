@@ -45,11 +45,11 @@
             "new_lines": ""
         },
         {
-            "key": "field_651f00d87dc9c",
-            "label": "Hero Link",
-            "name": "hero_link",
+            "key": "field_65366f4416cc1",
+            "label": "Animation Images",
+            "name": "animation_images",
             "aria-label": "",
-            "type": "link",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -59,33 +59,183 @@
                 "id": ""
             },
             "show_in_graphql": 1,
-            "return_format": "array"
-        },
-        {
-            "key": "field_651f00e67dc9d",
-            "label": "Hero Background Image",
-            "name": "hero_background_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_65366f8016cc2",
+                    "label": "Image One Schematic",
+                    "name": "image_one_schematic",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_65366f4416cc1"
+                },
+                {
+                    "key": "field_65366f9916cc3",
+                    "label": "Image One Hover Image",
+                    "name": "image_one_hover_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_65366f4416cc1"
+                },
+                {
+                    "key": "field_65366fbe16cc4",
+                    "label": "Image One Position",
+                    "name": "image_one_position",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "choices": {
+                        "1": "Top Left",
+                        "2": "Top Right",
+                        "3": "Bottom Left",
+                        "4": "Bottom Right"
+                    },
+                    "default_value": 1,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_65366f4416cc1"
+                },
+                {
+                    "key": "field_6536700516cc5",
+                    "label": "Image Two Schematic",
+                    "name": "image_two_schematic_",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_65366f4416cc1"
+                },
+                {
+                    "key": "field_6536702116cc6",
+                    "label": "Image Two Hover Image",
+                    "name": "image_two_hover_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_65366f4416cc1"
+                },
+                {
+                    "key": "field_6536703a16cc7",
+                    "label": "Image Two Position",
+                    "name": "image_two_position",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "choices": {
+                        "1": "Top Left",
+                        "2": "Top Right",
+                        "3": "Bottom Left",
+                        "4": "Bottom Right"
+                    },
+                    "default_value": 1,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_65366f4416cc1"
+                }
+            ]
         }
     ],
     "location": [
@@ -110,5 +260,5 @@
     "graphql_field_name": "homeHero",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1696530689
+    "modified": 1698075514
 }

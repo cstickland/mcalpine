@@ -1,62 +1,126 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .home-hero-block {
+  background: transparent linear-gradient(190deg, #7caef21f 0%, #7caef200 100%)
+    0% 0% no-repeat padding-box;
+  height: 100vh;
+  .home-hero-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1 {
+      color: $color__mcalpine-red;
+      font-weight: 400;
+      font-size: clamp(2.281rem, calc(-0.366rem + 5.513vw), 6.25rem);
+      text-align: center;
+      margin: 0;
+      * {
+        font-size: clamp(2.281rem, calc(-0.366rem + 5.513vw), 6.25rem);
+      }
+      a,
+      u {
+        text-decoration-color: #7badf2;
+      }
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      font-size: clamp(1rem, calc(0.667rem + 0.694vw), 1.5rem);
+      padding: 0;
+      text-align: center;
+      max-width: 871px;
+    }
+  }
 }
 
 @media only screen and (min-width: $desktop) {
   .home-hero-block {
     display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    .home-hero-background-red {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 50%;
-      min-height: 100%;
-      background-color: $color__mcalpine-red;
-      z-index: -1;
-    }
-    .home-hero-background-gradient {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 50%;
-      min-height: 100%;
-      background: transparent
-        linear-gradient(190deg, #7caef2 0%, #7caef200 100%) 0% 0% no-repeat
-        padding-box;
-      opacity: 0.12;
-      z-index: -1;
-
-      .gradient-hatching,
-      .gradient-hatching-bottom {
-        img {
-          width: 10px;
-        }
-      }
-    }
+    height: calc(100vh - 110px);
 
     .home-hero-content {
       @include container-large;
-      background-color: #0b113e66;
-      background-clip: content-box;
-      height: min-content;
       display: flex;
       align-items: center;
-
+      position: relative;
       background-size: cover;
-      color: #ffffff;
-
+      height: 100%;
       .home-hero-text {
         padding-bottom: 192px;
+        z-index: 2;
+      }
+      ul {
+        position: absolute;
+        z-index: 1;
+        list-style: none;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        li {
+          display: none;
+          height: 100%;
+          width: 100%;
+          &.show {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 50% 50%;
+
+            .position-1 {
+              grid-area: 1 / 1 / span 1 / span 1;
+            }
+
+            .position-2 {
+              grid-area: 1 / 2 / span 1 / span 1;
+            }
+
+            .position-3 {
+              grid-area: 2 / 1 / span 1 / span 1;
+            }
+
+            .position-4 {
+              grid-area: 2 / 2 / span 1 / span 1;
+            }
+
+            .home-hero-image-container {
+              display: grid;
+              grid-template-columns: 100%;
+              grid-template-rows: 100%;
+
+              .home-hero-schematic-image {
+                grid-area: 1 / 1 / span 1 / span 1;
+                align-self: center;
+                justify-self: center;
+              }
+
+              .home-hero-hover-image {
+                opacity: 0;
+                grid-area: 1 / 1 / span 1 / span 1;
+                align-self: center;
+                justify-self: center;
+                transition: opacity 0.2s ease-in-out;
+              }
+
+              &:hover {
+                .home-hero-hover-image {
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
       }
       h1 {
-        padding-left: 50px;
         max-width: 1416px;
-        padding-top: 178px;
 
         * {
           font-size: 100px;
+
+          font-size: clamp(2.281rem, calc(-0.366rem + 5.513vw), 6.25rem);
           display: inline;
           margin: 0;
           padding: 0;
@@ -71,9 +135,13 @@
         }
       }
 
-      p {
-        max-width: 650px;
-        padding-left: 50px;
+      .hero-text {
+        font-size: 1rem;
+        font-size: clamp(1rem, calc(0.667rem + 0.694vw), 1.5rem);
+        padding: 0;
+        text-align: center;
+        max-width: 871px;
+        margin: 0 auto;
       }
     }
   }

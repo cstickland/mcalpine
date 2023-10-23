@@ -1,0 +1,87 @@
+@media only screen and (min-width: 64rem) {
+  .home-hero-block {
+    display: flex;
+    position: relative;
+  }
+  .home-hero-block .home-hero-background-red {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 100%;
+    background-color: #e63128;
+    z-index: -1;
+  }
+  .home-hero-block .home-hero-background-gradient {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    min-height: 100%;
+    background: transparent linear-gradient(190deg, #7caef2 0%, rgba(124, 174, 242, 0) 100%) 0% 0% no-repeat padding-box;
+    opacity: 0.12;
+    z-index: -1;
+  }
+  .home-hero-block .home-hero-background-gradient .gradient-hatching img,
+  .home-hero-block .home-hero-background-gradient .gradient-hatching-bottom img {
+    width: 10px;
+  }
+  .home-hero-block .home-hero-content {
+    width: 100%;
+    max-width: 110.25rem;
+    margin: 0 auto;
+    padding: 2.1875rem 1.25rem;
+    background-color: rgba(11, 17, 62, 0.4);
+    background-clip: content-box;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    color: #ffffff;
+  }
+}
+@media only screen and (min-width: 64rem) and (min-width: 48rem) {
+  .home-hero-block .home-hero-content {
+    padding: 3.75rem 2.5rem;
+  }
+}
+@media only screen and (min-width: 64rem) and (min-width: 64rem) {
+  .home-hero-block .home-hero-content {
+    padding: 5rem 3.75rem;
+  }
+}
+@media only screen and (min-width: 64rem) and (min-width: 120rem) {
+  .home-hero-block .home-hero-content {
+    padding-top: 5rem;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .home-hero-block .home-hero-content .home-hero-text {
+    padding-bottom: 192px;
+  }
+  .home-hero-block .home-hero-content h1 {
+    padding-left: 50px;
+    max-width: 1416px;
+    padding-top: 178px;
+  }
+  .home-hero-block .home-hero-content h1 * {
+    font-size: 100px;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+  .home-hero-block .home-hero-content h1 p {
+    padding-left: 0;
+    max-width: 100%;
+  }
+  .home-hero-block .home-hero-content h1 ul {
+    text-decoration: underline;
+    text-decoration-color: #7caef2;
+  }
+  .home-hero-block .home-hero-content p {
+    max-width: 650px;
+    padding-left: 50px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -3,13 +3,9 @@
     "title": "Home Hero Block",
     "description": "A custom hero block.",
     "style": [ "file:./style.css" ],
-    "script": [ "file:./hero-home.js"],
     "category": "formatting",
     "icon": "admin-home",
     "keywords": ["hero", "home"],
-    "supports": {
-        "multiple": false
-    },
     "acf": {
         "mode": "preview",
         "renderTemplate": "render.php"
