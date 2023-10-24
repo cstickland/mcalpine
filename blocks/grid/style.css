@@ -31,18 +31,12 @@
 .grid-block .grid-title.white {
   color: #ffffff;
 }
+.grid-block .grid-title.black {
+  color: #222222;
+}
 .grid-block .grid-title.center {
   margin: 0 auto;
   margin-bottom: 2.5rem;
-}
-.grid-block .grid-title .hatch {
-  position: absolute;
-  width: 45%;
-  height: 100%;
-  top: 0;
-  left: 27.5%;
-  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 8px, #bca1a1 9px, #bca1a1 10px);
-  z-index: -1;
 }
 .grid-block ul {
   list-style: none;

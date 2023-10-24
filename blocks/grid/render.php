@@ -1,8 +1,7 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'grid-block']); ?> id="query-<?php the_title(); ?>">
-    <h1 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">
+    <h2 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">
         <?php the_field('title'); ?>
-        <div class="hatch"></div>
-    </h1>
+    </h2>
 
     <ul class="grid-block-grid">
         <?php $allowed_blocks = array('mcalpine/product-card', 'acf/content', 'mcalpine/info-card'); ?>

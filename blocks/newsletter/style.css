@@ -1,6 +1,7 @@
 .newsletter-block {
   background-size: 1920px;
   max-width: 1920px;
+  margin: 0 auto;
   display: flex;
   padding-top: 2.1875rem;
 }
@@ -89,6 +90,7 @@
 @media only screen and (min-width: 64rem) {
   .newsletter-block {
     padding-top: 0;
+    padding: 0 !important;
     display: block;
   }
   .newsletter-block .white-cover {
@@ -105,6 +107,8 @@
     padding: 2.1875rem 1.25rem;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 @media only screen and (min-width: 64rem) and (min-width: 48rem) {

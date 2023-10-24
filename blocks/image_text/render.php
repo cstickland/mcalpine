@@ -1,7 +1,12 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block']); ?> id="query-<?php the_title(); ?>">
     <div class="image-text-container  <?php if (get_field('image_full_width')) :
                                             echo 'image-full-width ';
-                                        endif; ?><?php the_field('color'); ?> <?php the_field('image_alignment_mobile'); ?> <?php the_field('image_alignment_desktop'); ?>">
+                                        endif;
+                                        if (get_field('show_overflow_image')) : echo 'overflow ';
+                                        endif;
+                                        echo get_field('color') . ' ';
+                                        echo get_field('image_alignment_mobile') . ' ';
+                                        echo get_field('image_alignment_desktop'); ?>">
         <div class="text-container 
                 <?php the_field('color');
 
@@ -36,8 +41,19 @@
             $image_url = $image['url'];
 
             if (!empty($image)) : ?>
-                <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
             <?php endif; ?>
+
+            <?php if (get_field('show_overflow_image')) { ?>
+                <?php $image = get_field('overflow_image');
+                $image_alt = $image['alt'];
+                $image_url = $image['url'];
+
+                if (!empty($image)) : ?>
+                    <img class="overflow-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                <?php endif; ?>
+
+            <?php } ?>
         </div>
         <div class="text-block-hash <?php if (get_field('text_alignment_desktop')) :
                                         the_field('text_alignment_desktop');

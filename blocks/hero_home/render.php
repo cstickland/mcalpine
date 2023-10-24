@@ -1,16 +1,21 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'home-hero-block']); ?> id="home-hero-block">
 
     <div class="home-hero-content">
+        <div class="hero-background-gradient">
+            <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+        </div>
+
+        <div class="hero-background-gradient">
+            <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+        </div>
         <div class="home-hero-text">
             <h1><?php the_field('hero_title'); ?></h1>
             <p class="hero-text"><?php the_field('hero_text'); ?></p>
         </div>
         <ul class="background-animated-images">
             <?php if (have_rows('animation_images')) :
-                $count = 0;
                 while (have_rows('animation_images')) : the_row(); ?>
-                    <li class="<?php if ($count == 0) : echo ' show';
-                                endif; ?>">
+                    <li class="animated-image-slide">
                         <?php $image_schematic = get_sub_field('image_one_schematic');
                         $image_hover = get_sub_field('image_one_hover_image');
                         ?>
@@ -27,7 +32,6 @@
                         </div>
 
                     </li>
-                    <?php $count++; ?>
             <?php endwhile;
             endif; ?>
         </ul>

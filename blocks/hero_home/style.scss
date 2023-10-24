@@ -3,12 +3,41 @@
 .home-hero-block {
   background: transparent linear-gradient(190deg, #7caef21f 0%, #7caef200 100%)
     0% 0% no-repeat padding-box;
-  height: 100vh;
+  height: 85vh;
   .home-hero-content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    position: relative;
+    .hero-background-gradient {
+      overflow: hidden;
+      position: absolute;
+      z-index: 2;
+
+      img {
+        width: 120rem;
+        height: auto;
+        max-width: none;
+      }
+
+      &:first-of-type {
+        right: 0;
+        top: 10%;
+        height: 15rem;
+        width: 4rem;
+      }
+
+      &:nth-of-type(2) {
+        height: 4rem;
+        width: 45%;
+        bottom: 5%;
+        left: 1.25rem;
+      }
+    }
     h1 {
       color: $color__mcalpine-red;
       font-weight: 400;
@@ -31,10 +60,65 @@
       text-align: center;
       max-width: 871px;
     }
+
+    ul {
+      position: absolute;
+      z-index: 1;
+      list-style: none;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      li {
+        display: none;
+        height: 100%;
+        width: 100%;
+        &.show {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          .position-1 {
+            grid-area: 1 / 1 / span 1 / span 1;
+          }
+
+          .position-2 {
+            grid-area: 1 / 1 / span 1 / span 1;
+          }
+
+          .position-3 {
+            grid-area: 2 / 2 / span 1 / span 1;
+          }
+
+          .position-4 {
+            grid-area: 2 / 2 / span 1 / span 1;
+          }
+
+          .home-hero-image-container {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 100%;
+
+            .home-hero-schematic-image {
+              grid-area: 1 / 1 / span 1 / span 1;
+              align-self: center;
+              justify-self: center;
+            }
+
+            .home-hero-hover-image {
+              opacity: 0;
+              grid-area: 1 / 1 / span 1 / span 1;
+              align-self: center;
+              justify-self: center;
+              transition: opacity 0.25s linear;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-@media only screen and (min-width: $desktop) {
+@media only screen and (min-width: $tablet) {
   .home-hero-block {
     display: flex;
     align-items: center;
@@ -43,15 +127,40 @@
     height: calc(100vh - 110px);
 
     .home-hero-content {
-      @include container-large;
       display: flex;
       align-items: center;
       position: relative;
       background-size: cover;
       height: 100%;
-      .home-hero-text {
-        padding-bottom: 192px;
+      max-width: 120rem;
+      width: 100%;
+      .hero-background-gradient {
+        overflow: hidden;
+        position: absolute;
         z-index: 2;
+
+        img {
+          width: 120rem;
+          height: auto;
+          max-width: none;
+        }
+
+        &:first-of-type {
+          right: 0;
+          top: 20%;
+          height: 25rem;
+          width: 6rem;
+        }
+
+        &:nth-of-type(2) {
+          height: 6rem;
+          width: 25rem;
+          bottom: 15%;
+          left: 10%;
+        }
+      }
+      .home-hero-text {
+        z-index: 3;
       }
       ul {
         position: absolute;
@@ -67,9 +176,10 @@
           width: 100%;
           &.show {
             display: grid;
-            grid-template-columns: 50% 50%;
-            grid-template-rows: 50% 50%;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
 
+            column-gap: 20rem;
             .position-1 {
               grid-area: 1 / 1 / span 1 / span 1;
             }
@@ -88,9 +198,16 @@
 
             .home-hero-image-container {
               display: grid;
+              opacity: 0;
               grid-template-columns: 100%;
               grid-template-rows: 100%;
+              animation-name: hero-schematic;
+              animation-duration: 5s;
+              animation-fill-mode: forwards;
 
+              &:nth-of-type(2) {
+                animation-delay: 200ms;
+              }
               .home-hero-schematic-image {
                 grid-area: 1 / 1 / span 1 / span 1;
                 align-self: center;
@@ -102,7 +219,7 @@
                 grid-area: 1 / 1 / span 1 / span 1;
                 align-self: center;
                 justify-self: center;
-                transition: opacity 0.2s ease-in-out;
+                transition: opacity 0.25s linear;
               }
 
               &:hover {
@@ -144,5 +261,25 @@
         margin: 0 auto;
       }
     }
+  }
+}
+
+@keyframes hero-schematic {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    transform: scale(1);
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
   }
 }
