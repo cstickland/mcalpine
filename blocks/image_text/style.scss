@@ -39,11 +39,12 @@
       }
       h2 {
         max-width: 350px;
+        padding-bottom: 1.5rem;
+        padding-top: 2.5rem;
       }
       .color-block {
         height: 0.75rem;
         width: 56px;
-        margin-bottom: 1rem;
       }
       &.color-red {
         background-color: $color__mcalpine-red;

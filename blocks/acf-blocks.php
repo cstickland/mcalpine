@@ -20,3 +20,4 @@ require_once('help_card/help_card.php');
 require_once('international_contact/international_contact.php');
 require_once('faq_contact/faq_contact.php');
 require_once('faq/faq_archive.php');
+require_once('grid_text/grid-and-text.php');

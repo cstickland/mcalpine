@@ -1,0 +1,109 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.grid-text-block {
+  .image-text-container {
+    @include container-large;
+    display: flex;
+    flex-direction: column;
+
+    .grid-container {
+      .acf-innerblocks-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 424px));
+        gap: 1.5rem;
+        justify-content: center;
+      }
+    }
+    .text-container {
+      padding: 2rem;
+      p {
+        margin-bottom: 2rem;
+        max-width: 405px;
+
+        color: #5a5a5a;
+      }
+      h2 {
+        max-width: 350px;
+
+        color: $color__mcalpine-black;
+      }
+      .color-block {
+        height: 0.75rem;
+        width: 56px;
+        margin-bottom: 1rem;
+
+        background-color: $color__mcalpine-red;
+      }
+      background-color: #ffffff;
+    }
+    .background-image-schematic {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .grid-text-block {
+    .image-text-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0px;
+      position: relative;
+
+      .text-block-hash {
+        display: block;
+      }
+
+      .text-container {
+        h2 {
+          max-width: 420px;
+        }
+      }
+
+      .grid-container {
+        width: auto;
+        height: 100%;
+
+        flex-grow: 1;
+
+        .acf-innerblocks-container {
+          gap: 1.5rem;
+          grid-auto-flow: row;
+          direction: rtl;
+          justify-content: start;
+          * {
+            direction: ltr;
+          }
+        }
+      }
+
+      .text-container {
+        width: auto;
+      }
+
+      .text-container {
+        min-width: 30%;
+        .color-block {
+          width: 93px;
+          height: 1.5rem;
+        }
+      }
+
+      .background-image-schematic {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: -1;
+        display: flex;
+        justify-content: center;
+        img {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

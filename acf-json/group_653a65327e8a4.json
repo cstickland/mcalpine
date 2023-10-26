@@ -1,33 +1,11 @@
 {
-    "key": "group_64e37874aeef8",
-    "title": "Info Card",
+    "key": "group_653a65327e8a4",
+    "title": "Grid & Text Block",
     "fields": [
         {
-            "key": "field_64e3787422b5d",
-            "label": "Card Number",
-            "name": "card_number",
-            "aria-label": "",
-            "type": "number",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 1,
-            "min": 1,
-            "max": 4,
-            "placeholder": "",
-            "step": 1,
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_64e378ca22b5e",
-            "label": "Title Text",
-            "name": "title_text",
+            "key": "field_653a653280e4b",
+            "label": "Title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -38,6 +16,7 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_graphql": 1,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -45,9 +24,9 @@
             "append": ""
         },
         {
-            "key": "field_64e378d422b5f",
-            "label": "Main Text",
-            "name": "main_text",
+            "key": "field_653a653280e82",
+            "label": "Text",
+            "name": "text",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -58,6 +37,7 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_graphql": 1,
             "default_value": "",
             "maxlength": "",
             "rows": "",
@@ -65,11 +45,11 @@
             "new_lines": ""
         },
         {
-            "key": "field_653a5ca012ca4",
-            "label": "Icon Image",
-            "name": "icon_image",
+            "key": "field_653a653280eb8",
+            "label": "Link",
+            "name": "link",
             "aria-label": "",
-            "type": "image",
+            "type": "link",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -79,19 +59,10 @@
                 "id": ""
             },
             "show_in_graphql": 1,
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
+            "return_format": "array"
         },
         {
-            "key": "field_653a5cb312ca5",
+            "key": "field_653a653280ffe",
             "label": "Background Image",
             "name": "background_image",
             "aria-label": "",
@@ -122,7 +93,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "mcalpine\/info-card"
+                "value": "mcalpine\/grid-text"
             }
         ]
     ],
@@ -136,8 +107,8 @@
     "description": "",
     "show_in_rest": 0,
     "show_in_graphql": 0,
-    "graphql_field_name": "infoCard",
+    "graphql_field_name": "image&TextBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1698323665
+    "modified": 1698328225
 }

@@ -54,11 +54,12 @@
 }
 .image-text-block .image-text-container .text-container h2 {
   max-width: 350px;
+  padding-bottom: 1.5rem;
+  padding-top: 2.5rem;
 }
 .image-text-block .image-text-container .text-container .color-block {
   height: 0.75rem;
   width: 56px;
-  margin-bottom: 1rem;
 }
 .image-text-block .image-text-container .text-container.color-red {
   background-color: #e63128;

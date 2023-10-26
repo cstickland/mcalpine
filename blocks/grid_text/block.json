@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "mcalpine/grid-text",
+	"version": "0.1.0",
+	"title": "Grid & Text",
+	"category": "widgets",
+	"icon": "format-image",
+	"description": "Example block scaffolded with Create Block tool.",
+		"supports": {
+		"html": false,
+        "jsx": true,
+        "mode": false
+	},
+	"textdomain": "mcalpine",
+	"style": "file:./style.css",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	}
+}
