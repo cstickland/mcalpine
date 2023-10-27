@@ -1,0 +1,13 @@
+{
+    "name": "mcalpine/large-hero",
+    "title": "Large hero",
+    "description": "A custom hero block.",
+    "style": [ "file:./style.css" ],
+    "category": "formatting",
+    "icon": "admin-post",
+    "keywords": ["hero", "small", "breadcrumbs"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    }
+}

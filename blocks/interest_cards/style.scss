@@ -1,0 +1,108 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.interest-cards-block {
+  @include container-large;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .border-subtitle {
+    font-size: 0.75rem;
+    color: $color__mcalpine-red;
+    border: solid 1px $color__mcalpine-red;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: $color__mcalpine-black;
+    padding-bottom: 2.5rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+
+    .interest-card {
+      max-width: 424px;
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        padding-bottom: 1.5rem;
+      }
+
+      h3 {
+        color: $color__mcalpine-red;
+        padding-bottom: 1rem;
+      }
+
+      p {
+        color: #5a5a5a;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $tablet) {
+  .interest-cards-block {
+    .border-subttitle {
+      font-size: clamp(0.75rem, calc(0.563rem + 0.391vw), 0.875rem);
+      margin-bottom: calc(0.063rem + 1.953vw);
+    }
+
+    h2 {
+      padding-bottom: calc(-1.25rem + 7.813vw);
+    }
+
+    ul {
+      .interest-card {
+        img {
+          padding-bottom: calc(0rem + 3.125vw);
+        }
+
+        h3 {
+          padding-bottom: calc(0.094rem + 1.758vw);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .interest-cards-block {
+    .border-subtitle {
+      font-size: 0.875rem;
+      margin-bottom: 1.625rem;
+    }
+
+    h2 {
+      padding-bottom: 5rem;
+    }
+
+    ul {
+      flex-direction: row;
+      justify-content: center;
+      align-items: start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      .interest-card {
+        img {
+          padding-bottom: 2.5rem;
+        }
+
+        h3 {
+          padding-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}

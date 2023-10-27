@@ -1,0 +1,227 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.large-hero-block {
+  position: relative;
+
+  .large-hero-gradient {
+    position: absolute;
+    z-index: -1;
+    background: transparent
+      linear-gradient(207deg, #7caef226 0%, #7caef200 100%) 0% 0% no-repeat
+      padding-box;
+    width: 70%;
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+
+  .large-hero-container {
+    @include container-large;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    .large-hero-image-container {
+      display: flex;
+      z-index: 1;
+      padding-top: 3.5rem;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        mix-blend-mode: multiply;
+        background: transparent
+          linear-gradient(180deg, #22222200 0%, #222222 100%) 0% 0% no-repeat
+          padding-box;
+      }
+    }
+
+    .large-hatching {
+      width: 40%;
+      height: 2rem;
+      margin-left: auto;
+
+      overflow: hidden;
+      img {
+        width: 1920px;
+
+        max-width: none;
+        object-fit: cover;
+      }
+    }
+
+    .large-hero-post-content {
+      background-color: $color__mcalpine-red;
+      color: #ffffff;
+      padding-left: 2rem;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+
+      * {
+        max-width: 450px;
+      }
+
+      h2 {
+        padding-top: 0.625rem;
+        padding-bottom: 1rem;
+        padding-right: 2rem;
+      }
+
+      p {
+        padding-right: 2rem;
+        margin: 0;
+      }
+
+      .large-link {
+        background-color: #ffffff;
+        width: 2.5rem;
+        height: 2.5rem;
+        align-self: flex-end;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 10px;
+          transform: rotate(90deg);
+          path {
+            fill: #5a5a5a;
+          }
+        }
+      }
+    }
+    .hero-title {
+      color: $color__mcalpine-red;
+      background-color: #ffffff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      padding-right: 2rem;
+      padding-left: 2rem;
+      justify-content: end;
+      z-index: 2;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+
+      .hero-title-desktop {
+        display: none;
+      }
+
+      .hero-title-mobile {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+
+      .large-hero-breadcrumbs {
+        display: flex;
+        align-items: center;
+
+        font-size: 0.75rem;
+        a {
+          text-decoration: none;
+          color: #5a5a5a;
+
+          &:hover {
+            color: $color__mcalpine-red;
+          }
+        }
+
+        svg {
+          width: 0.375rem;
+          margin: 0 0.5rem;
+          path {
+            fill: #5a5a5a;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .large-hero-block {
+    .large-hero-gradient {
+      width: 50%;
+    }
+
+    .large-hero-container {
+      .hero-title {
+        grid-area: 1 / 1 / span 2 / span 6;
+        justify-content: start;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        z-index: 3;
+
+        .hero-title-mobile {
+          display: none;
+        }
+
+        .hero-title-desktop {
+          display: block;
+          margin: 0;
+          padding-top: 1.625rem;
+        }
+
+        .large-hero-breadcrumbs {
+          font-size: 1rem;
+        }
+      }
+
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 7.5rem 7.5rem 8fr 3rem;
+
+      .large-hero-image-container {
+        max-height: 70vh;
+        grid-area: 2 / 1 / span 2 / span 12;
+        padding-top: 0;
+      }
+      .large-hatching {
+        grid-area: 4/ 3 / span 1 / span 4;
+        height: 100%;
+        margin-left: 0;
+        width: auto;
+        img {
+          width: 1920px;
+        }
+      }
+      .large-hero-post-content {
+        padding-top: 46px;
+        padding-left: 50px;
+        grid-area: 3 / 9 / span 2 / span 4;
+        z-index: 2;
+        height: fit-content;
+        align-self: end;
+
+        h2,
+        p {
+          padding-right: 3.625rem;
+        }
+
+        .large-link {
+          width: 3.5rem;
+          height: 3.5rem;
+
+          svg {
+            width: auto;
+            path {
+              fill: #5a5a5a;
+            }
+          }
+        }
+      }
+    }
+  }
+}

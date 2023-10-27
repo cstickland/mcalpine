@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "mcalpine/interest-cards",
+  "version": "0.1.0",
+  "title": "Interest Cards",
+  "category": "widgets",
+  "icon": "editor-ul",
+  "description": "Example block scaffolded with Create Block tool.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "faq",
+  "style": "file:./style.css",
+  "editorStyle": "file:./style.css",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  }
+}
