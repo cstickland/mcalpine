@@ -1,0 +1,85 @@
+{
+    "key": "group_653f8a2bb2a44",
+    "title": "Insight Card Block",
+    "fields": [
+        {
+            "key": "field_653f8a2c320f6",
+            "label": "Insight",
+            "name": "insight_id",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "post_type": [
+                "post"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_653fb7500f079",
+            "label": "Column Width",
+            "name": "column_width",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "col-1": "1",
+                "col-2": "2",
+                "col-3": "3",
+                "col-4": "4"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "mcalpine\/insight-card"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "graphql_field_name": "insightCardBlock",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1698674595
+}

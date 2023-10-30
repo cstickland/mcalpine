@@ -23,3 +23,4 @@ require_once('faq/faq_archive.php');
 require_once('grid_text/grid-and-text.php');
 require_once('interest_cards/interest_cards.php');
 require_once('hero_large/hero_large.php');
+require_once('insight_card/insight_card.php');

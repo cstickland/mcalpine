@@ -1338,12 +1338,6 @@ fieldset {
   grid-column: span 1;
   container-type: inline-size;
   container-name: insight-card; }
-  .insight-card.col-2 {
-    grid-column: span 2; }
-  .insight-card.col-3 {
-    grid-column: span 3; }
-  .insight-card.col-4 {
-    grid-column: span 4; }
   .insight-card .insight-card-image-container {
     grid-area: 1 / 1 / span 2 / span 1;
     position: relative;
@@ -1416,6 +1410,12 @@ fieldset {
     transform: translateX(0%); }
 
 @media only screen and (min-width: 64rem) {
+  .insight-card.col-2 {
+    grid-column: span 2; }
+  .insight-card.col-3 {
+    grid-column: span 3; }
+  .insight-card.col-4 {
+    grid-column: span 4; }
   .insight-card.mobile-show .insight-card-image-container .insight-card-hover-gradient {
     opacity: 0; }
   .insight-card.mobile-show .insight-card-link a span {

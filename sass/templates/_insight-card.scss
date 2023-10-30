@@ -11,17 +11,6 @@
   grid-column: span 1;
   container-type: inline-size;
   container-name: insight-card;
-  &.col-2 {
-    grid-column: span 2;
-  }
-
-  &.col-3 {
-    grid-column: span 3;
-  }
-
-  &.col-4 {
-    grid-column: span 4;
-  }
 
   .insight-card-image-container {
     grid-area: 1 / 1 / span 2 / span 1;
@@ -131,6 +120,17 @@
 
 @media only screen and (min-width: $desktop) {
   .insight-card {
+    &.col-2 {
+      grid-column: span 2;
+    }
+
+    &.col-3 {
+      grid-column: span 3;
+    }
+
+    &.col-4 {
+      grid-column: span 4;
+    }
     &.mobile-show {
       .insight-card-image-container {
         .insight-card-hover-gradient {

@@ -7,6 +7,8 @@
 
     let questions = [];
     let categories = new Set();
+    let filteredQuestions = [];
+    let filteredCategories = new Set();
     let searchTerm = "";
 
     onMount(async () => {
@@ -16,12 +18,34 @@
             categories.add(question.node.categories.edges[0].node.name);
         });
 
-        const container = document.getElementById('faq');
+        const container = document.getElementById("faq");
         setTimeout(() => {
-            
-        container.style.minHeight = 'unset';
-        }, 300)
+            container.style.minHeight = "unset";
+        }, 300);
     });
+
+    $: if (searchTerm != "") {
+        filteredQuestions = [];
+        filteredCategories = new Set();
+        questions.forEach((question) => {
+            if (
+                question.node.title
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                question.node.faqFields.answer
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+            ) {
+                filteredQuestions.push(question);
+                filteredCategories.add(
+                    question.node.categories.edges[0].node.name
+                );
+            }
+        });
+    } else {
+        filteredQuestions = [...questions];
+        filteredCategories = [...categories];
+    }
 </script>
 
 <section class="faq-archive">
@@ -34,19 +58,19 @@
         />
         <div class="category-links">
             <h5>Topics</h5>
-            {#if questions.length > 0}
-                {#each [...categories] as category}
+            {#if filteredQuestions.length > 0}
+                {#each [...filteredCategories] as category}
                     <a href={"#" + category}>{category}</a>
                 {/each}
             {/if}
         </div>
     </div>
     <div class="questions-container">
-        {#each [...categories] as category}
+        {#each [...filteredCategories] as category}
             <div id={category} transition:fade>
                 <h3 class="faq-category-title">{category}</h3>
-                {#if questions.length > 0}
-                    {#each questions as question}
+                {#if filteredQuestions.length > 0}
+                    {#each filteredQuestions as question}
                         {#if question.node.categories.edges[0].node.name == category}
                             <Accordion
                                 question={question.node.title}
