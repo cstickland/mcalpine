@@ -11,5 +11,14 @@ img {
 }
 
 figure {
-  margin: 1em 0; // Extra wide images within figure tags don't overflow the content area.
+  max-width: 100%;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
+}
+figcaption {
+  padding-left: 1.25rem;
+  border-left: solid 2px $color__mcalpine-red;
+  margin-top: 0.875rem;
+  color: $color__mcalpine-black;
+  font: normal normal bold 14px/31px TheSans;
 }

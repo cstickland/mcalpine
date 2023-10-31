@@ -257,6 +257,23 @@ textarea {
 details {
   display: block; }
 
+blockquote {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+  border-left: solid 5px #e63128;
+  margin-left: 0; }
+  blockquote p {
+    font-style: italic;
+    font-size: 1rem; }
+    blockquote p::before {
+      content: '\201C'; }
+    blockquote p::after {
+      content: '\201D'; }
+
+strong {
+  color: #222222; }
+
 /*
  * Add the correct display in all browsers.
  */
@@ -503,7 +520,16 @@ img {
   max-width: 100%; }
 
 figure {
-  margin: 1em 0; }
+  max-width: 100%;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem; }
+
+figcaption {
+  padding-left: 1.25rem;
+  border-left: solid 2px #e63128;
+  margin-top: 0.875rem;
+  color: #222222;
+  font: normal normal bold 14px/31px TheSans; }
 
 table {
   margin: 0 0 1.5em;

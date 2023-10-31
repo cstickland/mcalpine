@@ -1,0 +1,36 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.top-articles {
+  display: flex;
+  flex-direction: column;
+  h4 {
+    color: $color__mcalpine-black;
+    padding-bottom: 3rem;
+  }
+
+  .featured-article {
+    display: block;
+    padding: 2.5rem 1.875rem;
+    background-color: #f85b53;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $color__mcalpine-red;
+    }
+
+    .featured-article-title {
+      font-size: 2rem;
+    }
+
+    max-width: 572px;
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .top-articles {
+    min-width: 454px;
+    padding-left: 2rem;
+  }
+}

@@ -323,6 +323,29 @@ details {
   display: block;
 }
 
+blockquote {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+  border-left: solid 5px $color__mcalpine-red;
+  margin-left: 0;
+
+  p {
+    font-style: italic;
+    font-size: 1rem;
+    &::before {
+      content: '\201C';
+    }
+    &::after {
+      content: '\201D';
+    }
+  }
+}
+
+strong {
+  color: $color__mcalpine-black;
+}
+
 /*
  * Add the correct display in all browsers.
  */

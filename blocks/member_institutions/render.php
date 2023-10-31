@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'info-card']); ?> id="query-<?php the_title(); ?>">
+<section <?php echo get_block_wrapper_attributes(['class' => 'member-institutions']); ?> id="query-<?php the_title(); ?>">
     <?php if (get_field('icon_image')) { ?>
         <?php $image = get_field('icon_image');
         $image_alt = $image['alt'];
@@ -28,4 +28,4 @@
     <div class="hash">
         <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
     </div>
-</div>
+</section>
