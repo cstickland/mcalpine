@@ -1,31 +1,29 @@
 <section <?php echo get_block_wrapper_attributes(['class' => 'member-institutions']); ?> id="query-<?php the_title(); ?>">
-    <?php if (get_field('icon_image')) { ?>
-        <?php $image = get_field('icon_image');
-        $image_alt = $image['alt'];
-        $image_url = $image['url'];
+    <div class="red-band"></div>
+    <div class="member-institutions-text"><?php the_field('text'); ?></div>
 
-        if (!empty($image)) : ?>
-            <img class="icon-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
-        <?php endif; ?>
-
-    <?php } ?>
-    <div class="info-card-text">
-        <h4 class="info-card-title"><?php the_field('title_text'); ?></h4>
-        <div class="info-card-message">
-            <div><?php the_field('main_text'); ?></div>
-        </div>
-    </div>
-    <?php if (get_field('background_image')) { ?>
-        <?php $image = get_field('background_image');
-        $image_alt = $image['alt'];
-        $image_url = $image['url'];
-
-        if (!empty($image)) : ?>
-            <img class="background-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
-        <?php endif; ?>
-
-    <?php } ?>
-    <div class="hash">
-        <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
-    </div>
+    <?php if (have_rows('institutions')) : ?>
+        <ul class="institution-icon-grid">
+            <?php while (have_rows('institutions')) : the_row();
+            ?>
+                <li>
+                    <?php
+                    $link = get_sub_field('insitution_link');
+                    if ($link) :
+                        $link_url = $link['url'];
+                        $link_title = $link['title'];
+                        $link_target = $link['target'] ? $link['target'] : '_self';
+                    ?>
+                        <a class="member-insitution-link" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                            <?php
+                            $image = get_sub_field('full_color_image');
+                            if (!empty($image)) : ?>
+                                <img class="full-color-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                            <?php endif; ?>
+                        </a>
+                    <?php endif; ?>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    <?php endif; ?>
 </section>

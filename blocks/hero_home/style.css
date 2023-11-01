@@ -168,22 +168,25 @@
   }
   .home-hero-block .home-hero-content ul li.show .position-1 {
     grid-area: 1/1/span 1/span 1;
+    animation-name: hero-schematic-1;
   }
   .home-hero-block .home-hero-content ul li.show .position-2 {
     grid-area: 1/2/span 1/span 1;
+    animation-name: hero-schematic-2;
   }
   .home-hero-block .home-hero-content ul li.show .position-3 {
     grid-area: 2/1/span 1/span 1;
+    animation-name: hero-schematic-3;
   }
   .home-hero-block .home-hero-content ul li.show .position-4 {
     grid-area: 2/2/span 1/span 1;
+    animation-name: hero-schematic-4;
   }
   .home-hero-block .home-hero-content ul li.show .home-hero-image-container {
     display: grid;
     opacity: 0;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
-    animation-name: hero-schematic;
     animation-duration: 5s;
     animation-fill-mode: forwards;
   }
@@ -232,20 +235,77 @@
     margin: 0 auto;
   }
 }
-@keyframes hero-schematic {
+@keyframes hero-schematic-1 {
   0% {
     opacity: 0;
     transform: scale(0.9);
   }
   10% {
-    transform: scale(1);
+    transform: scale(1) translate(0%, 0%);
   }
   20% {
     opacity: 1;
   }
   90% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05) translateX(2%) translateY(2%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hero-schematic-2 {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    transform: scale(1) translateX(0%) translateY(0%);
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.05) translateX(-2%) translateY(2%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hero-schematic-3 {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    transform: scale(1) translateX(0%) translateY(0%);
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.05) translateX(2%) translateY(-2%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hero-schematic-4 {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    transform: scale(1) translateX(0%) translateY(0%);
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.05) translateX(-2%) translateY(-2%);
   }
   100% {
     opacity: 0;

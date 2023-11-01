@@ -27,3 +27,4 @@ require_once('insight_card/insight_card.php');
 require_once('category_card/category_card.php');
 require_once('hero_post/hero_post.php');
 require_once('top_articles/top_articles.php');
+require_once('member_institutions/member_insitutions.php');
