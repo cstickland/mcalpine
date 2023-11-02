@@ -1,0 +1,149 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.featured-product {
+  @include container-large;
+  .featured-product-content {
+    background-color: $color__mcalpine-red;
+
+    color: #fff;
+
+    .featured-product-text {
+      padding: 2rem;
+      .featured-product-subtitle {
+        display: none;
+        padding: 1rem 2rem;
+        border: solid 1px #fff;
+        border-radius: 50px;
+        width: fit-content;
+        font-size: 0.75rem;
+        font-size: clamp(
+          0.75rem,
+          0.6633597883597884rem + 0.1763668430335097vw,
+          0.875rem
+        );
+      }
+
+      h2 {
+        font-size: 1.801875rem;
+        font-size: clamp(
+          1.801875rem,
+          -1.7144179894179894rem + 7.157848324514991vw,
+          6.875rem
+        );
+        max-width: 724px;
+        font-weight: 900;
+        margin: 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .featured-product-message {
+        font-size: 1.42375rem;
+        font-size: clamp(
+          1.42375rem,
+          1.3275793650793652rem + 0.19576719576719567vw,
+          1.5625rem
+        );
+        font-style: italic;
+        padding-bottom: 2rem;
+        margin: 0;
+      }
+    }
+
+    .featured-product-image-container {
+      position: relative;
+      margin-bottom: 2rem;
+
+      .featured-product-subtitle {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        padding: 1rem 2rem;
+        border: solid 1px #fff;
+        border-radius: 50px;
+        width: fit-content;
+        font-size: 0.75rem;
+        font-size: clamp(
+          0.75rem,
+          0.6633597883597884rem + 0.1763668430335097vw,
+          0.875rem
+        );
+        background-color: $color__mcalpine-red;
+        z-index: 2;
+      }
+      .featured-product-image {
+        z-index: 3;
+        position: relative;
+        width: 100%;
+        padding: 2rem;
+        padding-bottom: 0.5rem;
+      }
+      .featured-product-hash {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 1;
+        img {
+          max-width: none;
+          width: 120rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .featured-product {
+    .featured-product-content {
+      display: flex;
+
+      .featured-product-text {
+        padding: 4rem;
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        .featured-product-subtitle {
+          display: block;
+          background-color: $color__mcalpine-red;
+          position: relative;
+          z-index: 2;
+        }
+
+        h2 {
+          margin: 0;
+        }
+
+        .featured-product-link-container {
+          display: flex;
+          align-items: center;
+
+          .featured-product-message {
+            max-width: 60%;
+            padding-bottom: 0;
+            margin: 0;
+          }
+        }
+      }
+
+      .featured-product-image-container {
+        margin-bottom: 0;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        max-height: 464px;
+        .featured-product-subtitle {
+          display: none;
+        }
+
+        .featured-product-image {
+          max-height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}

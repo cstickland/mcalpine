@@ -28,3 +28,5 @@ require_once('category_card/category_card.php');
 require_once('hero_post/hero_post.php');
 require_once('top_articles/top_articles.php');
 require_once('member_institutions/member_insitutions.php');
+require_once('new_product_feature/new_product_feature.php');
+require_once('image_text_slider/image-and-text-slider.php');

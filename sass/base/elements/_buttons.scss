@@ -68,6 +68,18 @@
       background-color: $color__mcalpine-black;
       color: #ffffff;
     }
+
+    &.btn-outline {
+      background-color: transparent;
+      color: #fff;
+      border: solid 1px #fff;
+
+      &:hover {
+        background-color: #fff;
+        color: $color__mcalpine-black;
+        border-color: #fff;
+      }
+    }
   }
 }
 

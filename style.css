@@ -603,6 +603,14 @@ table {
     .btn.btn-white:hover {
       background-color: #222222;
       color: #ffffff; }
+    .btn.btn-white.btn-outline {
+      background-color: transparent;
+      color: #fff;
+      border: solid 1px #fff; }
+      .btn.btn-white.btn-outline:hover {
+        background-color: #fff;
+        color: #222222;
+        border-color: #fff; }
 
 @media only screen and (min-width: 64rem) {
   .btn {
