@@ -123,6 +123,33 @@
                     "return_format": "url"
                 }
             ]
+        },
+        {
+            "key": "field_6544c2c17ffcd",
+            "label": "Colour Style",
+            "name": "colour_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "white": "White",
+                "red": "Red"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -143,5 +170,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683034401
+    "show_in_graphql": 0,
+    "graphql_field_name": "reviewsBlock",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1699005167
 }

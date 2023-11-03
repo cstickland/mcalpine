@@ -1,10 +1,36 @@
 @import '../../sass/abstracts/_abstracts.scss';
 .review-block {
-  color: #ffffff;
-  background-color: $color__mcalpine-red;
+  &.red {
+    color: #ffffff;
+    background-color: $color__mcalpine-red;
+  }
+
+  &.white {
+    background-color: #fff;
+    color: $color__mcalpine-black;
+    .review-block-container {
+      ul {
+        .reviews-card {
+          background-color: #fff;
+          color: $color__mcalpine-grey;
+
+          .review-card-rating {
+            color: $color__mcalpine-red;
+          }
+
+          .review-card-author-name {
+            color: $color__mcalpine-black;
+          }
+        }
+      }
+    }
+  }
   .review-block-container {
     @include container-large;
 
+    .reviews-title-section {
+      max-width: 388px;
+    }
     ul {
       list-style: none;
       margin: 0;
@@ -71,7 +97,7 @@
       align-items: center;
 
       .reviews-title-section {
-        max-width: 25rem;
+        max-width: 24rem;
 
         h3 {
           font-size: 2rem;

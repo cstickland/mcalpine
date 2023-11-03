@@ -1,6 +1,20 @@
-.review-block {
+.review-block.red {
   color: #ffffff;
   background-color: #e63128;
+}
+.review-block.white {
+  background-color: #fff;
+  color: #222222;
+}
+.review-block.white .review-block-container ul .reviews-card {
+  background-color: #fff;
+  color: #878787;
+}
+.review-block.white .review-block-container ul .reviews-card .review-card-rating {
+  color: #e63128;
+}
+.review-block.white .review-block-container ul .reviews-card .review-card-author-name {
+  color: #222222;
 }
 .review-block .review-block-container {
   width: 100%;
@@ -22,6 +36,9 @@
   .review-block .review-block-container {
     padding-top: 5rem;
   }
+}
+.review-block .review-block-container .reviews-title-section {
+  max-width: 388px;
 }
 .review-block .review-block-container ul {
   list-style: none;
@@ -80,7 +97,7 @@
     align-items: center;
   }
   .review-block .review-block-container .reviews-title-section {
-    max-width: 25rem;
+    max-width: 24rem;
   }
   .review-block .review-block-container .reviews-title-section h3 {
     font-size: 2rem;

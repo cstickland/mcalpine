@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'review-block']); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'review-block ' . get_field('colour_style')]); ?>">
     <div class="review-block-container">
         <div class="reviews-title-section">
             <h3><?php the_field('title'); ?></h3>
@@ -9,7 +9,11 @@
                     while (have_rows('button')) : the_row();
             ?>
 
-                        <a href="<?php the_sub_field('button_url'); ?>" class="btn btn-red btn-outline">
+                        <a href="<?php the_sub_field('button_url'); ?>" class="btn <?php if (get_field('colour_style') == 'red') {
+                                                                                        echo 'btn-red btn-outline';
+                                                                                    } else {
+                                                                                        echo 'btn-black';
+                                                                                    } ?>">
                             <?php the_sub_field('button_text'); ?>
                         </a>
             <?php endwhile;
@@ -24,16 +28,9 @@
                             <?php
                             $rating = get_sub_field('rating');
 
-                            for ($i = 1; $i <= 5; $i++) {
-                                if ($rating < $i) {
-                                    if (is_float($rating) && (round($rating) == $i)) {
-                                        echo "<span>&star;</span>";
-                                    } else {
-                                        echo "<span>⯨</span>";
-                                    }
-                                } else {
-                                    echo "<span>&starf;</span>";
-                                }
+                            for ($i = 1; $i <= $rating; $i++) {
+
+                                echo "<span>&starf;</span>";
                             }
 
                             ?>
