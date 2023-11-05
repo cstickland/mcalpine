@@ -34,8 +34,8 @@ export default {
   output: {
     sourcemap: true,
     format: 'umd',
-    name: 'InsightArchive',
-    file: 'dist/insight-archive.js',
+    name: 'CategoryArchive',
+    file: 'dist/category-archive.js',
   },
   plugins: [
     svelte({

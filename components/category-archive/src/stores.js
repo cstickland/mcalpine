@@ -1,3 +1,7 @@
+import { writable } from 'svelte/store'
+
+export const allItems = writable([])
+
 export const categoryQuery = `{
   productCategories(first: 1000) {
     edges {
@@ -9,7 +13,7 @@ export const categoryQuery = `{
         customFields {
           categoryImage {
             altText
-            sourceUrl(size: THUMBNAIL)
+            sourceUrl(size: MEDIUM)
           }
         }
       }
@@ -27,7 +31,7 @@ export const warrantyQuery = `{
         featuredImage {
           node {
             altText
-            sourceUrl(size: THUMBNAIL)
+            sourceUrl(size: MEDIUM)
           }
         }
       }
@@ -54,35 +58,19 @@ export function divideItemsIntoPages(postsPerPage, items, currentPage) {
   let count = 0
   let page = []
   let pagesArray = []
-
   currentPage = 1
 
-  insights.forEach((insight, i) => {
-    if (i < insights.length - 1) {
-      if (postsPerPage - count >= insight.columnWidth) {
-        count += insight.columnWidth
-        page.push(insight)
-        return
-      }
-      if (postsPerPage - count < insight.columnWidth) {
-        page[page.length - 1].columnWidth = postsPerPage - count + 1
-        pagesArray.push(page)
-        page = []
-        count = 0
-        count += insight.columnWidth
-        page.push(insight)
-        return
-      }
-    }
-    if (postsPerPage > page.length) {
-      page.push(insight)
+  items.forEach((item) => {
+    page.push(item)
+
+    if (page.length == postsPerPage) {
       pagesArray.push(page)
+      page = []
       return
     }
-    pagesArray.push(page)
-    page = []
-    page.push(insight)
-    pagesArray.push(page)
   })
+  if (page.length > 0) {
+    pagesArray.push(page)
+  }
   return pagesArray
 }

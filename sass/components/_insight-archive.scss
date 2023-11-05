@@ -10,6 +10,10 @@
   .insight-archive-grid-container {
     container-type: inline-size;
     container-name: insight-grid-container;
+
+    .insight-archive-grid {
+      list-style: none;
+    }
   }
 }
 
@@ -118,12 +122,17 @@
     }
   }
 }
+
 .insight-archive-grid {
   display: grid;
   padding: 0;
   margin: 0;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+
+  &.mobile-two-column {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @supports (container-type: inline-size) {
@@ -138,12 +147,20 @@
   @container insight-grid-container (min-width: 1000px) {
     .insight-archive-grid {
       grid-template-columns: 1fr 1fr 1fr;
+
+      &.mobile-two-column {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
     }
   }
 
   @container insight-grid-container (min-width: 1400px) {
     .insight-archive-grid {
       grid-template-columns: repeat(4, 1fr);
+
+      &.mobile-two-column {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   }
 }

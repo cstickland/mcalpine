@@ -2013,6 +2013,8 @@ fieldset {
   .insight-archive .insight-archive-grid-container {
     container-type: inline-size;
     container-name: insight-grid-container; }
+    .insight-archive .insight-archive-grid-container .insight-archive-grid {
+      list-style: none; }
 
 .insight-archive-filters-container {
   border-top: solid 1px #f4f4f4;
@@ -2109,6 +2111,8 @@ fieldset {
   margin: 0;
   grid-template-columns: 1fr;
   gap: 1.5rem; }
+  .insight-archive-grid.mobile-two-column {
+    grid-template-columns: 1fr 1fr; }
 
 @supports (container-type: inline-size) {
   @container insight-grid-container (min-width: 600px) {
@@ -2118,10 +2122,14 @@ fieldset {
         grid-template-columns: 1fr; } }
   @container insight-grid-container (min-width: 1000px) {
     .insight-archive-grid {
-      grid-template-columns: 1fr 1fr 1fr; } }
+      grid-template-columns: 1fr 1fr 1fr; }
+      .insight-archive-grid.mobile-two-column {
+        grid-template-columns: 1fr 1fr 1fr; } }
   @container insight-grid-container (min-width: 1400px) {
     .insight-archive-grid {
-      grid-template-columns: repeat(4, 1fr); } } }
+      grid-template-columns: repeat(4, 1fr); }
+      .insight-archive-grid.mobile-two-column {
+        grid-template-columns: repeat(4, 1fr); } } }
 
 .category-toggle {
   background-color: #222222;

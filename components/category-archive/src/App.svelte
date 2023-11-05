@@ -2,58 +2,75 @@
     import Card from "./Card.svelte";
     import Pagination from "./Pagination.svelte";
 
-    import { getData, divideItemsIntoPages, categoryQuery, warrantyQuery } from './stores.js';
-    import { onMount } from 'svelte';
+    import {
+        getData,
+        divideItemsIntoPages,
+        categoryQuery,
+        warrantyQuery,
+        allItems
+    } from "./stores.js";
+    import { onMount } from "svelte";
 
-    export let archiveType = '';
+    export let archiveType = "";
     export let postsPerPage = 12;
 
-    let allItems = [];
     let currentPage = 1;
+    let itemsDividedIntoPages;
 
-    $: totalPages = itemsDividedIntoPages.length;
-    $: itemsDividedIntoPages = divideItemsIntoPages(postsPerPage, allItems, currentPage);
-    $: currentPageItems = itemsDividedIntoPages[currentPage - 1];
-    
     onMount(async () => {
         let query;
-        allItems = [];
+        $allItems = [];
 
-        if(archiveType == 'warranties') {
+
+        if (archiveType == "warranties") {
             query = warrantyQuery;
+            let items = [];
             let data = await getData(query);
 
-            data.warranties.edges.forEach((warranty) => {
+            data.data.warranties.edges.forEach((warranty) => {
                 let warrantyObject = {
                     title: warranty.node.title,
                     url: warranty.node.link,
                     imageUrl: warranty.node.featuredImage.node.sourceUrl,
                     imageAlt: warranty.node.featuredImage.node.altText,
                 };
-            allItems.push(warrantyObject);
-            })
+                items.push(warrantyObject);
+            });
+            allItems.set(items);
         }
 
-        if(archiveType == 'categories') {
+        if (archiveType == "categories") {
             query = categoryQuery;
-            let data = await getData(query);
-            
-             data.productCategories.edges.forEach((category) => {
+
+            data.data.productCategories.edges.forEach((category) => {
                 let categoryObject = {
                     title: category.node.name,
                     url: category.node.link,
-                    imageUrl: category.node.customFields.categoryImage.sourceUrl,
+                    imageUrl:
+                        category.node.customFields.categoryImage.sourceUrl,
                     imageAlt: category.node.customFields.categoryImage.altText,
                 };
-                allItems.push(categoryObject);
-            })
-        }       
+                $allItems.push(categoryObject);
+            });
+        }
+    });
+
+
+    allItems.subscribe((value) => {
+        itemsDividedIntoPages =  divideItemsIntoPages(
+            postsPerPage,
+            value,
+            currentPage
+        );
     })
+
+    $: totalPages = itemsDividedIntoPages.length;
+    $: currentPageItems = itemsDividedIntoPages[currentPage - 1] || [];
 </script>
 
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
-        <ul class="insight-archive-grid">
+        <ul class="insight-archive-grid mobile-two-column">
             {#each currentPageItems as item}
                 <Card {...item} />
             {/each}
