@@ -32,6 +32,17 @@
 .small-hero-block .small-hero-content .hero-breadcrumbs a.breadcrumb-middle-link {
   margin-left: 0.5rem;
 }
+.small-hero-block .small-hero-content .hero-breadcrumbs span {
+  display: flex;
+  align-items: center;
+}
+.small-hero-block .small-hero-content .hero-breadcrumbs svg {
+  width: 0.375rem;
+  margin: 0 0.5rem;
+}
+.small-hero-block .small-hero-content .hero-breadcrumbs svg path {
+  fill: #5a5a5a;
+}
 .small-hero-block .small-hero-content .hero-breadcrumbs .breadcrumbs-current {
   color: #e63128;
   margin-left: 0.5rem;

@@ -12,7 +12,7 @@
     import { onMount } from "svelte";
 
     export let archiveType = "";
-    export let postsPerPage = 12;
+    export let postsPerPage; 
 
     let currentPage = 1;
     let itemsDividedIntoPages;
@@ -20,7 +20,7 @@
     onMount(async () => {
         let query;
         $allItems = [];
-
+        console.log(postsPerPage)
 
         if (archiveType == "warranties") {
             query = warrantyQuery;
@@ -41,17 +41,20 @@
 
         if (archiveType == "categories") {
             query = categoryQuery;
-
+            let items = [];
+            let data = await getData(query);
+            console.log(data)
             data.data.productCategories.edges.forEach((category) => {
                 let categoryObject = {
                     title: category.node.name,
                     url: category.node.link,
-                    imageUrl:
-                        category.node.customFields.categoryImage.sourceUrl,
-                    imageAlt: category.node.customFields.categoryImage.altText,
+                    imageUrl: category.node.customFields.categoryImage?.sourceUrl,
+                    imageAlt: category.node.customFields.categoryImage?.altText,
                 };
-                $allItems.push(categoryObject);
+                items.push(categoryObject);
             });
+        allItems.set(items);
+
         }
     });
 

@@ -1,6 +1,6 @@
 <script>
     import { fade } from "svelte/transition";
-    import { activeMenu, version } from "../../stores.js";
+    import { activeMenu, version, menuParentId, menuParentTitle } from "../../stores.js";
     import SocialLinks from "./SocialLinks.svelte";
     import MenuImageLinks from "./MenuImageLinks.svelte";
     export let interests;
@@ -16,41 +16,53 @@
         <div class="menu-item" on:click={() => activeMenu.set(1)} on:keydown>
             {interests.name}
 
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                ><g data-name="Layer 2"
-                    ><g data-name="chevron-right"
-                        ><rect
-                            width="24"
-                            height="24"
-                            transform="rotate(-90 12 12)"
-                            opacity="0"
-                        /><path
-                            d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"
-                        /></g
-                    ></g
-                ></svg
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13.922"
+                height="16.245"
+                viewBox="0 0 13.922 16.245"
+                ><path
+                    d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z"
+                    fill="#fff"
+                /></svg
             >
         </div>
         <div class="menu-item" on:click={() => activeMenu.set(2)} on:keydown>
             Products
 
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                ><g data-name="Layer 2"
-                    ><g data-name="chevron-right"
-                        ><rect
-                            width="24"
-                            height="24"
-                            transform="rotate(-90 12 12)"
-                            opacity="0"
-                        /><path
-                            d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"
-                        /></g
-                    ></g
-                ></svg
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13.922"
+                height="16.245"
+                viewBox="0 0 13.922 16.245"
+                ><path
+                    d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z"
+                    fill="#fff"
+                /></svg
             >
         </div>
         {#each navbar.menuItems.nodes as link}
-            <a href={link.url} class="menu-item">{link.title}</a>
+            {#if link.parentId == null && link.childItems.nodes.length == 0}
+                <a href={link.url} class="menu-item">{link.title}</a>
+            {/if}
+            {#if link.parentId == null && link.childItems.nodes.length > 0}
+                <div class="menu-item" on:click={() => {
+                    menuParentId.set(link.id)
+                    menuParentTitle.set(link.title)
+                }} on:keydown>
+                    <span>{link.title} </span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="13.922"
+                        height="16.245"
+                        viewBox="0 0 13.922 16.245"
+                        ><path
+                            d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z"
+                            fill="#fff"
+                        /></svg
+                    >
+                </div>
+            {/if}
         {/each}
     </div>
     <div class="version-container">
@@ -84,6 +96,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         color: $color__mcalpine-red;
         padding: 1.125rem 1rem;
         cursor: pointer;
@@ -96,7 +109,7 @@
                 no-repeat padding-box;
         }
         svg {
-            height: 1.5rem;
+            height: 0.75rem;
 
             path {
                 fill: $color__mcalpine-red;

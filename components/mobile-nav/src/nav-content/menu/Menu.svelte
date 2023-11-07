@@ -1,5 +1,5 @@
 <script>
-    import { menus, activeMenu } from "../../stores.js";
+    import { menus, activeMenu, navBarMenu } from "../../stores.js";
     import MainMenu from "./MainMenu.svelte";
     import InterestsMenu from "./InterestMenu.svelte";
     import ProductMenu from "./ProductMenu.svelte";
@@ -7,7 +7,6 @@
     // import ProductMenuTwo from "./ProductMenuTwo.svelte";
 
     let interests;
-    let navbar;
 
     $menus.forEach((menu) => {
         if (menu.name == "Interest") {
@@ -15,7 +14,7 @@
         }
 
         if (menu.name == "Navbar") {
-            navbar = menu;
+            navBarMenu.set(menu);
         }
     });
 </script>
@@ -26,7 +25,7 @@
     out:fade={{ duration: 200 }}
 >
     {#if $activeMenu == 0}
-        <MainMenu {interests} {navbar} />
+        <MainMenu {interests} navbar={$navBarMenu} />
     {:else if $activeMenu == 1}
         <InterestsMenu {interests} />
     {:else if $activeMenu == 2}

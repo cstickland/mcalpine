@@ -18,6 +18,9 @@ export const linkedin = writable('https://uk.linkedin.com/')
 export const youtube = writable('https://www.youtube.com/')
 export const email = writable('email@email.com')
 export const openClassVersionTwo = writable('closed')
+export const menuParentId = writable('')
+export const navBarMenu = writable({})
+export const menuParentTitle = writable('')
 
 export function highlightResults(searchQuery, result) {
   let textToSearch = searchQuery
@@ -67,12 +70,17 @@ export const query = `{
   }
   menus {
     nodes {
-      menuItems {
+      menuItems(where: {parentId: null}) {
         nodes {
           parentId
           id
           url
           title: label
+          childItems {
+            nodes {
+              id
+            }
+          }
         }
       }
       name

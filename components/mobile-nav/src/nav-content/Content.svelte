@@ -1,7 +1,8 @@
 <script>
     import Results  from './Results.svelte';
     import Menu from './menu/Menu.svelte';
-    import { open, searchOpen } from "../stores.js";
+    import SubMenu from './menu/SubMenu.svelte';
+    import { open, searchOpen, menuParentId } from "../stores.js";
     import { slide } from "svelte/transition";
 
     export let form
@@ -17,7 +18,11 @@
         {#if $searchOpen}
             <Results {form} />
         {:else}
-           <Menu /> 
+            {#if $menuParentId == ''}
+                <Menu />
+           {:else}
+                <SubMenu /> 
+            {/if}
         {/if}
     </div>
 {/if}

@@ -1,7 +1,7 @@
 <script>
+    import { menuParentId, menuParentTitle, navBarMenu } from "../../stores.js";
     import { fade } from "svelte/transition";
-    import { activeMenu } from "../../stores.js";
-    export let interests;
+
 </script>
 
 <div
@@ -9,7 +9,7 @@
     in:fade={{ axis: "x", delay: 200, duration: 200 }}
     out:fade={{ axis: "x", duration: 200 }}
 >
-    <div class="menu-title" on:click={() => activeMenu.set(0)} on:keydown>
+    <div class="menu-title" on:click={() => menuParentId.set("")} on:keydown>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="13.922"
@@ -21,11 +21,13 @@
             /></svg
         >
 
-        <div>{interests.name}</div>
+        <div>{$menuParentTitle}</div>
         <div class="spacer" />
     </div>
-    {#each interests.menuItems.nodes as interest}
-        <a class="menu-item" href={interest.url}>{interest.title}</a>
+    {#each $navBarMenu.menuItems.nodes as item}
+        {#if item.parentId == $menuParentId}
+            <a class="menu-item" href={item.url}>{item.title}</a>
+        {/if}
     {/each}
 </div>
 
@@ -42,14 +44,14 @@
         font-size: 1rem;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         border-bottom: solid 1px #f4f4f4;
         font-weight: 700;
         padding: 1.125rem 1rem;
         cursor: pointer;
         svg {
-        transform: rotate(180deg);
+            transform: rotate(180deg);
             height: 0.75rem;
 
             path {

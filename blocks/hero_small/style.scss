@@ -31,7 +31,17 @@
           margin-left: 0.5rem;
         }
       }
-
+      span {
+        display: flex;
+        align-items: center;
+      }
+      svg {
+        width: 0.375rem;
+        margin: 0 0.5rem;
+        path {
+          fill: #5a5a5a;
+        }
+      }
       .breadcrumbs-current {
         color: $color__mcalpine-red;
         margin-left: 0.5rem;

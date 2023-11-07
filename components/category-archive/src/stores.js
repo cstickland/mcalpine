@@ -72,5 +72,6 @@ export function divideItemsIntoPages(postsPerPage, items, currentPage) {
   if (page.length > 0) {
     pagesArray.push(page)
   }
+  console.log(pagesArray)
   return pagesArray
 }

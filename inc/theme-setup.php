@@ -74,3 +74,18 @@ function mcalpine_register_scripts()
 
 
 add_action('wp_enqueue_scripts', 'mcalpine_register_scripts');
+
+
+add_filter('allowed_block_types_all', 'rt_allowed_block_types', 25, 2);
+
+function rt_allowed_block_types($allowed_blocks, $editor_context)
+{
+    if ('warranty' === $editor_context->post->post_type) {
+        $allowed_blocks = array(
+            'mcalpine/hero-contact'
+        );
+        return $allowed_blocks;
+    } else {
+        return;
+    }
+}
