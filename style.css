@@ -790,39 +790,38 @@ fieldset {
       padding-right: 2.5rem !important;
       margin: 0 auto;
       padding-top: 15px;
-      padding-bottom: 15px; } }
-
-.menu-item-has-children {
-  position: relative; }
-  .menu-item-has-children ul.sub-menu {
-    padding: 0 !important;
-    padding-top: 1.5rem !important;
-    display: none !important;
-    flex-direction: column !important;
-    position: absolute;
-    top: 100%;
-    right: -4rem;
-    width: 200px;
-    height: min-content;
-    background-color: #fff;
-    list-style: none;
-    gap: 0 !important; }
-    .menu-item-has-children ul.sub-menu li {
-      font-size: 1rem;
-      font-weight: 700; }
-      .menu-item-has-children ul.sub-menu li a {
-        padding: 1rem !important;
-        display: block;
-        width: 100%;
-        color: #222222 !important; }
-      .menu-item-has-children ul.sub-menu li:hover {
-        background: transparent linear-gradient(75deg, #ffffff 0%, #7caef20f 100%) 0% 0% no-repeat padding-box; }
-        .menu-item-has-children ul.sub-menu li:hover a {
-          margin-left: -0.175rem;
-          color: #e63128 !important;
-          transition: all 0.1s ease-in-out; }
-  .menu-item-has-children:hover ul.sub-menu {
-    display: flex !important; }
+      padding-bottom: 15px; }
+    .main-nav .menu-item-has-children {
+      position: relative; }
+      .main-nav .menu-item-has-children ul.sub-menu {
+        padding: 0 !important;
+        padding-top: 1.5rem !important;
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute;
+        top: 100%;
+        right: -4rem;
+        width: 200px;
+        height: min-content;
+        background-color: #fff;
+        list-style: none;
+        gap: 0 !important; }
+        .main-nav .menu-item-has-children ul.sub-menu li {
+          font-size: 1rem;
+          font-weight: 700; }
+          .main-nav .menu-item-has-children ul.sub-menu li a {
+            padding: 1rem !important;
+            display: block;
+            width: 100%;
+            color: #222222 !important; }
+          .main-nav .menu-item-has-children ul.sub-menu li:hover {
+            background: transparent linear-gradient(75deg, #ffffff 0%, #7caef20f 100%) 0% 0% no-repeat padding-box; }
+            .main-nav .menu-item-has-children ul.sub-menu li:hover a {
+              margin-left: -0.175rem;
+              color: #e63128 !important;
+              transition: all 0.1s ease-in-out; }
+      .main-nav .menu-item-has-children:hover ul.sub-menu {
+        display: flex !important; } }
 
 .site-footer .menu,
 .site-footer .sub-menu {
@@ -940,7 +939,7 @@ fieldset {
     padding-right: 0; }
     .site-footer .footer-container {
       width: 100%;
-      max-width: 110.25rem;
+      max-width: 120rem;
       margin: 0 auto;
       padding: 2.1875rem 1.25rem;
       padding-top: 0 !important;
@@ -1591,7 +1590,7 @@ fieldset {
 
 .post-content-container {
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   display: flex;
@@ -1662,7 +1661,7 @@ fieldset {
 @media only screen and (min-width: 80rem) {
   .post-content-container {
     width: 100%;
-    max-width: 110.25rem;
+    max-width: 120rem;
     margin: 0 auto;
     padding: 2.1875rem 1.25rem;
     flex-direction: row; } }
@@ -1681,7 +1680,7 @@ fieldset {
   grid-template-columns: 55% 45%;
   grid-template-areas: 'filters-heading controls' 'filters filters' 'product-grid product-grid' 'pagination pagination';
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   padding-top: 0 !important; }
@@ -2024,7 +2023,7 @@ fieldset {
 
 .insight-archive {
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   padding-top: 2rem !important; }
@@ -2051,7 +2050,7 @@ fieldset {
   .insight-archive-filters-container .insight-archive-filters {
     display: flex;
     width: 100%;
-    max-width: 110.25rem;
+    max-width: 120rem;
     margin: 0 auto;
     padding: 2.1875rem 1.25rem;
     padding-top: 0 !important;

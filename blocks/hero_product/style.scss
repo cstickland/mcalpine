@@ -1,38 +1,306 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .product-hero {
-  background-color: #ebebeb;
+  background: transparent linear-gradient(53deg, #ffffff 0%, #7caef229 100%) 0%
+    0% no-repeat padding-box;
+
+  &.red {
+    background: none;
+    background-color: $color__mcalpine-red;
+
+    .product-hero-container {
+      .product-hero-image {
+        .hero-breadcrumbs {
+          a {
+            color: #fff;
+
+            &:hover {
+              color: $color__mcalpine-black;
+            }
+          }
+          svg {
+            path {
+              fill: $color__mcalpine-black;
+            }
+          }
+
+          .breadcrumbs-current {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
   .product-hero-container {
     @include container-large;
+    padding-top: 1.5rem !important;
+    display: flex;
+    flex-direction: column;
+    img {
+      max-height: 760px;
+    }
 
-    .product-hero-details {
-      max-height: 100%;
-      padding-top: 1.5rem;
+    .product-hero-image {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      max-height: 400px;
       padding-bottom: 1.5rem;
+      .product-hero-schematic-image {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        object-fit: contain;
+
+        object-position: center 6rem;
+      }
+      .product-image {
+        max-height: 250px;
+        object-fit: contain;
+        width: 100%;
+        height: 80%;
+      }
+      .hero-breadcrumbs {
+        z-index: 1;
+        align-self: start;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+        font-size: 0.75rem;
+        padding-right: 0.875rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.75rem;
+        width: max-content;
+        a {
+          text-decoration: none;
+          color: #878787;
+          margin-right: 0.5rem;
+          &:hover {
+            color: $color__mcalpine-red;
+          }
+
+          &.breadcrumb-middle-link {
+            margin-left: 0.5rem;
+          }
+        }
+        span {
+          display: flex;
+          align-items: center;
+        }
+        svg {
+          width: 0.375rem;
+          margin: 0 0.125rem;
+          path {
+            fill: #5a5a5a;
+          }
+        }
+        .breadcrumbs-current {
+          color: $color__mcalpine-red;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+    .product-hero-details {
+      margin: 0 auto;
+      color: #5a5a5a;
+      max-height: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.325rem;
-      * {
-        background-color: white;
-      }
+      max-width: 572px;
+      .product-details-container {
+        padding: 1.5rem;
+        background-color: #fff;
 
-      .product-skus-container {
-        ul {
-          list-style: none;
+        .product-title {
           margin: 0;
-          padding-left: 0;
+          padding-bottom: 1rem;
+          border-bottom: solid 1px #d8d8d8;
+        }
+        ul {
+          list-style-type: square;
+          list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJklEQVQYV2P8DwQMRABGkMLnRpp4lUqeu84wqhBnEMGDh4jwZgAAmKw/43YFJ/cAAAAASUVORK5CYII=);
+          margin: 0;
+          padding: 1rem;
+        }
+        .btn {
+          width: 100%;
+          margin-top: 1rem;
+        }
+      }
+    }
+    .product-skus-container {
+      padding: 1.5rem;
+      background-color: #fff;
+      ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        li {
+          display: flex;
+          gap: 1.25rem;
+          align-items: center;
+          img {
+            max-height: 3.5rem;
+            max-width: 3.5rem;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    .product-instructions-container {
+      display: flex;
+      flex-direction: column;
+
+      .technical-drawing,
+      .installation-instructions {
+        width: 100%;
+        background-color: #fff;
+
+        a {
+          width: 100%;
+          color: $color__mcalpine-black;
+          padding: 1rem;
+          display: block;
+          text-align: center;
+          font-size: 1rem;
+          text-decoration: none;
+          text-transform: uppercase;
+
+          &:hover {
+            color: $color__mcalpine-red;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-hero {
+    .product-hero-container {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: calc(100vh - 111px);
+      overflow: hidden;
+
+      .product-hero-details {
+        .product-details-container {
+          padding: 1.5rem;
+          background-color: #fff;
+          margin-bottom: 1.5rem;
+          max-height: 60%;
+          overflow: scroll;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-          li {
-            display: flex;
-            gap: 1.25rem;
-            align-items: center;
-            img {
-              max-width: 3.5rem;
-              border: 1px solid #707070;
+          width: 572px;
+          height: 60%;
+
+          .product-title {
+            color: $color__mcalpine-black;
+            padding-bottom: 1.5rem;
+            border-bottom: solid 1px #d8d8d8;
+            margin: 0;
+          }
+          ul {
+            overflow-y: scroll;
+          }
+
+          .btn {
+            justify-self: flex-end;
+          }
+        }
+
+        .product-skus-container {
+          padding: 1.5rem;
+          max-height: 25%;
+          display: flex;
+          ul {
+            overflow-y: scroll;
+            width: 100%;
+            li {
+              height: 57px;
+              display: flex;
+              gap: 1.375rem;
+              object-fit: contain;
+              .sku-image-container {
+                width: 57px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #f7f9fc;
+
+                img {
+                  height: 100%;
+                }
+              }
+              .sku-text {
+                font-size: 14px;
+                color: $color__mcalpine-red;
+              }
             }
           }
+        }
+      }
+
+      .product-hero-image {
+        min-height: 100%;
+        justify-content: unset;
+        flex-grow: 1;
+        position: relative;
+        .hero-breadcrumbs {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: start;
+          font-size: 1rem;
+          padding-bottom: 1rem;
+          a {
+            text-decoration: none;
+            color: #878787;
+            margin-right: 0.5rem;
+            &:hover {
+              color: $color__mcalpine-red;
+            }
+
+            &.breadcrumb-middle-link {
+              margin-left: 0.5rem;
+            }
+          }
+
+          .breadcrumbs-current {
+            color: $color__mcalpine-red;
+            margin-left: 0.5rem;
+          }
+        }
+
+        .product-image {
+          display: none;
+          max-height: 47.5rem;
+          max-width: 54.375rem;
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+          z-index: 1;
+
+          &.active {
+            display: block;
+          }
+        }
+
+        .product-hero-schematic-image {
+          object-position: center bottom;
         }
       }
     }

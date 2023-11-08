@@ -3,6 +3,67 @@
     "title": "Products",
     "fields": [
         {
+            "key": "field_654b9a5654b00",
+            "label": "Product Hero Background Style",
+            "name": "product_hero_background_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "gradient": "Blue Gradient",
+                "red": "Red"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_654b9e912008e",
+            "label": "Product Schematic Image",
+            "name": "product_schematic_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654b9a5654b00",
+                        "operator": "==",
+                        "value": "gradient"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_64736a878b344",
             "label": "Skus",
             "name": "skus",
@@ -273,5 +334,5 @@
     "graphql_field_name": "products",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1696666058
+    "modified": 1699454652
 }

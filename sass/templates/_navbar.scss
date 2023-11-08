@@ -139,53 +139,52 @@
       padding-top: 15px;
       padding-bottom: 15px;
     }
-  }
-}
+    .menu-item-has-children {
+      position: relative;
 
-.menu-item-has-children {
-  position: relative;
+      ul.sub-menu {
+        padding: 0 !important;
+        padding-top: 1.5rem !important;
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute;
+        top: 100%;
+        right: -4rem;
+        width: 200px;
+        height: min-content;
+        background-color: #fff;
+        list-style: none;
+        gap: 0 !important;
 
-  ul.sub-menu {
-    padding: 0 !important;
-    padding-top: 1.5rem !important;
-    display: none !important;
-    flex-direction: column !important;
-    position: absolute;
-    top: 100%;
-    right: -4rem;
-    width: 200px;
-    height: min-content;
-    background-color: #fff;
-    list-style: none;
-    gap: 0 !important;
+        li {
+          font-size: 1rem;
+          font-weight: 700;
+          a {
+            padding: 1rem !important;
+            display: block;
+            width: 100%;
+            color: $color__mcalpine-black !important;
+          }
 
-    li {
-      font-size: 1rem;
-      font-weight: 700;
-      a {
-        padding: 1rem !important;
-        display: block;
-        width: 100%;
-        color: $color__mcalpine-black !important;
+          &:hover {
+            background: transparent
+              linear-gradient(75deg, #ffffff 0%, #7caef20f 100%) 0% 0% no-repeat
+              padding-box;
+            a {
+              margin-left: -0.175rem;
+
+              color: $color__mcalpine-red !important;
+              transition: all 0.1s ease-in-out;
+            }
+          }
+        }
       }
 
       &:hover {
-        background: transparent
-          linear-gradient(75deg, #ffffff 0%, #7caef20f 100%) 0% 0% no-repeat
-          padding-box;
-        a {
-          margin-left: -0.175rem;
-
-          color: $color__mcalpine-red !important;
-          transition: all 0.1s ease-in-out;
+        ul.sub-menu {
+          display: flex !important;
         }
       }
-    }
-  }
-
-  &:hover {
-    ul.sub-menu {
-      display: flex !important;
     }
   }
 }

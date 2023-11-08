@@ -85,7 +85,35 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
             'mcalpine/hero-contact'
         );
         return $allowed_blocks;
-    } else {
-        return;
     }
+    $allowed_blocks = array(
+        'mcalpine/hero-contact',
+        'mcalpine/image-text',
+        'create-block/grid',
+        'mcalpine/grid-text',
+        'acf/cta',
+        "mcalpine/category-card",
+        "acf/faq-archive",
+        "acf/faq-contact",
+        "mcalpine/help-card",
+        "mcalpine/hero-contact",
+        "mcalpine/featured-insight-hero",
+        "mcalpine/home-hero",
+        "mcalpine/large-hero",
+        "mcalpine/small-hero",
+        "mcalpine/image-text-slider",
+        "mcalpine/info-card",
+        "mcalpine/insight-card",
+        "mcalpine/interest-cards",
+        "mcalpine/international-contact",
+        "mcalpine/member-institutions",
+        "mcalpine/new-product-feature",
+        "mcalpine/newsletter",
+        "mcalpine/product-card",
+        "mcalpine/prodcut-guide-cta",
+        "acf/reviews",
+        "mcalpine/info-card",
+        "mcalpine/vertical-text"
+    );
+    return $allowed_blocks;
 }
