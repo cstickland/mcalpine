@@ -31,3 +31,4 @@ require_once('member_institutions/member_insitutions.php');
 require_once('new_product_feature/new_product_feature.php');
 require_once('image_text_slider/image-and-text-slider.php');
 require_once('hero_contact/hero_contact.php');
+require_once('timeline/timeline.php');

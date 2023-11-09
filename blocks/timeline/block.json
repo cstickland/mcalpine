@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "mcalpine/info-card",
+  "name": "mcalpine/timeline",
   "version": "0.1.0",
-  "title": "Info Card",
+  "title": "History Timeline",
   "category": "widgets",
   "icon": "editor-ul",
   "description": "Example block scaffolded with Create Block tool.",
@@ -12,7 +12,6 @@
   },
   "textdomain": "mcalpine",
   "style": "file:./style.css",
-  "parent": ["create-block/grid"],
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

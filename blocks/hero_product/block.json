@@ -3,6 +3,7 @@
     "title": "Product Hero Block",
     "description": "A custom content block.",
     "style": [ "file:./style.css" ],
+    "script": ["file:./hero-product.js"],
     "category": "formatting",
     "icon": "admin-comments",
     "keywords": ["testimonial", "quote"],

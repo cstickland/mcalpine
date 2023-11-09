@@ -39,6 +39,20 @@
                 ?>
                 <img class="product-hero-schematic-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
             <?php endif; ?>
+            <div class="product-hero-control-images">
+                <?php if (have_rows('skus', $post_id)) :
+                    while (have_rows('skus', $post_id)) : the_row();
+                        $sku = get_sub_field('sku');
+                        if (have_rows('product_images')) :
+                            while (have_rows('product_images')) : the_row(); ?>
+                                <img data-sku='<?php echo $sku; ?>' class="product-image-thumbnail" src="<?php the_sub_field('product_image'); ?>" />
+                <?php endwhile;
+                        endif;
+                        $count++;
+                    endwhile;
+                endif; ?>
+
+            </div>
 
         </div>
         <div class="product-hero-details">

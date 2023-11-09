@@ -113,7 +113,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/prodcut-guide-cta",
         "acf/reviews",
         "mcalpine/info-card",
-        "mcalpine/vertical-text"
+        "mcalpine/vertical-text",
+        "mcalpine/timeline"
     );
     return $allowed_blocks;
 }
