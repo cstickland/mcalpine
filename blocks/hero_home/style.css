@@ -34,21 +34,38 @@
   bottom: 5%;
   left: 1.25rem;
 }
-.home-hero-block .home-hero-content h1 {
+.home-hero-block .home-hero-content .home-hero-text {
+  transform: translateY(40%);
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+}
+.home-hero-block .home-hero-content .home-hero-text h1 {
   color: #e63128;
   font-weight: 400;
   font-size: clamp(2.281rem, -0.366rem + 5.513vw, 6.25rem);
   text-align: center;
   margin: 0;
 }
-.home-hero-block .home-hero-content h1 * {
+.home-hero-block .home-hero-content .home-hero-text h1 * {
   font-size: clamp(2.281rem, -0.366rem + 5.513vw, 6.25rem);
 }
-.home-hero-block .home-hero-content h1 a,
-.home-hero-block .home-hero-content h1 u {
-  text-decoration-color: #7badf2;
+.home-hero-block .home-hero-content .home-hero-text h1 a,
+.home-hero-block .home-hero-content .home-hero-text h1 u {
+  text-decoration: none;
+  background-image: linear-gradient(#7badf2, #7badf2);
+  background-size: 0% 0.075em;
+  background-position-y: 90%;
+  background-position-x: 0%;
+  background-repeat: no-repeat;
+  animation-name: underline;
+  animation-duration: 0.75s;
+  animation-timeline: linear;
+  animation-fill-mode: forwards;
+  animation-delay: 0.75s;
 }
-.home-hero-block .home-hero-content .hero-text {
+.home-hero-block .home-hero-content .home-hero-text .hero-text {
   font-size: 1rem;
   font-size: clamp(1rem, 0.667rem + 0.694vw, 1.5rem);
   padding: 0;
@@ -309,6 +326,14 @@
   }
   100% {
     opacity: 0;
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
   }
 }
 

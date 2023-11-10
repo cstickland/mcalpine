@@ -12,6 +12,7 @@
   },
   "textdomain": "mcalpine",
   "style": "file:./style.css",
+  "script": "file:./timeline.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"
