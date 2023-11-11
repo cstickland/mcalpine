@@ -1,6 +1,8 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .info-card {
+  transform: scale(0.7);
+  @include grow;
   aspect-ratio: 1/1;
   background-color: $color__mcalpine-red;
   display: flex;
@@ -9,6 +11,18 @@
   padding: 2.5rem 2.625rem;
   position: relative;
   z-index: 2;
+
+  &:first-of-type {
+    animation-delay: 100ms;
+  }
+
+  &:nth-of-type(3) {
+    animation-delay: 200ms;
+  }
+
+  &:nth-of-type(4) {
+    animation-delay: 300ms;
+  }
 
   .hash {
     width: 60%;

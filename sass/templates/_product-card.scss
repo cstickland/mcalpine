@@ -17,6 +17,7 @@
   }
 
   .product-title {
+    @include slide-in;
     grid-area: name;
     padding-left: 1.5rem;
     color: #5a5a5a;
@@ -57,6 +58,8 @@
     width: max-content;
     margin-right: 1.5rem;
     margin-left: auto;
+
+    @include slide-in;
     .sku-count-small {
       display: none;
     }
@@ -165,6 +168,10 @@
       'image image .'
       'name name link';
     img {
+      @include grow;
+      animation-delay: 0.2s;
+      animation-duration: 0.5s;
+      transform-origin: center left;
       max-height: 95%;
       margin: 0 auto;
       grid-area: image;

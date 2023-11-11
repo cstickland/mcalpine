@@ -1,4 +1,49 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
 .info-card {
+  transform: scale(0.7);
+  opacity: 0;
+  animation-name: grow;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: top left;
   aspect-ratio: 1/1;
   background-color: #e63128;
   display: flex;
@@ -7,6 +52,15 @@
   padding: 2.5rem 2.625rem;
   position: relative;
   z-index: 2;
+}
+.info-card:first-of-type {
+  animation-delay: 100ms;
+}
+.info-card:nth-of-type(3) {
+  animation-delay: 200ms;
+}
+.info-card:nth-of-type(4) {
+  animation-delay: 300ms;
 }
 .info-card .hash {
   width: 60%;

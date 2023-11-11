@@ -17,12 +17,15 @@
     .text-container {
       padding: 2rem;
       p {
+        @include slide-in;
+        animation-delay: 150ms;
         margin-bottom: 2rem;
         max-width: 405px;
 
         color: #5a5a5a;
       }
       h2 {
+        @include slide-in;
         max-width: 350px;
 
         color: $color__mcalpine-black;
@@ -34,7 +37,6 @@
 
         background-color: $color__mcalpine-red;
       }
-      background-color: #ffffff;
     }
     .background-image-schematic {
       display: none;

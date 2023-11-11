@@ -16,11 +16,16 @@
     border-radius: 50px;
     padding: 1rem 2rem;
     text-transform: uppercase;
+
+    @include slide-in;
   }
   .h1,
   .h2 {
     text-align: center;
     color: $color__mcalpine-red;
+
+    @include slide-in;
+    animation-delay: 150ms;
 
     * {
       font-size: inherit;
@@ -50,6 +55,9 @@
     max-width: 875px;
     padding-top: 2rem;
     font-size: 1rem;
+
+    @include slide-in;
+    animation-delay: 300ms;
 
     @media only screen and (min-width: $tablet) {
       font-size: 1rem;

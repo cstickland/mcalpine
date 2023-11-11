@@ -41,7 +41,7 @@
     .home-hero-text {
       transform: translateY(40%);
       opacity: 0;
-      animation-name: slide-in;
+      animation-name: slide-in-hero;
       animation-duration: 0.75s;
       animation-fill-mode: forwards;
 
@@ -366,14 +366,5 @@
   }
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes underline {
-  from {
-    background-size: 0% 0.075em;
-  }
-  to {
-    background-size: 100% 0.075em;
   }
 }

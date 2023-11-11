@@ -15,10 +15,32 @@ Tags: custom-background, custom-logo, custom-menu, featured-images
 @keyframes slide-in {
   from {
     opacity: 0;
+    transform: translateY(3rem); }
+  to {
+    opacity: 1;
+    transform: translateY(0); } }
+
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.7); }
+  to {
+    opacity: 1;
+    transform: scale(1); } }
+
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
     transform: translateY(40%); }
   to {
     opacity: 1;
     transform: translateY(0); } }
+
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em; }
+  to {
+    background-size: 100% 0.075em; } }
 
 /* Normalize
 --------------------------------------------- */
@@ -1130,6 +1152,11 @@ fieldset {
   .product-card .sku-list-container {
     display: none; }
   .product-card .product-title {
+    opacity: 0;
+    animation-name: slide-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
     grid-area: name;
     padding-left: 1.5rem;
     color: #5a5a5a;
@@ -1166,7 +1193,12 @@ fieldset {
     height: 28px;
     width: max-content;
     margin-right: 1.5rem;
-    margin-left: auto; }
+    margin-left: auto;
+    opacity: 0;
+    animation-name: slide-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out; }
     .product-card .sku-count .sku-count-small {
       display: none; }
   .product-card:hover .sku-count, .product-card.open .sku-count {
@@ -1252,6 +1284,15 @@ fieldset {
     grid-template-rows: 65% 10% 25%;
     grid-template-areas: 'image image count' 'image image .' 'name name link'; }
     .product-card .product-block-image img {
+      opacity: 0;
+      animation-name: grow;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-in-out;
+      transform-origin: top left;
+      animation-delay: 0.2s;
+      animation-duration: 0.5s;
+      transform-origin: center left;
       max-height: 95%;
       margin: 0 auto;
       grid-area: image;
