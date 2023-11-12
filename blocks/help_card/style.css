@@ -1,3 +1,41 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
 .help-card {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #f4f4f4;
@@ -12,8 +50,21 @@
   padding: 1rem;
 }
 .help-card .help-card-content .help-card-image {
+  opacity: 0;
+  animation-name: grow;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: top left;
   padding-bottom: 4.125rem;
   width: 3.25rem;
+}
+.help-card .help-card-content .help-card-title {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 .help-card .help-card-content .help-card-title.c-red {
   color: #e63128;
@@ -22,12 +73,24 @@
   color: #222222;
 }
 .help-card .help-card-content .help-card-text {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 100ms;
   display: none;
   color: #5a5a5a;
   padding-bottom: 1rem;
   font-size: 1rem;
 }
 .help-card .help-card-content .btn {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 200ms;
   display: none;
 }
 .help-card .help-card-content.align-center {

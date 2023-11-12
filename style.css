@@ -15,7 +15,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images
 @keyframes slide-in {
   from {
     opacity: 0;
-    transform: translateY(3rem); }
+    transform: translateY(2rem); }
   to {
     opacity: 1;
     transform: translateY(0); } }
@@ -23,7 +23,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images
 @keyframes grow {
   from {
     opacity: 0;
-    transform: scale(0.7); }
+    transform: scale(0.9); }
   to {
     opacity: 1;
     transform: scale(1); } }
@@ -1141,7 +1141,701 @@ fieldset {
   container-type: inline-size;
   container-name: product-card; }
 
+.acf-innerblocks-container .product-card-container:nth-of-type(2) .product-card {
+  animation-delay: 150ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(2) .product-card .product-title {
+    animation-delay: 200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(2) .product-card .product-block-image img {
+    animation-delay: 300ms; }
+
+.product-card-container:nth-of-type(2) .product-card {
+  animation-delay: 75ms; }
+  .product-card-container:nth-of-type(2) .product-card .product-title {
+    animation-delay: 125ms; }
+  .product-card-container:nth-of-type(2) .product-card .product-block-image img {
+    animation-delay: 175ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(3) .product-card {
+  animation-delay: 300ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(3) .product-card .product-title {
+    animation-delay: 350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(3) .product-card .product-block-image img {
+    animation-delay: 450ms; }
+
+.product-card-container:nth-of-type(3) .product-card {
+  animation-delay: 150ms; }
+  .product-card-container:nth-of-type(3) .product-card .product-title {
+    animation-delay: 200ms; }
+  .product-card-container:nth-of-type(3) .product-card .product-block-image img {
+    animation-delay: 250ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(4) .product-card {
+  animation-delay: 450ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(4) .product-card .product-title {
+    animation-delay: 500ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(4) .product-card .product-block-image img {
+    animation-delay: 600ms; }
+
+.product-card-container:nth-of-type(4) .product-card {
+  animation-delay: 225ms; }
+  .product-card-container:nth-of-type(4) .product-card .product-title {
+    animation-delay: 275ms; }
+  .product-card-container:nth-of-type(4) .product-card .product-block-image img {
+    animation-delay: 325ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(5) .product-card {
+  animation-delay: 600ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(5) .product-card .product-title {
+    animation-delay: 650ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(5) .product-card .product-block-image img {
+    animation-delay: 750ms; }
+
+.product-card-container:nth-of-type(5) .product-card {
+  animation-delay: 300ms; }
+  .product-card-container:nth-of-type(5) .product-card .product-title {
+    animation-delay: 350ms; }
+  .product-card-container:nth-of-type(5) .product-card .product-block-image img {
+    animation-delay: 400ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(6) .product-card {
+  animation-delay: 750ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(6) .product-card .product-title {
+    animation-delay: 800ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(6) .product-card .product-block-image img {
+    animation-delay: 900ms; }
+
+.product-card-container:nth-of-type(6) .product-card {
+  animation-delay: 375ms; }
+  .product-card-container:nth-of-type(6) .product-card .product-title {
+    animation-delay: 425ms; }
+  .product-card-container:nth-of-type(6) .product-card .product-block-image img {
+    animation-delay: 475ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(7) .product-card {
+  animation-delay: 900ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(7) .product-card .product-title {
+    animation-delay: 950ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(7) .product-card .product-block-image img {
+    animation-delay: 1050ms; }
+
+.product-card-container:nth-of-type(7) .product-card {
+  animation-delay: 450ms; }
+  .product-card-container:nth-of-type(7) .product-card .product-title {
+    animation-delay: 500ms; }
+  .product-card-container:nth-of-type(7) .product-card .product-block-image img {
+    animation-delay: 550ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(8) .product-card {
+  animation-delay: 1050ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(8) .product-card .product-title {
+    animation-delay: 1100ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(8) .product-card .product-block-image img {
+    animation-delay: 1200ms; }
+
+.product-card-container:nth-of-type(8) .product-card {
+  animation-delay: 525ms; }
+  .product-card-container:nth-of-type(8) .product-card .product-title {
+    animation-delay: 575ms; }
+  .product-card-container:nth-of-type(8) .product-card .product-block-image img {
+    animation-delay: 625ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(9) .product-card {
+  animation-delay: 1200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(9) .product-card .product-title {
+    animation-delay: 1250ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(9) .product-card .product-block-image img {
+    animation-delay: 1350ms; }
+
+.product-card-container:nth-of-type(9) .product-card {
+  animation-delay: 600ms; }
+  .product-card-container:nth-of-type(9) .product-card .product-title {
+    animation-delay: 650ms; }
+  .product-card-container:nth-of-type(9) .product-card .product-block-image img {
+    animation-delay: 700ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(10) .product-card {
+  animation-delay: 1350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(10) .product-card .product-title {
+    animation-delay: 1400ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(10) .product-card .product-block-image img {
+    animation-delay: 1500ms; }
+
+.product-card-container:nth-of-type(10) .product-card {
+  animation-delay: 675ms; }
+  .product-card-container:nth-of-type(10) .product-card .product-title {
+    animation-delay: 725ms; }
+  .product-card-container:nth-of-type(10) .product-card .product-block-image img {
+    animation-delay: 775ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(11) .product-card {
+  animation-delay: 1500ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(11) .product-card .product-title {
+    animation-delay: 1550ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(11) .product-card .product-block-image img {
+    animation-delay: 1650ms; }
+
+.product-card-container:nth-of-type(11) .product-card {
+  animation-delay: 750ms; }
+  .product-card-container:nth-of-type(11) .product-card .product-title {
+    animation-delay: 800ms; }
+  .product-card-container:nth-of-type(11) .product-card .product-block-image img {
+    animation-delay: 850ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(12) .product-card {
+  animation-delay: 1650ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(12) .product-card .product-title {
+    animation-delay: 1700ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(12) .product-card .product-block-image img {
+    animation-delay: 1800ms; }
+
+.product-card-container:nth-of-type(12) .product-card {
+  animation-delay: 825ms; }
+  .product-card-container:nth-of-type(12) .product-card .product-title {
+    animation-delay: 875ms; }
+  .product-card-container:nth-of-type(12) .product-card .product-block-image img {
+    animation-delay: 925ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(13) .product-card {
+  animation-delay: 1800ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(13) .product-card .product-title {
+    animation-delay: 1850ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(13) .product-card .product-block-image img {
+    animation-delay: 1950ms; }
+
+.product-card-container:nth-of-type(13) .product-card {
+  animation-delay: 900ms; }
+  .product-card-container:nth-of-type(13) .product-card .product-title {
+    animation-delay: 950ms; }
+  .product-card-container:nth-of-type(13) .product-card .product-block-image img {
+    animation-delay: 1000ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(14) .product-card {
+  animation-delay: 1950ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(14) .product-card .product-title {
+    animation-delay: 2000ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(14) .product-card .product-block-image img {
+    animation-delay: 2100ms; }
+
+.product-card-container:nth-of-type(14) .product-card {
+  animation-delay: 975ms; }
+  .product-card-container:nth-of-type(14) .product-card .product-title {
+    animation-delay: 1025ms; }
+  .product-card-container:nth-of-type(14) .product-card .product-block-image img {
+    animation-delay: 1075ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(15) .product-card {
+  animation-delay: 2100ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(15) .product-card .product-title {
+    animation-delay: 2150ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(15) .product-card .product-block-image img {
+    animation-delay: 2250ms; }
+
+.product-card-container:nth-of-type(15) .product-card {
+  animation-delay: 1050ms; }
+  .product-card-container:nth-of-type(15) .product-card .product-title {
+    animation-delay: 1100ms; }
+  .product-card-container:nth-of-type(15) .product-card .product-block-image img {
+    animation-delay: 1150ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(16) .product-card {
+  animation-delay: 2250ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(16) .product-card .product-title {
+    animation-delay: 2300ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(16) .product-card .product-block-image img {
+    animation-delay: 2400ms; }
+
+.product-card-container:nth-of-type(16) .product-card {
+  animation-delay: 1125ms; }
+  .product-card-container:nth-of-type(16) .product-card .product-title {
+    animation-delay: 1175ms; }
+  .product-card-container:nth-of-type(16) .product-card .product-block-image img {
+    animation-delay: 1225ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(17) .product-card {
+  animation-delay: 2400ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(17) .product-card .product-title {
+    animation-delay: 2450ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(17) .product-card .product-block-image img {
+    animation-delay: 2550ms; }
+
+.product-card-container:nth-of-type(17) .product-card {
+  animation-delay: 1200ms; }
+  .product-card-container:nth-of-type(17) .product-card .product-title {
+    animation-delay: 1250ms; }
+  .product-card-container:nth-of-type(17) .product-card .product-block-image img {
+    animation-delay: 1300ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(18) .product-card {
+  animation-delay: 2550ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(18) .product-card .product-title {
+    animation-delay: 2600ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(18) .product-card .product-block-image img {
+    animation-delay: 2700ms; }
+
+.product-card-container:nth-of-type(18) .product-card {
+  animation-delay: 1275ms; }
+  .product-card-container:nth-of-type(18) .product-card .product-title {
+    animation-delay: 1325ms; }
+  .product-card-container:nth-of-type(18) .product-card .product-block-image img {
+    animation-delay: 1375ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(19) .product-card {
+  animation-delay: 2700ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(19) .product-card .product-title {
+    animation-delay: 2750ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(19) .product-card .product-block-image img {
+    animation-delay: 2850ms; }
+
+.product-card-container:nth-of-type(19) .product-card {
+  animation-delay: 1350ms; }
+  .product-card-container:nth-of-type(19) .product-card .product-title {
+    animation-delay: 1400ms; }
+  .product-card-container:nth-of-type(19) .product-card .product-block-image img {
+    animation-delay: 1450ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(20) .product-card {
+  animation-delay: 2850ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(20) .product-card .product-title {
+    animation-delay: 2900ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(20) .product-card .product-block-image img {
+    animation-delay: 3000ms; }
+
+.product-card-container:nth-of-type(20) .product-card {
+  animation-delay: 1425ms; }
+  .product-card-container:nth-of-type(20) .product-card .product-title {
+    animation-delay: 1475ms; }
+  .product-card-container:nth-of-type(20) .product-card .product-block-image img {
+    animation-delay: 1525ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(21) .product-card {
+  animation-delay: 3000ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(21) .product-card .product-title {
+    animation-delay: 3050ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(21) .product-card .product-block-image img {
+    animation-delay: 3150ms; }
+
+.product-card-container:nth-of-type(21) .product-card {
+  animation-delay: 1500ms; }
+  .product-card-container:nth-of-type(21) .product-card .product-title {
+    animation-delay: 1550ms; }
+  .product-card-container:nth-of-type(21) .product-card .product-block-image img {
+    animation-delay: 1600ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(22) .product-card {
+  animation-delay: 3150ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(22) .product-card .product-title {
+    animation-delay: 3200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(22) .product-card .product-block-image img {
+    animation-delay: 3300ms; }
+
+.product-card-container:nth-of-type(22) .product-card {
+  animation-delay: 1575ms; }
+  .product-card-container:nth-of-type(22) .product-card .product-title {
+    animation-delay: 1625ms; }
+  .product-card-container:nth-of-type(22) .product-card .product-block-image img {
+    animation-delay: 1675ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(23) .product-card {
+  animation-delay: 3300ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(23) .product-card .product-title {
+    animation-delay: 3350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(23) .product-card .product-block-image img {
+    animation-delay: 3450ms; }
+
+.product-card-container:nth-of-type(23) .product-card {
+  animation-delay: 1650ms; }
+  .product-card-container:nth-of-type(23) .product-card .product-title {
+    animation-delay: 1700ms; }
+  .product-card-container:nth-of-type(23) .product-card .product-block-image img {
+    animation-delay: 1750ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(24) .product-card {
+  animation-delay: 3450ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(24) .product-card .product-title {
+    animation-delay: 3500ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(24) .product-card .product-block-image img {
+    animation-delay: 3600ms; }
+
+.product-card-container:nth-of-type(24) .product-card {
+  animation-delay: 1725ms; }
+  .product-card-container:nth-of-type(24) .product-card .product-title {
+    animation-delay: 1775ms; }
+  .product-card-container:nth-of-type(24) .product-card .product-block-image img {
+    animation-delay: 1825ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(25) .product-card {
+  animation-delay: 3600ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(25) .product-card .product-title {
+    animation-delay: 3650ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(25) .product-card .product-block-image img {
+    animation-delay: 3750ms; }
+
+.product-card-container:nth-of-type(25) .product-card {
+  animation-delay: 1800ms; }
+  .product-card-container:nth-of-type(25) .product-card .product-title {
+    animation-delay: 1850ms; }
+  .product-card-container:nth-of-type(25) .product-card .product-block-image img {
+    animation-delay: 1900ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(26) .product-card {
+  animation-delay: 3750ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(26) .product-card .product-title {
+    animation-delay: 3800ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(26) .product-card .product-block-image img {
+    animation-delay: 3900ms; }
+
+.product-card-container:nth-of-type(26) .product-card {
+  animation-delay: 1875ms; }
+  .product-card-container:nth-of-type(26) .product-card .product-title {
+    animation-delay: 1925ms; }
+  .product-card-container:nth-of-type(26) .product-card .product-block-image img {
+    animation-delay: 1975ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(27) .product-card {
+  animation-delay: 3900ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(27) .product-card .product-title {
+    animation-delay: 3950ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(27) .product-card .product-block-image img {
+    animation-delay: 4050ms; }
+
+.product-card-container:nth-of-type(27) .product-card {
+  animation-delay: 1950ms; }
+  .product-card-container:nth-of-type(27) .product-card .product-title {
+    animation-delay: 2000ms; }
+  .product-card-container:nth-of-type(27) .product-card .product-block-image img {
+    animation-delay: 2050ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(28) .product-card {
+  animation-delay: 4050ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(28) .product-card .product-title {
+    animation-delay: 4100ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(28) .product-card .product-block-image img {
+    animation-delay: 4200ms; }
+
+.product-card-container:nth-of-type(28) .product-card {
+  animation-delay: 2025ms; }
+  .product-card-container:nth-of-type(28) .product-card .product-title {
+    animation-delay: 2075ms; }
+  .product-card-container:nth-of-type(28) .product-card .product-block-image img {
+    animation-delay: 2125ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(29) .product-card {
+  animation-delay: 4200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(29) .product-card .product-title {
+    animation-delay: 4250ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(29) .product-card .product-block-image img {
+    animation-delay: 4350ms; }
+
+.product-card-container:nth-of-type(29) .product-card {
+  animation-delay: 2100ms; }
+  .product-card-container:nth-of-type(29) .product-card .product-title {
+    animation-delay: 2150ms; }
+  .product-card-container:nth-of-type(29) .product-card .product-block-image img {
+    animation-delay: 2200ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(30) .product-card {
+  animation-delay: 4350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(30) .product-card .product-title {
+    animation-delay: 4400ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(30) .product-card .product-block-image img {
+    animation-delay: 4500ms; }
+
+.product-card-container:nth-of-type(30) .product-card {
+  animation-delay: 2175ms; }
+  .product-card-container:nth-of-type(30) .product-card .product-title {
+    animation-delay: 2225ms; }
+  .product-card-container:nth-of-type(30) .product-card .product-block-image img {
+    animation-delay: 2275ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(31) .product-card {
+  animation-delay: 4500ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(31) .product-card .product-title {
+    animation-delay: 4550ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(31) .product-card .product-block-image img {
+    animation-delay: 4650ms; }
+
+.product-card-container:nth-of-type(31) .product-card {
+  animation-delay: 2250ms; }
+  .product-card-container:nth-of-type(31) .product-card .product-title {
+    animation-delay: 2300ms; }
+  .product-card-container:nth-of-type(31) .product-card .product-block-image img {
+    animation-delay: 2350ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(32) .product-card {
+  animation-delay: 4650ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(32) .product-card .product-title {
+    animation-delay: 4700ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(32) .product-card .product-block-image img {
+    animation-delay: 4800ms; }
+
+.product-card-container:nth-of-type(32) .product-card {
+  animation-delay: 2325ms; }
+  .product-card-container:nth-of-type(32) .product-card .product-title {
+    animation-delay: 2375ms; }
+  .product-card-container:nth-of-type(32) .product-card .product-block-image img {
+    animation-delay: 2425ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(33) .product-card {
+  animation-delay: 4800ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(33) .product-card .product-title {
+    animation-delay: 4850ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(33) .product-card .product-block-image img {
+    animation-delay: 4950ms; }
+
+.product-card-container:nth-of-type(33) .product-card {
+  animation-delay: 2400ms; }
+  .product-card-container:nth-of-type(33) .product-card .product-title {
+    animation-delay: 2450ms; }
+  .product-card-container:nth-of-type(33) .product-card .product-block-image img {
+    animation-delay: 2500ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(34) .product-card {
+  animation-delay: 4950ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(34) .product-card .product-title {
+    animation-delay: 5000ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(34) .product-card .product-block-image img {
+    animation-delay: 5100ms; }
+
+.product-card-container:nth-of-type(34) .product-card {
+  animation-delay: 2475ms; }
+  .product-card-container:nth-of-type(34) .product-card .product-title {
+    animation-delay: 2525ms; }
+  .product-card-container:nth-of-type(34) .product-card .product-block-image img {
+    animation-delay: 2575ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(35) .product-card {
+  animation-delay: 5100ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(35) .product-card .product-title {
+    animation-delay: 5150ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(35) .product-card .product-block-image img {
+    animation-delay: 5250ms; }
+
+.product-card-container:nth-of-type(35) .product-card {
+  animation-delay: 2550ms; }
+  .product-card-container:nth-of-type(35) .product-card .product-title {
+    animation-delay: 2600ms; }
+  .product-card-container:nth-of-type(35) .product-card .product-block-image img {
+    animation-delay: 2650ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(36) .product-card {
+  animation-delay: 5250ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(36) .product-card .product-title {
+    animation-delay: 5300ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(36) .product-card .product-block-image img {
+    animation-delay: 5400ms; }
+
+.product-card-container:nth-of-type(36) .product-card {
+  animation-delay: 2625ms; }
+  .product-card-container:nth-of-type(36) .product-card .product-title {
+    animation-delay: 2675ms; }
+  .product-card-container:nth-of-type(36) .product-card .product-block-image img {
+    animation-delay: 2725ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(37) .product-card {
+  animation-delay: 5400ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(37) .product-card .product-title {
+    animation-delay: 5450ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(37) .product-card .product-block-image img {
+    animation-delay: 5550ms; }
+
+.product-card-container:nth-of-type(37) .product-card {
+  animation-delay: 2700ms; }
+  .product-card-container:nth-of-type(37) .product-card .product-title {
+    animation-delay: 2750ms; }
+  .product-card-container:nth-of-type(37) .product-card .product-block-image img {
+    animation-delay: 2800ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(38) .product-card {
+  animation-delay: 5550ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(38) .product-card .product-title {
+    animation-delay: 5600ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(38) .product-card .product-block-image img {
+    animation-delay: 5700ms; }
+
+.product-card-container:nth-of-type(38) .product-card {
+  animation-delay: 2775ms; }
+  .product-card-container:nth-of-type(38) .product-card .product-title {
+    animation-delay: 2825ms; }
+  .product-card-container:nth-of-type(38) .product-card .product-block-image img {
+    animation-delay: 2875ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(39) .product-card {
+  animation-delay: 5700ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(39) .product-card .product-title {
+    animation-delay: 5750ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(39) .product-card .product-block-image img {
+    animation-delay: 5850ms; }
+
+.product-card-container:nth-of-type(39) .product-card {
+  animation-delay: 2850ms; }
+  .product-card-container:nth-of-type(39) .product-card .product-title {
+    animation-delay: 2900ms; }
+  .product-card-container:nth-of-type(39) .product-card .product-block-image img {
+    animation-delay: 2950ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(40) .product-card {
+  animation-delay: 5850ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(40) .product-card .product-title {
+    animation-delay: 5900ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(40) .product-card .product-block-image img {
+    animation-delay: 6000ms; }
+
+.product-card-container:nth-of-type(40) .product-card {
+  animation-delay: 2925ms; }
+  .product-card-container:nth-of-type(40) .product-card .product-title {
+    animation-delay: 2975ms; }
+  .product-card-container:nth-of-type(40) .product-card .product-block-image img {
+    animation-delay: 3025ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(41) .product-card {
+  animation-delay: 6000ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(41) .product-card .product-title {
+    animation-delay: 6050ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(41) .product-card .product-block-image img {
+    animation-delay: 6150ms; }
+
+.product-card-container:nth-of-type(41) .product-card {
+  animation-delay: 3000ms; }
+  .product-card-container:nth-of-type(41) .product-card .product-title {
+    animation-delay: 3050ms; }
+  .product-card-container:nth-of-type(41) .product-card .product-block-image img {
+    animation-delay: 3100ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(42) .product-card {
+  animation-delay: 6150ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(42) .product-card .product-title {
+    animation-delay: 6200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(42) .product-card .product-block-image img {
+    animation-delay: 6300ms; }
+
+.product-card-container:nth-of-type(42) .product-card {
+  animation-delay: 3075ms; }
+  .product-card-container:nth-of-type(42) .product-card .product-title {
+    animation-delay: 3125ms; }
+  .product-card-container:nth-of-type(42) .product-card .product-block-image img {
+    animation-delay: 3175ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(43) .product-card {
+  animation-delay: 6300ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(43) .product-card .product-title {
+    animation-delay: 6350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(43) .product-card .product-block-image img {
+    animation-delay: 6450ms; }
+
+.product-card-container:nth-of-type(43) .product-card {
+  animation-delay: 3150ms; }
+  .product-card-container:nth-of-type(43) .product-card .product-title {
+    animation-delay: 3200ms; }
+  .product-card-container:nth-of-type(43) .product-card .product-block-image img {
+    animation-delay: 3250ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(44) .product-card {
+  animation-delay: 6450ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(44) .product-card .product-title {
+    animation-delay: 6500ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(44) .product-card .product-block-image img {
+    animation-delay: 6600ms; }
+
+.product-card-container:nth-of-type(44) .product-card {
+  animation-delay: 3225ms; }
+  .product-card-container:nth-of-type(44) .product-card .product-title {
+    animation-delay: 3275ms; }
+  .product-card-container:nth-of-type(44) .product-card .product-block-image img {
+    animation-delay: 3325ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(45) .product-card {
+  animation-delay: 6600ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(45) .product-card .product-title {
+    animation-delay: 6650ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(45) .product-card .product-block-image img {
+    animation-delay: 6750ms; }
+
+.product-card-container:nth-of-type(45) .product-card {
+  animation-delay: 3300ms; }
+  .product-card-container:nth-of-type(45) .product-card .product-title {
+    animation-delay: 3350ms; }
+  .product-card-container:nth-of-type(45) .product-card .product-block-image img {
+    animation-delay: 3400ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(46) .product-card {
+  animation-delay: 6750ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(46) .product-card .product-title {
+    animation-delay: 6800ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(46) .product-card .product-block-image img {
+    animation-delay: 6900ms; }
+
+.product-card-container:nth-of-type(46) .product-card {
+  animation-delay: 3375ms; }
+  .product-card-container:nth-of-type(46) .product-card .product-title {
+    animation-delay: 3425ms; }
+  .product-card-container:nth-of-type(46) .product-card .product-block-image img {
+    animation-delay: 3475ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(47) .product-card {
+  animation-delay: 6900ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(47) .product-card .product-title {
+    animation-delay: 6950ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(47) .product-card .product-block-image img {
+    animation-delay: 7050ms; }
+
+.product-card-container:nth-of-type(47) .product-card {
+  animation-delay: 3450ms; }
+  .product-card-container:nth-of-type(47) .product-card .product-title {
+    animation-delay: 3500ms; }
+  .product-card-container:nth-of-type(47) .product-card .product-block-image img {
+    animation-delay: 3550ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(48) .product-card {
+  animation-delay: 7050ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(48) .product-card .product-title {
+    animation-delay: 7100ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(48) .product-card .product-block-image img {
+    animation-delay: 7200ms; }
+
+.product-card-container:nth-of-type(48) .product-card {
+  animation-delay: 3525ms; }
+  .product-card-container:nth-of-type(48) .product-card .product-title {
+    animation-delay: 3575ms; }
+  .product-card-container:nth-of-type(48) .product-card .product-block-image img {
+    animation-delay: 3625ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(49) .product-card {
+  animation-delay: 7200ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(49) .product-card .product-title {
+    animation-delay: 7250ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(49) .product-card .product-block-image img {
+    animation-delay: 7350ms; }
+
+.product-card-container:nth-of-type(49) .product-card {
+  animation-delay: 3600ms; }
+  .product-card-container:nth-of-type(49) .product-card .product-title {
+    animation-delay: 3650ms; }
+  .product-card-container:nth-of-type(49) .product-card .product-block-image img {
+    animation-delay: 3700ms; }
+
+.acf-innerblocks-container .product-card-container:nth-of-type(50) .product-card {
+  animation-delay: 7350ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(50) .product-card .product-title {
+    animation-delay: 7400ms; }
+  .acf-innerblocks-container .product-card-container:nth-of-type(50) .product-card .product-block-image img {
+    animation-delay: 7500ms; }
+
+.product-card-container:nth-of-type(50) .product-card {
+  animation-delay: 3675ms; }
+  .product-card-container:nth-of-type(50) .product-card .product-title {
+    animation-delay: 3725ms; }
+  .product-card-container:nth-of-type(50) .product-card .product-block-image img {
+    animation-delay: 3775ms; }
+
 .product-card {
+  opacity: 0;
+  animation-name: grow;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: top left;
+  transform-origin: bottom left;
+  animation-duration: 350ms;
   position: relative;
   aspect-ratio: 1;
   max-width: 100%;
@@ -1154,9 +1848,11 @@ fieldset {
   .product-card .product-title {
     opacity: 0;
     animation-name: slide-in;
-    animation-duration: 0.5s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
+    animation-delay: 50ms;
+    animation-duration: 250ms;
     grid-area: name;
     padding-left: 1.5rem;
     color: #5a5a5a;
@@ -1193,12 +1889,7 @@ fieldset {
     height: 28px;
     width: max-content;
     margin-right: 1.5rem;
-    margin-left: auto;
-    opacity: 0;
-    animation-name: slide-in;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out; }
+    margin-left: auto; }
     .product-card .sku-count .sku-count-small {
       display: none; }
   .product-card:hover .sku-count, .product-card.open .sku-count {
@@ -1223,7 +1914,10 @@ fieldset {
     .product-card:hover .sku-list-container .product-title, .product-card.open .sku-list-container .product-title {
       color: #ffffff;
       display: flex;
-      align-items: center; }
+      align-items: center;
+      animation: unset;
+      opacity: 1;
+      transform: translateY(0); }
     .product-card:hover .sku-list-container .product-card-link, .product-card.open .sku-list-container .product-card-link {
       background-color: black;
       width: 80%;
@@ -1286,13 +1980,13 @@ fieldset {
     .product-card .product-block-image img {
       opacity: 0;
       animation-name: grow;
-      animation-duration: 0.5s;
+      animation-duration: 0.3s;
       animation-fill-mode: forwards;
       animation-timing-function: ease-in-out;
       transform-origin: top left;
-      animation-delay: 0.2s;
-      animation-duration: 0.5s;
-      transform-origin: center left;
+      animation-delay: 150ms;
+      transform-origin: bottom center;
+      animation-duration: 350ms;
       max-height: 95%;
       margin: 0 auto;
       grid-area: image;

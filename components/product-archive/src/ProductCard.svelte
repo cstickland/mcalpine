@@ -1,12 +1,11 @@
 <script>
     export let product = [];
-    import { fade } from "svelte/transition";
     let open = false;
     $: openClass = open ? "open" : "closed";
 </script>
 
 <div class="product-card-container">
-    <div class="product-card {openClass}" in:fade={{ duration: 300 }}>
+    <div class="product-card {openClass}" >
         <div class="product-block-image">
             <img src={product.image_url} alt="" />
             <div class="product-title">{@html product.title}</div>

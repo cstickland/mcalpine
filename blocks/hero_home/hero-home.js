@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mouseX = e.pageX - centerX
         mouseY = e.pageY - centerY
 
-        homeHeroBackground.style.top = -mouseY * 0.02 + 'px'
-        homeHeroBackground.style.left = -mouseX * 0.02 + 'px'
+        homeHeroBackground.style.top = -mouseY * 0.015 + 'px'
+        homeHeroBackground.style.left = -mouseX * 0.015 + 'px'
       })
     }
 

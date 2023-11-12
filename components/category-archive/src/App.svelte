@@ -16,6 +16,7 @@
 
     let currentPage = 1;
     let itemsDividedIntoPages;
+    let transition = false;
 
     onMount(async () => {
         let query;
@@ -74,14 +75,16 @@
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid mobile-two-column">
+            {#if transition == false}
             {#each currentPageItems as item}
                 <Card {...item} />
             {/each}
+            {/if}
         </ul>
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage {totalPages} />
+            <Pagination bind:currentPage bind:transition {totalPages} />
         {/if}
     </div>
 </section>

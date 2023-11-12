@@ -3,13 +3,18 @@
     import * as animateScroll from "svelte-scrollto";
     export let currentPage;
     export let totalPages;
+    export let transition;
 
     function setCurrentcurrentPage(newPage) {
 
-        animateScroll.scrollTo({element: ".insight-archive-filters-container", duration: 200});
+        animateScroll.scrollTo({element: "#category-archive", duration: 200});
         // setTimeout(() => {
-            
+            transition = true;
         currentPage = newPage;
+        setTimeout(() => {
+
+        transition = false;
+        }, 10)
         // }, 600);
     }
 </script>

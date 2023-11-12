@@ -13,10 +13,12 @@
 
     padding: 1rem;
     .help-card-image {
+      @include grow;
       padding-bottom: 4.125rem;
       width: 3.25rem;
     }
     .help-card-title {
+      @include slide-in;
       &.c-red {
         color: $color__mcalpine-red;
       }
@@ -27,12 +29,16 @@
     }
 
     .help-card-text {
+      @include slide-in;
+      animation-delay: 100ms;
       display: none;
       color: #5a5a5a;
       padding-bottom: 1rem;
       font-size: 1rem;
     }
     .btn {
+      @include slide-in;
+      animation-delay: 200ms;
       display: none;
     }
     &.align-center {
