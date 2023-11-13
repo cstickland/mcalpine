@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
   const timeline = document.getElementById('timeline')
-
   const slideContainer = timeline.querySelector('.timeline-slides')
   const slides = timeline.querySelectorAll('.timeline-slide')
 

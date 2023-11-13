@@ -4,7 +4,7 @@
 <!-- buttons > button_link -->
 <!-- text_left -->
 
-<div <?php echo get_block_wrapper_attributes(['class' => 'product-guide-block']); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'product-guide-block animate']); ?>>
     <div class="product-guide-container">
         <?php $image = get_field('background_image');
         if ($image) :
@@ -13,7 +13,9 @@
             $url = $image['url'];
             $title = $image['title'];
             $alt = $image['alt']; ?>
-            <img src="<?php echo $url; ?>" alt="<?php echo $alt; ?>" class="product-guide-background-image" />
+            <div class="background-image-container">
+                <img src="<?php echo $url; ?>" alt="<?php echo $alt; ?>" class="product-guide-background-image" />
+            </div>
         <?php endif; ?>
         <div class="product-guide-gradients">
             <div class="product-guide-gradient-white"></div>

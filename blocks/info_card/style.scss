@@ -1,8 +1,37 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.animate {
+  &.info-card {
+    opacity: 0;
+  }
+
+  &.animated {
+    &.info-card {
+      @include grow;
+      .text-container {
+        p {
+          @include slide-in;
+          animation-delay: 150ms;
+        }
+        h2 {
+          @include slide-in;
+          max-width: 350px;
+        }
+      }
+    }
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    &.info-card {
+      opacity: 1;
+    }
+  }
+}
+
 .info-card {
   transform: scale(0.7);
-  @include grow;
   aspect-ratio: 1/1;
   background-color: $color__mcalpine-red;
   display: flex;

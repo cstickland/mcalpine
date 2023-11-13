@@ -3,8 +3,9 @@
         <?php $count = 0; ?>
         <ul class="timeline-slides">
             <?php while (have_rows('timeline_slides')) : the_row(); ?>
-                <li class="timeline-slide <?php if ($count == 0) {
-                                                echo 'active';
+                <li class="timeline-slide <?php echo get_sub_field('slide_background_color');
+                                            if ($count == 0) {
+                                                echo ' active';
                                             } ?>">
 
                     <div class="slide-content">

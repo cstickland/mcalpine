@@ -1,20 +1,57 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .product-guide-block {
+  &.animated {
+    .product-guide-container {
+      overflow: hidden;
+      .product-guide-content {
+        h2,
+        .product-guide-text,
+        .buttons-container {
+          @include slide-in;
+        }
+        h2 {
+          animation-delay: 250ms;
+        }
+        .product-guide-text {
+          animation-delay: 400ms;
+        }
+        .buttons-container {
+          animation-delay: 650ms;
+        }
+      }
+
+      .product-guide-background-image {
+        @include image-fade-in;
+        transform-origin: center center;
+        animation-duration: 0.5s;
+      }
+    }
+  }
+}
+
+.product-guide-block {
   color: $color__mcalpine-black;
   .product-guide-container {
-    @include container-large;
     display: grid;
+    @include container-large;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
-
-    .product-guide-background-image {
+    overflow: hidden;
+    position: relative;
+    .background-image-container {
       grid-area: 1 / 1 / span 1 / span 1;
       height: 100%;
       width: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 1;
+      overflow: hidden;
+      .product-guide-background-image {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 1;
+      }
     }
     .product-guide-gradients {
       z-index: 2;

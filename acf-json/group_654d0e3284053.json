@@ -117,6 +117,35 @@
                     "placeholder": "",
                     "new_lines": "",
                     "parent_repeater": "field_654d0e32119c3"
+                },
+                {
+                    "key": "field_65524912ca3ed",
+                    "label": "Slide Background Colour",
+                    "name": "slide_background_color",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "choices": {
+                        "bg-white": "White",
+                        "bg-gradient": "Blue Gradient",
+                        "bg-grey": "Grey"
+                    },
+                    "default_value": "bg-white",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_654d0e32119c3"
                 }
             ]
         }
@@ -143,5 +172,5 @@
     "graphql_field_name": "timelineBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1699549403
+    "modified": 1699891603
 }

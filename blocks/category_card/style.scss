@@ -3,7 +3,7 @@
 @for $i from 2 through 50 {
   .acf-innerblocks-container {
     .category-card-container:nth-of-type(#{$i}) {
-      animation-delay: ($i - 1) * 150ms;
+      animation-delay: ($i - 1) * 200ms;
     }
   }
   .category-card-container:nth-of-type(#{$i}) {
@@ -11,12 +11,34 @@
   }
 }
 
+.animate {
+  .category-card-container {
+    opacity: 0;
+    transform-origin: bottom left;
+  }
+}
+
+.animated,
+.insight-archive-grid {
+  .category-card-container {
+    opacity: 1;
+    @include grow;
+    transform-origin: bottom left;
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    .category-card-container {
+      opacity: 1;
+    }
+  }
+}
+
 .category-card-container {
   aspect-ratio: 1;
   container-type: inline-size;
   container-name: category-card;
-  @include grow;
-  transform-origin: bottom left;
 
   .category-card {
     background-color: #f9f9f9;

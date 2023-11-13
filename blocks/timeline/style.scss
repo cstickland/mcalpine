@@ -23,31 +23,76 @@
       scroll-snap-align: start;
       min-width: 80%;
       max-width: 80%;
-      &.active,
-      &.active + .timeline-slide {
-        display: inline-block;
+      position: relative;
+      .slide-year {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $color__mcalpine-red;
+        font-size: 4.5rem;
+        font-size: clamp(
+          4.5rem,
+          -1.666666666666666rem + 12.847222222222221vw,
+          13.75rem
+        );
+        width: 2ch;
+        word-wrap: break-word;
+        line-height: 1;
+        font-weight: bold;
+        letter-spacing: 0px;
       }
 
       &.active {
+        .slide-year {
+          @include fade-in;
+          animation-delay: 500ms;
+        }
+        .color-block {
+          @include fade-in;
+        }
+        .slide-message {
+          @include slide-in;
+          animation-delay: 800ms;
+        }
+
+        h3 {
+          @include slide-in;
+          animation-delay: 650ms;
+        }
+      }
+
+      &.bg-gradient {
         background: transparent
           linear-gradient(194deg, #7caef21f 0%, #7caef200 100%) 0% 0% no-repeat
           padding-box;
       }
-    }
-    .slide-text-container {
-      white-space: unset;
-      .color-block {
-        background-color: $color__mcalpine-red;
-        height: 0.75rem;
-        width: 56px;
+
+      &.bg-white {
+        background-color: #ffffff;
       }
-      .slide-message {
-        max-width: 405px;
+      &.bg-grey {
+        background-color: #f4f4f4;
       }
-      h3 {
-        max-width: 350px;
-        padding-bottom: 1.5rem;
-        padding-top: 2.5rem;
+
+      .slide-text-container {
+        white-space: unset;
+        .color-block {
+          opacity: 0;
+          background-color: $color__mcalpine-red;
+          height: 0.75rem;
+          width: 56px;
+        }
+        .slide-message {
+          max-width: 405px;
+          opacity: 0;
+        }
+        h3 {
+          opacity: 0;
+          max-width: 350px;
+          padding-bottom: 1.5rem;
+          padding-top: 2.5rem;
+        }
       }
     }
   }
@@ -82,11 +127,6 @@
         &:last-of-type {
           margin-right: 20%;
         }
-        &.active {
-          background: transparent
-            linear-gradient(194deg, #7caef21f 0%, #7caef200 100%) 0% 0%
-            no-repeat padding-box;
-        }
 
         .slide-content {
           display: flex;
@@ -94,24 +134,12 @@
           gap: 2rem;
           position: relative;
           padding-top: 179px;
-          padding-left: 8rem;
+          padding-left: 0;
+          padding-bottom: 25rem;
           img {
             max-width: 60%;
             max-height: 509px;
             object-fit: contain;
-          }
-
-          .slide-year {
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: $color__mcalpine-red;
-            font-size: 220px;
-            width: 252px;
-            word-wrap: break-word;
-            line-height: 1;
-            font-weight: bold;
-            letter-spacing: 0px;
           }
         }
         .slide-text-container {
@@ -130,7 +158,40 @@
             padding-top: 2.5rem;
           }
         }
+
+        &.active {
+          .slide-content {
+            animation-name: slide-padding;
+            animation-fill-mode: forwards;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-in-out;
+          }
+        }
       }
     }
+  }
+}
+
+@media only screen and (min-width: $desktop__full) {
+  .timeline-slides-block {
+    .timeline-slides {
+      .timeline-slide {
+        .slide-content {
+          .slide-year {
+            font-size: 13.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes slide-padding {
+  0% {
+    padding-left: 0;
+  }
+
+  100% {
+    padding-left: 8rem;
   }
 }

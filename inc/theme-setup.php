@@ -70,6 +70,8 @@ function mcalpine_register_scripts()
     }
 
     wp_enqueue_script('category-archive-js', get_template_directory_uri() . "/components/category-archive/dist/category-archive.js", array(), array());
+
+    wp_enqueue_script('animate-on-scroll', get_template_directory_uri() . "/js/animate-on-scroll.js", array(), array());
 }
 
 

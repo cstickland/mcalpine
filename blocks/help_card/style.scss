@@ -1,5 +1,82 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+@for $i from 2 through 50 {
+  .acf-innerblocks-container {
+    .help-card:nth-of-type(#{$i}) {
+      animation-delay: ($i - 1) * 200ms;
+
+      .help-card-content {
+        .help-card-image,
+        .help-card-title {
+          animation-delay: ($i - 1) * 200ms;
+        }
+
+        .help-card-text {
+          animation-delay: (($i - 1) * 200) + 100ms;
+        }
+        .btn {
+          animation-delay: (($i - 1) * 200) + 200ms;
+        }
+      }
+    }
+  }
+  .help-card:nth-of-type(#{$i}) {
+    animation-delay: ($i - 1) * 75ms;
+
+    .help-card-content {
+      .help-card-image,
+      .help-card-title {
+        animation-delay: ($i - 1) * 75ms;
+      }
+
+      .help-card-text {
+        animation-delay: (($i - 1) * 75) + 100ms;
+      }
+      .btn {
+        animation-delay: (($i - 1) * 75) + 200ms;
+      }
+    }
+  }
+}
+
+.animate {
+  .help-card {
+    opacity: 0;
+    .btn {
+      opacity: 0;
+    }
+  }
+}
+
+.animated {
+  .help-card {
+    opacity: 1;
+
+    @include grow;
+    transform-origin: bottom left;
+    .help-card-title {
+      @include slide-in;
+    }
+    .help-card-text {
+      @include slide-in;
+    }
+    .btn {
+      @include slide-in;
+    }
+    .help-card-image {
+      @include grow;
+    }
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    .product-card-container {
+      opacity: 1;
+    }
+  }
+}
+
 .help-card {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #f4f4f4;
@@ -13,12 +90,10 @@
 
     padding: 1rem;
     .help-card-image {
-      @include grow;
       padding-bottom: 4.125rem;
       width: 3.25rem;
     }
     .help-card-title {
-      @include slide-in;
       &.c-red {
         color: $color__mcalpine-red;
       }
@@ -29,7 +104,6 @@
     }
 
     .help-card-text {
-      @include slide-in;
       animation-delay: 100ms;
       display: none;
       color: #5a5a5a;
@@ -37,7 +111,6 @@
       font-size: 1rem;
     }
     .btn {
-      @include slide-in;
       animation-delay: 200ms;
       display: none;
     }

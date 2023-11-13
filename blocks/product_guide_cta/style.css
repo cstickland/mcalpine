@@ -1,14 +1,103 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+.product-guide-block.animated .product-guide-container {
+  overflow: hidden;
+}
+.product-guide-block.animated .product-guide-container .product-guide-content h2,
+.product-guide-block.animated .product-guide-container .product-guide-content .product-guide-text,
+.product-guide-block.animated .product-guide-container .product-guide-content .buttons-container {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+.product-guide-block.animated .product-guide-container .product-guide-content h2 {
+  animation-delay: 250ms;
+}
+.product-guide-block.animated .product-guide-container .product-guide-content .product-guide-text {
+  animation-delay: 400ms;
+}
+.product-guide-block.animated .product-guide-container .product-guide-content .buttons-container {
+  animation-delay: 650ms;
+}
+.product-guide-block.animated .product-guide-container .product-guide-background-image {
+  animation-name: image-fade-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+  transform-origin: center center;
+  animation-duration: 0.5s;
+}
+
 .product-guide-block {
   color: #222222;
 }
 .product-guide-block .product-guide-container {
+  display: grid;
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
-  display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
+  overflow: hidden;
+  position: relative;
 }
 @media only screen and (min-width: 48rem) {
   .product-guide-block .product-guide-container {
@@ -25,10 +114,16 @@
     padding-top: 5rem;
   }
 }
-.product-guide-block .product-guide-container .product-guide-background-image {
+.product-guide-block .product-guide-container .background-image-container {
   grid-area: 1/1/span 1/span 1;
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+.product-guide-block .product-guide-container .background-image-container .product-guide-background-image {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   z-index: 1;

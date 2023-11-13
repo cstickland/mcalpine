@@ -4,24 +4,30 @@
 }
 
 @for $i from 2 through 50 {
-  .acf-innerblocks-container {
-    .product-card-container:nth-of-type(#{$i}) {
-      .product-card {
-        animation-delay: ($i - 1) * 150ms;
+  .animated {
+    .acf-innerblocks-container {
+      .product-card-container:nth-of-type(#{$i}) {
+        animation-delay: ($i - 1) * 200ms;
 
-        .product-title {
-          animation-delay: (($i - 1) * 150) + 50ms;
-        }
+        .product-card {
+          .product-title {
+            animation-delay: (($i - 1) * 200) + 50ms;
+          }
 
-        .product-block-image {
-          img {
-            animation-delay: (($i - 1) * 150) + 150ms;
+          .product-block-image {
+            img {
+              animation-delay: (($i - 1) * 200) + 150ms;
+            }
+          }
+          .sku-count {
+            animation-delay: (($i - 1) * 200) + 300ms;
           }
         }
       }
     }
   }
   .product-card-container:nth-of-type(#{$i}) {
+    animation-delay: ($i - 1) * 75ms;
     .product-card {
       animation-delay: ($i - 1) * 75ms;
 
@@ -31,15 +37,63 @@
 
       .product-block-image {
         img {
-          animation-delay: (($i - 1) * 75) + 100ms;
+          animation-delay: (($i - 1) * 75) + 150ms;
         }
+      }
+      .sku-count {
+        animation-delay: (($i - 1) * 75) + 300ms;
       }
     }
   }
 }
 
+.animate {
+  .product-card-container {
+    opacity: 0;
+    .product-card {
+      .sku-count {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.animated,
+.product-archive-grid {
+  .product-card-container {
+    opacity: 1;
+
+    @include grow;
+    transform-origin: bottom left;
+    .product-card {
+      .product-title {
+        @include slide-in;
+        animation-delay: 50ms;
+      }
+      .product-block-image {
+        img {
+          @include grow;
+          animation-delay: 100ms;
+        }
+      }
+      .sku-count {
+        @include grow;
+        transform-origin: center right;
+        animation-delay: 300ms;
+      }
+    }
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    .product-card-container {
+      opacity: 1;
+    }
+  }
+}
+
 .product-card {
-  @include grow;
   transform-origin: bottom left;
   animation-duration: 350ms;
   position: relative;
@@ -55,7 +109,6 @@
   }
 
   .product-title {
-    @include slide-in;
     animation-delay: 50ms;
     animation-duration: 250ms;
     grid-area: name;
@@ -99,8 +152,6 @@
     margin-right: 1.5rem;
     margin-left: auto;
 
-    // @include slide-in;
-    // animation-delay: 700ms;
     .sku-count-small {
       display: none;
     }
@@ -212,7 +263,6 @@
       'image image .'
       'name name link';
     img {
-      @include grow;
       animation-delay: 150ms;
       transform-origin: bottom center;
       animation-duration: 350ms;

@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'info-card']); ?> id="query-<?php the_title(); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'info-card animate']); ?> id="query-<?php the_title(); ?>">
     <?php if (get_field('icon_image')) { ?>
         <?php $image = get_field('icon_image');
         $image_alt = $image['alt'];

@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'vertical-text']); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'vertical-text animate']); ?>>
     <?php if (get_field('show_lines')) : ?>
         <div class="vertical-line"></div>
     <?php endif; ?>

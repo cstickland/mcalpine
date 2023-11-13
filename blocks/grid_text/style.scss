@@ -1,5 +1,36 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.animate {
+  &.grid-text-block {
+    opacity: 0;
+  }
+
+  &.animated {
+    &.grid-text-block {
+      opacity: 1;
+
+      .text-container {
+        p {
+          @include slide-in;
+          animation-delay: 150ms;
+        }
+        h2 {
+          @include slide-in;
+          max-width: 350px;
+        }
+      }
+    }
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    &.grid-text-block {
+      opacity: 1;
+    }
+  }
+}
+
 .grid-text-block {
   .image-text-container {
     @include container-large;
@@ -17,17 +48,12 @@
     .text-container {
       padding: 2rem;
       p {
-        @include slide-in;
-        animation-delay: 150ms;
         margin-bottom: 2rem;
         max-width: 405px;
 
         color: #5a5a5a;
       }
       h2 {
-        @include slide-in;
-        max-width: 350px;
-
         color: $color__mcalpine-black;
       }
       .color-block {

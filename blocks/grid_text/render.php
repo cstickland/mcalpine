@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'grid-text-block']); ?> id="query-<?php the_title(); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'grid-text-block animate']); ?> id="query-<?php the_title(); ?>">
     <div class="image-text-container">
         <div class="text-container">
             <div class="color-block"></div>

@@ -1,7 +1,7 @@
 @keyframes slide-in {
   from {
     opacity: 0;
-    transform: translateY(3rem);
+    transform: translateY(2rem);
   }
   to {
     opacity: 1;
@@ -11,7 +11,7 @@
 @keyframes grow {
   from {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
@@ -36,14 +36,58 @@
     background-size: 100% 0.075em;
   }
 }
-.info-card {
-  transform: scale(0.7);
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+.animate.info-card {
+  opacity: 0;
+}
+.animate.animated.info-card {
   opacity: 0;
   animation-name: grow;
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
   transform-origin: top left;
+}
+.animate.animated.info-card .text-container p {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 150ms;
+}
+.animate.animated.info-card .text-container h2 {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  max-width: 350px;
+}
+
+.editor-styles-wrapper .animate.info-card {
+  opacity: 1;
+}
+
+.info-card {
+  transform: scale(0.7);
   aspect-ratio: 1/1;
   background-color: #e63128;
   display: flex;

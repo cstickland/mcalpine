@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'grid-block ' . get_field('mobile_style')]); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'grid-block animate ' . get_field('mobile_style')]); ?>>
     <div class="grid-title-container">
         <h2 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">
             <?php the_field('title'); ?>
