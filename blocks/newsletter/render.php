@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'newsletter-block']); ?> style="background-image: url('<?php echo get_template_directory_uri() . "/assets/hatching_bg.svg"; ?>')">
+<div <?php echo get_block_wrapper_attributes(['class' => 'newsletter-block animate']); ?> style="background-image: url('<?php echo get_template_directory_uri() . "/assets/hatching_bg.svg"; ?>')">
     <div class="white-cover"></div>
     <div class="newsletter-container">
         <div class="newsletter-content">

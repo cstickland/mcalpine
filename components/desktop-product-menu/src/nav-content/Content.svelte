@@ -8,6 +8,7 @@
 </script>
 
 {#if $open}
+<div class="nav-hover-padding-container">
     <div
         class="nav-content-container"
         in:slide={{ axis: "y", duration: 300 }}
@@ -35,16 +36,23 @@
             </div></a
         >
     </div>
+</div>
 {/if}
 
 <style lang="scss">
     @import "../../../../sass/abstracts/variables/_colors.scss";
+.nav-hover-padding-container {
+    padding-top: 31px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
 
+}
     .nav-content-container {
         padding: 75px 0;
-        position: absolute;
-        left: 0;
-        top: 111px;
+       
+        width: 100%;
         background-color: #ffffff;
         width: 100%;
         flex-grow: 1;

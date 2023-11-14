@@ -1,5 +1,42 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.animate {
+  .image-text-block {
+    opacity: 0;
+    .product-card {
+      .sku-count {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.animated {
+  .product-card-container {
+    opacity: 1;
+
+    @include grow;
+    transform-origin: bottom left;
+    .product-card {
+      .product-title {
+        @include slide-in;
+        animation-delay: 50ms;
+      }
+      .product-block-image {
+        img {
+          @include grow;
+          animation-delay: 100ms;
+        }
+      }
+      .sku-count {
+        @include grow;
+        transform-origin: center right;
+        animation-delay: 300ms;
+      }
+    }
+  }
+}
+
 .image-text-block {
   .image-text-container {
     @include container-large;

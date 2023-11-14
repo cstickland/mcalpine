@@ -116,7 +116,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "acf/reviews",
         "mcalpine/info-card",
         "mcalpine/vertical-text",
-        "mcalpine/timeline"
+        "mcalpine/timeline",
+        "mcalpine/image-text-product"
     );
     return $allowed_blocks;
 }

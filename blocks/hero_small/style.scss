@@ -1,5 +1,30 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.animate {
+  &.small-hero-block {
+    .small-hero-content {
+      h1 {
+        opacity: 0;
+      }
+      .small-hero-text {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.animated {
+  &.small-hero-block {
+    h1 {
+      @include slide-in;
+    }
+    .small-hero-text {
+      @include slide-in;
+      animation-delay: 150ms;
+    }
+  }
+}
+
 .small-hero-block {
   width: 100%;
   display: flex;

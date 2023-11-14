@@ -158,11 +158,11 @@
                 padding: 0.5rem 0.75rem;
                 transition: padding 0.2s ease-in-out;
 
-                &:hover {
-                    color: #e63128;
-                    background: transparent linear-gradient(75deg, #FFFFFF 0%, #7CAEF240 100%) 0% 0% no-repeat padding-box;
-                    padding-left: 0.625rem;
-                }
+                    &:hover {
+                        color: #e63128;
+                        background: transparent linear-gradient(75deg, #FFFFFF 0%, #7CAEF240 100%) 0% 0% no-repeat padding-box;
+                        padding-left: 0.625rem;
+                    }
                 }
             }
         }
@@ -172,7 +172,12 @@
             width: 100%;
             position: relative;
             .search-field {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='search'%3E%3Crect width='24' height='24' opacity='0' fill='%23e63128'/%3E%3Cpath fill='%23e63128' d='M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+                background-repeat: no-repeat;
+                background-position: 98% center;
+                background-size: 5.25%;
                 background-color: #fff;
+
                 border: 1px solid #f4f4f4;
                 color: #222222;
                 max-width: 740px;

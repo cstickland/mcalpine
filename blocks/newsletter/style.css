@@ -1,3 +1,97 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate .newsletter-block-title {
+  opacity: 0;
+}
+.animate .newsletter-block-message {
+  opacity: 0;
+  animation-delay: 150ms;
+}
+
+.animated .newsletter-block-title {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+.animated .newsletter-block-message {
+  opacity: 0;
+  animation-name: slide-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.editor-styles-wrapper .animate .newsletter-block-title {
+  opacity: 1;
+}
+.editor-styles-wrapper .animate .newsletter-block-message {
+  opacity: 1;
+}
+
 .newsletter-block {
   background-size: 1920px;
   max-width: 1920px;
@@ -102,7 +196,7 @@
   }
   .newsletter-block .newsletter-container {
     width: 100%;
-    max-width: 110.25rem;
+    max-width: 120rem;
     margin: 0 auto;
     padding: 2.1875rem 1.25rem;
     padding-top: 0 !important;

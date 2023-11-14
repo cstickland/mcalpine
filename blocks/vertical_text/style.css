@@ -54,6 +54,14 @@
     transform: scale(1.075);
   }
 }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .animate.vertical-text {
   opacity: 0;
 }
@@ -83,6 +91,13 @@
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
   animation-delay: 300ms;
+}
+.animate.animated.vertical-text .vertical-line {
+  animation-name: fade-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
 }
 
 .editor-styles-wrapper .animate.vertical-text {

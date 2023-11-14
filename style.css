@@ -824,6 +824,46 @@ fieldset {
     border: 0;
     cursor: pointer;
     text-transform: capitalize; }
+  .main-nav.red {
+    background-color: #e63128; }
+    .main-nav.red .desktop-menu {
+      background-color: #e63128; }
+      .main-nav.red .desktop-menu .site-logo {
+        background-color: #e63128; }
+        .main-nav.red .desktop-menu .site-logo svg rect,
+        .main-nav.red .desktop-menu .site-logo svg polygon,
+        .main-nav.red .desktop-menu .site-logo svg path {
+          fill: #fff; }
+      .main-nav.red .desktop-menu .menu a {
+        color: #fff; }
+        .main-nav.red .desktop-menu .menu a:hover {
+          color: #222222; }
+      .main-nav.red .desktop-menu .menu .sub-menu {
+        background-color: #e63128; }
+        .main-nav.red .desktop-menu .menu .sub-menu a {
+          color: #fff !important; }
+          .main-nav.red .desktop-menu .menu .sub-menu a:hover {
+            color: #222222 !important; }
+      .main-nav.red .desktop-menu .product-text {
+        color: #fff; }
+      .main-nav.red .desktop-menu .select-interest {
+        background-color: #e63128 !important;
+        color: #fff !important;
+        border-bottom: solid 2px #fff; }
+        .main-nav.red .desktop-menu .select-interest:hover {
+          border: solid 1px #fff !important; }
+        .main-nav.red .desktop-menu .select-interest svg rect,
+        .main-nav.red .desktop-menu .select-interest svg path {
+          fill: #fff !important; }
+        .main-nav.red .desktop-menu .select-interest .interest-links {
+          background-color: #e63128 !important;
+          border: solid 1px #fff !important; }
+          .main-nav.red .desktop-menu .select-interest .interest-links a {
+            color: #fff !important; }
+            .main-nav.red .desktop-menu .select-interest .interest-links a:hover {
+              color: #222222 !important; }
+        .main-nav.red .desktop-menu .select-interest.open {
+          border: solid 1px #fff !important; }
 
 @media only screen and (min-width: 68rem) {
   .main-nav {
@@ -845,12 +885,12 @@ fieldset {
       position: relative; }
       .main-nav .menu-item-has-children ul.sub-menu {
         padding: 0 !important;
-        padding-top: 1.5rem !important;
+        padding-top: 25px !important;
         display: none !important;
         flex-direction: column !important;
         position: absolute;
         top: 100%;
-        right: -4rem;
+        right: -2.5rem;
         width: 200px;
         height: min-content;
         background-color: #fff;
@@ -859,6 +899,8 @@ fieldset {
         .main-nav .menu-item-has-children ul.sub-menu li {
           font-size: 1rem;
           font-weight: 700; }
+          .main-nav .menu-item-has-children ul.sub-menu li:first-of-type {
+            border-top: solid 1px #fff; }
           .main-nav .menu-item-has-children ul.sub-menu li a {
             padding: 1rem !important;
             display: block;

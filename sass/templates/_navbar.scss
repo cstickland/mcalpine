@@ -119,6 +119,82 @@
     cursor: pointer;
     text-transform: capitalize;
   }
+
+  &.red {
+    background-color: $color__mcalpine-red;
+    .desktop-menu {
+      background-color: $color__mcalpine-red;
+      .site-logo {
+        background-color: $color__mcalpine-red;
+
+        svg {
+          rect,
+          polygon,
+          path {
+            fill: #fff;
+          }
+        }
+      }
+
+      .menu {
+        a {
+          color: #fff;
+
+          &:hover {
+            color: $color__mcalpine-black;
+          }
+        }
+
+        .sub-menu {
+          background-color: $color__mcalpine-red;
+
+          a {
+            color: #fff !important;
+
+            &:hover {
+              color: $color__mcalpine-black !important;
+            }
+          }
+        }
+      }
+
+      .product-text {
+        color: #fff;
+      }
+
+      .select-interest {
+        background-color: $color__mcalpine-red !important;
+        color: #fff !important;
+        border-bottom: solid 2px #fff;
+
+        &:hover {
+          border: solid 1px #fff !important;
+        }
+
+        svg {
+          rect,
+          path {
+            fill: #fff !important;
+          }
+        }
+        .interest-links {
+          background-color: $color__mcalpine-red !important;
+          border: solid 1px #fff !important;
+          a {
+            color: #fff !important;
+
+            &:hover {
+              color: $color__mcalpine-black !important;
+            }
+          }
+        }
+
+        &.open {
+          border: solid 1px #fff !important;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 68rem) {
@@ -144,12 +220,12 @@
 
       ul.sub-menu {
         padding: 0 !important;
-        padding-top: 1.5rem !important;
+        padding-top: 25px !important;
         display: none !important;
         flex-direction: column !important;
         position: absolute;
         top: 100%;
-        right: -4rem;
+        right: -2.5rem;
         width: 200px;
         height: min-content;
         background-color: #fff;
@@ -157,6 +233,9 @@
         gap: 0 !important;
 
         li {
+          &:first-of-type {
+            border-top: solid 1px #fff;
+          }
           font-size: 1rem;
           font-weight: 700;
           a {

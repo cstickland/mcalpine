@@ -1,4 +1,4 @@
-<section <?php echo get_block_wrapper_attributes(['class' => 'member-institutions']); ?> id="query-<?php the_title(); ?>">
+<section <?php echo get_block_wrapper_attributes(['class' => 'member-institutions animate']); ?> id="query-<?php the_title(); ?>">
     <div class="red-band"></div>
     <div class="member-institutions-text"><?php the_field('text'); ?></div>
 

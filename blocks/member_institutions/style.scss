@@ -1,5 +1,49 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+@for $i from 2 through 50 {
+  .institution-icon-grid {
+    li:nth-of-type(#{$i}) {
+      animation-delay: $i * 75ms;
+    }
+  }
+}
+
+.animate {
+  .member-institutions-text {
+    opacity: 0;
+  }
+
+  .institution-icon-grid {
+    li {
+      opacity: 0;
+    }
+  }
+}
+
+.animated {
+  .member-institutions-text {
+    @include slide-in;
+  }
+  .institution-icon-grid {
+    li {
+      @include grow;
+      transform-origin: center center;
+    }
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    .newsletter-block-title {
+      opacity: 1;
+    }
+
+    .newsletter-block-message {
+      opacity: 1;
+    }
+  }
+}
+
 .member-institutions {
   @include container-large;
   padding-top: 0 !important;

@@ -8,7 +8,7 @@ $image = !empty(get_field('image')) ? get_field('image') : get_field('category_h
 
 
 
-<div <?php echo get_block_wrapper_attributes(['class' => 'small-hero-block']); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'small-hero-block animate']); ?>>
     <div class="small-hero-content">
         <div class="hero-breadcrumbs">
             <a href="<?php echo get_site_url(); ?>">Home</a>

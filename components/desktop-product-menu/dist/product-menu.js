@@ -1991,6 +1991,7 @@
 
     // (10:0) {#if $open}
     function create_if_block(ctx) {
+    	let div2;
     	let div1;
     	let productmenu;
     	let t0;
@@ -2009,6 +2010,7 @@
 
     	const block = {
     		c: function create() {
+    			div2 = element("div");
     			div1 = element("div");
     			create_component(productmenu.$$.fragment);
     			t0 = space();
@@ -2024,29 +2026,32 @@
     			attr_dev(rect, "height", "24");
     			attr_dev(rect, "transform", "rotate(-90 12 12)");
     			attr_dev(rect, "opacity", "0");
-    			attr_dev(rect, "class", "svelte-1cfri6h");
-    			add_location(rect, file$1, 23, 29, 763);
+    			attr_dev(rect, "class", "svelte-1jw4ldy");
+    			add_location(rect, file$1, 24, 29, 805);
     			attr_dev(path, "d", "M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z");
-    			attr_dev(path, "class", "svelte-1cfri6h");
-    			add_location(path, file$1, 28, 30, 992);
+    			attr_dev(path, "class", "svelte-1jw4ldy");
+    			add_location(path, file$1, 29, 30, 1034);
     			attr_dev(g0, "data-name", "chevron-right");
-    			add_location(g0, file$1, 22, 25, 705);
+    			add_location(g0, file$1, 23, 25, 747);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file$1, 21, 21, 657);
+    			add_location(g1, file$1, 22, 21, 699);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 24 24");
-    			attr_dev(svg, "class", "svelte-1cfri6h");
-    			add_location(svg, file$1, 20, 16, 576);
-    			attr_dev(div0, "class", "all-products-link-arrow svelte-1cfri6h");
-    			add_location(div0, file$1, 19, 12, 522);
-    			attr_dev(a, "class", "all-products-link svelte-1cfri6h");
+    			attr_dev(svg, "class", "svelte-1jw4ldy");
+    			add_location(svg, file$1, 21, 16, 618);
+    			attr_dev(div0, "class", "all-products-link-arrow svelte-1jw4ldy");
+    			add_location(div0, file$1, 20, 12, 564);
+    			attr_dev(a, "class", "all-products-link svelte-1jw4ldy");
     			attr_dev(a, "href", /*allProductsLink*/ ctx[0]);
-    			add_location(a, file$1, 17, 8, 427);
-    			attr_dev(div1, "class", "nav-content-container svelte-1cfri6h");
-    			add_location(div1, file$1, 10, 4, 248);
+    			add_location(a, file$1, 18, 8, 469);
+    			attr_dev(div1, "class", "nav-content-container svelte-1jw4ldy");
+    			add_location(div1, file$1, 11, 4, 290);
+    			attr_dev(div2, "class", "nav-hover-padding-container svelte-1jw4ldy");
+    			add_location(div2, file$1, 10, 0, 244);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div1);
     			mount_component(productmenu, div1, null);
     			append_dev(div1, t0);
     			append_dev(div1, a);
@@ -2084,7 +2089,7 @@
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(div2);
     			destroy_component(productmenu);
     			if (detaching && div1_outro) div1_outro.end();
     		}
@@ -2266,7 +2271,7 @@
     			t1 = space();
     			create_component(content.$$.fragment);
     			attr_dev(div0, "class", "product-text svelte-1tgj1oi");
-    			add_location(div0, file, 33, 4, 666);
+    			add_location(div0, file, 37, 4, 726);
     			add_location(div1, file, 24, 0, 514);
     		},
     		l: function claim(nodes) {
@@ -2284,7 +2289,8 @@
     					listen_dev(window, "resize", /*onwindowresize*/ ctx[3]),
     					listen_dev(div1, "mouseenter", /*mouseenter_handler*/ ctx[4], false, false, false, false),
     					action_destroyer(clickOutside.call(null, div1)),
-    					listen_dev(div1, "click_outside", /*click_outside_handler*/ ctx[5], false, false, false, false)
+    					listen_dev(div1, "click_outside", /*click_outside_handler*/ ctx[5], false, false, false, false),
+    					listen_dev(div1, "mouseleave", /*mouseleave_handler*/ ctx[6], false, false, false, false)
     				];
 
     				mounted = true;
@@ -2353,6 +2359,10 @@
     		open.set(false);
     	};
 
+    	const mouseleave_handler = () => {
+    		open.set(false);
+    	};
+
     	$$self.$$set = $$props => {
     		if ('siteUrl' in $$props) $$invalidate(2, siteUrl = $$props.siteUrl);
     		if ('allProductsLink' in $$props) $$invalidate(0, allProductsLink = $$props.allProductsLink);
@@ -2388,7 +2398,8 @@
     		siteUrl,
     		onwindowresize,
     		mouseenter_handler,
-    		click_outside_handler
+    		click_outside_handler,
+    		mouseleave_handler
     	];
     }
 

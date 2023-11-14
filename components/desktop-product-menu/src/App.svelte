@@ -30,6 +30,10 @@
     on:click_outside={() => {
         open.set(false);
     }}
+
+    on:mouseleave={() => {
+        open.set(false);
+    }}
 >
     <div class="product-text">Product</div>
     <Content {allProductsLink} />
@@ -39,4 +43,6 @@
     .product-text {
         cursor: pointer;
     }
+
+   
 </style>

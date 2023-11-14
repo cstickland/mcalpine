@@ -1,5 +1,5 @@
 <header>
-    <nav class="main-nav">
+    <nav class="main-nav <?php the_field('navbar_color'); ?>">
         <section class="desktop-menu container">
             <div class="nav-content">
                 <div>

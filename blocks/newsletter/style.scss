@@ -1,5 +1,38 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.animate {
+  .newsletter-block-title {
+    opacity: 0;
+  }
+
+  .newsletter-block-message {
+    opacity: 0;
+    animation-delay: 150ms;
+  }
+}
+
+.animated {
+  .newsletter-block-title {
+    @include slide-in;
+  }
+
+  .newsletter-block-message {
+    @include slide-in;
+  }
+}
+
+.editor-styles-wrapper {
+  .animate {
+    .newsletter-block-title {
+      opacity: 1;
+    }
+
+    .newsletter-block-message {
+      opacity: 1;
+    }
+  }
+}
+
 .newsletter-block {
   background-size: 1920px;
   max-width: 1920px;
