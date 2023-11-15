@@ -8,6 +8,10 @@
   .search-hero-content {
     .search-hero__subtitle {
       font-style: italic;
+      background-color: #fff;
+      width: max-content;
+      padding-left: 1.25rem;
+      padding-right: 1rem;
     }
 
     .search-hero__highlight {
@@ -17,10 +21,13 @@
     h1 {
       color: #222222;
       margin: 0;
+      padding-left: 1.25rem;
     }
 
     .search-hero-text {
-      font-size: 25px;
+      padding-top: 2rem;
+      padding-left: 1.25rem;
+      font-size: 1.125rem;
       color: $color__mcalpine-black;
       p {
         margin: 0;
@@ -65,10 +72,12 @@
       padding-bottom: 68px;
       h1 {
         color: #222222;
-        padding: 1.5rem 0;
+        padding: 1.5rem 1.25rem;
       }
 
       .search-hero-text {
+        font-size: 25px;
+        padding-top: 0;
       }
     }
 

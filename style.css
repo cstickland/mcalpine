@@ -3395,11 +3395,13 @@ fieldset {
   .insight-card:nth-of-type(50) .insight-card-text h3 {
     animation-delay: 4175ms; }
 
-.animate .insight-card {
+.animate .insight-card,
+.insight-archive-grid .insight-card {
   opacity: 0;
   transform: scale(0.9); }
 
-.animated .insight-card {
+.animated .insight-card,
+.insight-archive-grid .insight-card {
   opacity: 1;
   opacity: 0;
   animation-name: grow;
@@ -3408,20 +3410,23 @@ fieldset {
   animation-timing-function: ease-in-out;
   transform-origin: top left;
   transform-origin: bottom left; }
-  .animated .insight-card .insight-card-background-image {
+  .animated .insight-card .insight-card-background-image,
+  .insight-archive-grid .insight-card .insight-card-background-image {
     animation-name: zoom;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     transform-origin: center center; }
-  .animated .insight-card .insight-card-text h6 {
+  .animated .insight-card .insight-card-text h6,
+  .insight-archive-grid .insight-card .insight-card-text h6 {
     opacity: 0;
     animation-name: slide-in;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     animation-delay: 100ms; }
-  .animated .insight-card .insight-card-text h3 {
+  .animated .insight-card .insight-card-text h3,
+  .insight-archive-grid .insight-card .insight-card-text h3 {
     opacity: 0;
     animation-name: slide-in;
     animation-duration: 0.3s;

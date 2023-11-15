@@ -41,14 +41,16 @@
   }
 }
 
-.animate {
+.animate,
+.insight-archive-grid {
   .insight-card {
     opacity: 0;
     transform: scale(0.9);
   }
 }
 
-.animated {
+.animated,
+.insight-archive-grid {
   .insight-card {
     opacity: 1;
 

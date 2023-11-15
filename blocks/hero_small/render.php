@@ -4,6 +4,12 @@ $link = !empty(get_field('breadcrumb_middle_link')) ? get_field('breadcrumb_midd
 $title = !empty(get_field('title')) ? get_field('title') : $term->name;
 $message =  !empty(get_field('message')) ? get_field('message') : get_field('category_hero_message', $term);
 $image = !empty(get_field('image')) ? get_field('image') : get_field('category_hero_image', $term);
+$breadcrumb_end = 'hello';
+if (is_archive()) {
+    $breadcrumb_end = $term->name;
+} else {
+    $breadcrumb_end = get_the_title();
+};
 ?>
 
 
@@ -29,7 +35,7 @@ $image = !empty(get_field('image')) ? get_field('image') : get_field('category_h
                     </svg>
                 </span>
             <?php endif; ?>
-            <div class="breadcrumbs-current"><?php the_title(); ?></div>
+            <div class="breadcrumbs-current"><?php echo $breadcrumb_end; ?></div>
         </div>
         <h1><?php echo $title; ?></h1>
         <p class="small-hero-text"><?php echo $message; ?></p>
