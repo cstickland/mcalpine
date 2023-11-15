@@ -9,7 +9,22 @@ get_header();
 
     <?php echo do_blocks('<!-- wp:mcalpine/small-hero {"name":"mcalpine/small-hero","data":{"title":"Where To Buy","_title":"field_64ef3eb65a74d","message":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam…","_message":"field_64ef3ec25a74e","image":"","_image":"field_64ef3ed55a74f","breadcrumb_middle_link":"","_breadcrumb_middle_link":"field_64ef4f89decd4"},"mode":"edit"} /-->'); ?>
 
-    <div id="map"></div>
+
+    <!-- Start Stockist.co widget -->
+    <div data-stockist-widget-tag="u7092">Loading store locator
+        from <a href="https://stockist.co">Stockist store locator</a>...</div>
+    <script>
+        (function(s, t, o, c, k) {
+            c = s.createElement(t);
+            c.src = o;
+            c.async = 1;
+            k = s.getElementsByTagName(t)[0];
+            k.parentNode.insertBefore(c, k);
+        })(document, 'script', '//stockist.co/embed/v1/widget.min.js');
+    </script>
+    <!-- End Stockist.co widget -->
+
+
     <?php if (have_rows('map_locations', 'option')) : ?>
         <div class="map-search">
             <div class="" <h3>Find Your Local Stockist</h3>
@@ -56,21 +71,6 @@ get_header();
 
 </main><!-- #main -->
 
-<script>
-    const mapContainer = document.getElementById('map');
-    const app = new MapComponent({
-        target: mapContainer,
-        props: {
-            ready: false,
-            apiKey: "<?php the_field('api_key', 'option'); ?>"
-        }
-    });
-    window.initMap = function ready() {
-        app.$set({
-            ready: true
-        });
-    }
-</script>
 
 <style>
     #map .h1 {

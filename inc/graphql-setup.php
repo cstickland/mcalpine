@@ -24,6 +24,11 @@ add_filter('register_post_type_args', function ($args, $post_type) {
         $args['graphql_single_name'] = 'warranty';
         $args['graphql_plural_name'] = 'warranties'; # Don't set, and it will default to `all${graphql_single_name}`, i.e. `allDocument`.
     }
+    if ('download' === $post_type) {
+        $args['show_in_graphql'] = true;
+        $args['graphql_single_name'] = 'download';
+        $args['graphql_plural_name'] = 'downloads';
+    }
 
     return $args;
 }, 10, 2);

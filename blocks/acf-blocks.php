@@ -33,3 +33,4 @@ require_once('image_text_slider/image-and-text-slider.php');
 require_once('hero_contact/hero_contact.php');
 require_once('timeline/timeline.php');
 require_once('image_text_product/image-and-text-product.php');
+require_once('hero_search/hero-search.php');

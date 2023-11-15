@@ -88,6 +88,15 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         );
         return $allowed_blocks;
     }
+    if ('product' === $editor_context->post->post_type) {
+        $allowed_blocks = array(
+            'macalpine/image-text-product',
+            'mcalpine/image-text',
+            'acf/reviews'
+
+        );
+        return $allowed_blocks;
+    }
     $allowed_blocks = array(
         'mcalpine/hero-contact',
         'mcalpine/image-text',
@@ -117,7 +126,7 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/info-card",
         "mcalpine/vertical-text",
         "mcalpine/timeline",
-        "mcalpine/image-text-product"
+        "mcalpine/search-hero"
     );
     return $allowed_blocks;
 }
