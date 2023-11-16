@@ -41,6 +41,30 @@
   }
 }
 
+@for $y from 1 through 50 {
+  .insight-archive-grid:nth-child(#{$y}) {
+    &.insight-card {
+      animation-delay: $y * 75ms;
+
+      .insight-card-image-container {
+        .insight-card-background-image {
+          animation-delay: ($y * 75) + 50ms;
+        }
+      }
+
+      .insight-card-text {
+        h6 {
+          animation-delay: ($y * 75) + 350ms;
+        }
+
+        h3 {
+          animation-delay: ($y * 75) + 500ms;
+        }
+      }
+    }
+  }
+}
+
 .animate,
 .insight-archive-grid {
   .insight-card {

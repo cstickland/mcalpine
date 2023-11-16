@@ -33,16 +33,37 @@
     "location": [
         [
             {
-                "param": "current_user_role",
-                "operator": "!=",
-                "value": "customer"
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
             }
         ],
         [
             {
-                "param": "block",
-                "operator": "!=",
-                "value": "all"
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "download"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "warranty"
             }
         ]
     ],
@@ -59,5 +80,5 @@
     "graphql_field_name": "navbar",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1699983666
+    "modified": 1700138371
 }

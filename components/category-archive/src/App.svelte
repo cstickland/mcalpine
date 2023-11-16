@@ -21,7 +21,6 @@
     onMount(async () => {
         let query;
         $allItems = [];
-        console.log(postsPerPage)
 
         if (archiveType == "warranties") {
             query = warrantyQuery;

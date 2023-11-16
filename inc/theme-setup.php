@@ -68,6 +68,10 @@ function mcalpine_register_scripts()
 
         wp_enqueue_script('faq-js', get_template_directory_uri() . "/components/faq/dist/faq-archive.js", array(), array());
     }
+    if (is_search()) {
+
+        wp_enqueue_script('search-archive-js', get_template_directory_uri() . "/components/search-archive/dist/search-archive.js", array(), array());
+    }
 
     wp_enqueue_script('category-archive-js', get_template_directory_uri() . "/components/category-archive/dist/category-archive.js", array(), array());
 
@@ -129,4 +133,33 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/search-hero"
     );
     return $allowed_blocks;
+}
+
+function custom_admin_head()
+{
+    $css = '';
+
+    $css = 'td.media-icon img[src$=".svg"] { width: 100% !important; height: auto !important; }';
+
+    echo '<style type="text/css">' . $css . '</style>';
+}
+add_action('admin_head', 'custom_admin_head');
+
+function cc_mime_types($mimes)
+{
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+
+if (!is_admin()) {
+    function search_filter_posts($query)
+    {
+        if ($query->is_search) {
+            $query->set('post_type', ['post', 'product']);
+        }
+        return $query;
+    }
+    add_filter('pre_get_posts', 'search_filter_posts');
 }

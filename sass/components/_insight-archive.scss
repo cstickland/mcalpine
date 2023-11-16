@@ -64,6 +64,7 @@
         background-color: white;
         z-index: 2;
         width: 100%;
+        min-width: max-content;
         border-radius: 0 8px 8px 0;
         color: $color__mcalpine-black;
         cursor: pointer;

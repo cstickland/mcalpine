@@ -7,7 +7,7 @@
     import Filters from "./Filters.svelte";
 
     import { filters } from './stores.js';
-
+    let archiveGrid;
     let currentPage = 1;
     let postsPerPage = 16;
     let categories = getCategories();
@@ -85,7 +85,7 @@
 </div>
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
-        <ul class="insight-archive-grid">
+        <ul class="insight-archive-grid" >
             {#each currentPageInsights as insight}
                 <InsightCard {insight} />
             {/each}
@@ -93,7 +93,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage {totalPages} />
+            <Pagination bind:currentPage{totalPages} />
         {/if}
     </div>
 </section>
