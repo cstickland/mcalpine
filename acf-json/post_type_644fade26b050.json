@@ -53,7 +53,6 @@
     "show_in_admin_bar": true,
     "show_in_nav_menus": true,
     "show_in_rest": true,
-    "show_in_graphql": true,
     "rest_base": "",
     "rest_namespace": "",
     "rest_controller_class": "",
@@ -69,7 +68,8 @@
         "custom-fields"
     ],
     "taxonomies": [
-        "product_categories"
+        "product_categories",
+        "post_tag"
     ],
     "has_archive": true,
     "has_archive_slug": "products",
@@ -84,5 +84,6 @@
     "can_export": false,
     "delete_with_user": false,
     "register_meta_box_cb": "",
-    "modified": 1688560554
+    "enter_title_here": "",
+    "modified": 1700226236
 }

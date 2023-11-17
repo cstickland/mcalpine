@@ -23,8 +23,8 @@
                             <img src="<?php echo esc_url($image_schematic['url']); ?>" alt="<?php echo esc_attr($image_schematic['alt']); ?>" class="home-hero-schematic-image" />
                             <img src="<?php echo esc_url($image_hover['url']); ?>" alt="<?php echo esc_attr($image_hover['alt']); ?>" class="home-hero-hover-image" />
                         </div>
-                        <?php $image_schematic = get_sub_field('image_one_schematic');
-                        $image_hover = get_sub_field('image_one_hover_image');
+                        <?php $image_schematic = get_sub_field('image_two_schematic');
+                        $image_hover = get_sub_field('image_two_hover_image');
                         ?>
                         <div class="position-<?php the_sub_field('image_two_position'); ?> home-hero-image-container">
                             <img src="<?php echo esc_url($image_schematic['url']); ?>" alt="<?php echo esc_attr($image_schematic['alt']); ?>" class="home-hero-schematic-image" />

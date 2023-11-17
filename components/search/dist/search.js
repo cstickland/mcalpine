@@ -1841,7 +1841,7 @@
     	return child_ctx;
     }
 
-    // (69:8) {#if interestsOpen}
+    // (95:8) {#if interestsOpen}
     function create_if_block_1(ctx) {
     	let div;
     	let div_transition;
@@ -1852,8 +1852,8 @@
     		c: function create() {
     			div = element("div");
     			if (if_block) if_block.c();
-    			attr_dev(div, "class", "interest-links svelte-1pucxr9");
-    			add_location(div, file, 69, 12, 1903);
+    			attr_dev(div, "class", "interest-links svelte-xfkarq");
+    			add_location(div, file, 95, 12, 4397);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1901,14 +1901,14 @@
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(69:8) {#if interestsOpen}",
+    		source: "(95:8) {#if interestsOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (71:16) {#if menu?.menuItems?.nodes}
+    // (97:16) {#if menu?.menuItems?.nodes}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value = /*menu*/ ctx[3]?.menuItems?.nodes;
@@ -1971,14 +1971,14 @@
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(71:16) {#if menu?.menuItems?.nodes}",
+    		source: "(97:16) {#if menu?.menuItems?.nodes}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (72:20) {#each menu?.menuItems?.nodes as item}
+    // (98:20) {#each menu?.menuItems?.nodes as item}
     function create_each_block(ctx) {
     	let a;
     	let t_value = /*item*/ ctx[10].label + "";
@@ -1990,8 +1990,8 @@
     			a = element("a");
     			t = text(t_value);
     			attr_dev(a, "href", a_href_value = /*item*/ ctx[10].url);
-    			attr_dev(a, "class", "svelte-1pucxr9");
-    			add_location(a, file, 72, 24, 2095);
+    			attr_dev(a, "class", "svelte-xfkarq");
+    			add_location(a, file, 98, 24, 4589);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2013,14 +2013,14 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(72:20) {#each menu?.menuItems?.nodes as item}",
+    		source: "(98:20) {#each menu?.menuItems?.nodes as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (92:8) {#if results?.products?.length > 0 || results?.other?.length > 0}
+    // (118:8) {#if results?.products?.length > 0 || results?.other?.length > 0}
     function create_if_block(ctx) {
     	let results_1;
     	let current;
@@ -2065,7 +2065,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(92:8) {#if results?.products?.length > 0 || results?.other?.length > 0}",
+    		source: "(118:8) {#if results?.products?.length > 0 || results?.other?.length > 0}",
     		ctx
     	});
 
@@ -2074,22 +2074,43 @@
 
     function create_fragment(ctx) {
     	let form;
-    	let div1;
     	let div0;
+    	let a;
+    	let svg0;
+    	let defs;
+    	let style;
     	let t0;
-    	let svg;
     	let g1;
     	let g0;
-    	let rect;
-    	let path;
+    	let rect0;
+    	let polygon0;
+    	let polygon1;
+    	let polygon2;
+    	let path0;
+    	let path1;
+    	let polygon3;
+    	let path2;
     	let t1;
-    	let div1_class_value;
-    	let t2;
     	let div2;
-    	let span;
+    	let div1;
+    	let t2;
+    	let svg1;
+    	let g3;
+    	let g2;
+    	let rect1;
+    	let path3;
+    	let t3;
+    	let div2_class_value;
     	let t4;
+    	let div3;
+    	let span;
+    	let t6;
     	let input;
-    	let t5;
+    	let t7;
+    	let t8;
+    	let div4;
+    	let t9;
+    	let div5;
     	let current;
     	let mounted;
     	let dispose;
@@ -2099,57 +2120,121 @@
     	const block = {
     		c: function create() {
     			form = element("form");
-    			div1 = element("div");
     			div0 = element("div");
-    			t0 = text("Select Interest \n            ");
-    			svg = svg_element("svg");
+    			a = element("a");
+    			svg0 = svg_element("svg");
+    			defs = svg_element("defs");
+    			style = svg_element("style");
+    			t0 = text(".cls-1 {\n                                        fill: #e63228;\n                                        stroke-width: 0px;\n                                    }\n                                ");
     			g1 = svg_element("g");
     			g0 = svg_element("g");
-    			rect = svg_element("rect");
-    			path = svg_element("path");
+    			rect0 = svg_element("rect");
+    			polygon0 = svg_element("polygon");
+    			polygon1 = svg_element("polygon");
+    			polygon2 = svg_element("polygon");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			polygon3 = svg_element("polygon");
+    			path2 = svg_element("path");
     			t1 = space();
-    			if (if_block0) if_block0.c();
-    			t2 = space();
     			div2 = element("div");
+    			div1 = element("div");
+    			t2 = text("Select Interest \n            ");
+    			svg1 = svg_element("svg");
+    			g3 = svg_element("g");
+    			g2 = svg_element("g");
+    			rect1 = svg_element("rect");
+    			path3 = svg_element("path");
+    			t3 = space();
+    			if (if_block0) if_block0.c();
+    			t4 = space();
+    			div3 = element("div");
     			span = element("span");
     			span.textContent = "Search for:";
-    			t4 = space();
+    			t6 = space();
     			input = element("input");
-    			t5 = space();
+    			t7 = space();
     			if (if_block1) if_block1.c();
-    			attr_dev(rect, "width", "24");
-    			attr_dev(rect, "height", "24");
-    			attr_dev(rect, "opacity", "0");
-    			attr_dev(rect, "class", "svelte-1pucxr9");
-    			add_location(rect, file, 61, 25, 1560);
-    			attr_dev(path, "d", "M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z");
-    			attr_dev(path, "class", "svelte-1pucxr9");
-    			add_location(path, file, 61, 68, 1603);
-    			attr_dev(g0, "data-name", "chevron-down");
-    			add_location(g0, file, 60, 21, 1507);
-    			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file, 59, 17, 1463);
-    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "viewBox", "0 0 24 24");
-    			attr_dev(svg, "class", "svelte-1pucxr9");
-    			add_location(svg, file, 58, 12, 1386);
-    			attr_dev(div0, "class", "interest-title svelte-1pucxr9");
-    			add_location(div0, file, 56, 8, 1317);
-    			attr_dev(div1, "name", "interest");
-    			attr_dev(div1, "class", div1_class_value = "select-interest " + (/*interestsOpen*/ ctx[4] ? 'open' : 'closed') + " svelte-1pucxr9");
-    			add_location(div1, file, 48, 4, 1106);
+    			t8 = space();
+    			div4 = element("div");
+    			t9 = space();
+    			div5 = element("div");
+    			add_location(style, file, 52, 32, 1332);
+    			add_location(defs, file, 51, 28, 1293);
+    			attr_dev(rect0, "class", "cls-1 svelte-xfkarq");
+    			attr_dev(rect0, "x", "465.55");
+    			attr_dev(rect0, "width", "36.42");
+    			attr_dev(rect0, "height", "114.15");
+    			add_location(rect0, file, 61, 36, 1758);
+    			attr_dev(polygon0, "class", "cls-1");
+    			attr_dev(polygon0, "points", "662.08 71.55 687.57 71.55 699.12 42.6 662.08 42.6 662.08 28.95 688.17 28.95 699.73 0 662.08 0 636.51 0 625.66 0 625.66 114.15 636.51 114.15 662.08 114.15 688.17 114.15 699.73 85.2 662.08 85.2 662.08 71.55");
+    			add_location(polygon0, file, 62, 36, 1858);
+    			attr_dev(polygon1, "class", "cls-1");
+    			attr_dev(polygon1, "points", "346.9 0 310.48 0 310.48 114.15 328.69 114.15 346.9 114.15 362.39 114.15 373.94 82.9 346.9 82.9 346.9 0");
+    			add_location(polygon1, file, 63, 36, 2134);
+    			attr_dev(polygon2, "class", "cls-1");
+    			attr_dev(polygon2, "points", "576.94 47.83 550.68 0 514.26 0 514.26 114.15 550.68 114.15 550.68 66.32 576.94 114.15 613.36 114.15 613.36 0 576.94 0 576.94 47.83");
+    			add_location(polygon2, file, 64, 36, 2308);
+    			attr_dev(path0, "class", "cls-1 svelte-xfkarq");
+    			attr_dev(path0, "d", "m435.72,0h-54.1v114.15h36.42v-28.71h17.69c10.15,0,18.38-8.23,18.38-18.38V18.38c0-10.15-8.23-18.38-18.38-18.38Zm-8.26,48.73c0,4.3-3.36,8.35-9.42,8.35v-31.16c4.71,0,9.42,3.26,9.42,7.96v14.85Z");
+    			add_location(path0, file, 65, 36, 2510);
+    			attr_dev(path1, "class", "cls-1 svelte-xfkarq");
+    			attr_dev(path1, "d", "m257.76,0h-36.42l-16.6,114.15h36.42l2.04-14.06h18.12l2.04,14.06h36.42L283.18,0h-25.43Zm-11.81,81.19l6.31-43.39,6.31,43.39h-12.62Z");
+    			add_location(path1, file, 66, 36, 2763);
+    			attr_dev(polygon3, "class", "cls-1");
+    			attr_dev(polygon3, "points", "125.83 0 108.15 0 89.42 0 80.58 60.76 71.75 0 53.02 0 35.33 0 16.6 0 0 114.15 36.42 114.15 44.17 60.81 51.93 114.15 72.82 114.15 88.35 114.15 109.24 114.15 116.99 60.81 124.75 114.15 161.17 114.15 144.57 0 125.83 0");
+    			add_location(polygon3, file, 67, 36, 2956);
+    			attr_dev(path2, "class", "cls-1 svelte-xfkarq");
+    			attr_dev(path2, "d", "m161.31,17.91h0v33.7h0c0,9.89,8.02,17.91,17.91,17.91h23.01v-17.91h-3.9c-5.37,0-9.72-4.35-9.72-9.72v-14.26c0-5.37,4.35-9.72,9.72-9.72h3.9V0h-23.01c-9.89,0-17.91,8.02-17.91,17.91Z");
+    			add_location(path2, file, 68, 36, 3242);
+    			attr_dev(g0, "id", "McAlpine_Logo_-_New");
+    			add_location(g0, file, 60, 32, 1693);
+    			attr_dev(g1, "id", "Layer_1-2");
+    			add_location(g1, file, 59, 28, 1642);
+    			attr_dev(svg0, "id", "Layer_2");
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "viewBox", "0 0 699.73 114.15");
+    			attr_dev(svg0, "class", "svelte-xfkarq");
+    			add_location(svg0, file, 50, 24, 1183);
+    			attr_dev(a, "href", "/");
+    			attr_dev(a, "class", "site-logo svelte-xfkarq");
+    			add_location(a, file, 49, 20, 1128);
+    			add_location(div0, file, 48, 0, 1102);
+    			attr_dev(rect1, "width", "24");
+    			attr_dev(rect1, "height", "24");
+    			attr_dev(rect1, "opacity", "0");
+    			attr_dev(rect1, "class", "svelte-xfkarq");
+    			add_location(rect1, file, 87, 25, 4054);
+    			attr_dev(path3, "d", "M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z");
+    			attr_dev(path3, "class", "svelte-xfkarq");
+    			add_location(path3, file, 87, 68, 4097);
+    			attr_dev(g2, "data-name", "chevron-down");
+    			add_location(g2, file, 86, 21, 4001);
+    			attr_dev(g3, "data-name", "Layer 2");
+    			add_location(g3, file, 85, 17, 3957);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			attr_dev(svg1, "class", "svelte-xfkarq");
+    			add_location(svg1, file, 84, 12, 3880);
+    			attr_dev(div1, "class", "interest-title svelte-xfkarq");
+    			add_location(div1, file, 82, 8, 3811);
+    			attr_dev(div2, "name", "interest");
+    			attr_dev(div2, "class", div2_class_value = "select-interest " + (/*interestsOpen*/ ctx[4] ? 'open' : 'closed') + " svelte-xfkarq");
+    			add_location(div2, file, 74, 4, 3600);
     			attr_dev(span, "class", "screen-reader-text");
-    			add_location(span, file, 80, 8, 2271);
+    			add_location(span, file, 106, 8, 4765);
     			attr_dev(input, "type", "search");
     			attr_dev(input, "placeholder", "Search a product name, SKU or term…");
     			attr_dev(input, "autocomplete", "off");
     			attr_dev(input, "id", "search-field");
-    			attr_dev(input, "class", "search-field svelte-1pucxr9");
+    			attr_dev(input, "class", "search-field svelte-xfkarq");
     			attr_dev(input, "name", "s");
-    			add_location(input, file, 81, 8, 2331);
-    			attr_dev(div2, "class", "search-form__input svelte-1pucxr9");
-    			add_location(div2, file, 79, 4, 2230);
-    			attr_dev(form, "class", "search-form svelte-1pucxr9");
+    			add_location(input, file, 107, 8, 4825);
+    			attr_dev(div3, "class", "search-form__input svelte-xfkarq");
+    			add_location(div3, file, 105, 4, 4724);
+    			add_location(div4, file, 121, 4, 5279);
+    			add_location(div5, file, 122, 4, 5295);
+    			attr_dev(form, "class", "search-form svelte-xfkarq");
     			attr_dev(form, "id", "search-form");
     			attr_dev(form, "role", "search");
     			attr_dev(form, "method", "get");
@@ -2161,30 +2246,51 @@
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
-    			append_dev(form, div1);
-    			append_dev(div1, div0);
-    			append_dev(div0, t0);
-    			append_dev(div0, svg);
-    			append_dev(svg, g1);
+    			append_dev(form, div0);
+    			append_dev(div0, a);
+    			append_dev(a, svg0);
+    			append_dev(svg0, defs);
+    			append_dev(defs, style);
+    			append_dev(style, t0);
+    			append_dev(svg0, g1);
     			append_dev(g1, g0);
-    			append_dev(g0, rect);
-    			append_dev(g0, path);
-    			append_dev(div1, t1);
-    			if (if_block0) if_block0.m(div1, null);
-    			append_dev(form, t2);
+    			append_dev(g0, rect0);
+    			append_dev(g0, polygon0);
+    			append_dev(g0, polygon1);
+    			append_dev(g0, polygon2);
+    			append_dev(g0, path0);
+    			append_dev(g0, path1);
+    			append_dev(g0, polygon3);
+    			append_dev(g0, path2);
+    			append_dev(form, t1);
     			append_dev(form, div2);
-    			append_dev(div2, span);
-    			append_dev(div2, t4);
-    			append_dev(div2, input);
+    			append_dev(div2, div1);
+    			append_dev(div1, t2);
+    			append_dev(div1, svg1);
+    			append_dev(svg1, g3);
+    			append_dev(g3, g2);
+    			append_dev(g2, rect1);
+    			append_dev(g2, path3);
+    			append_dev(div2, t3);
+    			if (if_block0) if_block0.m(div2, null);
+    			append_dev(form, t4);
+    			append_dev(form, div3);
+    			append_dev(div3, span);
+    			append_dev(div3, t6);
+    			append_dev(div3, input);
     			set_input_value(input, /*searchQuery*/ ctx[1]);
-    			append_dev(div2, t5);
-    			if (if_block1) if_block1.m(div2, null);
+    			append_dev(div3, t7);
+    			if (if_block1) if_block1.m(div3, null);
+    			append_dev(form, t8);
+    			append_dev(form, div4);
+    			append_dev(form, t9);
+    			append_dev(form, div5);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div1, "click", /*click_handler*/ ctx[8], false, false, false, false),
-    					listen_dev(div1, "keydown", /*keydown_handler*/ ctx[7], false, false, false, false),
+    					listen_dev(div2, "click", /*click_handler*/ ctx[8], false, false, false, false),
+    					listen_dev(div2, "keydown", /*keydown_handler*/ ctx[7], false, false, false, false),
     					listen_dev(input, "input", /*input_input_handler*/ ctx[9]),
     					listen_dev(input, "input", /*getResults*/ ctx[5], false, false, false, false)
     				];
@@ -2204,7 +2310,7 @@
     					if_block0 = create_if_block_1(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
-    					if_block0.m(div1, null);
+    					if_block0.m(div2, null);
     				}
     			} else if (if_block0) {
     				group_outros();
@@ -2216,8 +2322,8 @@
     				check_outros();
     			}
 
-    			if (!current || dirty & /*interestsOpen*/ 16 && div1_class_value !== (div1_class_value = "select-interest " + (/*interestsOpen*/ ctx[4] ? 'open' : 'closed') + " svelte-1pucxr9")) {
-    				attr_dev(div1, "class", div1_class_value);
+    			if (!current || dirty & /*interestsOpen*/ 16 && div2_class_value !== (div2_class_value = "select-interest " + (/*interestsOpen*/ ctx[4] ? 'open' : 'closed') + " svelte-xfkarq")) {
+    				attr_dev(div2, "class", div2_class_value);
     			}
 
     			if (dirty & /*searchQuery*/ 2 && input.value !== /*searchQuery*/ ctx[1]) {
@@ -2235,7 +2341,7 @@
     					if_block1 = create_if_block(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
-    					if_block1.m(div2, null);
+    					if_block1.m(div3, null);
     				}
     			} else if (if_block1) {
     				group_outros();

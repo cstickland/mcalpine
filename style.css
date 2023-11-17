@@ -746,7 +746,6 @@ fieldset {
     flex-direction: row;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     height: 100%;
     align-items: center; }
   .main-nav .resultImage {
@@ -796,8 +795,7 @@ fieldset {
     height: 100%;
     display: flex;
     align-items: center;
-    flex-grow: 1;
-    max-width: 46.25rem; }
+    flex-grow: 1; }
     .main-nav .search-container #search-form__mobile {
       position: unset; }
   .main-nav #results-container__mobile {
@@ -3398,452 +3396,452 @@ fieldset {
 .insight-archive-grid:nth-child(1).insight-card {
   animation-delay: 75ms; }
   .insight-archive-grid:nth-child(1).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 125ms; }
+    animation-delay: 125ms !important; }
   .insight-archive-grid:nth-child(1).insight-card .insight-card-text h6 {
-    animation-delay: 425ms; }
+    animation-delay: 425ms !important; }
   .insight-archive-grid:nth-child(1).insight-card .insight-card-text h3 {
-    animation-delay: 575ms; }
+    animation-delay: 575ms !important; }
 
 .insight-archive-grid:nth-child(2).insight-card {
   animation-delay: 150ms; }
   .insight-archive-grid:nth-child(2).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 200ms; }
+    animation-delay: 200ms !important; }
   .insight-archive-grid:nth-child(2).insight-card .insight-card-text h6 {
-    animation-delay: 500ms; }
+    animation-delay: 500ms !important; }
   .insight-archive-grid:nth-child(2).insight-card .insight-card-text h3 {
-    animation-delay: 650ms; }
+    animation-delay: 650ms !important; }
 
 .insight-archive-grid:nth-child(3).insight-card {
   animation-delay: 225ms; }
   .insight-archive-grid:nth-child(3).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 275ms; }
+    animation-delay: 275ms !important; }
   .insight-archive-grid:nth-child(3).insight-card .insight-card-text h6 {
-    animation-delay: 575ms; }
+    animation-delay: 575ms !important; }
   .insight-archive-grid:nth-child(3).insight-card .insight-card-text h3 {
-    animation-delay: 725ms; }
+    animation-delay: 725ms !important; }
 
 .insight-archive-grid:nth-child(4).insight-card {
   animation-delay: 300ms; }
   .insight-archive-grid:nth-child(4).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 350ms; }
+    animation-delay: 350ms !important; }
   .insight-archive-grid:nth-child(4).insight-card .insight-card-text h6 {
-    animation-delay: 650ms; }
+    animation-delay: 650ms !important; }
   .insight-archive-grid:nth-child(4).insight-card .insight-card-text h3 {
-    animation-delay: 800ms; }
+    animation-delay: 800ms !important; }
 
 .insight-archive-grid:nth-child(5).insight-card {
   animation-delay: 375ms; }
   .insight-archive-grid:nth-child(5).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 425ms; }
+    animation-delay: 425ms !important; }
   .insight-archive-grid:nth-child(5).insight-card .insight-card-text h6 {
-    animation-delay: 725ms; }
+    animation-delay: 725ms !important; }
   .insight-archive-grid:nth-child(5).insight-card .insight-card-text h3 {
-    animation-delay: 875ms; }
+    animation-delay: 875ms !important; }
 
 .insight-archive-grid:nth-child(6).insight-card {
   animation-delay: 450ms; }
   .insight-archive-grid:nth-child(6).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 500ms; }
+    animation-delay: 500ms !important; }
   .insight-archive-grid:nth-child(6).insight-card .insight-card-text h6 {
-    animation-delay: 800ms; }
+    animation-delay: 800ms !important; }
   .insight-archive-grid:nth-child(6).insight-card .insight-card-text h3 {
-    animation-delay: 950ms; }
+    animation-delay: 950ms !important; }
 
 .insight-archive-grid:nth-child(7).insight-card {
   animation-delay: 525ms; }
   .insight-archive-grid:nth-child(7).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 575ms; }
+    animation-delay: 575ms !important; }
   .insight-archive-grid:nth-child(7).insight-card .insight-card-text h6 {
-    animation-delay: 875ms; }
+    animation-delay: 875ms !important; }
   .insight-archive-grid:nth-child(7).insight-card .insight-card-text h3 {
-    animation-delay: 1025ms; }
+    animation-delay: 1025ms !important; }
 
 .insight-archive-grid:nth-child(8).insight-card {
   animation-delay: 600ms; }
   .insight-archive-grid:nth-child(8).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 650ms; }
+    animation-delay: 650ms !important; }
   .insight-archive-grid:nth-child(8).insight-card .insight-card-text h6 {
-    animation-delay: 950ms; }
+    animation-delay: 950ms !important; }
   .insight-archive-grid:nth-child(8).insight-card .insight-card-text h3 {
-    animation-delay: 1100ms; }
+    animation-delay: 1100ms !important; }
 
 .insight-archive-grid:nth-child(9).insight-card {
   animation-delay: 675ms; }
   .insight-archive-grid:nth-child(9).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 725ms; }
+    animation-delay: 725ms !important; }
   .insight-archive-grid:nth-child(9).insight-card .insight-card-text h6 {
-    animation-delay: 1025ms; }
+    animation-delay: 1025ms !important; }
   .insight-archive-grid:nth-child(9).insight-card .insight-card-text h3 {
-    animation-delay: 1175ms; }
+    animation-delay: 1175ms !important; }
 
 .insight-archive-grid:nth-child(10).insight-card {
   animation-delay: 750ms; }
   .insight-archive-grid:nth-child(10).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 800ms; }
+    animation-delay: 800ms !important; }
   .insight-archive-grid:nth-child(10).insight-card .insight-card-text h6 {
-    animation-delay: 1100ms; }
+    animation-delay: 1100ms !important; }
   .insight-archive-grid:nth-child(10).insight-card .insight-card-text h3 {
-    animation-delay: 1250ms; }
+    animation-delay: 1250ms !important; }
 
 .insight-archive-grid:nth-child(11).insight-card {
   animation-delay: 825ms; }
   .insight-archive-grid:nth-child(11).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 875ms; }
+    animation-delay: 875ms !important; }
   .insight-archive-grid:nth-child(11).insight-card .insight-card-text h6 {
-    animation-delay: 1175ms; }
+    animation-delay: 1175ms !important; }
   .insight-archive-grid:nth-child(11).insight-card .insight-card-text h3 {
-    animation-delay: 1325ms; }
+    animation-delay: 1325ms !important; }
 
 .insight-archive-grid:nth-child(12).insight-card {
   animation-delay: 900ms; }
   .insight-archive-grid:nth-child(12).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 950ms; }
+    animation-delay: 950ms !important; }
   .insight-archive-grid:nth-child(12).insight-card .insight-card-text h6 {
-    animation-delay: 1250ms; }
+    animation-delay: 1250ms !important; }
   .insight-archive-grid:nth-child(12).insight-card .insight-card-text h3 {
-    animation-delay: 1400ms; }
+    animation-delay: 1400ms !important; }
 
 .insight-archive-grid:nth-child(13).insight-card {
   animation-delay: 975ms; }
   .insight-archive-grid:nth-child(13).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1025ms; }
+    animation-delay: 1025ms !important; }
   .insight-archive-grid:nth-child(13).insight-card .insight-card-text h6 {
-    animation-delay: 1325ms; }
+    animation-delay: 1325ms !important; }
   .insight-archive-grid:nth-child(13).insight-card .insight-card-text h3 {
-    animation-delay: 1475ms; }
+    animation-delay: 1475ms !important; }
 
 .insight-archive-grid:nth-child(14).insight-card {
   animation-delay: 1050ms; }
   .insight-archive-grid:nth-child(14).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1100ms; }
+    animation-delay: 1100ms !important; }
   .insight-archive-grid:nth-child(14).insight-card .insight-card-text h6 {
-    animation-delay: 1400ms; }
+    animation-delay: 1400ms !important; }
   .insight-archive-grid:nth-child(14).insight-card .insight-card-text h3 {
-    animation-delay: 1550ms; }
+    animation-delay: 1550ms !important; }
 
 .insight-archive-grid:nth-child(15).insight-card {
   animation-delay: 1125ms; }
   .insight-archive-grid:nth-child(15).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1175ms; }
+    animation-delay: 1175ms !important; }
   .insight-archive-grid:nth-child(15).insight-card .insight-card-text h6 {
-    animation-delay: 1475ms; }
+    animation-delay: 1475ms !important; }
   .insight-archive-grid:nth-child(15).insight-card .insight-card-text h3 {
-    animation-delay: 1625ms; }
+    animation-delay: 1625ms !important; }
 
 .insight-archive-grid:nth-child(16).insight-card {
   animation-delay: 1200ms; }
   .insight-archive-grid:nth-child(16).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1250ms; }
+    animation-delay: 1250ms !important; }
   .insight-archive-grid:nth-child(16).insight-card .insight-card-text h6 {
-    animation-delay: 1550ms; }
+    animation-delay: 1550ms !important; }
   .insight-archive-grid:nth-child(16).insight-card .insight-card-text h3 {
-    animation-delay: 1700ms; }
+    animation-delay: 1700ms !important; }
 
 .insight-archive-grid:nth-child(17).insight-card {
   animation-delay: 1275ms; }
   .insight-archive-grid:nth-child(17).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1325ms; }
+    animation-delay: 1325ms !important; }
   .insight-archive-grid:nth-child(17).insight-card .insight-card-text h6 {
-    animation-delay: 1625ms; }
+    animation-delay: 1625ms !important; }
   .insight-archive-grid:nth-child(17).insight-card .insight-card-text h3 {
-    animation-delay: 1775ms; }
+    animation-delay: 1775ms !important; }
 
 .insight-archive-grid:nth-child(18).insight-card {
   animation-delay: 1350ms; }
   .insight-archive-grid:nth-child(18).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1400ms; }
+    animation-delay: 1400ms !important; }
   .insight-archive-grid:nth-child(18).insight-card .insight-card-text h6 {
-    animation-delay: 1700ms; }
+    animation-delay: 1700ms !important; }
   .insight-archive-grid:nth-child(18).insight-card .insight-card-text h3 {
-    animation-delay: 1850ms; }
+    animation-delay: 1850ms !important; }
 
 .insight-archive-grid:nth-child(19).insight-card {
   animation-delay: 1425ms; }
   .insight-archive-grid:nth-child(19).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1475ms; }
+    animation-delay: 1475ms !important; }
   .insight-archive-grid:nth-child(19).insight-card .insight-card-text h6 {
-    animation-delay: 1775ms; }
+    animation-delay: 1775ms !important; }
   .insight-archive-grid:nth-child(19).insight-card .insight-card-text h3 {
-    animation-delay: 1925ms; }
+    animation-delay: 1925ms !important; }
 
 .insight-archive-grid:nth-child(20).insight-card {
   animation-delay: 1500ms; }
   .insight-archive-grid:nth-child(20).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1550ms; }
+    animation-delay: 1550ms !important; }
   .insight-archive-grid:nth-child(20).insight-card .insight-card-text h6 {
-    animation-delay: 1850ms; }
+    animation-delay: 1850ms !important; }
   .insight-archive-grid:nth-child(20).insight-card .insight-card-text h3 {
-    animation-delay: 2000ms; }
+    animation-delay: 2000ms !important; }
 
 .insight-archive-grid:nth-child(21).insight-card {
   animation-delay: 1575ms; }
   .insight-archive-grid:nth-child(21).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1625ms; }
+    animation-delay: 1625ms !important; }
   .insight-archive-grid:nth-child(21).insight-card .insight-card-text h6 {
-    animation-delay: 1925ms; }
+    animation-delay: 1925ms !important; }
   .insight-archive-grid:nth-child(21).insight-card .insight-card-text h3 {
-    animation-delay: 2075ms; }
+    animation-delay: 2075ms !important; }
 
 .insight-archive-grid:nth-child(22).insight-card {
   animation-delay: 1650ms; }
   .insight-archive-grid:nth-child(22).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1700ms; }
+    animation-delay: 1700ms !important; }
   .insight-archive-grid:nth-child(22).insight-card .insight-card-text h6 {
-    animation-delay: 2000ms; }
+    animation-delay: 2000ms !important; }
   .insight-archive-grid:nth-child(22).insight-card .insight-card-text h3 {
-    animation-delay: 2150ms; }
+    animation-delay: 2150ms !important; }
 
 .insight-archive-grid:nth-child(23).insight-card {
   animation-delay: 1725ms; }
   .insight-archive-grid:nth-child(23).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1775ms; }
+    animation-delay: 1775ms !important; }
   .insight-archive-grid:nth-child(23).insight-card .insight-card-text h6 {
-    animation-delay: 2075ms; }
+    animation-delay: 2075ms !important; }
   .insight-archive-grid:nth-child(23).insight-card .insight-card-text h3 {
-    animation-delay: 2225ms; }
+    animation-delay: 2225ms !important; }
 
 .insight-archive-grid:nth-child(24).insight-card {
   animation-delay: 1800ms; }
   .insight-archive-grid:nth-child(24).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1850ms; }
+    animation-delay: 1850ms !important; }
   .insight-archive-grid:nth-child(24).insight-card .insight-card-text h6 {
-    animation-delay: 2150ms; }
+    animation-delay: 2150ms !important; }
   .insight-archive-grid:nth-child(24).insight-card .insight-card-text h3 {
-    animation-delay: 2300ms; }
+    animation-delay: 2300ms !important; }
 
 .insight-archive-grid:nth-child(25).insight-card {
   animation-delay: 1875ms; }
   .insight-archive-grid:nth-child(25).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 1925ms; }
+    animation-delay: 1925ms !important; }
   .insight-archive-grid:nth-child(25).insight-card .insight-card-text h6 {
-    animation-delay: 2225ms; }
+    animation-delay: 2225ms !important; }
   .insight-archive-grid:nth-child(25).insight-card .insight-card-text h3 {
-    animation-delay: 2375ms; }
+    animation-delay: 2375ms !important; }
 
 .insight-archive-grid:nth-child(26).insight-card {
   animation-delay: 1950ms; }
   .insight-archive-grid:nth-child(26).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2000ms; }
+    animation-delay: 2000ms !important; }
   .insight-archive-grid:nth-child(26).insight-card .insight-card-text h6 {
-    animation-delay: 2300ms; }
+    animation-delay: 2300ms !important; }
   .insight-archive-grid:nth-child(26).insight-card .insight-card-text h3 {
-    animation-delay: 2450ms; }
+    animation-delay: 2450ms !important; }
 
 .insight-archive-grid:nth-child(27).insight-card {
   animation-delay: 2025ms; }
   .insight-archive-grid:nth-child(27).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2075ms; }
+    animation-delay: 2075ms !important; }
   .insight-archive-grid:nth-child(27).insight-card .insight-card-text h6 {
-    animation-delay: 2375ms; }
+    animation-delay: 2375ms !important; }
   .insight-archive-grid:nth-child(27).insight-card .insight-card-text h3 {
-    animation-delay: 2525ms; }
+    animation-delay: 2525ms !important; }
 
 .insight-archive-grid:nth-child(28).insight-card {
   animation-delay: 2100ms; }
   .insight-archive-grid:nth-child(28).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2150ms; }
+    animation-delay: 2150ms !important; }
   .insight-archive-grid:nth-child(28).insight-card .insight-card-text h6 {
-    animation-delay: 2450ms; }
+    animation-delay: 2450ms !important; }
   .insight-archive-grid:nth-child(28).insight-card .insight-card-text h3 {
-    animation-delay: 2600ms; }
+    animation-delay: 2600ms !important; }
 
 .insight-archive-grid:nth-child(29).insight-card {
   animation-delay: 2175ms; }
   .insight-archive-grid:nth-child(29).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2225ms; }
+    animation-delay: 2225ms !important; }
   .insight-archive-grid:nth-child(29).insight-card .insight-card-text h6 {
-    animation-delay: 2525ms; }
+    animation-delay: 2525ms !important; }
   .insight-archive-grid:nth-child(29).insight-card .insight-card-text h3 {
-    animation-delay: 2675ms; }
+    animation-delay: 2675ms !important; }
 
 .insight-archive-grid:nth-child(30).insight-card {
   animation-delay: 2250ms; }
   .insight-archive-grid:nth-child(30).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2300ms; }
+    animation-delay: 2300ms !important; }
   .insight-archive-grid:nth-child(30).insight-card .insight-card-text h6 {
-    animation-delay: 2600ms; }
+    animation-delay: 2600ms !important; }
   .insight-archive-grid:nth-child(30).insight-card .insight-card-text h3 {
-    animation-delay: 2750ms; }
+    animation-delay: 2750ms !important; }
 
 .insight-archive-grid:nth-child(31).insight-card {
   animation-delay: 2325ms; }
   .insight-archive-grid:nth-child(31).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2375ms; }
+    animation-delay: 2375ms !important; }
   .insight-archive-grid:nth-child(31).insight-card .insight-card-text h6 {
-    animation-delay: 2675ms; }
+    animation-delay: 2675ms !important; }
   .insight-archive-grid:nth-child(31).insight-card .insight-card-text h3 {
-    animation-delay: 2825ms; }
+    animation-delay: 2825ms !important; }
 
 .insight-archive-grid:nth-child(32).insight-card {
   animation-delay: 2400ms; }
   .insight-archive-grid:nth-child(32).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2450ms; }
+    animation-delay: 2450ms !important; }
   .insight-archive-grid:nth-child(32).insight-card .insight-card-text h6 {
-    animation-delay: 2750ms; }
+    animation-delay: 2750ms !important; }
   .insight-archive-grid:nth-child(32).insight-card .insight-card-text h3 {
-    animation-delay: 2900ms; }
+    animation-delay: 2900ms !important; }
 
 .insight-archive-grid:nth-child(33).insight-card {
   animation-delay: 2475ms; }
   .insight-archive-grid:nth-child(33).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2525ms; }
+    animation-delay: 2525ms !important; }
   .insight-archive-grid:nth-child(33).insight-card .insight-card-text h6 {
-    animation-delay: 2825ms; }
+    animation-delay: 2825ms !important; }
   .insight-archive-grid:nth-child(33).insight-card .insight-card-text h3 {
-    animation-delay: 2975ms; }
+    animation-delay: 2975ms !important; }
 
 .insight-archive-grid:nth-child(34).insight-card {
   animation-delay: 2550ms; }
   .insight-archive-grid:nth-child(34).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2600ms; }
+    animation-delay: 2600ms !important; }
   .insight-archive-grid:nth-child(34).insight-card .insight-card-text h6 {
-    animation-delay: 2900ms; }
+    animation-delay: 2900ms !important; }
   .insight-archive-grid:nth-child(34).insight-card .insight-card-text h3 {
-    animation-delay: 3050ms; }
+    animation-delay: 3050ms !important; }
 
 .insight-archive-grid:nth-child(35).insight-card {
   animation-delay: 2625ms; }
   .insight-archive-grid:nth-child(35).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2675ms; }
+    animation-delay: 2675ms !important; }
   .insight-archive-grid:nth-child(35).insight-card .insight-card-text h6 {
-    animation-delay: 2975ms; }
+    animation-delay: 2975ms !important; }
   .insight-archive-grid:nth-child(35).insight-card .insight-card-text h3 {
-    animation-delay: 3125ms; }
+    animation-delay: 3125ms !important; }
 
 .insight-archive-grid:nth-child(36).insight-card {
   animation-delay: 2700ms; }
   .insight-archive-grid:nth-child(36).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2750ms; }
+    animation-delay: 2750ms !important; }
   .insight-archive-grid:nth-child(36).insight-card .insight-card-text h6 {
-    animation-delay: 3050ms; }
+    animation-delay: 3050ms !important; }
   .insight-archive-grid:nth-child(36).insight-card .insight-card-text h3 {
-    animation-delay: 3200ms; }
+    animation-delay: 3200ms !important; }
 
 .insight-archive-grid:nth-child(37).insight-card {
   animation-delay: 2775ms; }
   .insight-archive-grid:nth-child(37).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2825ms; }
+    animation-delay: 2825ms !important; }
   .insight-archive-grid:nth-child(37).insight-card .insight-card-text h6 {
-    animation-delay: 3125ms; }
+    animation-delay: 3125ms !important; }
   .insight-archive-grid:nth-child(37).insight-card .insight-card-text h3 {
-    animation-delay: 3275ms; }
+    animation-delay: 3275ms !important; }
 
 .insight-archive-grid:nth-child(38).insight-card {
   animation-delay: 2850ms; }
   .insight-archive-grid:nth-child(38).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2900ms; }
+    animation-delay: 2900ms !important; }
   .insight-archive-grid:nth-child(38).insight-card .insight-card-text h6 {
-    animation-delay: 3200ms; }
+    animation-delay: 3200ms !important; }
   .insight-archive-grid:nth-child(38).insight-card .insight-card-text h3 {
-    animation-delay: 3350ms; }
+    animation-delay: 3350ms !important; }
 
 .insight-archive-grid:nth-child(39).insight-card {
   animation-delay: 2925ms; }
   .insight-archive-grid:nth-child(39).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 2975ms; }
+    animation-delay: 2975ms !important; }
   .insight-archive-grid:nth-child(39).insight-card .insight-card-text h6 {
-    animation-delay: 3275ms; }
+    animation-delay: 3275ms !important; }
   .insight-archive-grid:nth-child(39).insight-card .insight-card-text h3 {
-    animation-delay: 3425ms; }
+    animation-delay: 3425ms !important; }
 
 .insight-archive-grid:nth-child(40).insight-card {
   animation-delay: 3000ms; }
   .insight-archive-grid:nth-child(40).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3050ms; }
+    animation-delay: 3050ms !important; }
   .insight-archive-grid:nth-child(40).insight-card .insight-card-text h6 {
-    animation-delay: 3350ms; }
+    animation-delay: 3350ms !important; }
   .insight-archive-grid:nth-child(40).insight-card .insight-card-text h3 {
-    animation-delay: 3500ms; }
+    animation-delay: 3500ms !important; }
 
 .insight-archive-grid:nth-child(41).insight-card {
   animation-delay: 3075ms; }
   .insight-archive-grid:nth-child(41).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3125ms; }
+    animation-delay: 3125ms !important; }
   .insight-archive-grid:nth-child(41).insight-card .insight-card-text h6 {
-    animation-delay: 3425ms; }
+    animation-delay: 3425ms !important; }
   .insight-archive-grid:nth-child(41).insight-card .insight-card-text h3 {
-    animation-delay: 3575ms; }
+    animation-delay: 3575ms !important; }
 
 .insight-archive-grid:nth-child(42).insight-card {
   animation-delay: 3150ms; }
   .insight-archive-grid:nth-child(42).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3200ms; }
+    animation-delay: 3200ms !important; }
   .insight-archive-grid:nth-child(42).insight-card .insight-card-text h6 {
-    animation-delay: 3500ms; }
+    animation-delay: 3500ms !important; }
   .insight-archive-grid:nth-child(42).insight-card .insight-card-text h3 {
-    animation-delay: 3650ms; }
+    animation-delay: 3650ms !important; }
 
 .insight-archive-grid:nth-child(43).insight-card {
   animation-delay: 3225ms; }
   .insight-archive-grid:nth-child(43).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3275ms; }
+    animation-delay: 3275ms !important; }
   .insight-archive-grid:nth-child(43).insight-card .insight-card-text h6 {
-    animation-delay: 3575ms; }
+    animation-delay: 3575ms !important; }
   .insight-archive-grid:nth-child(43).insight-card .insight-card-text h3 {
-    animation-delay: 3725ms; }
+    animation-delay: 3725ms !important; }
 
 .insight-archive-grid:nth-child(44).insight-card {
   animation-delay: 3300ms; }
   .insight-archive-grid:nth-child(44).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3350ms; }
+    animation-delay: 3350ms !important; }
   .insight-archive-grid:nth-child(44).insight-card .insight-card-text h6 {
-    animation-delay: 3650ms; }
+    animation-delay: 3650ms !important; }
   .insight-archive-grid:nth-child(44).insight-card .insight-card-text h3 {
-    animation-delay: 3800ms; }
+    animation-delay: 3800ms !important; }
 
 .insight-archive-grid:nth-child(45).insight-card {
   animation-delay: 3375ms; }
   .insight-archive-grid:nth-child(45).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3425ms; }
+    animation-delay: 3425ms !important; }
   .insight-archive-grid:nth-child(45).insight-card .insight-card-text h6 {
-    animation-delay: 3725ms; }
+    animation-delay: 3725ms !important; }
   .insight-archive-grid:nth-child(45).insight-card .insight-card-text h3 {
-    animation-delay: 3875ms; }
+    animation-delay: 3875ms !important; }
 
 .insight-archive-grid:nth-child(46).insight-card {
   animation-delay: 3450ms; }
   .insight-archive-grid:nth-child(46).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3500ms; }
+    animation-delay: 3500ms !important; }
   .insight-archive-grid:nth-child(46).insight-card .insight-card-text h6 {
-    animation-delay: 3800ms; }
+    animation-delay: 3800ms !important; }
   .insight-archive-grid:nth-child(46).insight-card .insight-card-text h3 {
-    animation-delay: 3950ms; }
+    animation-delay: 3950ms !important; }
 
 .insight-archive-grid:nth-child(47).insight-card {
   animation-delay: 3525ms; }
   .insight-archive-grid:nth-child(47).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3575ms; }
+    animation-delay: 3575ms !important; }
   .insight-archive-grid:nth-child(47).insight-card .insight-card-text h6 {
-    animation-delay: 3875ms; }
+    animation-delay: 3875ms !important; }
   .insight-archive-grid:nth-child(47).insight-card .insight-card-text h3 {
-    animation-delay: 4025ms; }
+    animation-delay: 4025ms !important; }
 
 .insight-archive-grid:nth-child(48).insight-card {
   animation-delay: 3600ms; }
   .insight-archive-grid:nth-child(48).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3650ms; }
+    animation-delay: 3650ms !important; }
   .insight-archive-grid:nth-child(48).insight-card .insight-card-text h6 {
-    animation-delay: 3950ms; }
+    animation-delay: 3950ms !important; }
   .insight-archive-grid:nth-child(48).insight-card .insight-card-text h3 {
-    animation-delay: 4100ms; }
+    animation-delay: 4100ms !important; }
 
 .insight-archive-grid:nth-child(49).insight-card {
   animation-delay: 3675ms; }
   .insight-archive-grid:nth-child(49).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3725ms; }
+    animation-delay: 3725ms !important; }
   .insight-archive-grid:nth-child(49).insight-card .insight-card-text h6 {
-    animation-delay: 4025ms; }
+    animation-delay: 4025ms !important; }
   .insight-archive-grid:nth-child(49).insight-card .insight-card-text h3 {
-    animation-delay: 4175ms; }
+    animation-delay: 4175ms !important; }
 
 .insight-archive-grid:nth-child(50).insight-card {
   animation-delay: 3750ms; }
   .insight-archive-grid:nth-child(50).insight-card .insight-card-image-container .insight-card-background-image {
-    animation-delay: 3800ms; }
+    animation-delay: 3800ms !important; }
   .insight-archive-grid:nth-child(50).insight-card .insight-card-text h6 {
-    animation-delay: 4100ms; }
+    animation-delay: 4100ms !important; }
   .insight-archive-grid:nth-child(50).insight-card .insight-card-text h3 {
-    animation-delay: 4250ms; }
+    animation-delay: 4250ms !important; }
 
 .animate .insight-card,
 .insight-archive-grid .insight-card {

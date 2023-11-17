@@ -48,17 +48,17 @@
 
       .insight-card-image-container {
         .insight-card-background-image {
-          animation-delay: ($y * 75) + 50ms;
+          animation-delay: ($y * 75) + 50ms !important;
         }
       }
 
       .insight-card-text {
         h6 {
-          animation-delay: ($y * 75) + 350ms;
+          animation-delay: ($y * 75) + 350ms !important;
         }
 
         h3 {
-          animation-delay: ($y * 75) + 500ms;
+          animation-delay: ($y * 75) + 500ms !important;
         }
       }
     }

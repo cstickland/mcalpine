@@ -68,10 +68,8 @@ function mcalpine_register_scripts()
 
         wp_enqueue_script('faq-js', get_template_directory_uri() . "/components/faq/dist/faq-archive.js", array(), array());
     }
-    if (is_search()) {
 
-        wp_enqueue_script('search-archive-js', get_template_directory_uri() . "/components/search-archive/dist/search-archive.js", array(), array());
-    }
+    wp_enqueue_script('search-archive-js', get_template_directory_uri() . "/components/search-archive/dist/search-archive.js", array(), array());
 
     wp_enqueue_script('category-archive-js', get_template_directory_uri() . "/components/category-archive/dist/category-archive.js", array(), array());
 
@@ -158,6 +156,9 @@ if (!is_admin()) {
     {
         if ($query->is_search) {
             $query->set('post_type', ['post', 'product']);
+        }
+        if ($query->is_main_query() && !is_admin() && (is_category() || is_tag() && empty($query->query_vars['suppress_filters']))) {
+            $query->set('post_type', array('post', 'product'));
         }
         return $query;
     }
