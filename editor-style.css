@@ -559,9 +559,6 @@ body {
     body {
       font-size: 1.125rem; } }
 
-#primary {
-  overflow-x: hidden; }
-
 /* Make sure embeds and iframes fit their containers. */
 embed,
 iframe,

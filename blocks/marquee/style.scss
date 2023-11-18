@@ -1,0 +1,43 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.marquee-block {
+  .wrap {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    max-width: 120rem;
+    margin: 0 auto;
+    &:nth-of-type(2) {
+      ul {
+        margin-left: -30rem;
+      }
+    }
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    gap: 2rem;
+    padding-left: 2.125rem;
+
+    li {
+      min-width: max-content;
+      overflow: hidden;
+      display: flex;
+      white-space: nowrap;
+      color: #7caef2;
+      font-weight: 900;
+      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+      -webkit-text-stroke: 1px #7caef2;
+      font-size: 3.125rem;
+      line-height: 0.8;
+      font-size: clamp(3.125rem, -0.875rem + 8.333vw, 9.125rem);
+      div {
+        min-width: max-content;
+        &:first-of-type {
+          margin-left: -50%;
+        }
+      }
+    }
+  }
+}

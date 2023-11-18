@@ -128,7 +128,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/info-card",
         "mcalpine/vertical-text",
         "mcalpine/timeline",
-        "mcalpine/search-hero"
+        "mcalpine/search-hero",
+        "mcalpine/marquee"
     );
     return $allowed_blocks;
 }

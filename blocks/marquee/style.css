@@ -1,0 +1,102 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.marquee-block .wrap {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+.marquee-block .wrap:nth-of-type(2) ul {
+  margin-left: -30rem;
+}
+.marquee-block ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  padding-left: 2.125rem;
+}
+.marquee-block ul li {
+  min-width: max-content;
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+  color: #7caef2;
+  font-weight: 900;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke: 1px #7caef2;
+  font-size: 3.125rem;
+  line-height: 0.8;
+  font-size: clamp(3.125rem, -0.875rem + 8.333vw, 9.125rem);
+}
+.marquee-block ul li div {
+  min-width: max-content;
+}
+.marquee-block ul li div:first-of-type {
+  margin-left: -50%;
+}
+
+/*# sourceMappingURL=style.css.map */
