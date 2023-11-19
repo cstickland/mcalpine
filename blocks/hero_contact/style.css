@@ -1,3 +1,67 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .contact-hero-container {
   display: flex;
   flex-direction: column;
@@ -92,7 +156,7 @@
 .contact-hero-container .contact {
   z-index: 1;
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   padding-bottom: 2.5rem;
@@ -132,11 +196,37 @@
 .contact-hero-container .contact form {
   height: 100%;
 }
-.contact-hero-container .contact .gform-body .grform_fields,
-.contact-hero-container .contact .gform_body .grform_fields {
+.contact-hero-container .contact .gform-body .gform_fields,
+.contact-hero-container .contact .gform_body .gform_fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
+  gap: 1rem;
+}
+.contact-hero-container .contact .gform-body .gform_fields .gfield,
+.contact-hero-container .contact .gform_body .gform_fields .gfield {
+  width: 100%;
+}
+.contact-hero-container .contact .gform-body .gform_fields .gfield .ginput_container,
+.contact-hero-container .contact .gform_body .gform_fields .gfield .ginput_container {
+  width: 100%;
+}
+.contact-hero-container .contact .gform-body .gform_fields .gfield .ginput_container input,
+.contact-hero-container .contact .gform-body .gform_fields .gfield .ginput_container textarea,
+.contact-hero-container .contact .gform_body .gform_fields .gfield .ginput_container input,
+.contact-hero-container .contact .gform_body .gform_fields .gfield .ginput_container textarea {
+  width: 100%;
+}
+.contact-hero-container .contact .gform-body .gform_fields .gfield.gfield--type-name,
+.contact-hero-container .contact .gform_body .gform_fields .gfield.gfield--type-name {
+  display: flex;
+  flex-direction: column;
+}
+.contact-hero-container .contact .gform-body .gform_fields .gfield.gfield--type-name .ginput_container,
+.contact-hero-container .contact .gform_body .gform_fields .gfield.gfield--type-name .ginput_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 .contact-hero-container .contact .contact-link .footer-social-link {
   display: block;
@@ -289,6 +379,8 @@
   .contact-hero-container .contact form .gform-body .gform_fields .ginput_container_name,
   .contact-hero-container .contact form .gform_body .gform_fields .ginput_container_name {
     display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
     gap: 1.5rem;
   }
   .contact-hero-container .contact form .gform-body .gform_fields .gfield--type-textarea,
@@ -353,6 +445,49 @@
   .contact-hero-container .contact .contact-link a {
     display: block;
   }
+}
+.ginput_container_select {
+  position: relative;
+}
+
+.ginput_container_select select {
+  display: none; /*hide original SELECT element: */
+}
+
+/* Style the arrow inside the select element: */
+/* Point the arrow upwards when the select box is open (active): */
+/* style the items (options), including the selected item: */
+.selected-container {
+  border-bottom: 2px solid #fff;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 /*# sourceMappingURL=style.css.map */

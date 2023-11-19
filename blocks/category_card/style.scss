@@ -52,8 +52,9 @@
 
     transition: all 0.2s ease-in-out;
     .category-card-image {
+      padding-top: 10%;
       transition: all 0.2s ease-in-out;
-      max-height: 306px;
+      max-height: 85%;
       object-fit: contain;
     }
 
@@ -66,8 +67,10 @@
 
       h5 {
         padding-left: 1.5rem;
+        padding-bottom: 0.5rem;
       }
       .product-category-link {
+        align-self: end;
         display: flex;
         align-items: center;
         justify-content: center;

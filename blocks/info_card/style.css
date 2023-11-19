@@ -54,6 +54,14 @@
     transform: scale(1.075);
   }
 }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .animate.info-card {
   opacity: 0;
 }
@@ -131,6 +139,7 @@
   left: 0;
   mix-blend-mode: multiply;
   opacity: 0;
+  transition: opacity 0.1s ease-in-out;
 }
 .info-card .icon-image {
   z-index: 2;
@@ -151,16 +160,14 @@
 }
 .info-card:hover .info-card-text {
   z-index: 2;
-  animation-name: grow;
-  animation-delay: 150ms;
-  animation-fill-mode: forwards;
-  animation-duration: 100ms;
 }
 .info-card:hover .info-card-text .info-card-message {
-  grid-template-rows: 1fr;
-  margin-top: 2.5rem;
+  opacity: 0;
+  animation-name: grow-card;
+  animation-delay: 150ms;
+  animation-fill-mode: forwards;
+  animation-duration: 300ms;
   margin-bottom: auto;
-  transition: all 200ms ease-in-out;
 }
 .info-card:hover .background-image {
   opacity: 1;
@@ -187,17 +194,26 @@
   line-height: 1.625rem;
   display: grid;
   grid-template-rows: 0fr;
+  transform: translateY(4rem);
 }
 .info-card .info-card-text .info-card-message div {
   overflow: hidden;
 }
 
-@keyframes grow {
-  from {
-    flex-grow: 0;
+@keyframes grow-card {
+  0% {
+    grid-template-rows: 0;
+    opacity: 0;
   }
-  to {
-    flex-grow: 1;
+  10% {
+    grid-template-rows: 1fr;
+    transform: translateY(4rem);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    grid-template-rows: 1fr;
   }
 }
 

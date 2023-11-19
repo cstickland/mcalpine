@@ -3,6 +3,7 @@
     "title": "Hero Contact Form",
     "description": "A custom testing block.",
     "style": [ "file:./style.css" ],
+    "script": "file:./hero-contact.js",
     "category": "formatting",
     "icon": "admin-comments",
     "keywords": ["testimonial", "quote"],

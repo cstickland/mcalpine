@@ -1,6 +1,7 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .marquee-block {
+  overflow: hidden;
   .wrap {
     padding-top: 0 !important;
     padding-bottom: 0 !important;

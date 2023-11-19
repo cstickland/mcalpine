@@ -72,6 +72,7 @@
                 on:input={getResults}
                 placeholder="Search a product name, SKU or term…"
                 autofocus
+                autocomplete="off"
             />
         {/if}
     {:else}
@@ -92,7 +93,7 @@
 
     .mobile-nav-controls {
         padding: 1.125rem;
-        box-shadow: 0 -3px 10px #0000000d;
+        box-shadow: 0 3px 10px #0000000d;
 
         display: flex;
         flex-direction: row;
@@ -114,6 +115,10 @@
             flex-grow: 1;
             outline: 0;
             padding: 0;
+
+            &:focus-visible {
+            box-shadow: none;
+            }
         }
     }
 </style>

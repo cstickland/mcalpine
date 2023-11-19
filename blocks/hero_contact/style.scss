@@ -125,10 +125,34 @@
     }
     .gform-body,
     .gform_body {
-      .grform_fields {
+      .gform_fields {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
+        gap: 1rem;
+
+        .gfield {
+          width: 100%;
+
+          .ginput_container {
+            width: 100%;
+
+            input,
+            textarea {
+              width: 100%;
+            }
+          }
+
+          &.gfield--type-name {
+            display: flex;
+            flex-direction: column;
+            .ginput_container {
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+          }
+        }
       }
     }
 
@@ -297,6 +321,9 @@
             }
             .ginput_container_name {
               display: flex;
+              flex-direction: row !important;
+
+              flex-wrap: nowrap;
               gap: 1.5rem;
             }
             .gfield--type-textarea {
@@ -374,4 +401,49 @@
       }
     }
   }
+}
+
+.ginput_container_select {
+  position: relative;
+}
+
+.ginput_container_select select {
+  display: none; /*hide original SELECT element: */
+}
+
+/* Style the arrow inside the select element: */
+
+/* Point the arrow upwards when the select box is open (active): */
+
+/* style the items (options), including the selected item: */
+.selected-container {
+  border-bottom: 2px solid #fff;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }

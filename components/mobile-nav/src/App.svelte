@@ -57,8 +57,9 @@
     on:submit|preventDefault
     bind:this={form}
 >
-    <Content {form} />
+    
     <Controls />
+    <Content {form} />
 </form>
 
 <style lang="scss">
