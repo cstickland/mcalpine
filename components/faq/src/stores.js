@@ -3,7 +3,7 @@ import { writable } from 'svelte/store'
 export const filters = writable(new Set())
 
 export const query = `{
-  posts(where: {categoryName: "faq"}) {
+  posts(where: {categoryName: "faq"}, first: 200) {
     edges {
       node {
         postId

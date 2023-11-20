@@ -35,3 +35,4 @@ require_once('timeline/timeline.php');
 require_once('image_text_product/image-and-text-product.php');
 require_once('hero_search/hero-search.php');
 require_once('marquee/marquee.php');
+require_once('image_text_full_width/image-and-text-full-width.php');

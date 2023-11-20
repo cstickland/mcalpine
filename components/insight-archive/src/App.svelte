@@ -93,7 +93,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage{totalPages} />
+            <Pagination bind:currentPage {totalPages} />
         {/if}
     </div>
 </section>

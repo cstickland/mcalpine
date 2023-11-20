@@ -121,6 +121,30 @@
               grid-area: 1 / 1 / span 1 / span 1;
               align-self: center;
               justify-self: center;
+              width: 100%;
+              height: 100%;
+              max-width: 400px;
+              max-height: 400px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              overflow: hidden;
+
+              svg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                stroke-width: 1px;
+                * {
+                  stroke-width: 1px;
+                }
+              }
+              img {
+                width: 100%;
+                height: 100%;
+                max-width: 65%;
+                object-fit: contain;
+              }
             }
 
             .home-hero-hover-image {
@@ -129,6 +153,11 @@
               align-self: center;
               justify-self: center;
               transition: opacity 0.25s linear;
+              max-width: 385px;
+              max-height: 385px;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
             }
           }
         }
@@ -174,7 +203,7 @@
         &:nth-of-type(2) {
           height: 6rem;
           width: 25rem;
-          bottom: 15%;
+          bottom: 0;
           left: 10%;
         }
       }
@@ -302,7 +331,7 @@
   }
   90% {
     opacity: 1;
-    transform: scale(1.05) translateX(2%) translateY(2%);
+    transform: scale(1.05) translateX(-2%) translateY(-2%);
   }
   100% {
     opacity: 0;
@@ -322,7 +351,7 @@
   }
   90% {
     opacity: 1;
-    transform: scale(1.05) translateX(-2%) translateY(2%);
+    transform: scale(1.05) translateX(2%) translateY(-2%);
   }
   100% {
     opacity: 0;
@@ -342,7 +371,7 @@
   }
   90% {
     opacity: 1;
-    transform: scale(1.05) translateX(2%) translateY(-2%);
+    transform: scale(1.05) translateX(-2%) translateY(2%);
   }
   100% {
     opacity: 0;
@@ -362,7 +391,7 @@
   }
   90% {
     opacity: 1;
-    transform: scale(1.05) translateX(-2%) translateY(-2%);
+    transform: scale(1.05) translateX(2%) translateY(2%);
   }
   100% {
     opacity: 0;

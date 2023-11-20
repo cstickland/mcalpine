@@ -54,6 +54,14 @@
     transform: scale(1.075);
   }
 }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .acf-innerblocks-container .help-card:nth-of-type(2) {
   animation-delay: 200ms;
 }
@@ -1473,7 +1481,7 @@
   transform-origin: top left;
 }
 
-.editor-styles-wrapper .animate .product-card-container {
+.editor-styles-wrapper .animate .help-card {
   opacity: 1;
 }
 
@@ -1493,6 +1501,14 @@
 .help-card .help-card-content .help-card-image {
   padding-bottom: 4.125rem;
   width: 3.25rem;
+  height: max-content;
+}
+.help-card .help-card-content .help-card-image svg {
+  width: 100%;
+  height: auto;
+}
+.help-card .help-card-content .help-card-image svg * {
+  stroke-width: 100%;
 }
 .help-card .help-card-content .help-card-title.c-red {
   color: #e63128;

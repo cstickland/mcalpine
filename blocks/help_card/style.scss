@@ -71,7 +71,7 @@
 
 .editor-styles-wrapper {
   .animate {
-    .product-card-container {
+    .help-card {
       opacity: 1;
     }
   }
@@ -92,6 +92,15 @@
     .help-card-image {
       padding-bottom: 4.125rem;
       width: 3.25rem;
+      height: max-content;
+
+      svg {
+        width: 100%;
+        height: auto;
+        * {
+          stroke-width: 100%;
+        }
+      }
     }
     .help-card-title {
       &.c-red {

@@ -1,18 +1,14 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block']); ?> id="query-<?php the_title(); ?>">
-    <div class="image-text-container  <?php if (get_field('image_full_width')) :
-                                            echo 'image-full-width ';
-                                        endif;
-                                        if (get_field('show_overflow_image')) : echo 'overflow ';
-                                        endif;
+    <div class="image-text-container  <?php
                                         echo get_field('color') . ' ';
                                         echo get_field('image_alignment_mobile') . ' ';
                                         echo get_field('image_alignment_desktop'); ?>">
         <div class="text-container 
-                <?php the_field('color');
+                <?php the_field('color'); ?> 
 
-                if (get_field('text_alignment_desktop')) :
-                    the_field('text_alignment_desktop');
-                endif; ?>">
+<?php if (get_field('text_alignment_desktop')) :
+    the_field('text_alignment_desktop');
+endif; ?>">
             <div class="color-block"></div>
             <h2><?php the_field('title'); ?></h2>
             <?php if (get_field('text')) : ?>
@@ -34,8 +30,7 @@
                 </a>
             <?php endif; ?>
         </div>
-        <div class="image-container <?php if (get_field('image_full_width')) : echo 'image-full-width';
-                                    endif; ?>">
+        <div class="image-container">
             <?php $image = get_field('image');
             $image_alt = $image['alt'];
             $image_url = $image['url'];

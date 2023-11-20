@@ -44,7 +44,7 @@
 .nav-hover-padding-container {
     padding-top: 31px;
     position: absolute;
-    top: 80px;
+    top: 48px;
     left: 0;
     width: 100%;
 

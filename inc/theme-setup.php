@@ -99,6 +99,14 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         );
         return $allowed_blocks;
     }
+    if ('post' === $editor_context->post->post_type) {
+        $allowed_blocks = array(
+            'core/freeform'
+        );
+        return $allowed_blocks;
+    }
+
+
     $allowed_blocks = array(
         'mcalpine/hero-contact',
         'mcalpine/image-text',
@@ -129,7 +137,9 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/vertical-text",
         "mcalpine/timeline",
         "mcalpine/search-hero",
-        "mcalpine/marquee"
+        "mcalpine/marquee",
+        "core/freeform",
+        "mcalpine/image-text-full",
     );
     return $allowed_blocks;
 }

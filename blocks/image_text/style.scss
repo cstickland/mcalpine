@@ -58,7 +58,6 @@
       position: relative;
 
       .image-text-background-image {
-        position: absolute;
         top: 0;
         left: 0;
         min-width: 100%;
@@ -110,16 +109,6 @@
     .text-block-hash {
       display: none;
     }
-    &.image-full-width {
-      .text-container {
-        background-color: $color__mcalpine-red;
-        color: #ffffff;
-
-        .color-block {
-          background-color: #ffffff;
-        }
-      }
-    }
   }
 }
 
@@ -138,56 +127,6 @@
           max-width: 420px;
         }
       }
-      &.image-full-width {
-        grid-template-rows: 3fr 2fr 80px;
-
-        .image-container {
-          grid-area: 1 / 1 / span 2 / span 12;
-          width: 100%;
-          z-index: 1;
-          img {
-            width: auto;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-          }
-        }
-
-        .text-container {
-          background-color: $color__mcalpine-red;
-          width: 100%;
-          color: white;
-          padding-left: 5rem;
-          &.align-left {
-            grid-area: 2 / 1 / span 1 / span 4;
-          }
-
-          &.align-right {
-            grid-area: 2 / 9 / span 1 / span 4;
-          }
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          .color-block {
-            background-color: #fff;
-          }
-        }
-
-        .text-block-hash {
-          &.align-left {
-            grid-area: 3 / 1 / span 1 / span 3;
-          }
-          &.align-right {
-            grid-area: 3 / 10 / span 1 / span 3;
-          }
-          overflow: hidden;
-          img {
-            width: 1400px;
-            max-width: none;
-          }
-        }
-      }
       &.color-red {
         grid-template-rows: 1fr 8fr 80px;
 
@@ -200,7 +139,6 @@
           }
         }
         .image-container {
-          height: 100%;
           width: auto;
           img {
             width: 100%;
@@ -215,7 +153,7 @@
           width: auto;
           display: flex;
           flex-direction: column;
-          justify-content: end;
+          justify-content: center;
           padding-bottom: 7.5%;
 
           p {
@@ -226,6 +164,7 @@
         &.i-left {
           .image-container {
             grid-area: 1 / 1 / span 2 / span 8;
+            aspect-ratio: 16/9;
           }
           .text-container {
             grid-area: 2 / 5 / span 2 / span 8;
@@ -286,16 +225,10 @@
       }
 
       .text-container {
-        min-width: 30%;
-        width: 30%;
         .color-block {
           width: 93px;
           height: 1.5rem;
         }
-      }
-
-      .image-container {
-        width: 66%;
       }
     }
   }

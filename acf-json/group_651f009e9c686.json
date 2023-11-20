@@ -154,7 +154,7 @@
                 {
                     "key": "field_6536700516cc5",
                     "label": "Image Two Schematic",
-                    "name": "image_two_schematic_",
+                    "name": "image_two_schematic",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
@@ -260,5 +260,5 @@
     "graphql_field_name": "homeHero",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1698075514
+    "modified": 1700474336
 }

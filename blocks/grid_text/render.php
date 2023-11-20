@@ -31,11 +31,13 @@
                 <?php $image = get_field('background_image');
                 $image_alt = $image['alt'];
                 $image_url = $image['url'];
+                ?>
 
-                if (!empty($image)) : ?>
-                    <img class="background-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
-                <?php endif; ?>
-
+                <?php if (pathinfo($image_url)['extension'] == 'svg') {
+                    echo file_get_contents($image_url);
+                } else { ?>
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" class="background-image-schematic" />
+                <?php } ?>
             <?php } ?>
         </div>
     </div>

@@ -38,41 +38,43 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#each $productCategories as category}
-                {#if category.node.parentId == categoryParentId}
-                    <div
-                        class="category-item {versionClass}"
-                        on:click={() => {
-                            setParentCategories(
-                                category.node.id,
-                                category.node.name,
-                                category.node.link
-                            );
-                        }}
-                        on:keydown
-                    >
-                        <div>{category.node.name}</div>
-                        <div class="background-gradient" />
-                        <div class="category-image-container">
-                            {#if category.node.customFields.categoryImage}
-                                <img
-                                    src={category.node.customFields
-                                        .categoryImage.sourceUrl}
-                                    alt={category.node.customFields
-                                        .categoryImage.sourceUrl}
-                                    loading="lazy"
-                                />
-                            {:else}
-                                <img
-                                    src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
-                                    alt=""
-                                    loading="lazy"
-                                />
-                            {/if}
+            {#if [...$productCategories].length > 0}
+                {#each [...$productCategories] as category}
+                    {#if category.node.parentId == categoryParentId}
+                        <div
+                            class="category-item {versionClass}"
+                            on:click={() => {
+                                setParentCategories(
+                                    category.node.id,
+                                    category.node.name,
+                                    category.node.link
+                                );
+                            }}
+                            on:keydown
+                        >
+                            <div>{category.node.name}</div>
+                            <div class="background-gradient" />
+                            <div class="category-image-container">
+                                {#if category.node.customFields.categoryImage}
+                                    <img
+                                        src={category.node.customFields
+                                            .categoryImage.sourceUrl}
+                                        alt={category.node.customFields
+                                            .categoryImage.sourceUrl}
+                                        loading="lazy"
+                                    />
+                                {:else}
+                                    <img
+                                        src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
+                                        alt=""
+                                        loading="lazy"
+                                    />
+                                {/if}
+                            </div>
                         </div>
-                    </div>
-                {/if}
-            {/each}
+                    {/if}
+                {/each}
+            {/if}
         </div>
     </div>
 {:else}
@@ -95,34 +97,36 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#each $productCategories as category}
-                {#if category.node.parentId == categoryParentId}
-                    <a
-                        href={category.node.link}
-                        class="category-item {versionClass}"
-                    >
-                        <div>{category.node.name}</div>
-                        <div class="background-gradient" />
-                        <div class="category-image-container">
-                            {#if category.node.customFields.categoryImage}
-                                <img
-                                    src={category.node.customFields
-                                        .categoryImage.sourceUrl}
-                                    alt={category.node.customFields
-                                        .categoryImage.sourceUrl}
-                                    loading="lazy"
-                                />
-                            {:else}
-                                <img
-                                    src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
-                                    alt=""
-                                    loading="lazy"
-                                />
-                            {/if}
-                        </div>
-                    </a>
-                {/if}
-            {/each}
+            {#if [...$productCategories].length > 0}
+                {#each [...$productCategories] as category}
+                    {#if category.node.parentId == categoryParentId}
+                        <a
+                            href={category.node.link}
+                            class="category-item {versionClass}"
+                        >
+                            <div>{category.node.name}</div>
+                            <div class="background-gradient" />
+                            <div class="category-image-container">
+                                {#if category.node.customFields.categoryImage}
+                                    <img
+                                        src={category.node.customFields
+                                            .categoryImage.sourceUrl}
+                                        alt={category.node.customFields
+                                            .categoryImage.sourceUrl}
+                                        loading="lazy"
+                                    />
+                                {:else}
+                                    <img
+                                        src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
+                                        alt=""
+                                        loading="lazy"
+                                    />
+                                {/if}
+                            </div>
+                        </a>
+                    {/if}
+                {/each}
+            {/if}
         </div>
     </div>
 {/if}

@@ -9,7 +9,7 @@ if ($link) {
 }
 ?>
 <?php if ($link) { ?>
-    <a href="<?php echo esc_url($link_url); ?>" class="help-card">
+    <a href="<?php echo esc_url($link_url); ?>" <?php echo get_block_wrapper_attributes(['class' => 'help-card']); ?>>
     <?php } else { ?>
         <div <?php echo get_block_wrapper_attributes(['class' => 'help-card']); ?>>
         <?php } ?>
@@ -17,9 +17,19 @@ if ($link) {
             <?php
             $image = get_field('image');
             if (!empty($image)) :
+
+                $image_url = $image['url'];
+                $image_alt = $image['alt'];
             ?>
-                <img class="help-card-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-            <?php endif; ?>
+                <?php if (pathinfo($image_url)['extension'] == 'svg') {
+                    echo '<div class="help-card-image">';
+                    echo file_get_contents($image_url);
+                    echo '</div>';
+                } else { ?>
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" class="help-card-image" />
+            <?php }
+            endif; ?>
+
             <?php if (get_field('title')) : ?>
                 <h4 class="help-card-title c-<?php the_field('title_colour'); ?>"><?php the_field('title'); ?></h4>
             <?php endif; ?>

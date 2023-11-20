@@ -128,10 +128,10 @@ h1,
 
   @media only screen and (min-width: $tablet) {
     font-size: 1.802rem;
-    font-size: clamp(1.802rem, calc(-0.6447rem + 5.0973vw), 3.433125rem);
+    font-size: clamp(1.802rem, calc(1.228rem + 1.838vw), 3.433rem);
   }
 
-  @media only screen and (min-width: $desktop) {
+  @media only screen and (min-width: $desktop__full) {
     font-size: 3.433125rem;
   }
 }
@@ -142,10 +142,10 @@ h2,
 
   @media only screen and (min-width: $tablet) {
     font-size: 1.6rem;
-    font-size: clamp(1.6rem, calc(-0.125rem + 3.5937vw), 2.75rem);
+    font-size: clamp(1.6rem, calc(1.195rem + 1.296vw), 2.75rem);
   }
 
-  @media only screen and (min-width: $desktop) {
+  @media only screen and (min-width: $desktop__full) {
     font-size: 2.75rem;
   }
 }

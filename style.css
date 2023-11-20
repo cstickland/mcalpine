@@ -465,8 +465,8 @@ h1,
     h1,
     .h1 {
       font-size: 1.802rem;
-      font-size: clamp(1.802rem, calc(-0.6447rem + 5.0973vw), 3.43312rem); } }
-  @media only screen and (min-width: 64rem) {
+      font-size: clamp(1.802rem, calc(1.228rem + 1.838vw), 3.433rem); } }
+  @media only screen and (min-width: 120rem) {
     h1,
     .h1 {
       font-size: 3.433125rem; } }
@@ -478,8 +478,8 @@ h2,
     h2,
     .h2 {
       font-size: 1.6rem;
-      font-size: clamp(1.6rem, calc(-0.125rem + 3.5937vw), 2.75rem); } }
-  @media only screen and (min-width: 64rem) {
+      font-size: clamp(1.6rem, calc(1.195rem + 1.296vw), 2.75rem); } }
+  @media only screen and (min-width: 120rem) {
     h2,
     .h2 {
       font-size: 2.75rem; } }
@@ -747,6 +747,8 @@ fieldset {
     align-items: center; }
   .main-nav .resultImage {
     max-width: 100%; }
+  .main-nav .cls-1 {
+    fill: #e63128; }
   .main-nav .desktop-menu {
     display: none;
     background-color: #ffffff; }
@@ -3900,6 +3902,7 @@ fieldset {
   container-name: insight-card; }
   .insight-card .insight-card-image-container {
     grid-area: 1 / 1 / span 2 / span 1;
+    background-color: #e63128;
     position: relative;
     top: 0;
     left: 0;

@@ -21,6 +21,7 @@
   "dependencies": {
     "sass": "^1.69.3",
     "sirv-cli": "^2.0.0",
+    "svelte-preprocess": "^5.1.0",
     "svelte-scrollto": "^0.2.0"
   }
 }
