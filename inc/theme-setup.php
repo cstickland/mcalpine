@@ -94,7 +94,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         $allowed_blocks = array(
             'macalpine/image-text-product',
             'mcalpine/image-text',
-            'acf/reviews'
+            'acf/reviews',
+            "mcalpine/product-suitability"
 
         );
         return $allowed_blocks;
