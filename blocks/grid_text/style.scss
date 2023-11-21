@@ -40,7 +40,6 @@
     .grid-container {
       .acf-innerblocks-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 424px));
         gap: 1.5rem;
         justify-content: center;
       }
@@ -70,7 +69,31 @@
   }
 }
 
-@media only screen and (min-width: $desktop) {
+@media only screen and (min-width: $tablet) {
+  .grid-text-block {
+    .image-text-container {
+      .grid-container {
+        .acf-innerblocks-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop__large) {
+  .grid-text-block {
+    .image-text-container {
+      .grid-container {
+        .acf-innerblocks-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 100rem) {
   .grid-text-block {
     .image-text-container {
       display: flex;
@@ -98,6 +121,7 @@
 
         .acf-innerblocks-container {
           gap: 1.5rem;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 424px));
           grid-auto-flow: row;
           direction: rtl;
           justify-content: start;

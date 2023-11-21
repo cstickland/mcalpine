@@ -23,13 +23,40 @@
                 <?php endif; ?>
 
             <?php } ?>
-        </div>
 
-        <div class="text-container 
-<?php
-if (get_field('text_alignment_desktop')) :
-    the_field('text_alignment_desktop');
-endif; ?>">
+            <div class="text-container desktop
+        <?php
+        if (get_field('text_alignment_desktop')) :
+            the_field('text_alignment_desktop');
+        endif; ?>">
+                <div class="color-block"></div>
+                <h2><?php the_field('title'); ?></h2>
+                <?php if (get_field('text')) : ?>
+                    <p><?php the_field('text'); ?></p>
+                <?php endif; ?>
+                <?php $link = get_field('link');
+                if ($link) :
+                    $link_url = $link['url'];
+                    $link_title = $link['title'];
+                    $link_target = $link['target'] ? $link['target'] : '_self';
+                ?>
+
+                    <a class="btn btn-white" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                        <?php echo esc_html($link_title); ?>
+                    </a>
+                <?php endif; ?>
+                <div class="text-block-hash <?php if (get_field('text_alignment_desktop')) :
+                                                the_field('text_alignment_desktop');
+                                            endif; ?> ">
+                    <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+                </div>
+            </div>
+        </div>
+        <div class="text-container mobile 
+        <?php
+        if (get_field('text_alignment_desktop')) :
+            the_field('text_alignment_desktop');
+        endif; ?>">
             <div class="color-block"></div>
             <h2><?php the_field('title'); ?></h2>
             <?php if (get_field('text')) : ?>
@@ -46,6 +73,11 @@ endif; ?>">
                     <?php echo esc_html($link_title); ?>
                 </a>
             <?php endif; ?>
+            <div class="text-block-hash <?php if (get_field('text_alignment_desktop')) :
+                                            the_field('text_alignment_desktop');
+                                        endif; ?> ">
+                <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+            </div>
         </div>
 
     </div>

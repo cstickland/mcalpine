@@ -41,6 +41,7 @@
   @include container-large;
   padding-top: 0 !important;
   .image-text-container {
+    padding-bottom: 2.5rem;
     position: relative;
     overflow: hidden;
 
@@ -90,29 +91,59 @@
       }
       .overflow-image {
         position: absolute;
+        z-index: 3;
       }
     }
     .text-container {
+      position: relative;
       padding: 2rem;
       padding: clamp(2rem, 0.944rem + 3.38vw, 5rem);
       background-color: $color__mcalpine-red;
       color: #ffffff;
+      max-height: 100%;
+
+      &.mobile {
+        display: block;
+      }
+
+      &.desktop {
+        display: none;
+      }
       p {
         margin-bottom: 2rem;
         max-width: 405px;
       }
       h2 {
-        max-width: 350px;
-        padding-top: 2.5rem;
+        max-width: 400px;
+        padding-top: 1.5rem;
+        padding-bottom: 1rem;
+        text-align: left;
+        width: 16ch;
       }
       .color-block {
         background-color: #ffffff;
         height: 0.75rem;
         width: 56px;
       }
-    }
-    .text-block-hash {
-      display: none;
+      .text-block-hash {
+        display: block;
+        position: absolute;
+        top: 100%;
+        width: 40%;
+        overflow: hidden;
+        height: 2.5rem;
+
+        &.align-left {
+          left: 0;
+        }
+        &.align-right {
+          right: 0;
+        }
+        img {
+          width: 120rem;
+          max-width: none;
+        }
+      }
     }
   }
 }
@@ -122,6 +153,7 @@
     .image-text-container {
       position: relative;
       overflow: visible;
+      padding-bottom: 0;
       .text-block-hash {
         display: block;
       }
@@ -144,6 +176,15 @@
         width: fit-content;
         bottom: 0;
         color: white;
+        z-index: 2;
+
+        &.mobile {
+          display: none;
+        }
+
+        &.desktop {
+          display: block;
+        }
         &.align-left {
           left: 0;
         }
@@ -161,23 +202,11 @@
           width: 93px;
           height: 1.5rem;
         }
-      }
 
-      .text-block-hash {
-        &.align-left {
-          grid-area: 3 / 1 / span 1 / span 3;
+        .text-block-hash {
+          width: 80%;
+          height: 3.5rem;
         }
-        &.align-right {
-          grid-area: 3 / 10 / span 1 / span 3;
-        }
-        overflow: hidden;
-        img {
-          width: 1400px;
-          max-width: none;
-        }
-      }
-
-      .text-container {
       }
     }
   }
