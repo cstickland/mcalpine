@@ -7,7 +7,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const controlImages = productHero.querySelectorAll(
         '.product-image-thumbnail',
       )
-      console.log(controlImages)
       controlImages.forEach((controlImage) => {
         controlImage.addEventListener('click', () => {
           clearImages(images)

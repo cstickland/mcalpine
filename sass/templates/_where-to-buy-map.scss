@@ -1,0 +1,255 @@
+#stockist-widget {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .stockist-search-form {
+    margin: 0 1.25rem !important;
+    order: 1;
+    overflow: hidden !important;
+    padding-bottom: 0 !important;
+
+    .stockist-query-entry {
+      padding: 1.5rem !important;
+    }
+  }
+  .stockist-horizontal {
+    order: 2;
+    max-height: 17.5rem;
+    min-height: 17.5rem;
+    overflow-y: scroll !important;
+    overflow: scroll !important;
+    margin: 0 1.25rem !important;
+
+    .stockist-side-panel {
+      max-width: 100%;
+      min-width: 100%;
+      background-color: $color__mcalpine-red;
+    }
+  }
+
+  .stockist-map {
+    order: 3;
+    min-height: 80vh;
+    transform: translateY(-6rem);
+  }
+}
+
+.stockist-widget {
+  position: relative;
+  overflow: visible;
+
+  .stockist-horizontal {
+    overflow: visible !important;
+  }
+
+  .stockist-query-entry {
+    display: flex !important;
+    background-color: $color__mcalpine-red;
+    color: #fff !important;
+    flex-direction: column;
+    gap: 0;
+    &:before {
+      content: 'Find Your Local Stockist' !important;
+      width: 100% !important;
+      font-size: 2rem;
+      padding-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    input.stockist-search-field {
+      flex-grow: 1;
+      border-radius: 3px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='search'%3E%3Crect width='24' height='24' opacity='0'/%3E%3Cpath fill='%23808080' d='M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-size: 2rem;
+      background-position: 98% center;
+      padding: 1.25rem !important;
+      box-shadow: inset 0px 0px 6px #0000001a;
+      background-color: #fff;
+      border: 0 !important;
+      height: auto !important;
+    }
+
+    .stockist-search-button {
+      width: auto !important;
+      display: none !important;
+
+      button {
+        margin: 0 !important;
+      }
+    }
+  }
+  .stockist-side-panel {
+    background-color: $color__mcalpine-red;
+    color: #fff;
+    width: 424px !important;
+    position: absolute !important;
+    top: -3rem !important;
+    z-index: 2;
+    padding: 2rem !important;
+    padding-top: 2.125rem !important;
+
+    ul {
+      li {
+        border-left: 0 !important;
+        border-bottom: 1px solid #e2e2e2 !important;
+        border-top: 0 !important;
+        .stockist-icon {
+          display: none !important;
+        }
+        .stockist-result-distance {
+          display: none !important;
+        }
+        .stockist-result-name,
+        .stockist-result-address,
+        .stockist-result-details {
+          padding-left: 0 !important;
+          color: #fff;
+        }
+
+        .stockist-result-address {
+          padding-top: 1.125rem !important;
+        }
+
+        .stockist-result-details {
+          a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:hover {
+              color: $color__mcalpine-black;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .stockist-map {
+    height: 80vh !important;
+    position: relative !important;
+    left: 0 !important;
+  }
+}
+
+#stockist-widget .stockist-result-list {
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media only screen and (min-width: $desktop) {
+  #stockist-widget {
+    display: block !important;
+    position: relative;
+    overflow: visible;
+    .stockist-map {
+      transform: translateY(0);
+    }
+    .stockist-horizontal {
+      overflow: visible !important;
+      max-height: min-content !important;
+      margin: 0 !important;
+    }
+    .stockist-side-panel {
+      background-color: $color__mcalpine-red;
+      color: #fff;
+      width: 424px !important;
+      min-width: 0 !important;
+      position: absolute !important;
+      top: -3rem !important;
+      left: 78px !important;
+      z-index: 2;
+      padding: 2rem !important;
+      padding-top: 2.125rem !important;
+      .stockist-search-form {
+        margin: 0 !important;
+      }
+      .stockist-query-entry {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0;
+
+        padding: 0 !important;
+        &:before {
+          content: 'Find Your Local Stockist' !important;
+          width: 100% !important;
+          font-size: 2rem;
+          padding-bottom: 0.75rem;
+          font-weight: 700;
+        }
+        input.stockist-search-field {
+          flex-grow: 1;
+          border-radius: 3px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='search'%3E%3Crect width='24' height='24' opacity='0'/%3E%3Cpath fill='%23808080' d='M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+          background-repeat: no-repeat;
+          background-size: 2rem;
+          background-position: 98% center;
+          padding: 1.25rem !important;
+          box-shadow: inset 0px 0px 6px #0000001a;
+          background-color: #fff;
+          border: 0 !important;
+          height: auto !important;
+        }
+
+        .stockist-search-button {
+          width: auto !important;
+          display: none !important;
+
+          button {
+            margin: 0 !important;
+          }
+        }
+      }
+
+      ul {
+        li {
+          border-left: 0 !important;
+          border-bottom: 1px solid #e2e2e2 !important;
+          border-top: 0 !important;
+          .stockist-icon {
+            display: none !important;
+          }
+          .stockist-result-distance {
+            display: none !important;
+          }
+          .stockist-result-name,
+          .stockist-result-address,
+          .stockist-result-details {
+            padding-left: 0 !important;
+            color: #fff;
+          }
+
+          .stockist-result-address {
+            padding-top: 1.125rem !important;
+          }
+
+          .stockist-result-details {
+            a {
+              color: #fff;
+              font-weight: bold;
+              text-decoration: none;
+
+              &:hover {
+                color: $color__mcalpine-black;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .stockist-map {
+      height: 80vh !important;
+      position: relative !important;
+      left: 0 !important;
+    }
+  }
+
+  #stockist-widget .stockist-result-list {
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

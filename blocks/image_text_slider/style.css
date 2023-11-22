@@ -1,3 +1,67 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .image-text-slider-block .slider-buttons {
   height: 40px;
   display: flex;
@@ -69,7 +133,7 @@
 .image-text-slider-block .slide-container {
   position: relative;
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   list-style: none;
@@ -98,12 +162,13 @@
 .image-text-slider-block .image-text-container {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 3fr 4fr;
+  grid-template-rows: 3fr auto;
 }
 .image-text-slider-block .image-text-container .image-container {
   grid-area: 1/1/span 1/span 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   background-color: #f4f4f4;
 }
@@ -115,6 +180,9 @@
 }
 .image-text-slider-block .image-text-container .image-container .overflow-image {
   position: absolute;
+  object-fit: contain;
+  left: unset !important;
+  max-height: 90%;
 }
 .image-text-slider-block .image-text-container .text-container {
   grid-area: 2/1/span 1/span 1;
@@ -163,6 +231,9 @@
     aspect-ratio: 16/9;
     object-fit: cover;
     object-position: center center;
+  }
+  .image-text-slider-block .image-text-container .image-container .overflow-image {
+    max-height: unset;
   }
   .image-text-slider-block .image-text-container .red-block {
     grid-area: 3/5/span 1/span 3;

@@ -60,22 +60,3 @@ function cf_search_distinct($where)
     return $where;
 }
 add_filter('posts_distinct', 'cf_search_distinct');
-
-
-function mytheme_pre_get_posts($query)
-{
-    if ($query->is_graphql_request()) {
-        $term = get_term_by('name', get_query_var('s'), 'cars');
-        if ($term) {
-            $query->set('tax_query', array(
-                array(
-                    'taxonomy' => 'product_categories',
-                    'field'    => 'slug',
-                    'terms'    =>  $term->slug,
-                    'operator' => 'AND'
-                )
-            ));
-        }
-    }
-}
-add_action('pre_get_posts', 'mytheme_pre_get_posts', 1);

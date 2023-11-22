@@ -1,41 +1,21 @@
 @import '../../sass/abstracts/_abstracts.scss';
-.grid-block {
+.suitability-block {
   overflow: hidden;
-  @include container-large;
-  container-type: inline-size;
-  container-name: block-grid-container;
 
+  .suitability-content-container {
+    @include container-large;
+    container-type: inline-size;
+    container-name: block-suitability-container;
+  }
   .grid-title-container {
     display: flex;
     justify-content: space-between;
     align-items: end;
 
     margin-bottom: 2.5rem;
-    .grid-link {
-      display: none;
-      color: $color__mcalpine-grey;
-
-      &:hover {
-        color: $color__mcalpine-red;
-      }
-    }
     .grid-title {
       width: auto;
-      &.red {
-        color: $color__mcalpine-red;
-      }
-
-      &.white {
-        color: #ffffff;
-      }
-
-      &.black {
-        color: $color__mcalpine-black;
-      }
-      &.center {
-        margin: 0 auto;
-        margin-bottom: 2.5rem;
-      }
+      color: $color__mcalpine-black;
     }
   }
   ul {
@@ -43,113 +23,91 @@
     margin: 0;
     padding: 0;
 
-    .acf-innerblocks-container {
-      max-width: 100%;
-      display: grid;
-      grid-template-columns: 100%;
-      gap: 1.25rem;
-    }
-  }
+    max-width: 100%;
+    display: grid;
+    gap: 1.25rem;
 
-  &.scroll {
-    ul {
-      overflow: scroll;
-      padding-bottom: 2rem;
-      .acf-innerblocks-container {
-        gap: 1.125rem;
-        grid-template-columns: repeat(4, calc(50% - 0.625rem));
+    li {
+      a {
+        text-decoration: none;
+        border: 1px solid #f4f4f4;
+        color: #878787;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        width: 100%;
+
+        svg {
+          height: 1.25rem;
+          path {
+            fill: $color__mcalpine-red;
+          }
+        }
       }
     }
   }
 
-  &.column-2 {
-    ul {
-      .acf-innerblocks-container {
-        gap: 1.125rem;
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+  ul {
+    overflow: scroll;
+    padding-bottom: 2rem;
+    gap: 1.125rem;
+    grid-template-columns: repeat(4, 100%);
+    grid-template-rows: auto;
   }
 
-  .grid-link-mobile {
-    display: block;
-    margin: 1.625rem auto;
-    color: $color__mcalpine-grey;
-    width: fit-content;
-    &:hover {
-      color: $color__mcalpine-red;
+  &.red {
+    background-color: $color__mcalpine-red;
+    color: #fff;
+
+    .grid-title-container {
+      .grid-title {
+        color: #fff;
+      }
+    }
+    ul {
+      li {
+        a {
+          border: 1px solid #f85b53;
+          color: #fff;
+
+          box-shadow: inset 0px 0px 10px #0000000d;
+          svg {
+            path {
+              fill: #fff;
+            }
+          }
+        }
+      }
     }
   }
 }
 
 @supports (container-type: inline-size) {
-  @container block-grid-container (min-width: 700px) {
-    .grid-block {
+  @container block-suitability-container (min-width: 700px) {
+    .suitability-block {
       ul {
-        .acf-innerblocks-container {
-          grid-template-columns: 1fr 1fr;
-        }
+        grid-template-columns: 1fr 1fr;
       }
     }
   }
-  @container block-grid-container (min-width: 1050px) {
-    .grid-block {
+  @container block-suitability-container (min-width: 1050px) {
+    .suitability-block {
       .grid-title-container {
         .grid-link {
           display: block;
         }
       }
-
       ul {
-        .acf-innerblocks-container {
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-      }
-
-      &.scroll {
-        ul {
-          .acf-innerblocks-container {
-            grid-template-columns: 1fr 1fr 1fr;
-          }
-        }
-      }
-
-      &.column-2 {
-        ul {
-          .acf-innerblocks-container {
-            grid-template-columns: 1fr 1fr 1fr;
-          }
-        }
-      }
-
-      .grid-link-mobile {
-        display: none;
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
   }
 
-  @container block-grid-container (min-width: 1400px) {
-    .grid-block {
+  @container block-suitability-container (min-width: 1400px) {
+    .suitability-block {
       ul {
-        .acf-innerblocks-container {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-
-      &.scroll {
-        ul {
-          .acf-innerblocks-container {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-      }
-
-      &.column-2 {
-        ul {
-          .acf-innerblocks-container {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   }

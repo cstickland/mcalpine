@@ -1,3 +1,7 @@
+import { writable } from 'svelte/store'
+
+export const previousSuggestions = writable([])
+
 export const menuQuery = `{
   menus(where: {slug: "interest"}) {
     edges {

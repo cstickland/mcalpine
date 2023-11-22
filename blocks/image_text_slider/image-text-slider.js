@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = slider.querySelectorAll('.slide')
     let activeSlide = 0
     let slideCount = slides.length
-    console.log(slideCount)
 
     const prevButton = slider.querySelector('.prev-button')
 

@@ -43,8 +43,10 @@ $results = [];
     <ul>
         <?php
         if (have_posts()) :
+            echo '<ul>';
             while (have_posts()) :
                 the_post();
+
                 $post_type = get_post_type();
                 if ($post_type === 'post') {
                     $post_id = get_the_ID();

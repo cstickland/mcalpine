@@ -106,11 +106,12 @@
   .image-text-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 3fr 4fr;
+    grid-template-rows: 3fr auto;
     .image-container {
       grid-area: 1 / 1 / span 1 / span 1;
       display: flex;
       align-items: center;
+      justify-content: center;
       position: relative;
       background-color: #f4f4f4;
 
@@ -122,6 +123,9 @@
       }
       .overflow-image {
         position: absolute;
+        object-fit: contain;
+        left: unset !important;
+        max-height: 90%;
       }
     }
     .text-container {
@@ -178,6 +182,10 @@
           aspect-ratio: 16 / 9;
           object-fit: cover;
           object-position: center center;
+        }
+
+        .overflow-image {
+          max-height: unset;
         }
       }
 

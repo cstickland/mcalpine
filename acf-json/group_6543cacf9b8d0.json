@@ -59,7 +59,7 @@
                 "id": ""
             },
             "show_in_graphql": 1,
-            "layout": "table",
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -212,6 +212,68 @@
                     "mime_types": "",
                     "preview_size": "medium",
                     "parent_repeater": "field_6543cacf25b14"
+                },
+                {
+                    "key": "field_655e8d808dd34",
+                    "label": "Overflow Image Height",
+                    "name": "overflow_image_height",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6543cb5e25b1b",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "default_value": 100,
+                    "min": 80,
+                    "max": 150,
+                    "step": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6543cacf25b14"
+                },
+                {
+                    "key": "field_655e8d888dd35",
+                    "label": "Overflow Image Horizontal Position",
+                    "name": "overflow_image_horizontal_position",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6543cb5e25b1b",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "default_value": 0,
+                    "min": 0,
+                    "max": 100,
+                    "step": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6543cacf25b14"
                 }
             ]
         }
@@ -238,5 +300,5 @@
     "graphql_field_name": "imageTextSliderBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1698942638
+    "modified": 1700695575
 }

@@ -3,7 +3,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   /* Look for any elements with the class "custom-select": */
   x = document.querySelectorAll('.ginput_container_select')
-  console.log(x)
   l = x.length
   for (i = 0; i < l; i++) {
     selElmnt = x[i].getElementsByTagName('select')[0]

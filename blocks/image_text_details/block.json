@@ -1,13 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "mcalpine/image-text-product",
+	"name": "mcalpine/image-text-details",
 	"version": "0.1.0",
-	"title": "Image & Text Product SKUs",
+	"title": "Image & Text Details",
 	"category": "widgets",
 	"icon": "format-image",
 	"description": "Example block scaffolded with Create Block tool.",
-    "parent": ["mcalpine/product-details"],
 	"supports": {
 		"html": false},
 	"textdomain": "mcalpine",

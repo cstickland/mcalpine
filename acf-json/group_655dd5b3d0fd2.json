@@ -1,9 +1,36 @@
 {
-    "key": "group_655b9e9933285",
-    "title": "Image Text Full Width Block",
+    "key": "group_655dd5b3d0fd2",
+    "title": "Image & Text Details Block",
     "fields": [
         {
-            "key": "field_655ba02d4ddf2",
+            "key": "field_655dd5c541095",
+            "label": "Background Colour",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "white": "White",
+                "red": "Red"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_655dd5b3d5e95",
             "label": "Title",
             "name": "title",
             "aria-label": "",
@@ -24,7 +51,7 @@
             "append": ""
         },
         {
-            "key": "field_655ba03fe972f",
+            "key": "field_655dd5b3d5ee0",
             "label": "Text",
             "name": "text",
             "aria-label": "",
@@ -45,7 +72,7 @@
             "new_lines": ""
         },
         {
-            "key": "field_655ba04edeb58",
+            "key": "field_655dd5b3d5f18",
             "label": "Link",
             "name": "link",
             "aria-label": "",
@@ -62,14 +89,57 @@
             "return_format": "array"
         },
         {
-            "key": "field_655ba016bc40f",
+            "key": "field_655dd5b3d5f4f",
+            "label": "Image Alignment Desktop",
+            "name": "image_alignment_desktop",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_652a851e29e8f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "i-left": "Image Left",
+                "i-right": "Image Right"
+            },
+            "default_value": "i-right",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_655dd5b3d5f86",
             "label": "Text Alignment Desktop",
             "name": "text_alignment_desktop",
             "aria-label": "",
             "type": "select",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_652a851e29e8f",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -89,7 +159,69 @@
             "placeholder": ""
         },
         {
-            "key": "field_655ba06513c9b",
+            "key": "field_655dd5b3d5fbe",
+            "label": "Image Alignment Mobile",
+            "name": "image_alignment_mobile",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "i-top": "Image Top",
+                "i-bottom": "Image Bottom"
+            },
+            "default_value": "i-top",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_655dd5b3d5ff5",
+            "label": "Colour",
+            "name": "color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_655dd5c541095",
+                        "operator": "!=",
+                        "value": "red"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "color-red": "Red",
+                "color-white": "White"
+            },
+            "default_value": "color-white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_655dd5b3d602c",
             "label": "Image",
             "name": "image",
             "aria-label": "",
@@ -113,148 +245,6 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "medium"
-        },
-        {
-            "key": "field_655b9e99808d2",
-            "label": "Background Image Height",
-            "name": "background_image_height",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "choices": {
-                "tall": "Tall",
-                "short": "Short"
-            },
-            "default_value": "tall",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_655ba0bcce0d3",
-            "label": "Show Overflow Image",
-            "name": "show_overflow_image",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_655ba0a0ce0d2",
-            "label": "Overflow Image",
-            "name": "overflow_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_655ba0bcce0d3",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_655ba0e0ce0d4",
-            "label": "Overflow Image Height",
-            "name": "overflow_image_height",
-            "aria-label": "",
-            "type": "range",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_655ba0bcce0d3",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": 100,
-            "min": 80,
-            "max": 150,
-            "step": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_655ba14fce0d5",
-            "label": "Overflow Image Horizontal Position",
-            "name": "overflow_image_horizontal_position",
-            "aria-label": "",
-            "type": "range",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_655ba0bcce0d3",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": 0,
-            "min": 0,
-            "max": 100,
-            "step": "",
-            "prepend": "",
-            "append": ""
         }
     ],
     "location": [
@@ -262,7 +252,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "mcalpine\/image-text-full"
+                "value": "mcalpine\/image-text-details"
             }
         ]
     ],
@@ -276,8 +266,8 @@
     "description": "",
     "show_in_rest": 0,
     "show_in_graphql": 0,
-    "graphql_field_name": "imageTextFullWidthBlock",
+    "graphql_field_name": "image&TextBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1700695453
+    "modified": 1700648734
 }

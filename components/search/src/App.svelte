@@ -1,37 +1,18 @@
 <script>
     let searchQuery = "";
     export let siteUrl = "";
-    export let ajaxUrl = "";
 
-    const action = "advancedSearch";
 
     import Results from "./Results.svelte";
     import { onMount } from "svelte";
     import { slide } from 'svelte/transition';
-    import { menuQuery, getData } from "./stores.js";
+    import { menuQuery, getData, previousSuggestions } from "./stores.js";
+    import { getResults } from "./functions.js";
 
     let results = {};
     let menu = {};
     let interestsOpen = false;
-    async function getResults() {
-        if (searchQuery == "") {
-            results = {};
-            return;
-        }
-
-        let formData = new FormData();
-        formData.append("s", searchQuery);
-        formData.append("action", action);
-
-        const fetchPromise = await fetch(ajaxUrl, {
-            method: "POST",
-            body: formData,
-        });
-
-        const response = await fetchPromise.json();
-        results = response;
-    }
-
+    
     onMount(async () => {
         let fetchMenu = await getData(menuQuery);
 
@@ -113,10 +94,10 @@
             id="search-field"
             class="search-field"
             name="s"
-            on:input={getResults}
+            on:input={async () => {results = await getResults(searchQuery, previousSuggestions);}}
         />
-        {#if results?.products?.length > 0 || results?.other?.length > 0}
-            <Results {results} searchTerm={searchQuery} />
+        {#if results?.data != null || results?.other?.length > 0}
+            <Results bind:results={results} bind:searchTerm={searchQuery} />
         {/if}
     </div>
     <div></div>

@@ -4179,6 +4179,189 @@ fieldset {
     .post-content-container {
       padding-top: 5rem; } }
 
+#stockist-widget {
+  display: flex;
+  flex-direction: column;
+  position: relative; }
+  #stockist-widget .stockist-search-form {
+    margin: 0 1.25rem !important;
+    order: 1;
+    overflow: hidden !important;
+    padding-bottom: 0 !important; }
+    #stockist-widget .stockist-search-form .stockist-query-entry {
+      padding: 1.5rem !important; }
+  #stockist-widget .stockist-horizontal {
+    order: 2;
+    max-height: 17.5rem;
+    min-height: 17.5rem;
+    overflow-y: scroll !important;
+    overflow: scroll !important;
+    margin: 0 1.25rem !important; }
+    #stockist-widget .stockist-horizontal .stockist-side-panel {
+      max-width: 100%;
+      min-width: 100%;
+      background-color: #e63128; }
+  #stockist-widget .stockist-map {
+    order: 3;
+    min-height: 80vh;
+    transform: translateY(-6rem); }
+
+.stockist-widget {
+  position: relative;
+  overflow: visible; }
+  .stockist-widget .stockist-horizontal {
+    overflow: visible !important; }
+  .stockist-widget .stockist-query-entry {
+    display: flex !important;
+    background-color: #e63128;
+    color: #fff !important;
+    flex-direction: column;
+    gap: 0; }
+    .stockist-widget .stockist-query-entry:before {
+      content: 'Find Your Local Stockist' !important;
+      width: 100% !important;
+      font-size: 2rem;
+      padding-bottom: 0.75rem;
+      font-weight: 700; }
+    .stockist-widget .stockist-query-entry input.stockist-search-field {
+      flex-grow: 1;
+      border-radius: 3px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='search'%3E%3Crect width='24' height='24' opacity='0'/%3E%3Cpath fill='%23808080' d='M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-size: 2rem;
+      background-position: 98% center;
+      padding: 1.25rem !important;
+      box-shadow: inset 0px 0px 6px #0000001a;
+      background-color: #fff;
+      border: 0 !important;
+      height: auto !important; }
+    .stockist-widget .stockist-query-entry .stockist-search-button {
+      width: auto !important;
+      display: none !important; }
+      .stockist-widget .stockist-query-entry .stockist-search-button button {
+        margin: 0 !important; }
+  .stockist-widget .stockist-side-panel {
+    background-color: #e63128;
+    color: #fff;
+    width: 424px !important;
+    position: absolute !important;
+    top: -3rem !important;
+    z-index: 2;
+    padding: 2rem !important;
+    padding-top: 2.125rem !important; }
+    .stockist-widget .stockist-side-panel ul li {
+      border-left: 0 !important;
+      border-bottom: 1px solid #e2e2e2 !important;
+      border-top: 0 !important; }
+      .stockist-widget .stockist-side-panel ul li .stockist-icon {
+        display: none !important; }
+      .stockist-widget .stockist-side-panel ul li .stockist-result-distance {
+        display: none !important; }
+      .stockist-widget .stockist-side-panel ul li .stockist-result-name,
+      .stockist-widget .stockist-side-panel ul li .stockist-result-address,
+      .stockist-widget .stockist-side-panel ul li .stockist-result-details {
+        padding-left: 0 !important;
+        color: #fff; }
+      .stockist-widget .stockist-side-panel ul li .stockist-result-address {
+        padding-top: 1.125rem !important; }
+      .stockist-widget .stockist-side-panel ul li .stockist-result-details a {
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none; }
+        .stockist-widget .stockist-side-panel ul li .stockist-result-details a:hover {
+          color: #222222; }
+  .stockist-widget .stockist-map {
+    height: 80vh !important;
+    position: relative !important;
+    left: 0 !important; }
+
+#stockist-widget .stockist-result-list {
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+@media only screen and (min-width: 64rem) {
+  #stockist-widget {
+    display: block !important;
+    position: relative;
+    overflow: visible; }
+    #stockist-widget .stockist-map {
+      transform: translateY(0); }
+    #stockist-widget .stockist-horizontal {
+      overflow: visible !important;
+      max-height: min-content !important;
+      margin: 0 !important; }
+    #stockist-widget .stockist-side-panel {
+      background-color: #e63128;
+      color: #fff;
+      width: 424px !important;
+      min-width: 0 !important;
+      position: absolute !important;
+      top: -3rem !important;
+      left: 78px !important;
+      z-index: 2;
+      padding: 2rem !important;
+      padding-top: 2.125rem !important; }
+      #stockist-widget .stockist-side-panel .stockist-search-form {
+        margin: 0 !important; }
+      #stockist-widget .stockist-side-panel .stockist-query-entry {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0;
+        padding: 0 !important; }
+        #stockist-widget .stockist-side-panel .stockist-query-entry:before {
+          content: 'Find Your Local Stockist' !important;
+          width: 100% !important;
+          font-size: 2rem;
+          padding-bottom: 0.75rem;
+          font-weight: 700; }
+        #stockist-widget .stockist-side-panel .stockist-query-entry input.stockist-search-field {
+          flex-grow: 1;
+          border-radius: 3px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='search'%3E%3Crect width='24' height='24' opacity='0'/%3E%3Cpath fill='%23808080' d='M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+          background-repeat: no-repeat;
+          background-size: 2rem;
+          background-position: 98% center;
+          padding: 1.25rem !important;
+          box-shadow: inset 0px 0px 6px #0000001a;
+          background-color: #fff;
+          border: 0 !important;
+          height: auto !important; }
+        #stockist-widget .stockist-side-panel .stockist-query-entry .stockist-search-button {
+          width: auto !important;
+          display: none !important; }
+          #stockist-widget .stockist-side-panel .stockist-query-entry .stockist-search-button button {
+            margin: 0 !important; }
+      #stockist-widget .stockist-side-panel ul li {
+        border-left: 0 !important;
+        border-bottom: 1px solid #e2e2e2 !important;
+        border-top: 0 !important; }
+        #stockist-widget .stockist-side-panel ul li .stockist-icon {
+          display: none !important; }
+        #stockist-widget .stockist-side-panel ul li .stockist-result-distance {
+          display: none !important; }
+        #stockist-widget .stockist-side-panel ul li .stockist-result-name,
+        #stockist-widget .stockist-side-panel ul li .stockist-result-address,
+        #stockist-widget .stockist-side-panel ul li .stockist-result-details {
+          padding-left: 0 !important;
+          color: #fff; }
+        #stockist-widget .stockist-side-panel ul li .stockist-result-address {
+          padding-top: 1.125rem !important; }
+        #stockist-widget .stockist-side-panel ul li .stockist-result-details a {
+          color: #fff;
+          font-weight: bold;
+          text-decoration: none; }
+          #stockist-widget .stockist-side-panel ul li .stockist-result-details a:hover {
+            color: #222222; }
+    #stockist-widget .stockist-map {
+      height: 80vh !important;
+      position: relative !important;
+      left: 0 !important; }
+  #stockist-widget .stockist-result-list {
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden; } }
+
 .product-archive {
   display: grid;
   grid-template-columns: 55% 45%;

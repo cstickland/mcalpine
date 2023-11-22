@@ -40,13 +40,13 @@
                                 <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
                             <?php endif; ?>
 
-                            <?php if (get_field('show_overflow_image')) { ?>
-                                <?php $image = get_field('overflow_image');
+                            <?php if (get_sub_field('show_overflow_image') == true) { ?>
+                                <?php $image = get_sub_field('slide_overflow_image');
                                 $image_alt = $image['alt'];
                                 $image_url = $image['url'];
 
                                 if (!empty($image)) : ?>
-                                    <img class="overflow-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                                    <img class="overflow-image" style="height: <?php the_sub_field('overflow_image_height'); ?>%; left: <?php the_sub_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
                                 <?php endif; ?>
 
                             <?php } ?>

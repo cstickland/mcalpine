@@ -27,18 +27,25 @@
                             <img data-sku='<?php echo $sku; ?>' class="product-image <?php if ($count == 0) {
                                                                                             echo ' active';
                                                                                         } ?>" src="<?php the_sub_field('product_image'); ?>" />
-                <?php endwhile;
+                    <?php endwhile;
                     endif;
                     $count++;
                 endwhile;
             endif;
             $image = get_field('product_schematic_image', $post_id);
+
             if (!empty($image)) :
-                $image_alt = $image['alt'];
                 $image_url = $image['url'];
-                ?>
-                <img class="product-hero-schematic-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
-            <?php endif; ?>
+                $image_alt = $image['alt'];
+
+                if (pathinfo($image_url)['extension'] == 'svg') {
+                    echo '<div class="product-hero-schematic-image">';
+                    echo file_get_contents($image_url);
+                    echo '</div>';
+                } else { ?>
+                    <img class="product-hero-schematic-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+            <?php }
+            endif; ?>
             <div class="product-hero-control-images">
                 <?php if (have_rows('skus', $post_id)) :
                     while (have_rows('skus', $post_id)) : the_row();

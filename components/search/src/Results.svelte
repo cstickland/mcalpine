@@ -1,36 +1,53 @@
 <script>
     import Submit from "./Submit.svelte";
-    import { highlightResults } from "./functions";
+    import { highlightResults, getResults } from "./functions";
+    import { previousSuggestions } from './stores.js';
     export let results = {};
     export let searchTerm = "";
 
-    $: totalResults = results?.products?.length + results?.other?.length;
+
+    $: totalResults =
+        results?.data?.products?.nodes?.length + results?.other?.length;
 </script>
 
 {#if searchTerm.length > 0}
     <div class="results-container show" id="results-container">
-        <div class="search-results__section-title">
-            <div class="result-title">Suggestions</div>
-        </div>
+        {#if results?.data?.productCategories?.length > 0 && results?.data?.productCategories[0] != searchTerm}
+            <div class="search-results__section-title">
+                <div class="result-title">Suggestions</div>
+                {#each results?.data?.productCategories as category, i}
+                    {#if i < 3 && searchTerm != category}
+                        <div
+                            class="suggestion"
+                            on:keydown
+                            on:click={async () => {
+                                searchTerm = category;
+                                results = await getResults(searchTerm, previousSuggestions);
+                            }}
+                        >
+                            {@html highlightResults(searchTerm, category)}
+                        </div>
+                    {/if}
+                {/each}
+            </div>
+        {/if}
         <div class="search-results__section-title">
             <div class="result-title">Products</div>
-            {#if results?.products.length > 0}
-                {#each results?.products as product, i}
+            {#if results?.data?.products?.nodes.length > 0}
+                {#each results?.data?.products?.nodes as product, i}
                     {#if i < 3}
-                        <a
-                            href={product?.permalink}
-                            class="search-product-result"
-                        >
+                        <a href={product?.link} class="search-product-result">
                             <img
                                 height="58px"
                                 width="58px"
-                                src={product?.skus[0]?.product_images[0]
-                                    ?.product_image}
+                                src={product?.customFields2?.skus[0]
+                                    ?.productImages[0]?.productImage
+                                    ?.mediaItemUrl}
                                 alt=""
                                 class="result-image"
                             />
                             <div class="c-red search-product-sku-count">
-                                {product?.sku_count}
+                                {product?.customFields2?.skus.length}
                                 {#if product?.sku_count > 1}
                                     Skus
                                 {:else}Sku{/if}
@@ -38,42 +55,42 @@
                             <div>
                                 {@html highlightResults(
                                     searchTerm,
-                                    product?.name
+                                    product?.title
                                 )}
                             </div>
                         </a>
                     {/if}
                 {/each}
             {:else}
-                <div>No Products Found</div>
+                <div class="suggestion">No Products Found</div>
             {/if}
         </div>
 
-        <div class="search-results__section-title">
-            <div class="result-title">Other</div>
-            {#if results?.other.length > 0}
-                {#each results?.other as other, i}
-                    {#if i < 3}
-                        <a
-                            href={other?.permalink}
-                            class="search-product-result other"
-                        >
-                            <div>
-                                {@html highlightResults(
-                                    searchTerm,
-                                    other?.name
-                                )}
-                            </div>
-                            <div class="other-post-type">
-                                {#if other?.post_type == "post"}Article{:else if other?.post_type == "page"}Page{/if}
-                            </div>
-                        </a>
-                    {/if}
-                {/each}
-            {:else}
-                <div>No other pages found</div>
-            {/if}
-        </div>
+        <!-- <div class="search-results__section-title"> -->
+        <!--     <div class="result-title">Other</div> -->
+        <!--     {#if results?.data} -->
+        <!--         {#each results?.other as other, i} -->
+        <!--             {#if i < 3} -->
+        <!--                 <a -->
+        <!--                     href={other?.permalink} -->
+        <!--                     class="search-product-result other" -->
+        <!--                 > -->
+        <!--                     <!-- <div> --> -->
+        <!--                     <!--     {@html highlightResults( --> -->
+        <!--                     <!--         searchTerm, --> -->
+        <!--                     <!--         other?.name --> -->
+        <!--                     <!--     )} --> -->
+        <!--                     <!-- </div> --> -->
+        <!--                     <div class="other-post-type"> -->
+        <!--                         {#if other?.post_type == "post"}Article{:else if other?.post_type == "page"}Page{/if} -->
+        <!--                     </div> -->
+        <!--                 </a> -->
+        <!--             {/if} -->
+        <!--         {/each} -->
+        <!--     {:else} -->
+        <!--         <div>No other pages found</div> -->
+        <!--     {/if} -->
+        <!-- </div> -->
         <div id="search-results__other" />
         <Submit {totalResults} />
     </div>
@@ -98,10 +115,20 @@
         border-radius: 0px 0px 0.5rem 0.5rem;
 
         .search-results__section-title {
-            padding-bottom: 1.75em;
-            padding-top: 1.25em;
+            padding-bottom: 1.375rem;
             display: flex;
             flex-direction: column;
+            .suggestion {
+                padding: 0.625rem 2rem;
+                color: #5a5a5a;
+                cursor: pointer;
+
+                &:hover {
+                    background: transparent
+                        linear-gradient(270deg, #ffffff 0%, #7caef214 100%) 0%
+                        0% no-repeat padding-box;
+                }
+            }
         }
         .search-product-result {
             display: flex;

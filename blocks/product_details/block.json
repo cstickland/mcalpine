@@ -1,17 +1,20 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "mcalpine/image-text-product",
+	"name": "mcalpine/product-details",
 	"version": "0.1.0",
-	"title": "Image & Text Product SKUs",
+	"title": "Details",
 	"category": "widgets",
-	"icon": "format-image",
+	"icon": "editor-ul",
 	"description": "Example block scaffolded with Create Block tool.",
-    "parent": ["mcalpine/product-details"],
 	"supports": {
-		"html": false},
-	"textdomain": "mcalpine",
+		"html": false,
+        "jsx": true,
+        "mode": false
+	},
+	"textdomain": "faq",
 	"style": "file:./style.css",
+	"editorStyle": "file:./style.css",
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php"

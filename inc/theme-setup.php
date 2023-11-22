@@ -92,10 +92,11 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
     }
     if ('product' === $editor_context->post->post_type) {
         $allowed_blocks = array(
-            'macalpine/image-text-product',
-            'mcalpine/image-text',
             'acf/reviews',
-            "mcalpine/product-suitability"
+            "mcalpine/product-suitability",
+            'mcalpine/product-details',
+            'mcalpine/image-text-product',
+            'mcalpine/image-text-details'
 
         );
         return $allowed_blocks;
@@ -162,17 +163,17 @@ function cc_mime_types($mimes)
 }
 add_filter('upload_mimes', 'cc_mime_types');
 
-
-if (!is_admin()) {
-    function search_filter_posts($query)
-    {
-        if ($query->is_search) {
-            $query->set('post_type', ['post', 'product']);
-        }
-        if ($query->is_main_query() && !is_admin() && (is_category() || is_tag() && empty($query->query_vars['suppress_filters']))) {
-            $query->set('post_type', array('post', 'product'));
-        }
-        return $query;
-    }
-    add_filter('pre_get_posts', 'search_filter_posts');
-}
+//
+// if (!is_admin()) {
+//     function search_filter_posts($query)
+//     {
+//         if ($query->is_search) {
+//             $query->set('post_type', ['post', 'product']);
+//         }
+//         if ($query->is_main_query() && !is_admin() && (is_category() || is_tag() && empty($query->query_vars['suppress_filters']))) {
+//             $query->set('post_type', array('post', 'product'));
+//         }
+//         return $query;
+//     }
+//     add_filter('pre_get_posts', 'search_filter_posts');
+// }

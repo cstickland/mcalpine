@@ -13,7 +13,7 @@ function advanced_search()
             'product'
         ),
         'posts_per_page' => -1,
-        's' => $terms
+        's' => $terms,
     );
     $list = array(
         'products' => array(),

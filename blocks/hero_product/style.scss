@@ -84,6 +84,7 @@
         width: 100%;
         max-width: 572px;
         margin-bottom: 1.5rem;
+        z-index: 2;
         &.active {
           display: block;
         }

@@ -26,14 +26,29 @@
             </a>
             <a href={$twitter} class="social-link">
                 <svg
+                    id="Layer_2"
+                    data-name="Layer 2"
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 25.431 22.595"
-                    ><path
-                        d="M10.171,26.589A15.63,15.63,0,0,0,26.323,11.058a11.422,11.422,0,0,0,2.09-4.01.621.621,0,0,0-.875-.72,2.654,2.654,0,0,1-3.05-.537,5.492,5.492,0,0,0-7.878-.24,5.831,5.831,0,0,0-1.624,5.506c-4.73.282-7.977-1.963-10.575-5.04a.607.607,0,0,0-1.059.339,13.667,13.667,0,0,0,6.495,14.19,9.5,9.5,0,0,1-6.311,3.219.635.635,0,0,0-.2,1.186,15.531,15.531,0,0,0,6.834,1.638"
-                        transform="translate(-3.004 -4.003)"
-                        fill="#E63128"
-                    /></svg
+                    viewBox="0 0 1000.78 936.69"
                 >
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: #fff;
+                                stroke-width: 0px;
+                            }
+                        </style>
+                    </defs>
+                    <g id="svg5">
+                        <g id="layer1">
+                            <path
+                                id="path1009"
+                                class="cls-1"
+                                d="m2.44,0l386.39,516.64L0,936.69h87.51l340.42-367.76,275.05,367.76h297.8l-408.13-545.7L954.57,0h-87.51l-313.51,338.7L300.24,0H2.44Zm128.69,64.46h136.81l604.13,807.76h-136.81L131.13,64.46Z"
+                            />
+                        </g>
+                    </g>
+                </svg>
             </a>
             <a href={$instagram} class="social-link">
                 <svg
@@ -127,7 +142,7 @@
         align-self: flex-end;
 
         .social-block-links {
-            min-width: 50%; 
+            min-width: 50%;
             padding-top: 1.5rem;
             padding-bottom: 1rem;
             padding-left: 1.125rem;
@@ -140,7 +155,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                
+
                 .social-link {
                     display: block;
                     margin-right: 0.5rem;

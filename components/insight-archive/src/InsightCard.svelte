@@ -17,11 +17,13 @@
         <h3 class="insight-card-title">{insight.title}</h3>
     </div>
     <div class="insight-card-image-container">
+        {#if insight.img}
         <img
             class="insight-card-background-image"
             src={insight.img}
             alt={insight.alt ? insight.alt : ""}
         />
+        {/if}
         <div class="insight-card-hover-gradient" />
     </div>
 
