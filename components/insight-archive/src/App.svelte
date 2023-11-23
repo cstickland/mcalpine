@@ -1,28 +1,26 @@
 <script>
     export let allInsights = [];
 
-
     import InsightCard from "./InsightCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
 
-    import { filters } from './stores.js';
-    let archiveGrid;
+    import { filters } from "./stores.js";
     let currentPage = 1;
     let postsPerPage = 16;
     let categories = getCategories();
-    
+    export let showFilters = true;
+
     $: totalPages = insightsDividedIntoPages.length;
     $: insightsDividedIntoPages = divideInsightsIntoPages($filters);
     $: currentPageInsights = insightsDividedIntoPages[currentPage - 1];
-    
     function getCategories() {
         const categories = new Set();
 
         allInsights.forEach((insight) => {
             categories.add(insight.identifier);
         });
-              return categories;
+        return categories;
     }
 
     function divideInsightsIntoPages(filters) {
@@ -32,18 +30,17 @@
         let insights = [];
 
         currentPage = 1;
-
-        if(filters.size == 0) {
+        if (filters.size == 0) {
             insights = allInsights;
         }
 
-        if(filters.size > 0) {
+        if (filters.size > 0) {
             insights = [];
             allInsights.forEach((insight) => {
-                if(filters.has(insight.identifier)) {
+                if (filters.has(insight.identifier)) {
                     insights.push(insight);
                 }
-            })
+            });
         }
 
         insights.forEach((insight, i) => {
@@ -76,16 +73,16 @@
         });
         return pagesArray;
     }
-
-
 </script>
 
 <div class="insight-archive-filters-container">
-    <Filters  {categories} />
+    {#if showFilters}
+        <Filters {categories} />
+    {/if}
 </div>
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
-        <ul class="insight-archive-grid" >
+        <ul class="insight-archive-grid">
             {#each currentPageInsights as insight}
                 <InsightCard {insight} />
             {/each}

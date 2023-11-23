@@ -6,12 +6,30 @@
         linkedin,
         youtube,
         email,
+        menus,
     } from "../../stores.js";
-</script>
+    import { onMount } from "svelte";
+
+    let menuVersionOne;
+    onMount(() => {
+         $menus.forEach((menu) => {
+        if (menu.slug == "mobile-v1") {
+            menuVersionOne = menu.menuItems.nodes;
+        }
+    });
+
+    })
+   </script>
 
 <div class="social-block">
     <div class="social-block-links">
-        <div class="social-block-menu">Version 1</div>
+        <div class="social-block-menu">
+            {#if menuVersionOne}
+                {#each menuVersionOne as link}
+                    <a href={link.url}>{link.title}</a>
+                {/each}
+            {/if}
+        </div>
         <div class="social-links-icons">
             <a href={$facebook} class="social-link">
                 <svg
@@ -162,6 +180,21 @@
                 }
                 svg {
                     height: 1rem;
+                }
+            }
+
+            .social-block-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                a{
+                 color: #878787;
+                 text-decoration: none;
+
+                 &:hover {
+                 color: #e63128;
+                 }
                 }
             }
         }

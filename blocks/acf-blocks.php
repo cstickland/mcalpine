@@ -39,3 +39,4 @@ require_once('image_text_full_width/image-and-text-full-width.php');
 require_once('product_suitability/product_suitability.php');
 require_once('product_details/product_details.php');
 require_once('image_text_details/image-and-text.php');
+require_once('video/vimeo_video.php');

@@ -1,0 +1,37 @@
+.product-sticky-links {
+  display: none;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  align-items: center;
+  gap: 2.625rem;
+
+  .home-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 1.5rem;
+    background-color: $color__mcalpine-black;
+
+    svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  .sticky-link {
+    color: #3c3c3c;
+    text-decoration: none;
+
+    &:hover {
+      color: $color__mcalpine-red;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-sticky-links {
+    display: flex;
+  }
+}

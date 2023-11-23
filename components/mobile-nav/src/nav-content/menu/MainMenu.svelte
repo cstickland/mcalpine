@@ -3,8 +3,27 @@
     import { activeMenu, version, menuParentId, menuParentTitle } from "../../stores.js";
     import SocialLinks from "./SocialLinks.svelte";
     import MenuImageLinks from "./MenuImageLinks.svelte";
+    import { onMount } from 'svelte'
     export let interests;
     export let navbar;
+    let loading = true
+
+     let parentIds = new Set();
+    onMount(() =>{
+        navbar.menuItems.nodes.forEach((item) => {
+            if(item.parentId != null) {
+                parentIds.add(item.parentId);
+            }         
+        })
+        navbar.menuItems.nodes.forEach((item) => {
+            if(parentIds.has(item.id)) {
+               item.hasChildren = true;
+            } else {
+                item.hasChildren = false;
+            }
+        })
+        loading = false;
+    })
 </script>
 
 <div
@@ -41,11 +60,12 @@
                 /></svg
             >
         </div>
+        {#if !loading}
         {#each navbar.menuItems.nodes as link}
-            {#if link.parentId == null && link.childItems.nodes.length == 0}
+            {#if link.parentId == null && link.hasChildren == false}
                 <a href={link.url} class="menu-item">{link.title}</a>
             {/if}
-            {#if link.parentId == null && link.childItems.nodes.length > 0}
+            {#if link.parentId == null && link.hasChildren == true}
                 <div class="menu-item" on:click={() => {
                     menuParentId.set(link.id)
                     menuParentTitle.set(link.title)
@@ -64,6 +84,7 @@
                 </div>
             {/if}
         {/each}
+        {/if}
     </div>
     <div class="version-container">
         {#if $version == 1}

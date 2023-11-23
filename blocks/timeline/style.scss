@@ -4,6 +4,7 @@
   max-width: 120rem;
   margin: 0 auto;
   width: 100%;
+  position: relative;
   .timeline-slides {
     list-style: none;
     margin: 0;
@@ -11,8 +12,7 @@
     overflow: scroll;
     display: flex;
     flex-direction: row;
-    scroll-snap-type: x mandatory;
-    scroll-snap-align: center;
+    scroll-behavior: smooth;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
     &::-webkit-scrollbar {
@@ -21,14 +21,54 @@
     .timeline-slide {
       display: inline-block;
       scroll-snap-align: start;
-      min-width: 80%;
-      max-width: 80%;
+      min-width: 100%;
+      max-width: 100%;
       position: relative;
+      padding-bottom: 6rem;
+
+      .slide-content {
+        img {
+          margin-top: 5rem;
+          aspect-ratio: 16/9;
+          padding: 0 50px;
+          object-fit: cover;
+          width: 100%;
+          transform: scale(0.9);
+          transform-origin: bottom left;
+          opacity: 0;
+        }
+      }
+      .slide-hash {
+        overflow: hidden;
+        position: absolute;
+        opacity: 0;
+        display: none;
+        z-index: 2;
+
+        &.slide-hash-left {
+          width: 2rem;
+          height: 25%;
+          top: 10%;
+          left: 0;
+        }
+
+        &.slide-hash-bottom-right {
+          width: 9rem;
+          height: 5.25rem;
+          bottom: 10%;
+          right: -4.5rem;
+        }
+
+        img {
+          max-width: none;
+          width: 120rem;
+        }
+      }
       .slide-year {
         opacity: 0;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 1rem;
+        left: 1.25rem;
         color: $color__mcalpine-red;
         font-size: 4.5rem;
         font-size: clamp(
@@ -44,21 +84,35 @@
       }
 
       &.active {
+        .slide-content {
+          img {
+            @include grow;
+            animation-delay: 0.3s;
+            animation-duration: 500ms;
+            transform-origin: bottom left;
+          }
+        }
+        .slide-hash {
+          opacity: 1;
+          transition: opacity 0.3s ease-in-out;
+        }
         .slide-year {
           @include fade-in;
-          animation-delay: 500ms;
+          animation-delay: 600ms;
         }
         .color-block {
           @include fade-in;
+          animation-delay: 500ms;
         }
         .slide-message {
           @include slide-in;
-          animation-delay: 800ms;
+          animation-delay: 900ms;
         }
 
         h3 {
           @include slide-in;
-          animation-delay: 650ms;
+          animation-delay: 750ms;
+          color: $color__mcalpine-red;
         }
       }
 
@@ -77,21 +131,100 @@
 
       .slide-text-container {
         white-space: unset;
+        width: 100%;
+        padding: 2.5rem 3.5rem;
+        padding-bottom: 0;
         .color-block {
           opacity: 0;
           background-color: $color__mcalpine-red;
           height: 0.75rem;
           width: 56px;
+          display: none;
         }
         .slide-message {
-          max-width: 405px;
+          max-width: 80%;
           opacity: 0;
         }
         h3 {
           opacity: 0;
           max-width: 350px;
-          padding-bottom: 1.5rem;
-          padding-top: 2.5rem;
+          padding-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+  .dots-indicator-triangle {
+    margin: 0 calc(50% - 20px);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 25px solid $color__mcalpine-red;
+  }
+  .timeline-dots {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    list-style: none;
+    max-width: 90vw;
+    width: 100%;
+    padding: 0;
+
+    padding-bottom: 0.5rem;
+    margin: 0 auto;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 2500%;
+      border-bottom: solid 1px #e7e7e7;
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 0 1.5rem;
+
+      &:hover {
+        .dot {
+          transform: scale(1.8);
+          transform-origin: center center;
+          background-color: $color__mcalpine-black;
+        }
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        background-color: $color__mcalpine-red;
+        border-radius: 50%;
+        z-index: 2;
+        transition: all 0.15s ease-in-out;
+      }
+      .dot-year {
+        color: #878787;
+        margin-bottom: 1.25rem;
+      }
+
+      &.active {
+        .dot {
+          transform: scale(1.8);
+          transform-origin: center center;
+          background-color: $color__mcalpine-black;
         }
       }
     }
@@ -104,11 +237,10 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      overflow: scroll;
+      overflow: hidden;
       display: flex;
       flex-direction: row;
-      scroll-snap-type: x mandatory;
-      scroll-snap-align: center;
+      scroll-behavior: smooth;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none;
 
@@ -121,9 +253,24 @@
         min-width: 80%;
         max-width: 80%;
         background: transparent;
-        padding: 2rem 138px;
+        padding: 2rem 7.5%;
         padding-bottom: 15rem;
         transition: background 0.5s ease-in-out;
+        .slide-hash {
+          display: block;
+          opacity: 0;
+        }
+
+        .slide-red-box {
+          opacity: 0;
+          height: 15%;
+          position: absolute;
+          right: -0.625rem;
+          width: 1.25rem;
+          top: 10%;
+          background-color: $color__mcalpine-red;
+          z-index: 2;
+        }
         &:last-of-type {
           margin-right: 20%;
         }
@@ -135,16 +282,23 @@
           position: relative;
           padding-top: 179px;
           padding-left: 0;
-          padding-bottom: 25rem;
           img {
-            max-width: 60%;
+            opacity: 1;
+            margin-top: 0;
             max-height: 509px;
             object-fit: contain;
+            max-width: 60%;
+            padding: 0;
+            transform: scale(0.8) translateX(-6rem);
           }
         }
         .slide-text-container {
           white-space: unset;
+          padding: 0;
+          width: fit-content;
           .color-block {
+            opacity: 0;
+            display: block;
             width: 93px;
             height: 1.5rem;
           }
@@ -158,13 +312,50 @@
             padding-top: 2.5rem;
           }
         }
+        .slide-year {
+          left: -3rem;
+          z-index: 3;
+        }
 
         &.active {
           .slide-content {
-            animation-name: slide-padding;
-            animation-fill-mode: forwards;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-in-out;
+            img {
+              opacity: 1;
+              animation-name: image-timeline;
+              animation-fill-mode: forwards;
+              animation-duration: 600ms;
+              animation-delay: 0ms;
+              transform-origin: bottom left;
+            }
+          }
+          .slide-hash {
+            @include fade-in;
+            animation-delay: 350ms;
+            animation-duration: 600ms;
+          }
+          .slide-red-box {
+            @include fade-in;
+            animation-delay: 500ms;
+            animation-duration: 500ms;
+          }
+          .slide-year {
+            @include fade-in;
+            animation-delay: 150ms;
+            animation-duration: 600ms;
+          }
+          .color-block {
+            @include fade-in;
+            animation-delay: 200ms;
+          }
+          .slide-message {
+            @include slide-in;
+            animation-delay: 500ms;
+          }
+
+          h3 {
+            @include slide-in;
+            animation-delay: 350ms;
+            color: $color__mcalpine-red;
           }
         }
       }
@@ -193,5 +384,14 @@
 
   100% {
     padding-left: 8rem;
+  }
+}
+
+@keyframes image-timeline {
+  from {
+    transform: scale(0.8) translateX(-6rem);
+  }
+  to {
+    transform: scale(1) translateX(0);
   }
 }

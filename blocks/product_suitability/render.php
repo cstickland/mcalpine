@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'suitability-block animate ' . get_field('background_color')]); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'suitability-block animate ' . get_field('background_color')]); ?> id="suitability">
     <div class="suitability-content-container">
         <div class="grid-title-container">
             <h2 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">

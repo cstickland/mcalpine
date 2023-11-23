@@ -36,6 +36,7 @@ function mcalpine_setup()
             'navbar' => esc_html__('Navbar', 'mcalpine'),
             'interests' => esc_html__('Interest', 'mcalpine'),
             'footer' => esc_html__('Footer', 'mcalpine'),
+            'mobilenav' => esc_html__('Mobilev1', 'mcalpine'),
         )
     );
 }
@@ -52,18 +53,14 @@ function mcalpine_register_scripts()
     wp_enqueue_style('search-form', get_template_directory_uri() . "/components/search/dist/search-form.css", array(),);
     wp_enqueue_style('mobile-nav', get_template_directory_uri() . "/components/mobile-nav/dist/mobile-nav.css", array(),);
     wp_enqueue_style('product-menu', get_template_directory_uri() . "/components/desktop-product-menu/dist/product-menu.css", array(),);
-
+    wp_enqueue_script('vimeo', "https://player.vimeo.com/api/player.js", array(), array());
     wp_enqueue_script('search-form-js', get_template_directory_uri() . "/components/search/dist/search.js", array(), array());
     wp_enqueue_script('mobile-nav-js', get_template_directory_uri() . "/components/mobile-nav/dist/mobile-nav.js", array(), array());
     wp_enqueue_script('product-menu-js', get_template_directory_uri() . "/components/desktop-product-menu/dist/product-menu.js", array(), array());
 
-    if (is_home()) {
-        wp_enqueue_script('insight-archive-js', get_template_directory_uri() . "/components/insight-archive/dist/insight-archive.js", array(), array());
-    }
+    wp_enqueue_script('insight-archive-js', get_template_directory_uri() . "/components/insight-archive/dist/insight-archive.js", array(), array());
 
-    if (is_page_template('where-to-buy.php')) {
-        wp_enqueue_script('where-to-find-us-js', get_template_directory_uri() . "/components/where-to-find-us/dist/map-component.js", array(), array());
-    }
+
     if (is_page_template('faq.php')) {
 
         wp_enqueue_script('faq-js', get_template_directory_uri() . "/components/faq/dist/faq-archive.js", array(), array());
@@ -142,6 +139,7 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
         "mcalpine/marquee",
         "core/freeform",
         "mcalpine/image-text-full",
+        "mcalpine/video"
     );
     return $allowed_blocks;
 }

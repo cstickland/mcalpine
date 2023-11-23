@@ -6,7 +6,7 @@
                 <li class="timeline-slide <?php echo get_sub_field('slide_background_color');
                                             if ($count == 0) {
                                                 echo ' active';
-                                            } ?>">
+                                            } ?>" data-year="<?php the_sub_field('slide_year'); ?>">
 
                     <div class="slide-content">
                         <?php $image = get_sub_field('slide_image');
@@ -24,10 +24,34 @@
                         <div class="slide-year"><?php the_sub_field('slide_year'); ?></div>
 
                     </div>
+                    <div class="slide-hash slide-hash-left">
+                        <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+                    </div>
+                    <div class="slide-hash slide-hash-bottom-right">
+                        <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
+                    </div>
+                    <div class="slide-red-box">
+                    </div>
                 </li>
                 <?php $count++; ?>
             <?php endwhile; ?>
         </ul>
+        <div class="timeline-dots-container">
+            <ul class="timeline-dots">
+                <?php $count = 0; ?>
+                <?php while (have_rows('timeline_slides')) : the_row(); ?>
+                    <li class="timeline-dot <?php if ($count == 0) {
+                                                echo 'active';
+                                            } ?>" data-year="<?php the_sub_field('slide_year'); ?>">
+                        <div class="dot-year"><?php the_sub_field('slide_year'); ?></div>
+                        <div class="dot"></div>
+                    </li>
+                    <?php $count++; ?>
+                <?php endwhile; ?>
+            </ul>
+            <div class="dots-indicator-triangle"></div>
+        </div>
+
     <?php endif; ?>
     <ul class="timeline-slides-controls"></ul>
 </div>

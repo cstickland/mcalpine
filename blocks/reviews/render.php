@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'review-block ' . get_field('colour_style')]); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'review-block ' . get_field('colour_style')]); ?> id="reviews">
     <div class="review-block-container">
         <div class="reviews-title-section">
             <h3><?php the_field('title'); ?></h3>

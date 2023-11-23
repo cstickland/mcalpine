@@ -2,7 +2,7 @@ body {
   font-family: 'TheSans', sans-serif;
   color: #878787;
   overflow-x: hidden;
-
+  margin-top: 60px;
   font-size: 1rem;
   line-height: 1.5;
   letter-spacing: 0;
@@ -14,5 +14,7 @@ body {
 
   @media only screen and (min-width: $desktop) {
     font-size: 1.125rem;
+
+    margin-top: 0;
   }
 }

@@ -76,14 +76,10 @@ export const query = `{
           id
           url
           title: label
-          childItems {
-            nodes {
-              id
-            }
-          }
         }
       }
       name
+      slug
     }
   }
 }`
