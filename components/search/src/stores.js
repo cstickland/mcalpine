@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store'
 
 export const previousSuggestions = writable([])
+export const results = writable({})
+export const searchQuery = writable('')
 
 export const menuQuery = `{
   menus(where: {slug: "interest"}) {

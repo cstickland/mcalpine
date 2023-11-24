@@ -22,11 +22,26 @@ export async function getResults(searchTerm, previousSuggestions) {
       }
     }
   }
-  productCategories(where: {search: "${searchTerm}"}) {
+  productCategories(where: {search: "${searchTerm}"}, first: 100) {
     edges {
       node {
-        id
-        name 
+        name
+        products(first: 100) {
+          nodes {
+            customFields2 {
+              skus {
+                sku
+                productImages {
+                  productImage {
+                    mediaItemUrl
+                  }
+                }
+              }
+            }
+            link
+            title
+          }
+        }
       }
     }
   }
@@ -55,7 +70,6 @@ export async function getResults(searchTerm, previousSuggestions) {
     }
   }
 }`
-
   const fetchPromise = await fetch('/graphql', {
     method: 'POST',
     headers: {
@@ -71,49 +85,28 @@ export async function getResults(searchTerm, previousSuggestions) {
 
   let otherResults = []
   let otherSimilarity = []
+  let products = response.data.products.nodes
+  let productCategories = response.data.productCategories.edges
+  let posts = response.data.posts.edges
+  let pages = response.data.pages.edges
 
-  response.data.posts.edges.forEach((post) => {
+  posts.forEach((post) => {
     post.node.postType = 'post'
     otherResults.push(post.node)
   })
 
-  response.data.pages.edges.forEach((page) => {
+  pages.forEach((page) => {
     page.node.postType = 'page'
     otherResults.push(page.node)
   })
   otherResults.forEach((result) => {
     otherSimilarity.push(result.title)
   })
-  let results = [
-    'asd',
-    'Help',
-    'About',
-    'History',
-    'Contact',
-    'Insights',
-    'HomePage',
-    'Categories',
-    'Installers',
-    'Hello world!',
-    'Where To Buy',
-    'International',
-    'In sit in quis placerat eget ut',
-    'Nibh faucibus vel rutrum orci sit',
-    'Orci consectetur ut nullam metus proin arcu',
-    'Lacus massa tellus orci vitae facilisi donec?',
-    'Cras egestas massa cursus lacinia pulvinar et',
-    'Consectetur vestibulum amet aliquam libero tellus',
-    'Risus fames sem quis semper erat lobortis malesuada',
-    'Sed ac bibendum scelerisque ultricies at adipiscing',
-    'Vulputate molestie dui purus convallis urna fringilla',
-    'Dictum eget eget ullamcorper amet elementum fusce viverra',
-    'Quam ut amet orci augue in turpis neque non vel vulputate?',
-    'Tellus sit faucibus rhoncus in fusce nec massa vel nibh urna',
-    'Urna rhoncus pellentesque et faucibus nibh eget lacus eget adipiscing',
-    'Sit facilisis mollis amet imperdiet tempus porttitor nisi gravida arcu amet id?',
-    'Magnis tellus suspendisse egestas neque etiam convallis imperdiet nisl metus vitae amet',
-  ]
-  console.log(sortBySimilarity(results, searchTerm))
+
+  if (products.length == 0 && productCategories.length == 1) {
+    response.data.products = productCategories[0].node.products
+  }
+
   response.data.productCategories.edges.forEach((category) => {
     categories.push(category.node.name)
   })
@@ -124,6 +117,7 @@ export async function getResults(searchTerm, previousSuggestions) {
   } else {
     response.data.productCategories = get(previousSuggestions)
   }
+  console.log(response)
   return response
 }
 

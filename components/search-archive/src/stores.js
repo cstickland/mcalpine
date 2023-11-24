@@ -13,7 +13,6 @@ export function divideItemsIntoPages(
   let page = []
   let pagesArray = []
   currentPage = 1
-  console.log(items)
   let currentItems = []
 
   if (filters.size == 0) {

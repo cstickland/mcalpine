@@ -1,31 +1,28 @@
 <script>
     import Submit from "./Submit.svelte";
-    import { highlightResults, getResults } from "./functions";
-    import { previousSuggestions } from './stores.js';
-    export let results = {};
-    export let searchTerm = "";
-
+    import { highlightResults} from "./functions";
+    import { results, searchQuery } from './stores.js';
+  
 
     $: totalResults =
-        results?.data?.products?.nodes?.length + results?.other?.length;
+        $results?.data?.products?.nodes?.length;
 </script>
 
-{#if searchTerm.length > 0}
+{#if $searchQuery.length > 0}
     <div class="results-container show" id="results-container">
-        {#if results?.data?.productCategories?.length > 0 && results?.data?.productCategories[0] != searchTerm}
+        {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}
             <div class="search-results__section-title">
                 <div class="result-title">Suggestions</div>
-                {#each results?.data?.productCategories as category, i}
-                    {#if i < 3 && searchTerm != category}
+                {#each $results?.data?.productCategories as category, i}
+                    {#if i < 3 && $searchQuery != category}
                         <div
                             class="suggestion"
                             on:keydown
                             on:click={async () => {
-                                searchTerm = category;
-                                results = await getResults(searchTerm, previousSuggestions);
+                                searchQuery.set(category);
                             }}
                         >
-                            {@html highlightResults(searchTerm, category)}
+                            {@html highlightResults($searchQuery, category)}
                         </div>
                     {/if}
                 {/each}
@@ -33,8 +30,8 @@
         {/if}
         <div class="search-results__section-title">
             <div class="result-title">Products</div>
-            {#if results?.data?.products?.nodes.length > 0}
-                {#each results?.data?.products?.nodes as product, i}
+            {#if $results?.data?.products?.nodes.length > 0}
+                {#each $results?.data?.products?.nodes as product, i}
                     {#if i < 3}
                         <a href={product?.link} class="search-product-result">
                             <img
@@ -54,7 +51,7 @@
                             </div>
                             <div>
                                 {@html highlightResults(
-                                    searchTerm,
+                                    $searchQuery,
                                     product?.title
                                 )}
                             </div>
@@ -75,13 +72,10 @@
         <!--                     href={other?.permalink} -->
         <!--                     class="search-product-result other" -->
         <!--                 > -->
-        <!--                     <!-- <div> --> -->
-        <!--                     <!--     {@html highlightResults( --> -->
+        <!--                     <!-- <div> -->         <!--                     <!--     {@html highlightResults( --> -->
         <!--                     <!--         searchTerm, --> -->
         <!--                     <!--         other?.name --> -->
-        <!--                     <!--     )} --> -->
-        <!--                     <!-- </div> --> -->
-        <!--                     <div class="other-post-type"> -->
+        <!--                     <!--     )} -->         <!--                     <!-- </div> -->         <!--                     <div class="other-post-type"> -->
         <!--                         {#if other?.post_type == "post"}Article{:else if other?.post_type == "page"}Page{/if} -->
         <!--                     </div> -->
         <!--                 </a> -->
