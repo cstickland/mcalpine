@@ -34,8 +34,6 @@
             results.set(data);
         }, 200);
     });
-
-
 </script>
 
 <form

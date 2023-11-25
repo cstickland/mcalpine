@@ -90,6 +90,7 @@ export async function getResults(searchTerm, previousSuggestions) {
   let posts = response.data.posts.edges
   let pages = response.data.pages.edges
 
+  // put all posts and pages into an "other" array
   posts.forEach((post) => {
     post.node.postType = 'post'
     otherResults.push(post.node)
@@ -99,22 +100,34 @@ export async function getResults(searchTerm, previousSuggestions) {
     page.node.postType = 'page'
     otherResults.push(page.node)
   })
+
+  //sort other array by levenstein distance of title to searchTerm
   otherResults.forEach((result) => {
     otherSimilarity.push(result.title)
   })
 
+  response.data.other = sortOtherResultsBySimilarity(otherResults, searchTerm)
+
+  //if no products are found, but a product categories are then use products from the category
   if (products.length == 0 && productCategories.length == 1) {
-    response.data.products = productCategories[0].node.products
+    products = productCategories[0].node.products
   }
 
+  //sort products by sku compared to search term using levenstein distance
+  response.data.products.nodes = sortProductsBySimilarity(products, searchTerm)
+
+  // move all category names into a single level array.
   response.data.productCategories.edges.forEach((category) => {
     categories.push(category.node.name)
   })
 
   if (categories.length > 0) {
+    // sort categories compared to search term using levenstein distance
     response.data.productCategories = sortBySimilarity(categories, searchTerm)
+    //if categories are found then update the last found categories
     previousSuggestions.set(sortBySimilarity(categories, searchTerm))
   } else {
+    // if no categories are found then use the previous found categories as suggestions
     response.data.productCategories = get(previousSuggestions)
   }
   console.log(response)
@@ -151,7 +164,6 @@ export function levenshteinDistance(a, b) {
       }
     }
   }
-
   // Return the final distance
   return distances[a.length][b.length]
 }
@@ -160,11 +172,49 @@ export function sortBySimilarity(products, searchTerm) {
   // Create an array of objects to store the words and their distances
   let wordDistances = products.map((word) => ({
     word: word,
-    distance: levenshteinDistance(word, searchTerm),
+    distance: levenshteinDistance(word.toLowerCase(), searchTerm.toLowerCase()),
   }))
 
   // Sort the array by distance
   wordDistances.sort((a, b) => a.distance - b.distance)
   // Return the sorted list of words
   return wordDistances.map((wd) => wd.word)
+}
+
+export function sortProductsBySimilarity(products, searchTerm) {
+  let wordDistances = products.map((product) => ({
+    product: product,
+    distance: levenshteinDistance(
+      getSkusList(product, searchTerm)[0],
+      searchTerm,
+    ),
+  }))
+
+  wordDistances.sort((a, b) => a.distance - b.distance)
+
+  return wordDistances.map((wd) => wd.product)
+}
+
+function getSkusList(product, searchTerm) {
+  let skus = []
+  let sortedSkus = []
+  product.customFields2.skus.forEach((row) => {
+    skus.push(row.sku.toLowerCase())
+  })
+
+  sortedSkus = sortBySimilarity(skus, searchTerm.toLowerCase())
+  return sortedSkus
+}
+
+function sortOtherResultsBySimilarity(otherResults, searchTerm) {
+  let wordDistances = otherResults.map((other) => ({
+    other: other,
+    distance: levenshteinDistance(
+      other.title.toLowerCase,
+      searchTerm.toLowerCase(),
+    ),
+  }))
+  wordDistances.sort((a, b) => a.distance - b.distance)
+
+  return wordDistances.map((wd) => wd.other)
 }

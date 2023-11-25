@@ -1,11 +1,9 @@
 <script>
     import Submit from "./Submit.svelte";
-    import { highlightResults} from "./functions";
-    import { results, searchQuery } from './stores.js';
-  
+    import { highlightResults } from "./functions";
+    import { results, searchQuery } from "./stores.js";
 
-    $: totalResults =
-        $results?.data?.products?.nodes?.length;
+    $: totalResults = $results?.data?.products?.nodes?.length + $results.data.other.length;
 </script>
 
 {#if $searchQuery.length > 0}
@@ -62,29 +60,33 @@
                 <div class="suggestion">No Products Found</div>
             {/if}
         </div>
-
-        <!-- <div class="search-results__section-title"> -->
-        <!--     <div class="result-title">Other</div> -->
-        <!--     {#if results?.data} -->
-        <!--         {#each results?.other as other, i} -->
-        <!--             {#if i < 3} -->
-        <!--                 <a -->
-        <!--                     href={other?.permalink} -->
-        <!--                     class="search-product-result other" -->
-        <!--                 > -->
-        <!--                     <!-- <div> -->         <!--                     <!--     {@html highlightResults( --> -->
-        <!--                     <!--         searchTerm, --> -->
-        <!--                     <!--         other?.name --> -->
-        <!--                     <!--     )} -->         <!--                     <!-- </div> -->         <!--                     <div class="other-post-type"> -->
-        <!--                         {#if other?.post_type == "post"}Article{:else if other?.post_type == "page"}Page{/if} -->
-        <!--                     </div> -->
-        <!--                 </a> -->
-        <!--             {/if} -->
-        <!--         {/each} -->
-        <!--     {:else} -->
-        <!--         <div>No other pages found</div> -->
-        <!--     {/if} -->
-        <!-- </div> -->
+        {#if $results.data.other != null && $results.other.length > 0}
+            <div class="search-results__section-title">
+                <div class="result-title">Other</div>
+                {#if $results?.data?.other}
+                    {#each $results?.data?.other as other, i}
+                        {#if i < 3}
+                            <a
+                                href={other?.permalink}
+                                class="search-product-result other"
+                            >
+                                <div>
+                                    {@html highlightResults(
+                                        $searchQuery,
+                                        other?.title
+                                    )}
+                                </div>
+                                <div class="other-post-type">
+                                    {#if other?.postType == "post"}Article{:else if other?.postType == "page"}Page{/if}
+                                </div>
+                            </a>
+                        {/if}
+                    {/each}
+                {:else}
+                    <div>No other pages found</div>
+                {/if}
+            </div>
+        {/if}
         <div id="search-results__other" />
         <Submit {totalResults} />
     </div>

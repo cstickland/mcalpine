@@ -37,7 +37,7 @@ add_filter('manage_product_posts_columns', 'add_acf_columns');
 
 
 /*
- * Add columns to address post list
+ * Add columns to Product post list in admin panel
  */
 function address_custom_column($column, $post_id)
 {

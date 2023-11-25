@@ -1064,6 +1064,7 @@
       let posts = response.data.posts.edges;
       let pages = response.data.pages.edges;
 
+      // put all posts and pages into an "other" array
       posts.forEach((post) => {
         post.node.postType = 'post';
         otherResults.push(post.node);
@@ -1073,22 +1074,34 @@
         page.node.postType = 'page';
         otherResults.push(page.node);
       });
+
+      //sort other array by levenstein distance of title to searchTerm
       otherResults.forEach((result) => {
         otherSimilarity.push(result.title);
       });
 
+      response.data.other = sortOtherResultsBySimilarity(otherResults, searchTerm);
+
+      //if no products are found, but a product categories are then use products from the category
       if (products.length == 0 && productCategories.length == 1) {
-        response.data.products = productCategories[0].node.products;
+        products = productCategories[0].node.products;
       }
 
+      //sort products by sku compared to search term using levenstein distance
+      response.data.products.nodes = sortProductsBySimilarity(products, searchTerm);
+
+      // move all category names into a single level array.
       response.data.productCategories.edges.forEach((category) => {
         categories.push(category.node.name);
       });
 
       if (categories.length > 0) {
+        // sort categories compared to search term using levenstein distance
         response.data.productCategories = sortBySimilarity(categories, searchTerm);
+        //if categories are found then update the last found categories
         previousSuggestions.set(sortBySimilarity(categories, searchTerm));
       } else {
+        // if no categories are found then use the previous found categories as suggestions
         response.data.productCategories = get_store_value(previousSuggestions);
       }
       console.log(response);
@@ -1125,7 +1138,6 @@
           }
         }
       }
-
       // Return the final distance
       return distances[a.length][b.length]
     }
@@ -1134,13 +1146,51 @@
       // Create an array of objects to store the words and their distances
       let wordDistances = products.map((word) => ({
         word: word,
-        distance: levenshteinDistance(word, searchTerm),
+        distance: levenshteinDistance(word.toLowerCase(), searchTerm.toLowerCase()),
       }));
 
       // Sort the array by distance
       wordDistances.sort((a, b) => a.distance - b.distance);
       // Return the sorted list of words
       return wordDistances.map((wd) => wd.word)
+    }
+
+    function sortProductsBySimilarity(products, searchTerm) {
+      let wordDistances = products.map((product) => ({
+        product: product,
+        distance: levenshteinDistance(
+          getSkusList(product, searchTerm)[0],
+          searchTerm,
+        ),
+      }));
+
+      wordDistances.sort((a, b) => a.distance - b.distance);
+
+      return wordDistances.map((wd) => wd.product)
+    }
+
+    function getSkusList(product, searchTerm) {
+      let skus = [];
+      let sortedSkus = [];
+      product.customFields2.skus.forEach((row) => {
+        skus.push(row.sku.toLowerCase());
+      });
+
+      sortedSkus = sortBySimilarity(skus, searchTerm.toLowerCase());
+      return sortedSkus
+    }
+
+    function sortOtherResultsBySimilarity(otherResults, searchTerm) {
+      let wordDistances = otherResults.map((other) => ({
+        other: other,
+        distance: levenshteinDistance(
+          other.title.toLowerCase,
+          searchTerm.toLowerCase(),
+        ),
+      }));
+      wordDistances.sort((a, b) => a.distance - b.distance);
+
+      return wordDistances.map((wd) => wd.other)
     }
 
     const previousSuggestions = writable([]);
@@ -1197,7 +1247,14 @@
     	return child_ctx;
     }
 
-    // (11:0) {#if $searchQuery.length > 0}
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[10] = list[i];
+    	child_ctx[7] = i;
+    	return child_ctx;
+    }
+
+    // (9:0) {#if $searchQuery.length > 0}
     function create_if_block$1(ctx) {
     	let div3;
     	let t0;
@@ -1205,19 +1262,21 @@
     	let div0;
     	let t2;
     	let t3;
-    	let div2;
     	let t4;
+    	let div2;
+    	let t5;
     	let submit;
     	let current;
-    	let if_block0 = /*$results*/ ctx[0]?.data?.productCategories?.length > 0 && /*$results*/ ctx[0]?.data?.productCategories[0] != /*$searchQuery*/ ctx[2] && create_if_block_4(ctx);
+    	let if_block0 = /*$results*/ ctx[0]?.data?.productCategories?.length > 0 && /*$results*/ ctx[0]?.data?.productCategories[0] != /*$searchQuery*/ ctx[2] && create_if_block_9(ctx);
 
     	function select_block_type(ctx, dirty) {
-    		if (/*$results*/ ctx[0]?.data?.products?.nodes.length > 0) return create_if_block_1$1;
-    		return create_else_block_1;
+    		if (/*$results*/ ctx[0]?.data?.products?.nodes.length > 0) return create_if_block_6;
+    		return create_else_block_2;
     	}
 
     	let current_block_type = select_block_type(ctx);
     	let if_block1 = current_block_type(ctx);
+    	let if_block2 = /*$results*/ ctx[0].data.other != null && /*$results*/ ctx[0].other.length > 0 && create_if_block_1$1(ctx);
 
     	submit = new Submit({
     			props: { totalResults: /*totalResults*/ ctx[1] },
@@ -1234,19 +1293,21 @@
     			div0.textContent = "Products";
     			t2 = space();
     			if_block1.c();
-    			t3 = text("\n\n        \n        \n        \n        \n        \n        \n        \n        \n        \n                  -->\n         -->\n         -->\n                          \n        \n        \n        \n        \n        \n        \n        \n        \n        \n        ");
-    			div2 = element("div");
+    			t3 = space();
+    			if (if_block2) if_block2.c();
     			t4 = space();
+    			div2 = element("div");
+    			t5 = space();
     			create_component(submit.$$.fragment);
     			attr_dev(div0, "class", "result-title svelte-xv6gwv");
-    			add_location(div0, file$2, 31, 12, 1241);
+    			add_location(div0, file$2, 29, 12, 1260);
     			attr_dev(div1, "class", "search-results__section-title svelte-xv6gwv");
-    			add_location(div1, file$2, 30, 8, 1185);
+    			add_location(div1, file$2, 28, 8, 1204);
     			attr_dev(div2, "id", "search-results__other");
-    			add_location(div2, file$2, 87, 8, 4057);
+    			add_location(div2, file$2, 89, 8, 4009);
     			attr_dev(div3, "class", "results-container show svelte-xv6gwv");
     			attr_dev(div3, "id", "results-container");
-    			add_location(div3, file$2, 11, 4, 278);
+    			add_location(div3, file$2, 9, 4, 297);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -1257,8 +1318,10 @@
     			append_dev(div1, t2);
     			if_block1.m(div1, null);
     			append_dev(div3, t3);
-    			append_dev(div3, div2);
+    			if (if_block2) if_block2.m(div3, null);
     			append_dev(div3, t4);
+    			append_dev(div3, div2);
+    			append_dev(div3, t5);
     			mount_component(submit, div3, null);
     			current = true;
     		},
@@ -1267,7 +1330,7 @@
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_4(ctx);
+    					if_block0 = create_if_block_9(ctx);
     					if_block0.c();
     					if_block0.m(div3, t0);
     				}
@@ -1288,6 +1351,19 @@
     				}
     			}
 
+    			if (/*$results*/ ctx[0].data.other != null && /*$results*/ ctx[0].other.length > 0) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+    				} else {
+    					if_block2 = create_if_block_1$1(ctx);
+    					if_block2.c();
+    					if_block2.m(div3, t4);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
+    			}
+
     			const submit_changes = {};
     			if (dirty & /*totalResults*/ 2) submit_changes.totalResults = /*totalResults*/ ctx[1];
     			submit.$set(submit_changes);
@@ -1305,6 +1381,7 @@
     			if (detaching) detach_dev(div3);
     			if (if_block0) if_block0.d();
     			if_block1.d();
+    			if (if_block2) if_block2.d();
     			destroy_component(submit);
     		}
     	};
@@ -1313,24 +1390,24 @@
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(11:0) {#if $searchQuery.length > 0}",
+    		source: "(9:0) {#if $searchQuery.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (13:8) {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}
-    function create_if_block_4(ctx) {
+    // (11:8) {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}
+    function create_if_block_9(ctx) {
     	let div1;
     	let div0;
     	let t1;
-    	let each_value_1 = /*$results*/ ctx[0]?.data?.productCategories;
-    	validate_each_argument(each_value_1);
+    	let each_value_2 = /*$results*/ ctx[0]?.data?.productCategories;
+    	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
     	}
 
     	const block = {
@@ -1345,9 +1422,9 @@
     			}
 
     			attr_dev(div0, "class", "result-title svelte-xv6gwv");
-    			add_location(div0, file$2, 14, 16, 526);
+    			add_location(div0, file$2, 12, 16, 545);
     			attr_dev(div1, "class", "search-results__section-title svelte-xv6gwv");
-    			add_location(div1, file$2, 13, 12, 466);
+    			add_location(div1, file$2, 11, 12, 485);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -1362,17 +1439,17 @@
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*searchQuery, $results, highlightResults, $searchQuery*/ 5) {
-    				each_value_1 = /*$results*/ ctx[0]?.data?.productCategories;
-    				validate_each_argument(each_value_1);
+    				each_value_2 = /*$results*/ ctx[0]?.data?.productCategories;
+    				validate_each_argument(each_value_2);
     				let i;
 
-    				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div1, null);
     					}
@@ -1382,7 +1459,7 @@
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value_1.length;
+    				each_blocks.length = each_value_2.length;
     			}
     		},
     		d: function destroy(detaching) {
@@ -1393,26 +1470,26 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4.name,
+    		id: create_if_block_9.name,
     		type: "if",
-    		source: "(13:8) {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}",
+    		source: "(11:8) {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (17:20) {#if i < 3 && $searchQuery != category}
-    function create_if_block_5(ctx) {
+    // (15:20) {#if i < 3 && $searchQuery != category}
+    function create_if_block_10(ctx) {
     	let div;
     	let html_tag;
-    	let raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*category*/ ctx[8]) + "";
+    	let raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*category*/ ctx[10]) + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[4](/*category*/ ctx[8]);
+    		return /*click_handler*/ ctx[4](/*category*/ ctx[10]);
     	}
 
     	const block = {
@@ -1422,7 +1499,7 @@
     			t = space();
     			html_tag.a = t;
     			attr_dev(div, "class", "suggestion svelte-xv6gwv");
-    			add_location(div, file$2, 17, 24, 727);
+    			add_location(div, file$2, 15, 24, 746);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1440,7 +1517,7 @@
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*$searchQuery, $results*/ 5 && raw_value !== (raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*category*/ ctx[8]) + "")) html_tag.p(raw_value);
+    			if (dirty & /*$searchQuery, $results*/ 5 && raw_value !== (raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*category*/ ctx[10]) + "")) html_tag.p(raw_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -1451,19 +1528,19 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5.name,
+    		id: create_if_block_10.name,
     		type: "if",
-    		source: "(17:20) {#if i < 3 && $searchQuery != category}",
+    		source: "(15:20) {#if i < 3 && $searchQuery != category}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:16) {#each $results?.data?.productCategories as category, i}
-    function create_each_block_1(ctx) {
+    // (14:16) {#each $results?.data?.productCategories as category, i}
+    function create_each_block_2(ctx) {
     	let if_block_anchor;
-    	let if_block = /*i*/ ctx[7] < 3 && /*$searchQuery*/ ctx[2] != /*category*/ ctx[8] && create_if_block_5(ctx);
+    	let if_block = /*i*/ ctx[7] < 3 && /*$searchQuery*/ ctx[2] != /*category*/ ctx[10] && create_if_block_10(ctx);
 
     	const block = {
     		c: function create() {
@@ -1475,11 +1552,11 @@
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*i*/ ctx[7] < 3 && /*$searchQuery*/ ctx[2] != /*category*/ ctx[8]) {
+    			if (/*i*/ ctx[7] < 3 && /*$searchQuery*/ ctx[2] != /*category*/ ctx[10]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_5(ctx);
+    					if_block = create_if_block_10(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -1496,17 +1573,17 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1.name,
+    		id: create_each_block_2.name,
     		type: "each",
-    		source: "(16:16) {#each $results?.data?.productCategories as category, i}",
+    		source: "(14:16) {#each $results?.data?.productCategories as category, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (61:12) {:else}
-    function create_else_block_1(ctx) {
+    // (59:12) {:else}
+    function create_else_block_2(ctx) {
     	let div;
 
     	const block = {
@@ -1514,7 +1591,7 @@
     			div = element("div");
     			div.textContent = "No Products Found";
     			attr_dev(div, "class", "suggestion svelte-xv6gwv");
-    			add_location(div, file$2, 61, 16, 2666);
+    			add_location(div, file$2, 59, 16, 2685);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1527,19 +1604,370 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block_1.name,
+    		id: create_else_block_2.name,
     		type: "else",
-    		source: "(61:12) {:else}",
+    		source: "(59:12) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (33:12) {#if $results?.data?.products?.nodes.length > 0}
-    function create_if_block_1$1(ctx) {
+    // (31:12) {#if $results?.data?.products?.nodes.length > 0}
+    function create_if_block_6(ctx) {
     	let each_1_anchor;
-    	let each_value = /*$results*/ ctx[0]?.data?.products?.nodes;
+    	let each_value_1 = /*$results*/ ctx[0]?.data?.products?.nodes;
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$results, highlightResults, $searchQuery*/ 5) {
+    				each_value_1 = /*$results*/ ctx[0]?.data?.products?.nodes;
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(31:12) {#if $results?.data?.products?.nodes.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (33:20) {#if i < 3}
+    function create_if_block_7(ctx) {
+    	let a;
+    	let img;
+    	let img_src_value;
+    	let t0;
+    	let div0;
+    	let t1_value = /*product*/ ctx[8]?.customFields2?.skus.length + "";
+    	let t1;
+    	let t2;
+    	let t3;
+    	let div1;
+    	let raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*product*/ ctx[8]?.title) + "";
+    	let t4;
+    	let a_href_value;
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*product*/ ctx[8]?.sku_count > 1) return create_if_block_8;
+    		return create_else_block_1;
+    	}
+
+    	let current_block_type = select_block_type_1(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			a = element("a");
+    			img = element("img");
+    			t0 = space();
+    			div0 = element("div");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			if_block.c();
+    			t3 = space();
+    			div1 = element("div");
+    			t4 = space();
+    			attr_dev(img, "height", "58px");
+    			attr_dev(img, "width", "58px");
+    			if (!src_url_equal(img.src, img_src_value = /*product*/ ctx[8]?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "");
+    			attr_dev(img, "class", "result-image svelte-xv6gwv");
+    			add_location(img, file$2, 34, 28, 1571);
+    			attr_dev(div0, "class", "c-red search-product-sku-count svelte-xv6gwv");
+    			add_location(div0, file$2, 43, 28, 2008);
+    			add_location(div1, file$2, 49, 28, 2336);
+    			attr_dev(a, "href", a_href_value = /*product*/ ctx[8]?.link);
+    			attr_dev(a, "class", "search-product-result svelte-xv6gwv");
+    			add_location(a, file$2, 33, 24, 1488);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, a, anchor);
+    			append_dev(a, img);
+    			append_dev(a, t0);
+    			append_dev(a, div0);
+    			append_dev(div0, t1);
+    			append_dev(div0, t2);
+    			if_block.m(div0, null);
+    			append_dev(a, t3);
+    			append_dev(a, div1);
+    			div1.innerHTML = raw_value;
+    			append_dev(a, t4);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$results*/ 1 && !src_url_equal(img.src, img_src_value = /*product*/ ctx[8]?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*$results*/ 1 && t1_value !== (t1_value = /*product*/ ctx[8]?.customFields2?.skus.length + "")) set_data_dev(t1, t1_value);
+
+    			if (current_block_type !== (current_block_type = select_block_type_1(ctx))) {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div0, null);
+    				}
+    			}
+
+    			if (dirty & /*$searchQuery, $results*/ 5 && raw_value !== (raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*product*/ ctx[8]?.title) + "")) div1.innerHTML = raw_value;
+    			if (dirty & /*$results*/ 1 && a_href_value !== (a_href_value = /*product*/ ctx[8]?.link)) {
+    				attr_dev(a, "href", a_href_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(a);
+    			if_block.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_7.name,
+    		type: "if",
+    		source: "(33:20) {#if i < 3}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (48:32) {:else}
+    function create_else_block_1(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Sku");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_1.name,
+    		type: "else",
+    		source: "(48:32) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (46:32) {#if product?.sku_count > 1}
+    function create_if_block_8(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Skus");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_8.name,
+    		type: "if",
+    		source: "(46:32) {#if product?.sku_count > 1}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (32:16) {#each $results?.data?.products?.nodes as product, i}
+    function create_each_block_1(ctx) {
+    	let if_block_anchor;
+    	let if_block = /*i*/ ctx[7] < 3 && create_if_block_7(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*i*/ ctx[7] < 3) if_block.p(ctx, dirty);
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(32:16) {#each $results?.data?.products?.nodes as product, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (63:8) {#if $results.data.other != null && $results.other.length > 0}
+    function create_if_block_1$1(ctx) {
+    	let div1;
+    	let div0;
+    	let t1;
+
+    	function select_block_type_2(ctx, dirty) {
+    		if (/*$results*/ ctx[0]?.data?.other) return create_if_block_2$1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type_2(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "Other";
+    			t1 = space();
+    			if_block.c();
+    			attr_dev(div0, "class", "result-title svelte-xv6gwv");
+    			add_location(div0, file$2, 64, 16, 2909);
+    			attr_dev(div1, "class", "search-results__section-title svelte-xv6gwv");
+    			add_location(div1, file$2, 63, 12, 2849);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t1);
+    			if_block.m(div1, null);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (current_block_type === (current_block_type = select_block_type_2(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div1, null);
+    				}
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if_block.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(63:8) {#if $results.data.other != null && $results.other.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (85:16) {:else}
+    function create_else_block(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "No other pages found";
+    			add_location(div, file$2, 85, 20, 3914);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(85:16) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (66:16) {#if $results?.data?.other}
+    function create_if_block_2$1(ctx) {
+    	let each_1_anchor;
+    	let each_value = /*$results*/ ctx[0]?.data?.other;
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -1566,7 +1994,7 @@
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*$results, highlightResults, $searchQuery*/ 5) {
-    				each_value = /*$results*/ ctx[0]?.data?.products?.nodes;
+    				each_value = /*$results*/ ctx[0]?.data?.other;
     				validate_each_argument(each_value);
     				let i;
 
@@ -1597,156 +2025,79 @@
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(33:12) {#if $results?.data?.products?.nodes.length > 0}",
+    		source: "(66:16) {#if $results?.data?.other}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (35:20) {#if i < 3}
-    function create_if_block_2$1(ctx) {
+    // (68:24) {#if i < 3}
+    function create_if_block_3(ctx) {
     	let a;
-    	let img;
-    	let img_src_value;
-    	let t0;
     	let div0;
-    	let t1_value = /*product*/ ctx[5]?.customFields2?.skus.length + "";
-    	let t1;
-    	let t2;
-    	let t3;
+    	let raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*other*/ ctx[5]?.title) + "";
+    	let t0;
     	let div1;
-    	let raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*product*/ ctx[5]?.title) + "";
-    	let t4;
+    	let t1;
     	let a_href_value;
 
-    	function select_block_type_1(ctx, dirty) {
-    		if (/*product*/ ctx[5]?.sku_count > 1) return create_if_block_3;
-    		return create_else_block;
+    	function select_block_type_3(ctx, dirty) {
+    		if (/*other*/ ctx[5]?.postType == "post") return create_if_block_4;
+    		if (/*other*/ ctx[5]?.postType == "page") return create_if_block_5;
     	}
 
-    	let current_block_type = select_block_type_1(ctx);
-    	let if_block = current_block_type(ctx);
+    	let current_block_type = select_block_type_3(ctx);
+    	let if_block = current_block_type && current_block_type(ctx);
 
     	const block = {
     		c: function create() {
     			a = element("a");
-    			img = element("img");
-    			t0 = space();
     			div0 = element("div");
-    			t1 = text(t1_value);
-    			t2 = space();
-    			if_block.c();
-    			t3 = space();
+    			t0 = space();
     			div1 = element("div");
-    			t4 = space();
-    			attr_dev(img, "height", "58px");
-    			attr_dev(img, "width", "58px");
-    			if (!src_url_equal(img.src, img_src_value = /*product*/ ctx[5]?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", "result-image svelte-xv6gwv");
-    			add_location(img, file$2, 36, 28, 1552);
-    			attr_dev(div0, "class", "c-red search-product-sku-count svelte-xv6gwv");
-    			add_location(div0, file$2, 45, 28, 1989);
-    			add_location(div1, file$2, 51, 28, 2317);
-    			attr_dev(a, "href", a_href_value = /*product*/ ctx[5]?.link);
-    			attr_dev(a, "class", "search-product-result svelte-xv6gwv");
-    			add_location(a, file$2, 35, 24, 1469);
+    			if (if_block) if_block.c();
+    			t1 = space();
+    			add_location(div0, file$2, 72, 32, 3306);
+    			attr_dev(div1, "class", "other-post-type svelte-xv6gwv");
+    			add_location(div1, file$2, 78, 32, 3590);
+    			attr_dev(a, "href", a_href_value = /*other*/ ctx[5]?.permalink);
+    			attr_dev(a, "class", "search-product-result other svelte-xv6gwv");
+    			add_location(a, file$2, 68, 28, 3117);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
-    			append_dev(a, img);
-    			append_dev(a, t0);
     			append_dev(a, div0);
-    			append_dev(div0, t1);
-    			append_dev(div0, t2);
-    			if_block.m(div0, null);
-    			append_dev(a, t3);
+    			div0.innerHTML = raw_value;
+    			append_dev(a, t0);
     			append_dev(a, div1);
-    			div1.innerHTML = raw_value;
-    			append_dev(a, t4);
+    			if (if_block) if_block.m(div1, null);
+    			append_dev(a, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$results*/ 1 && !src_url_equal(img.src, img_src_value = /*product*/ ctx[5]?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl)) {
-    				attr_dev(img, "src", img_src_value);
-    			}
-
-    			if (dirty & /*$results*/ 1 && t1_value !== (t1_value = /*product*/ ctx[5]?.customFields2?.skus.length + "")) set_data_dev(t1, t1_value);
-
-    			if (current_block_type !== (current_block_type = select_block_type_1(ctx))) {
-    				if_block.d(1);
-    				if_block = current_block_type(ctx);
+    			if (dirty & /*$searchQuery, $results*/ 5 && raw_value !== (raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*other*/ ctx[5]?.title) + "")) div0.innerHTML = raw_value;
+    			if (current_block_type !== (current_block_type = select_block_type_3(ctx))) {
+    				if (if_block) if_block.d(1);
+    				if_block = current_block_type && current_block_type(ctx);
 
     				if (if_block) {
     					if_block.c();
-    					if_block.m(div0, null);
+    					if_block.m(div1, null);
     				}
     			}
 
-    			if (dirty & /*$searchQuery, $results*/ 5 && raw_value !== (raw_value = highlightResults(/*$searchQuery*/ ctx[2], /*product*/ ctx[5]?.title) + "")) div1.innerHTML = raw_value;
-    			if (dirty & /*$results*/ 1 && a_href_value !== (a_href_value = /*product*/ ctx[5]?.link)) {
+    			if (dirty & /*$results*/ 1 && a_href_value !== (a_href_value = /*other*/ ctx[5]?.permalink)) {
     				attr_dev(a, "href", a_href_value);
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(a);
-    			if_block.d();
-    		}
-    	};
 
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_2$1.name,
-    		type: "if",
-    		source: "(35:20) {#if i < 3}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (50:32) {:else}
-    function create_else_block(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = text("Sku");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_else_block.name,
-    		type: "else",
-    		source: "(50:32) {:else}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (48:32) {#if product?.sku_count > 1}
-    function create_if_block_3(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = text("Skus");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
+    			if (if_block) {
+    				if_block.d();
+    			}
     		}
     	};
 
@@ -1754,17 +2105,71 @@
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(48:32) {#if product?.sku_count > 1}",
+    		source: "(68:24) {#if i < 3}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (34:16) {#each $results?.data?.products?.nodes as product, i}
+    // (80:110) 
+    function create_if_block_5(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Page");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(80:110) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (80:36) {#if other?.postType == "post"}
+    function create_if_block_4(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Article");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4.name,
+    		type: "if",
+    		source: "(80:36) {#if other?.postType == \\\"post\\\"}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (67:20) {#each $results?.data?.other as other, i}
     function create_each_block$1(ctx) {
     	let if_block_anchor;
-    	let if_block = /*i*/ ctx[7] < 3 && create_if_block_2$1(ctx);
+    	let if_block = /*i*/ ctx[7] < 3 && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
@@ -1788,7 +2193,7 @@
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(34:16) {#each $results?.data?.products?.nodes as product, i}",
+    		source: "(67:20) {#each $results?.data?.other as other, i}",
     		ctx
     	});
 
@@ -1907,7 +2312,7 @@
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*$results*/ 1) {
-    			$$invalidate(1, totalResults = $results?.data?.products?.nodes?.length);
+    			$$invalidate(1, totalResults = $results?.data?.products?.nodes?.length + $results.data.other.length);
     		}
     	};
 
@@ -2108,7 +2513,7 @@
     	return child_ctx;
     }
 
-    // (73:8) {#if interestsOpen}
+    // (71:8) {#if interestsOpen}
     function create_if_block_1(ctx) {
     	let div;
     	let div_transition;
@@ -2120,7 +2525,7 @@
     			div = element("div");
     			if (if_block) if_block.c();
     			attr_dev(div, "class", "interest-links svelte-8fyihs");
-    			add_location(div, file, 73, 12, 1920);
+    			add_location(div, file, 71, 12, 1918);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2168,14 +2573,14 @@
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(73:8) {#if interestsOpen}",
+    		source: "(71:8) {#if interestsOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (75:16) {#if menu?.menuItems?.nodes}
+    // (73:16) {#if menu?.menuItems?.nodes}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value = /*menu*/ ctx[1]?.menuItems?.nodes;
@@ -2238,14 +2643,14 @@
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(75:16) {#if menu?.menuItems?.nodes}",
+    		source: "(73:16) {#if menu?.menuItems?.nodes}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (76:20) {#each menu?.menuItems?.nodes as item}
+    // (74:20) {#each menu?.menuItems?.nodes as item}
     function create_each_block(ctx) {
     	let a;
     	let t_value = /*item*/ ctx[9].label + "";
@@ -2258,7 +2663,7 @@
     			t = text(t_value);
     			attr_dev(a, "href", a_href_value = /*item*/ ctx[9].url);
     			attr_dev(a, "class", "svelte-8fyihs");
-    			add_location(a, file, 76, 24, 2114);
+    			add_location(a, file, 74, 24, 2112);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2280,14 +2685,14 @@
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(76:20) {#each menu?.menuItems?.nodes as item}",
+    		source: "(74:20) {#each menu?.menuItems?.nodes as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (95:8) {#if $results?.data != null || $results?.other?.length > 0}
+    // (93:8) {#if $results?.data != null || $results?.other?.length > 0}
     function create_if_block(ctx) {
     	let results_1;
     	let current;
@@ -2319,7 +2724,7 @@
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(95:8) {#if $results?.data != null || $results?.other?.length > 0}",
+    		source: "(93:8) {#if $results?.data != null || $results?.other?.length > 0}",
     		ctx
     	});
 
@@ -2390,48 +2795,48 @@
     			div5 = element("div");
     			attr_dev(a, "href", "/");
     			attr_dev(a, "class", "site-logo svelte-8fyihs");
-    			add_location(a, file, 48, 8, 1043);
-    			add_location(div0, file, 47, 4, 1029);
+    			add_location(a, file, 46, 8, 1041);
+    			add_location(div0, file, 45, 4, 1027);
     			attr_dev(rect, "width", "24");
     			attr_dev(rect, "height", "24");
     			attr_dev(rect, "opacity", "0");
     			attr_dev(rect, "class", "svelte-8fyihs");
-    			add_location(rect, file, 65, 25, 1577);
+    			add_location(rect, file, 63, 25, 1575);
     			attr_dev(path, "d", "M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z");
     			attr_dev(path, "class", "svelte-8fyihs");
-    			add_location(path, file, 65, 68, 1620);
+    			add_location(path, file, 63, 68, 1618);
     			attr_dev(g0, "data-name", "chevron-down");
-    			add_location(g0, file, 64, 21, 1524);
+    			add_location(g0, file, 62, 21, 1522);
     			attr_dev(g1, "data-name", "Layer 2");
-    			add_location(g1, file, 63, 17, 1480);
+    			add_location(g1, file, 61, 17, 1478);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "class", "svelte-8fyihs");
-    			add_location(svg, file, 62, 12, 1403);
+    			add_location(svg, file, 60, 12, 1401);
     			attr_dev(div1, "class", "interest-title svelte-8fyihs");
-    			add_location(div1, file, 60, 8, 1334);
+    			add_location(div1, file, 58, 8, 1332);
     			attr_dev(div2, "name", "interest");
     			attr_dev(div2, "class", div2_class_value = "select-interest " + (/*interestsOpen*/ ctx[2] ? 'open' : 'closed') + " svelte-8fyihs");
-    			add_location(div2, file, 52, 4, 1123);
+    			add_location(div2, file, 50, 4, 1121);
     			attr_dev(span, "class", "screen-reader-text");
-    			add_location(span, file, 84, 8, 2290);
+    			add_location(span, file, 82, 8, 2288);
     			attr_dev(input, "type", "search");
     			attr_dev(input, "placeholder", "Search a product name, SKU or term…");
     			attr_dev(input, "autocomplete", "off");
     			attr_dev(input, "id", "search-field");
     			attr_dev(input, "class", "search-field svelte-8fyihs");
     			attr_dev(input, "name", "s");
-    			add_location(input, file, 85, 8, 2350);
+    			add_location(input, file, 83, 8, 2348);
     			attr_dev(div3, "class", "search-form__input svelte-8fyihs");
-    			add_location(div3, file, 83, 4, 2249);
-    			add_location(div4, file, 98, 4, 2731);
-    			add_location(div5, file, 99, 4, 2743);
+    			add_location(div3, file, 81, 4, 2247);
+    			add_location(div4, file, 96, 4, 2729);
+    			add_location(div5, file, 97, 4, 2741);
     			attr_dev(form, "class", "search-form svelte-8fyihs");
     			attr_dev(form, "id", "search-form");
     			attr_dev(form, "role", "search");
     			attr_dev(form, "method", "get");
     			attr_dev(form, "action", /*siteUrl*/ ctx[0]);
-    			add_location(form, file, 40, 0, 916);
+    			add_location(form, file, 38, 0, 914);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
