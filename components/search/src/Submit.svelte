@@ -1,16 +1,13 @@
-<script>
-    export let totalResults = 0;
-</script>
-
 <button
     type="submit"
     id="search-submit"
     class="search-submit submit-btn"
     value="view all results"
 >
-    <div class="result-count">Showing 9 of {totalResults} results</div>
+    <div class="result-count"></div>
+
+        <div class="view-all-text">View All Results</div>
     <div class="view-all">
-        <div>View All Results</div>
         <div class="view-all-chevron">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +54,7 @@
                 color: #ffffff;
             }
 
-            .view-all {
+            .view-all-text {
                 color: #ffffff;
             }
         }
@@ -70,7 +67,7 @@
 
         .view-all {
             color: #222222;
-
+            height: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -78,12 +75,12 @@
 
             .view-all-chevron {
                 background-color: #222222;
-                width: 60px;
-                height: 60px;
+                height: 100%;
+                aspect-ratio: 1;
                 display:flex;
                 align-items: center;
                 justify-content: center;
-                border-bottom: 1px solid #f4f4f4;
+  
                 svg {
                 width:2.5rem;
                     fill: #ffffff;

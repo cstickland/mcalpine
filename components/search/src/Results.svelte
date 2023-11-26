@@ -43,7 +43,7 @@
                             />
                             <div class="c-red search-product-sku-count">
                                 {product?.customFields2?.skus.length}
-                                {#if product?.sku_count > 1}
+                                {#if product?.customFields2?.skus.length > 1}
                                     Skus
                                 {:else}Sku{/if}
                             </div>
@@ -60,7 +60,7 @@
                 <div class="suggestion">No Products Found</div>
             {/if}
         </div>
-        {#if $results.data.other != null && $results.other.length > 0}
+        {#if $results?.data?.other != null && $results?.data?.other?.length > 0}
             <div class="search-results__section-title">
                 <div class="result-title">Other</div>
                 {#if $results?.data?.other}

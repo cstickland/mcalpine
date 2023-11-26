@@ -9,9 +9,12 @@
         version,
         openClassVersionTwo
     } from "../stores.js";
+    import { getResults, previousSuggestions } from '../search-stores.js'; 
     import Logo from "./Logo.svelte";
     import Hamburger from "./Hamburger.svelte";
     import SearchIcon from "./Search-Icon.svelte";
+    import { fade } from "svelte/transition";
+    let timer;
 
     $: openClassVersionOne = $open ? "open" : "closed";
 
@@ -36,26 +39,17 @@
         }
     };
 
-    import { fade } from "svelte/transition";
 
-    async function getResults() {
-        if (searchQuery == "") {
-            results.set({});
+    searchQuery.subscribe(async (value) => {
+        if (value == "") {
             return;
         }
-
-        let formData = new FormData();
-        formData.append("s", $searchQuery);
-        formData.append("action", action);
-
-        const fetchPromise = await fetch($ajaxUrl, {
-            method: "POST",
-            body: formData,
-        });
-
-        const response = await fetchPromise.json();
-        results.set(response);
-    }
+        clearTimeout(timer)
+        timer = setTimeout(async () => {
+            const data = await getResults(value, previousSuggestions);
+            results.set(data);
+        }, 200);
+    });
 </script>
 
 <div class="mobile-nav-controls {openClass}">
@@ -69,7 +63,6 @@
                 type="text"
                 name="s"
                 bind:value={$searchQuery}
-                on:input={getResults}
                 placeholder="Search a product name, SKU or term…"
                 autofocus
                 autocomplete="off"

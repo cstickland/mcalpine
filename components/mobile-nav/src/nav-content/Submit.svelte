@@ -30,19 +30,15 @@
     <div class="view-all">View All Results</div>
     <div class="view-all">
         <div class="view-all-chevron">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                ><g data-name="Layer 2"
-                    ><g data-name="chevron-right"
-                        ><rect
-                            width="24"
-                            height="24"
-                            transform="rotate(-90 12 12)"
-                            opacity="0"
-                        /><path
-                            d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"
-                        /></g
-                    ></g
-                ></svg
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13.922"
+                height="16.245"
+                viewBox="0 0 13.922 16.245"
+                ><path
+                    d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z"
+                    fill="#fff"
+                /></svg
             >
         </div>
     </div>
@@ -89,6 +85,9 @@
                     background-color: #222222;
                     width: 3.25rem;
                     height: 3.25rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     border-bottom: solid 1px #f4f4f4;
                     svg {
                         fill: #ffffff;
@@ -123,6 +122,10 @@
                     width: 3.25rem;
                     height: 3.25rem;
                     border-bottom: solid 1px #f4f4f4;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
                     svg {
                         fill: #e63128;
                     }

@@ -6,34 +6,13 @@
         highlightResults,
         searchQuery,
         version,
-        ajaxUrl,
-        action,
         open,
     } from "../stores.js";
     import { fade } from "svelte/transition";
     export let form;
-    $: fetchedResults = $results;
     $: totalResults = $results?.products?.length + $results?.other?.length;
     $: openClass = $open ? "open" : "closed";
 
-    async function getResults() {
-        if (searchQuery == "") {
-            results.set({});
-            return;
-        }
-
-        let formData = new FormData();
-        formData.append("s", $searchQuery);
-        formData.append("action", action);
-
-        const fetchPromise = await fetch($ajaxUrl, {
-            method: "POST",
-            body: formData,
-        });
-
-        const response = await fetchPromise.json();
-        results.set(response);
-    }
 </script>
 <div  class="menu-container"  in:fade={{ duration: 200, delay: 200 }}
     out:fade={{duration: 200}}
@@ -43,47 +22,63 @@
     id="results-container"
   >
     {#if $searchQuery.length > 0}
-        <div class="search-results__section-title">
-            <div class="result-title">Suggestions</div>
-        </div>
-        <div class="search-results__section-title">
+        {#if $results?.data?.productCategories?.length > 0 && $results?.data?.productCategories[0] != $searchQuery}
+            <div class="search-results__section-title">
+                <div class="result-title">Suggestions</div>
+                {#each $results?.data?.productCategories as category, i}
+                    {#if i < 3 && $searchQuery != category}
+                        <div
+                            class="search-product-result"
+                            on:keydown
+                            on:click={async () => {
+                                searchQuery.set(category);
+                            }}
+                        >
+                            {@html highlightResults($searchQuery, category)}
+                        </div>
+                    {/if}
+                {/each}
+            </div>
+        {/if}
+                <div class="search-results__section-title">
             <div class="result-title">Products</div>
-            {#if fetchedResults.products}
-                {#if fetchedResults?.products.length > 0}
-                    {#each fetchedResults?.products as product, i}
-                        {#if i < 3}
-                            <a
-                                href={product?.permalink}
-                                class="search-product-result"
-                            >
-                                <img
-                                    height="58px"
-                                    width="58px"
-                                    src={product?.skus[0]?.product_images[0]
-                                        ?.product_image}
-                                    alt=""
-                                    class="result-image"
-                                />
-                                <div>
-                                    {@html highlightResults(
-                                        $searchQuery,
-                                        product?.name
-                                    )}
-                                </div>
-                            </a>
-                        {/if}
-                    {/each}
-                {:else}
-                    <div>No Products Found</div>
-                {/if}
+            {#if $results?.data?.products?.nodes?.length > 0}
+                {#each $results?.data?.products?.nodes as product, i}
+                    {#if i < 3}
+                        <a href={product?.link} class="search-product-result">
+                            <img
+                                height="58px"
+                                width="58px"
+                                src={product?.customFields2?.skus[0]
+                                    ?.productImages[0]?.productImage
+                                    ?.mediaItemUrl}
+                                alt=""
+                                class="result-image"
+                            />
+                            <div class="c-red search-product-sku-count">
+                                {product?.customFields2?.skus.length}
+                                {#if product?.customFields2?.skus.length > 1}
+                                    Skus
+                                {:else}Sku{/if}
+                            </div>
+                            <div>
+                                {@html highlightResults(
+                                    $searchQuery,
+                                    product?.title
+                                )}
+                            </div>
+                        </a>
+                    {/if}
+                {/each}
+            {:else}
+                <div class="search-product-result">No Products Found</div>
             {/if}
         </div>
-
-        <div class="search-results__section-title">
-            {#if fetchedResults.other}
-                {#if fetchedResults?.other.length > 0}
-                    <div class="result-title">Other</div>
-                    {#each fetchedResults?.other as other, i}
+        {#if $results?.data?.other != null && $results?.data?.other?.length > 0}
+            <div class="search-results__section-title">
+                <div class="result-title">Other Results</div>
+                {#if $results?.data?.other}
+                    {#each $results?.data?.other as other, i}
                         {#if i < 3}
                             <a
                                 href={other?.permalink}
@@ -92,19 +87,20 @@
                                 <div>
                                     {@html highlightResults(
                                         $searchQuery,
-                                        other?.name
+                                        other?.title
                                     )}
                                 </div>
                                 <div class="other-post-type">
-                                    {#if other?.post_type == "post"}Article{:else if other?.post_type == "page"}Page{/if}
+                                    {#if other?.postType == "post"}Article{:else if other?.postType == "page"}Page{/if}
                                 </div>
                             </a>
                         {/if}
                     {/each}
+                {:else}
+                    <div>No other pages found</div>
                 {/if}
-            {/if}
-        </div>
-        {#if $version == 1}
+            </div>
+        {/if}        {#if $version == 1}
             <Submit {totalResults} {form} />
         {/if}
     {/if}
@@ -123,7 +119,6 @@
                 type="text"
                 name="s"
                 bind:value={$searchQuery}
-                on:input={getResults}
                 placeholder="Search a product name, SKU or term…"
                 autofocus
             />
@@ -165,6 +160,10 @@
             color: #222222;
             font-size: 1rem;
             border-bottom: solid 1px #f4f4f4;
+
+            .search-product-sku-count {
+                padding-right: 1rem;
+            }
 
             &.other {
                 display: flex;

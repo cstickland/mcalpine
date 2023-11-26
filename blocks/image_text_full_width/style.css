@@ -112,7 +112,6 @@
   max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
-  padding-top: 0 !important;
 }
 @media only screen and (min-width: 48rem) {
   .image-text-full-width-block {
@@ -233,7 +232,7 @@
   .image-text-full-width-block .image-text-container {
     position: relative;
     overflow: visible;
-    padding-bottom: 0;
+    padding-bottom: 4rem;
   }
   .image-text-full-width-block .image-text-container .text-block-hash {
     display: block;

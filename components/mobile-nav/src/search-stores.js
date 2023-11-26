@@ -1,16 +1,7 @@
-import { get } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 
-export function highlightResults(searchQuery, result) {
-  let textToSearch = searchQuery
-  let paragraph = result
-
-  textToSearch = textToSearch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-
-  let pattern = new RegExp(`${textToSearch}`, 'ig')
-
-  paragraph = paragraph.replace(pattern, (match) => `<b>${match}</b>`)
-  return paragraph
-}
+export const previousSuggestions = writable([])
+export const results = writable({})
 
 export async function getResults(searchTerm, previousSuggestions) {
   const query = `{
@@ -194,6 +185,7 @@ export function sortProductsBySimilarity(products, searchTerm) {
   return wordDistances.map((wd) => wd.product)
 }
 
+// take all the skus from a producct object and sort them via levenshtein Distance
 function getSkusList(product, searchTerm) {
   let skus = []
   let sortedSkus = []

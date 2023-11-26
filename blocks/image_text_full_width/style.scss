@@ -39,7 +39,6 @@
 
 .image-text-full-width-block {
   @include container-large;
-  padding-top: 0 !important;
   .image-text-container {
     padding-bottom: 2.5rem;
     position: relative;
@@ -153,7 +152,7 @@
     .image-text-container {
       position: relative;
       overflow: visible;
-      padding-bottom: 0;
+      padding-bottom: 4rem;
       .text-block-hash {
         display: block;
       }
