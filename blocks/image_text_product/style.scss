@@ -1,57 +1,57 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-.animate {
-  &.image-text-product-block {
-    .image-container {
-      .image-text-background-image,
-      .image-text-product-sku {
-        opacity: 0;
-      }
-    }
-
-    .text-container {
-      h2,
-      .image-text-product-text,
-      .color-block {
-        opacity: 0;
-      }
-    }
-  }
-}
-
-.animated {
-  &.image-text-product-block {
-    .image-container {
-      .image-text-background-image {
-        @include grow;
-        transform-origin: center center;
-        animation-duration: 0.75s;
-      }
-
-      .image-text-product-sku {
-        @include fade-in;
-      }
-    }
-
-    .text-container {
-      h2,
-      .image-text-product-text {
-        @include slide-in;
-        opacity: 0;
-      }
-      .color-block {
-        @include fade-in;
-      }
-      h2 {
-        animation-delay: 200ms;
-      }
-
-      .image-text-product-text {
-        animation-delay: 350ms;
-      }
-    }
-  }
-}
+// .animate {
+//   &.image-text-product-block {
+//     .image-container {
+//       .image-text-background-image,
+//       .image-text-product-sku {
+//         opacity: 0;
+//       }
+//     }
+//
+//     .text-container {
+//       h2,
+//       .image-text-product-text,
+//       .color-block {
+//         opacity: 0;
+//       }
+//     }
+//   }
+// }
+//
+// .animated {
+//   &.image-text-product-block {
+//     .image-container {
+//       .image-text-background-image {
+//         @include grow;
+//         transform-origin: center center;
+//         animation-duration: 0.75s;
+//       }
+//
+//       .image-text-product-sku {
+//         @include fade-in;
+//       }
+//     }
+//
+//     .text-container {
+//       h2,
+//       .image-text-product-text {
+//         @include slide-in;
+//         opacity: 0;
+//       }
+//       .color-block {
+//         @include fade-in;
+//       }
+//       h2 {
+//         animation-delay: 200ms;
+//       }
+//
+//       .image-text-product-text {
+//         animation-delay: 350ms;
+//       }
+//     }
+//   }
+// }
 
 .image-text-product-block {
   .image-text-container {
@@ -121,8 +121,16 @@
     .image-text-container {
       .text-container {
         * {
-          color: #fff !important;
+          color: #fff;
           max-width: 678px;
+
+          &.btn {
+            color: $color__mcalpine-black;
+
+            &:hover {
+              color: #fff;
+            }
+          }
         }
         .color-block {
           background-color: #fff;

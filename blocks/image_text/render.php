@@ -56,5 +56,4 @@ endif; ?>">
             <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
         </div>
     </div>
-
 </div>

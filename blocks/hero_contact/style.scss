@@ -141,6 +141,10 @@
             textarea {
               width: 100%;
             }
+
+            input[type='checkbox'] {
+              width: auto;
+            }
           }
 
           &.gfield--type-name {
@@ -405,6 +409,17 @@
 
 .ginput_container_select {
   position: relative;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: 'Hello! I am a';
+
+    width: 120px;
+    color: #fff;
+    padding-right: 1rem;
+    font-weight: 700;
+  }
 }
 
 .ginput_container_select select {
@@ -417,33 +432,63 @@
 
 /* style the items (options), including the selected item: */
 .selected-container {
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid $color__mcalpine-black;
   padding-right: 3rem;
   cursor: pointer;
+  width: 224px;
+  min-width: max-content;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='chevron-down'%3E%3Crect width='24' height='24' opacity='0'/%3E%3Cpath fill='%23e63128' d='M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: 99%;
+  background-color: #fff;
+  border-radius: 0.5rem 0.5rem 0 0;
+  overflow: hidden;
+
+  &.select-arrow-active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg data-name='Layer 2'%3E%3Cg data-name='chevron-up'%3E%3Crect width='24' height='24' transform='rotate(180 12 12)' opacity='0'/%3E%3Cpath fill='%23e63128' d='M16 14.5a1 1 0 0 1-.71-.29L12 10.9l-3.3 3.18a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.42l4-3.86a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.42 1 1 0 0 1-.69.28z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E ");
+
+    & + .select-items {
+      box-shadow: 0px 3px 6px #7caef24d;
+    }
+  }
 }
-.select-items div,
 .select-selected {
-  color: #ffffff;
-  padding: 8px 0;
+  color: $color__mcalpine-black;
+  padding: 8px 1rem;
   cursor: pointer;
+  font-weight: 700;
 }
 
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: DodgerBlue;
+  background-color: #fff;
+  color: #fff;
   top: 100%;
-  left: 0;
+  left: 120px;
   right: 0;
   z-index: 99;
+  width: 224px;
+  min-width: max-content;
+  border-radius: 0 0 0.5rem 0.5rem;
+  overflow: hidden;
+
+  div {
+    color: $color__mcalpine-black;
+    padding: 1rem;
+    cursor: pointer;
+  }
 }
 
 /* Hide the items when the select box is closed: */
 .select-hide {
-  display: none;
+  display: none !important;
 }
 
 .select-items div:hover,
 .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+  background: transparent
+    linear-gradient(75deg, #ffffff 0%, rgba(124, 174, 242, 0.2509803922) 100%)
+    0% 0% no-repeat padding-box;
 }

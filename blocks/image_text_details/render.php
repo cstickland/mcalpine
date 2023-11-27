@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block']); ?> id="query-<?php the_title(); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block ' . get_field('background_color')]); ?> id="query-<?php the_title(); ?>">
     <div class="image-text-container  <?php
                                         echo get_field('color') . ' ';
                                         echo get_field('image_alignment_mobile') . ' ';
@@ -20,7 +20,6 @@ endif; ?>">
                 $link_title = $link['title'];
                 $link_target = $link['target'] ? $link['target'] : '_self';
             ?>
-
                 <a class="btn <?php if (get_field('color') == 'color-white') {
                                     echo 'btn-red';
                                 } else {
@@ -31,23 +30,20 @@ endif; ?>">
             <?php endif; ?>
         </div>
         <div class="image-container">
-            <?php $image = get_field('image');
-            $image_alt = $image['alt'];
-            $image_url = $image['url'];
-
-            if (!empty($image)) : ?>
-                <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
-            <?php endif; ?>
-
-            <?php if (get_field('show_overflow_image')) { ?>
-                <?php $image = get_field('overflow_image');
+            <?php if (get_field('media_type') == 'image') { ?>
+                <?php $image = get_field('image');
                 $image_alt = $image['alt'];
                 $image_url = $image['url'];
 
                 if (!empty($image)) : ?>
-                    <img class="overflow-image" style="height: <?php the_field('overflow_image_height'); ?>%; left: <?php the_field('overflow_image_horizontal_position'); ?>%;" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                    <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
                 <?php endif; ?>
-
+            <?php } else if (get_field('media_type') == 'video') { ?>
+                <div class='video-block'>
+                    <div class="video-muted" data-video="<?php the_field('video_url'); ?>"></div>
+                    <div class="play-button">
+                    </div>
+                </div>
             <?php } ?>
         </div>
         <div class="text-block-hash <?php if (get_field('text_alignment_desktop')) :
@@ -56,5 +52,4 @@ endif; ?>">
             <img src="<?php echo get_template_directory_uri() . '/assets/hatching_bg.svg'; ?>" alt="hatching">
         </div>
     </div>
-
 </div>

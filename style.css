@@ -3904,7 +3904,7 @@ fieldset {
   container-name: insight-card; }
   .insight-card .insight-card-image-container {
     grid-area: 1 / 1 / span 2 / span 1;
-    background-color: #e63128;
+    background-color: #eb5a53;
     position: relative;
     top: 0;
     left: 0;

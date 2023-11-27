@@ -62,56 +62,6 @@
     opacity: 1;
   }
 }
-.animate.image-text-product-block .image-container .image-text-background-image,
-.animate.image-text-product-block .image-container .image-text-product-sku {
-  opacity: 0;
-}
-.animate.image-text-product-block .text-container h2,
-.animate.image-text-product-block .text-container .image-text-product-text,
-.animate.image-text-product-block .text-container .color-block {
-  opacity: 0;
-}
-
-.animated.image-text-product-block .image-container .image-text-background-image {
-  opacity: 0;
-  animation-name: grow;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-  transform-origin: top left;
-  transform-origin: center center;
-  animation-duration: 0.75s;
-}
-.animated.image-text-product-block .image-container .image-text-product-sku {
-  animation-name: fade-in;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-  transform-origin: center center;
-}
-.animated.image-text-product-block .text-container h2,
-.animated.image-text-product-block .text-container .image-text-product-text {
-  opacity: 0;
-  animation-name: slide-in;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-  opacity: 0;
-}
-.animated.image-text-product-block .text-container .color-block {
-  animation-name: fade-in;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-  transform-origin: center center;
-}
-.animated.image-text-product-block .text-container h2 {
-  animation-delay: 200ms;
-}
-.animated.image-text-product-block .text-container .image-text-product-text {
-  animation-delay: 350ms;
-}
-
 .image-text-product-block .image-text-container {
   width: 100%;
   max-width: 120rem;
@@ -189,8 +139,14 @@
   background-color: #e63128;
 }
 .image-text-product-block.color-red .image-text-container .text-container * {
-  color: #fff !important;
+  color: #fff;
   max-width: 678px;
+}
+.image-text-product-block.color-red .image-text-container .text-container *.btn {
+  color: #222222;
+}
+.image-text-product-block.color-red .image-text-container .text-container *.btn:hover {
+  color: #fff;
 }
 .image-text-product-block.color-red .image-text-container .text-container .color-block {
   background-color: #fff;

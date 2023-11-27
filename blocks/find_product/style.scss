@@ -1,0 +1,28 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.find-product-block {
+  color: $color__mcalpine_black;
+  background-color: transparent;
+
+  .find-product-block-container {
+    @include container-large;
+  }
+
+  .find-product-companies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      max-width: 276px;
+      max-height: 276px;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &.c-red {
+    color: #fff;
+    background-color: $color__mcalpine_red;
+  }
+}

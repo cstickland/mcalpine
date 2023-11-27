@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
       /* When the select box is clicked, close any other select boxes,
     and open/close the current select box: */
       e.stopPropagation()
-      closeAllSelect(this)
+
       this.nextSibling.classList.toggle('select-hide')
       this.classList.toggle('select-arrow-active')
     })
@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
       yl,
       arrNo = []
     x = document.getElementsByClassName('select-items')
-    y = document.getElementsByClassName('select-selected')
+    y = document.getElementsByClassName('selected-container')
     xl = x.length
     yl = y.length
     for (i = 0; i < yl; i++) {

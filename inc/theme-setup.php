@@ -81,67 +81,69 @@ add_filter('allowed_block_types_all', 'rt_allowed_block_types', 25, 2);
 
 function rt_allowed_block_types($allowed_blocks, $editor_context)
 {
-    if ('warranty' === $editor_context->post->post_type) {
+    if (get_current_screen()->is_block_editor()) {
+        if ('warranty' === $editor_context->post->post_type) {
+            $allowed_blocks = array(
+                'mcalpine/hero-contact'
+            );
+            return $allowed_blocks;
+        }
+        if ('product' === $editor_context->post->post_type) {
+            $allowed_blocks = array(
+                'acf/reviews',
+                "mcalpine/product-suitability",
+                'mcalpine/product-details',
+                'mcalpine/image-text-product',
+                'mcalpine/image-text-details'
+
+            );
+            return $allowed_blocks;
+        }
+        if ('post' === $editor_context->post->post_type) {
+            $allowed_blocks = array(
+                'core/freeform'
+            );
+            return $allowed_blocks;
+        }
+
+
         $allowed_blocks = array(
-            'mcalpine/hero-contact'
+            'mcalpine/hero-contact',
+            'mcalpine/image-text',
+            'create-block/grid',
+            'mcalpine/grid-text',
+            'acf/cta',
+            "mcalpine/category-card",
+            "acf/faq-archive",
+            "acf/faq-contact",
+            "mcalpine/help-card",
+            "mcalpine/hero-contact",
+            "mcalpine/featured-insight-hero",
+            "mcalpine/home-hero",
+            "mcalpine/large-hero",
+            "mcalpine/small-hero",
+            "mcalpine/image-text-slider",
+            "mcalpine/info-card",
+            "mcalpine/insight-card",
+            "mcalpine/interest-cards",
+            "mcalpine/international-contact",
+            "mcalpine/member-institutions",
+            "mcalpine/new-product-feature",
+            "mcalpine/newsletter",
+            "mcalpine/product-card",
+            "mcalpine/prodcut-guide-cta",
+            "acf/reviews",
+            "mcalpine/info-card",
+            "mcalpine/vertical-text",
+            "mcalpine/timeline",
+            "mcalpine/search-hero",
+            "mcalpine/marquee",
+            "core/freeform",
+            "mcalpine/image-text-full",
+            "mcalpine/video"
         );
         return $allowed_blocks;
     }
-    if ('product' === $editor_context->post->post_type) {
-        $allowed_blocks = array(
-            'acf/reviews',
-            "mcalpine/product-suitability",
-            'mcalpine/product-details',
-            'mcalpine/image-text-product',
-            'mcalpine/image-text-details'
-
-        );
-        return $allowed_blocks;
-    }
-    if ('post' === $editor_context->post->post_type) {
-        $allowed_blocks = array(
-            'core/freeform'
-        );
-        return $allowed_blocks;
-    }
-
-
-    $allowed_blocks = array(
-        'mcalpine/hero-contact',
-        'mcalpine/image-text',
-        'create-block/grid',
-        'mcalpine/grid-text',
-        'acf/cta',
-        "mcalpine/category-card",
-        "acf/faq-archive",
-        "acf/faq-contact",
-        "mcalpine/help-card",
-        "mcalpine/hero-contact",
-        "mcalpine/featured-insight-hero",
-        "mcalpine/home-hero",
-        "mcalpine/large-hero",
-        "mcalpine/small-hero",
-        "mcalpine/image-text-slider",
-        "mcalpine/info-card",
-        "mcalpine/insight-card",
-        "mcalpine/interest-cards",
-        "mcalpine/international-contact",
-        "mcalpine/member-institutions",
-        "mcalpine/new-product-feature",
-        "mcalpine/newsletter",
-        "mcalpine/product-card",
-        "mcalpine/prodcut-guide-cta",
-        "acf/reviews",
-        "mcalpine/info-card",
-        "mcalpine/vertical-text",
-        "mcalpine/timeline",
-        "mcalpine/search-hero",
-        "mcalpine/marquee",
-        "core/freeform",
-        "mcalpine/image-text-full",
-        "mcalpine/video"
-    );
-    return $allowed_blocks;
 }
 
 function custom_admin_head()
@@ -160,18 +162,3 @@ function cc_mime_types($mimes)
     return $mimes;
 }
 add_filter('upload_mimes', 'cc_mime_types');
-
-//
-// if (!is_admin()) {
-//     function search_filter_posts($query)
-//     {
-//         if ($query->is_search) {
-//             $query->set('post_type', ['post', 'product']);
-//         }
-//         if ($query->is_main_query() && !is_admin() && (is_category() || is_tag() && empty($query->query_vars['suppress_filters']))) {
-//             $query->set('post_type', array('post', 'product'));
-//         }
-//         return $query;
-//     }
-//     add_filter('pre_get_posts', 'search_filter_posts');
-// }

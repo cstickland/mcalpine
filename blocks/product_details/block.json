@@ -10,7 +10,8 @@
 	"supports": {
 		"html": false,
         "jsx": true,
-        "mode": false
+        "mode": false,
+        "multiple": false
 	},
 	"textdomain": "faq",
 	"style": "file:./style.css",

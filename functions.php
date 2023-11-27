@@ -6,7 +6,6 @@ require_once('inc/graphql-setup.php');
 require_once('inc/acf-setup.php');
 require_once('inc/theme-setup.php');
 require_once('inc/wpai-setup.php');
-require_once('inc/ajax-search.php');
 
 
 // help prevent cross site scripting by setting X-frame-options to SAMEORIGIN

@@ -46,21 +46,24 @@ $results = [];
             echo '<ul>';
             while (have_posts()) :
                 the_post();
-
                 $post_type = get_post_type();
-                if ($post_type === 'post') {
+                if ($post_type === 'post' || $post_type === 'page') {
                     $post_id = get_the_ID();
                     $insight_image = get_the_post_thumbnail_url();
                     $new_insight = new Insight();
                     $new_insight->title = get_the_title();
                     $new_insight->permalink = get_the_permalink();
                     $category;
-                    foreach ((get_the_category()) as $cat) {
-                        if ($cat->parent == 0) {
-                            $category = $cat->cat_name;
-                        }
-                    };
-                    $new_insight->identifier = $category;
+                    if ($post_type === 'post') {
+                        foreach ((get_the_category()) as $cat) {
+                            if ($cat->parent == 0) {
+                                $category = $cat->cat_name;
+                            }
+                        };
+                        $new_insight->identifier = $category;
+                    } else {
+                        $new_insight->identifier = 'Page';
+                    }
                     $new_insight->img = $insight_image;
                     $new_insight->columnWidth = 1;
                     $new_insight->id = $post_id;

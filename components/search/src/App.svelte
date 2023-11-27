@@ -26,6 +26,7 @@
     
     searchQuery.subscribe(async (value) => {
         if (value == "") {
+            results.set({});
             return;
         }
         clearTimeout(timer)

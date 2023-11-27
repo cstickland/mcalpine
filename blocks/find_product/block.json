@@ -1,0 +1,15 @@
+{
+  "name": "acf/find-product",
+  "title": "Find This Product",
+  "description": "A custom product block.",
+  "style": ["file:./style.css"],
+  "category": "formatting",
+  "icon": "testimonial",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "multiple": false
+  }
+}

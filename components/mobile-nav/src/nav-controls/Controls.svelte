@@ -3,13 +3,11 @@
         open,
         searchOpen,
         searchQuery,
-        ajaxUrl,
-        action,
         results,
         version,
-        openClassVersionTwo
+        openClassVersionTwo,
     } from "../stores.js";
-    import { getResults, previousSuggestions } from '../search-stores.js'; 
+    import { getResults, previousSuggestions } from "../search-stores.js";
     import Logo from "./Logo.svelte";
     import Hamburger from "./Hamburger.svelte";
     import SearchIcon from "./Search-Icon.svelte";
@@ -18,10 +16,9 @@
 
     $: openClassVersionOne = $open ? "open" : "closed";
 
+    $: openClass = cycleHamburger();
 
-    $: openClass =  cycleHamburger();
-
-    function cycleHamburger()  {
+    function cycleHamburger() {
         if ($version == 1) {
             if ($open) {
                 return "open";
@@ -37,14 +34,14 @@
                 return "closed";
             }
         }
-    };
-
+    }
 
     searchQuery.subscribe(async (value) => {
         if (value == "") {
+            results.set({});
             return;
         }
-        clearTimeout(timer)
+        clearTimeout(timer);
         timer = setTimeout(async () => {
             const data = await getResults(value, previousSuggestions);
             results.set(data);
@@ -76,7 +73,7 @@
         {#if $version == 1}
             <Hamburger openClass={openClassVersionOne} position={"controls"} />
         {:else if $version == 2}
-            <Hamburger  position={"controls"} openClass={$openClassVersionTwo} />
+            <Hamburger position={"controls"} openClass={$openClassVersionTwo} />
         {/if}
     </div>
 </div>
@@ -110,7 +107,7 @@
             padding: 0;
 
             &:focus-visible {
-            box-shadow: none;
+                box-shadow: none;
             }
         }
     }

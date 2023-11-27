@@ -9,5 +9,8 @@
     "acf": {
         "mode": "preview",
         "renderTemplate": "render.php"
+    },
+    "supports": {
+        "multiple": false
     }
 }

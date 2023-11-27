@@ -1,8 +1,3 @@
-<script>
-    import App from "../../App.svelte";
-
-</script>
-
 <div class="menu-image-container">
     <a
         href="/"

@@ -65,7 +65,7 @@
         <ul class="insight-archive-grid">
             {#if transition == false}
                 {#each currentPageInsights as insight}
-                    {#if insight.postType == "post"}
+                    {#if insight.postType === "post" || insight.postType === "page"}
                         <InsightCard {insight} />
                     {:else if insight.postType == "product"}
                         <ProductCard product={insight} />
