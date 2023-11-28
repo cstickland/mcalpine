@@ -64,6 +64,33 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_65661ea55c7a7",
+            "label": "Sticky Links Background Colour",
+            "name": "sticky_links_background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "white": "White",
+                "red": "Red"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_64736a878b344",
             "label": "Skus",
             "name": "skus",
@@ -336,5 +363,5 @@
     "graphql_types": [
         "Product"
     ],
-    "modified": 1700658263
+    "modified": 1701191376
 }

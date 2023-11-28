@@ -14,7 +14,7 @@
             <a class="grid-link" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a>
         <?php endif; ?>
     </div>
-    <ul class="grid-block-grid">
+    <ul class="grid-block-grid columns-<?php the_field('desktop_maximum_columns'); ?>">
         <?php $allowed_blocks = array('mcalpine/product-card', 'acf/content', 'mcalpine/info-card', 'mcalpine/insight-card', 'mcalpine/category-card'); ?>
         <InnerBlocks allowedBlocks="<?php echo esc_attr(wp_json_encode($allowed_blocks)); ?>" />
     </ul>

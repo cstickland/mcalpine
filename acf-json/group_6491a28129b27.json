@@ -36,12 +36,13 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_graphql": 1,
             "choices": {
                 "white": "White",
                 "red": "Red",
                 "black": "Black"
             },
-            "default_value": false,
+            "default_value": "black",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -119,6 +120,33 @@
             },
             "show_in_graphql": 1,
             "return_format": "array"
+        },
+        {
+            "key": "field_6565c0ac27683",
+            "label": "Desktop Maximum Columns",
+            "name": "desktop_maximum_columns",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "3": "Three",
+                "4": "Four"
+            },
+            "default_value": 4,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -143,5 +171,5 @@
     "graphql_field_name": "gridBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1698408671
+    "modified": 1701167316
 }

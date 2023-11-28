@@ -2,7 +2,7 @@
 $term = get_queried_object();
 $link = !empty(get_field('breadcrumb_middle_link')) ? get_field('breadcrumb_middle_link') : null;
 $title = !empty(get_field('title')) ? get_field('title') : $term->name;
-$message =  !empty(get_field('message')) ? get_field('message') : get_field('category_hero_message', $term);
+$message =  !empty(get_field('message')) ? get_field('message') : get_field('hero_message', $term);
 $image = !empty(get_field('image')) ? get_field('image') : get_field('category_hero_image', $term);
 $breadcrumb_end = 'hello';
 if (is_archive()) {

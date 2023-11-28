@@ -1,6 +1,6 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-.large-hero-block {
+.large-hero-category-block {
   position: relative;
 
   .large-hero-gradient {
@@ -22,10 +22,13 @@
 
     .large-hero-image-container {
       display: flex;
-      z-index: 1;
+      z-index: 4;
       padding-top: 3.5rem;
+      aspect-ratio: 16/5;
+      position: relative;
+      align-items: center;
 
-      img {
+      .background-image {
         height: 100%;
         width: 100%;
         object-fit: cover;
@@ -34,6 +37,11 @@
         background: transparent
           linear-gradient(180deg, #22222200 0%, #222222 100%) 0% 0% no-repeat
           padding-box;
+      }
+
+      .overflow-image {
+        position: absolute;
+        z-index: 3;
       }
     }
 
@@ -54,10 +62,11 @@
     .large-hero-post-content {
       background-color: $color__mcalpine-red;
       color: #ffffff;
-      padding-left: 2rem;
-      padding-top: 2rem;
+      padding: 2rem;
+      padding: clamp(2rem, 0.944rem + 3.38vw, 5rem);
       display: flex;
       flex-direction: column;
+      z-index: 5;
 
       &.hide-skip {
         padding-bottom: 2rem;
@@ -68,13 +77,9 @@
       }
 
       h2 {
-        padding-top: 0.625rem;
-        padding-bottom: 1rem;
-        padding-right: 2rem;
+        padding-bottom: 1.25rem;
       }
-
       p {
-        padding-right: 2rem;
         margin: 0;
       }
 
@@ -148,14 +153,14 @@
 }
 
 @media only screen and (min-width: $desktop) {
-  .large-hero-block {
+  .large-hero-category-block {
     .large-hero-gradient {
       width: 50%;
     }
 
     .large-hero-container {
       .hero-title {
-        grid-area: 1 / 1 / span 2 / span 6;
+        grid-area: 1 / 1 / span 1 / span 6;
         justify-content: start;
         padding-left: 0;
         padding-right: 0;
@@ -202,17 +207,9 @@
         }
       }
       .large-hero-post-content {
-        padding-top: 46px;
-        padding-left: 50px;
-        grid-area: 3 / 9 / span 2 / span 4;
-        z-index: 2;
+        grid-area: 2 / 9 / span 2 / span 4;
         height: fit-content;
         align-self: end;
-
-        h2,
-        p {
-          padding-right: 3.625rem;
-        }
 
         .large-link {
           width: 3.5rem;

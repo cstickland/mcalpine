@@ -13,7 +13,7 @@ get_header();
             $blocks = parse_blocks($post->post_content);
     ?>
             <?php if (count($blocks) > 0) : ?>
-                <div class="product-sticky-links">
+                <div class="product-sticky-links bg-<?php the_field('sticky_links_background_color'); ?>">
                     <a class="home-link" href="#primary">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245">

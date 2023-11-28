@@ -2,10 +2,29 @@
   display: none;
   position: sticky;
   top: 0;
-  background-color: #fff;
   z-index: 10;
   align-items: center;
   gap: 2.625rem;
+
+  &.bg-white {
+    background-color: #fff;
+
+    .sticky-link {
+      color: #3c3c3c;
+    }
+  }
+
+  &.bg-red {
+    background-color: $color__mcalpine-red;
+
+    .sticky-link {
+      color: #fff;
+
+      &:hover {
+        color: #3c3c3c;
+      }
+    }
+  }
 
   .home-link {
     display: flex;

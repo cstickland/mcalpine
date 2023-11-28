@@ -1,6 +1,6 @@
 {
-    "name": "mcalpine/large-hero",
-    "title": "Large hero",
+    "name": "mcalpine/large-hero-category",
+    "title": "Category Large hero",
     "description": "A custom hero block.",
     "style": [ "file:./style.css" ],
     "category": "formatting",

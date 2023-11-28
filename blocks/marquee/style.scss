@@ -2,6 +2,7 @@
 
 .marquee-block {
   overflow: hidden;
+  padding: 1.5rem 0;
   .wrap {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -40,5 +41,17 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (min-width: $tablet) {
+  .marquee-block {
+    padding: 3rem 0;
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .marquee-block {
+    padding: 4.5rem 0;
   }
 }

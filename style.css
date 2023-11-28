@@ -4368,10 +4368,19 @@ fieldset {
   display: none;
   position: sticky;
   top: 0;
-  background-color: #fff;
   z-index: 10;
   align-items: center;
   gap: 2.625rem; }
+  .product-sticky-links.bg-white {
+    background-color: #fff; }
+    .product-sticky-links.bg-white .sticky-link {
+      color: #3c3c3c; }
+  .product-sticky-links.bg-red {
+    background-color: #e63128; }
+    .product-sticky-links.bg-red .sticky-link {
+      color: #fff; }
+      .product-sticky-links.bg-red .sticky-link:hover {
+        color: #3c3c3c; }
   .product-sticky-links .home-link {
     display: flex;
     justify-content: center;

@@ -36,6 +36,9 @@
         margin: 0 auto;
         margin-bottom: 2.5rem;
       }
+      &.columns-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
     }
   }
   ul {
@@ -134,12 +137,28 @@
         .acf-innerblocks-container {
           grid-template-columns: repeat(4, 1fr);
         }
+
+        &.columns-3 {
+          .acf-innerblocks-container {
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+          }
+        }
       }
 
       &.scroll {
         ul {
           .acf-innerblocks-container {
             grid-template-columns: repeat(4, 1fr);
+          }
+
+          &.columns-3 {
+            .acf-innerblocks-container {
+              grid-template-columns: 1fr 1fr 1fr;
+              max-width: 1400px;
+              margin: 0 auto;
+            }
           }
         }
       }
@@ -148,6 +167,14 @@
         ul {
           .acf-innerblocks-container {
             grid-template-columns: repeat(4, 1fr);
+          }
+
+          &.columns-3 {
+            .acf-innerblocks-container {
+              grid-template-columns: 1fr 1fr 1fr;
+              max-width: 1400px;
+              margin: 0 auto;
+            }
           }
         }
       }

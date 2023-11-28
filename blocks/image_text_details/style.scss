@@ -203,7 +203,6 @@
         &.i-left {
           .image-container {
             grid-area: 1 / 1 / span 2 / span 8;
-            aspect-ratio: 16/9;
           }
           .text-container {
             grid-area: 2 / 5 / span 2 / span 8;

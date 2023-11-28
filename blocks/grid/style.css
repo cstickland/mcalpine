@@ -1,7 +1,71 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .grid-block {
   overflow: hidden;
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
   container-type: inline-size;
@@ -50,6 +114,9 @@
 .grid-block .grid-title-container .grid-title.center {
   margin: 0 auto;
   margin-bottom: 2.5rem;
+}
+.grid-block .grid-title-container .grid-title.columns-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .grid-block ul {
   list-style: none;
@@ -111,11 +178,26 @@
     .grid-block ul .acf-innerblocks-container {
       grid-template-columns: repeat(4, 1fr);
     }
+    .grid-block ul.columns-3 .acf-innerblocks-container {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
     .grid-block.scroll ul .acf-innerblocks-container {
       grid-template-columns: repeat(4, 1fr);
     }
+    .grid-block.scroll ul.columns-3 .acf-innerblocks-container {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
     .grid-block.column-2 ul .acf-innerblocks-container {
       grid-template-columns: repeat(4, 1fr);
+    }
+    .grid-block.column-2 ul.columns-3 .acf-innerblocks-container {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
     }
   }
 }

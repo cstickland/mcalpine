@@ -64,6 +64,7 @@
 }
 .marquee-block {
   overflow: hidden;
+  padding: 1.5rem 0;
 }
 .marquee-block .wrap {
   padding-top: 0 !important;
@@ -100,6 +101,17 @@
 }
 .marquee-block ul li div:first-of-type {
   margin-left: -50%;
+}
+
+@media only screen and (min-width: 48rem) {
+  .marquee-block {
+    padding: 3rem 0;
+  }
+}
+@media only screen and (min-width: 64rem) {
+  .marquee-block {
+    padding: 4.5rem 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

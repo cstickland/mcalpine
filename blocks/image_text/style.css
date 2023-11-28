@@ -236,7 +236,6 @@
   }
   .image-text-block .image-text-container.color-red.i-left .image-container {
     grid-area: 1/1/span 2/span 8;
-    aspect-ratio: 16/9;
   }
   .image-text-block .image-text-container.color-red.i-left .text-container {
     grid-area: 2/5/span 2/span 8;

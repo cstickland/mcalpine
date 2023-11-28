@@ -36,7 +36,6 @@ class Category
 
 $results = [];
 ?>
-
 <main id="primary" class="site-main">
     <div id="search-archive"></div>
     <ul>
@@ -44,6 +43,7 @@ $results = [];
         if (have_posts()) :
             while (have_posts()) :
                 the_post();
+
                 $post_type = get_post_type();
                 if ($post_type === 'post') {
                     $post_id = get_the_ID();

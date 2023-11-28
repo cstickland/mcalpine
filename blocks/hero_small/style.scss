@@ -5,22 +5,14 @@
     .small-hero-content {
       h1 {
         opacity: 0;
+
+        @include slide-in;
       }
       .small-hero-text {
         opacity: 0;
+        @include slide-in;
+        animation-delay: 150ms;
       }
-    }
-  }
-}
-
-.animated {
-  &.small-hero-block {
-    h1 {
-      @include slide-in;
-    }
-    .small-hero-text {
-      @include slide-in;
-      animation-delay: 150ms;
     }
   }
 }
