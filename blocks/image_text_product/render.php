@@ -18,7 +18,6 @@
                 $link_title = $link['title'];
                 $link_target = $link['target'] ? $link['target'] : '_self';
             ?>
-
                 <a class="btn <?php if (get_field('color') == 'color-white') {
                                     echo 'btn-red';
                                 } else {
@@ -43,5 +42,4 @@
             <div class="image-text-product-sku"><?php the_field('sku'); ?></div>
         </div>
     </div>
-
 </div>

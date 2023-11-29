@@ -11,17 +11,36 @@
   .find-product-companies {
     list-style: none;
     margin: 0;
+
+    margin-top: 55px;
     padding: 0;
 
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+
     li {
-      max-width: 276px;
-      max-height: 276px;
+      max-width: 274px;
+      max-height: 274px;
       height: 100%;
       width: 100%;
+
+      .company-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      img,
+      svg {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 
-  &.c-red {
+  &.bg-red {
     color: #fff;
     background-color: $color__mcalpine_red;
   }

@@ -270,6 +270,7 @@
       align-self: center;
       width: 87.5%;
       object-fit: contain;
+      filter: drop-shadow(4px 8px 8px var(--drop-shadow-color));
     }
 
     .product-card-link {

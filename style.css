@@ -2376,7 +2376,8 @@ fieldset {
       grid-area: 1 / 1 / span 2 / span 3;
       align-self: center;
       width: 87.5%;
-      object-fit: contain; }
+      object-fit: contain;
+      filter: drop-shadow(4px 8px 8px var(--drop-shadow-color)); }
     .product-card .product-block-image .product-card-link {
       background-color: #e63128; }
 
@@ -5107,6 +5108,9 @@ fieldset {
     width: 100%; }
   to {
     width: 10%; } }
+
+:root {
+  --drop-shadow-color: #00000026; }
 
 html {
   scroll-behavior: smooth; }

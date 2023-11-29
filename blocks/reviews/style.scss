@@ -33,15 +33,22 @@
     }
     ul {
       list-style: none;
-      margin: 0;
+      margin: 0 auto;
       padding: 0;
       margin-top: 1.25rem;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      flex-direction: row;
       gap: 1.25rem;
+      overflow-x: scroll;
+      overflow: hidden;
+      // -ms-overflow-style: none; /* IE and Edge */
+      // scrollbar-width: none; /* Firefox */
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
 
       .reviews-card {
-        max-height: 415px;
         aspect-ratio: 1;
         background-color: #f0453c;
         padding: 1.5rem 1.75rem;
@@ -50,6 +57,9 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
+        width: 100%;
+        max-width: 424px;
+        height: 424px;
 
         .review-card-rating {
           font-size: 1.5rem;
@@ -109,6 +119,10 @@
         display: flex;
         flex-direction: row;
         gap: 1.25rem;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        padding-bottom: 1rem;
+        scrollbar-color: white $color__mcalpine-red;
       }
     }
   }

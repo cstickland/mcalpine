@@ -1,26 +1,30 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'find-product-block ' . get_field('colour_style')]); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'find-product-block bg-' . get_field('background_color')]); ?>>
     <div class="find-product-block-container">
-        <h2><?php the_field('title'); ?></h2>
+        <h2><?php the_field('find_products_block_title', 'option'); ?></h2>
         <ul class="find-product-companies">
-            <?php if (have_rows('companies')) :
-                while (have_rows('companies')) : the_row(); ?>
-                    <li><?php $image = get_sub_field('image');
-                        ?>
-                        <div class="position-<?php the_sub_field('image_two_position'); ?> home-hero-image-container">
-                            <?php if (pathinfo($image_schematic['url'])['extension'] == 'svg') {
+            <?php if (have_rows('find_product_companies', 'option')) :
+                while (have_rows('find_product_companies', 'option')) : the_row(); ?>
+                    <li>
+                        <?php if (get_field('background-color') == 'red') {
+                            $image = get_sub_field('company_image_white');
+                        } else {
+                            $image = get_sub_field('company_image_color');
+                        } ?>
+                        <a href="<?php get_sub_field('company_search_url'); ?>" class="company-image-container">
+                            <?php if (pathinfo($image['url'])['extension'] == 'svg') {
                                 echo '<div class="company-image">';
-                                echo file_get_contents($image_schematic['url']);
+                                echo file_get_contents($image['url']);
                                 echo '</div>';
                             } else { ?>
-                                <img src="<?php echo esc_url($image_schematic['url']); ?>" alt="<?php echo esc_attr($image_schematic['alt']); ?>" class="company-image" />
+                                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="company-image" />
                             <?php } ?>
-                        </div>
+                        </a>
                     </li>
             <?php endwhile;
             endif; ?>
         </ul>
         <div class="">
-            <?php if (have_rows('links')) :
+            <?php if (have_rows('links', 'option')) :
                 while (have_rows('links')) : the_row(); ?>
                     <?php $link = get_sub_field('link');
                     if ($link) :

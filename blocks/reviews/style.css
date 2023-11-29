@@ -1,3 +1,67 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .review-block.red {
   color: #ffffff;
   background-color: #e63128;
@@ -18,7 +82,7 @@
 }
 .review-block .review-block-container {
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
 }
@@ -42,15 +106,17 @@
 }
 .review-block .review-block-container ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   margin-top: 1.25rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 1.25rem;
+  overflow-x: scroll;
+  overflow: hidden;
 }
 .review-block .review-block-container ul .reviews-card {
-  max-height: 415px;
   aspect-ratio: 1;
   background-color: #f0453c;
   padding: 1.5rem 1.75rem;
@@ -59,6 +125,9 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  width: 100%;
+  max-width: 424px;
+  height: 424px;
 }
 .review-block .review-block-container ul .reviews-card .review-card-rating {
   font-size: 1.5rem;
@@ -107,6 +176,10 @@
     display: flex;
     flex-direction: row;
     gap: 1.25rem;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding-bottom: 1rem;
+    scrollbar-color: white #e63128;
   }
 }
 

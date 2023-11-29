@@ -33,6 +33,10 @@ Tags: custom-background, custom-logo, custom-menu, featured-images
 
 @import 'components/components';
 
+:root {
+  --drop-shadow-color: #00000026;
+}
+
 html {
   scroll-behavior: smooth;
 }

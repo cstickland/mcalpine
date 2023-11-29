@@ -90,15 +90,30 @@
 .find-product-block .find-product-companies {
   list-style: none;
   margin: 0;
+  margin-top: 55px;
   padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
 }
 .find-product-block .find-product-companies li {
-  max-width: 276px;
-  max-height: 276px;
+  max-width: 274px;
+  max-height: 274px;
   height: 100%;
   width: 100%;
 }
-.find-product-block.c-red {
+.find-product-block .find-product-companies li .company-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.find-product-block .find-product-companies li img,
+.find-product-block .find-product-companies li svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.find-product-block.bg-red {
   color: #fff;
   background-color: #e63128;
 }
