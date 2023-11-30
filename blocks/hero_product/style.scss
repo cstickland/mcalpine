@@ -46,16 +46,24 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding-bottom: 1.5rem;
 
       .product-hero-schematic-image {
-        width: 100%;
+        width: 80%;
         position: absolute;
-        height: 100%;
+        height: 80%;
+        bottom: 0;
         object-fit: contain;
         object-position: center 6rem;
       }
+      .active-sku {
+        align-self: start;
+        padding-top: 2.5rem;
 
+        span {
+          color: $color__mcalpine-red;
+          padding-left: 1.5rem;
+        }
+      }
       .product-hero-control-images {
         display: flex;
         flex-direction: row;
@@ -72,9 +80,9 @@
           height: 2rem;
           width: 2rem;
           object-fit: contain;
-          border: 1px solid #707070;
           background-color: #f7f9fc;
           cursor: pointer;
+          border: solid 1px #f4f4f4;
         }
       }
 
@@ -85,6 +93,7 @@
         max-width: 572px;
         margin-bottom: 1.5rem;
         z-index: 2;
+        filter: drop-shadow(30px 40px 60px #00000029);
         &.active {
           display: block;
         }
@@ -163,19 +172,36 @@
       }
     }
     .product-skus-container {
-      padding: 1.5rem;
       background-color: #fff;
+      padding: 0;
       ul {
         list-style: none;
         margin: 0;
         padding-left: 0;
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
         li {
+          padding: 1.125rem 1.75rem;
           display: flex;
           gap: 1.25rem;
           align-items: center;
+          cursor: pointer;
+
+          &.active,
+          &:hover {
+            background: #7caef20d 0% 0% no-repeat padding-box;
+            .sku-image-container {
+              border: 1px solid #7caef2;
+            }
+
+            .sku-text {
+              color: $color__mcalpine-red;
+            }
+          }
+
+          .sku-text {
+            color: $color__mcalpine-black;
+          }
           img {
             max-height: 3.5rem;
             max-width: 3.5rem;
@@ -264,19 +290,18 @@
         }
 
         .product-skus-container {
-          padding: 1.5rem;
           max-height: 25%;
           display: flex;
           ul {
             overflow-y: scroll;
             width: 100%;
             li {
-              height: 57px;
               display: flex;
               gap: 1.375rem;
               object-fit: contain;
               .sku-image-container {
                 width: 57px;
+                height: 57px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -288,7 +313,6 @@
               }
               .sku-text {
                 font-size: 14px;
-                color: $color__mcalpine-red;
               }
             }
           }
@@ -317,7 +341,6 @@
             height: 2rem;
             width: 2rem;
             object-fit: contain;
-            border: 1px solid #707070;
             background-color: #f7f9fc;
           }
         }

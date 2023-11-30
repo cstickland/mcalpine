@@ -34,8 +34,8 @@ export default {
   output: {
     sourcemap: true,
     format: 'umd',
-    name: 'Slider',
-    file: 'dist/slider.js',
+    name: 'ProductHero',
+    file: 'dist/product-hero.js',
   },
   plugins: [
     svelte({
