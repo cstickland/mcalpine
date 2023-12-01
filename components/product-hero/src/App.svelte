@@ -10,7 +10,7 @@
         console.log($product.skus)
     })
 
-    activeSku.subscribe(() => {
+    activeSku.subscribe((value) => {
         display.set(false)
         setTimeout(() => {
             display.set(true)

@@ -36,16 +36,80 @@
     padding-top: 1.5rem !important;
     display: flex;
     flex-direction: column;
+    position: relative;
     img {
       max-height: 760px;
     }
 
     .product-hero-image {
       display: flex;
-      position: relative;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      align-self: flex-start;
+
+      .product-share {
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+
+        .product-share-icon {
+          background-color: $color__mcalpine-red;
+          height: 100%;
+          aspect-ratio: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          svg {
+            height: 1.125rem;
+            object-fit: contain;
+
+            * {
+              fill: #fff;
+              transition: fill 0.25s ease-in-out;
+            }
+          }
+        }
+
+        .product-share-links {
+          background-color: #e95c56;
+          height: 100%;
+          display: flex;
+          padding: 0 1.5rem;
+
+          a {
+            display: block;
+            height: 100%;
+            padding: 1.25rem 0.75rem;
+
+            svg {
+              height: 1.125rem;
+
+              * {
+                fill: #fff;
+              }
+            }
+            &:hover {
+              svg {
+                * {
+                  fill: $color__mcalpine-black;
+                }
+              }
+            }
+          }
+        }
+
+        &.active {
+          .product-share-icon {
+            svg {
+              * {
+                fill: #f85b53;
+              }
+            }
+          }
+        }
+      }
 
       .product-hero-schematic-image {
         width: 80%;
@@ -54,6 +118,12 @@
         bottom: 0;
         object-fit: contain;
         object-position: center 6rem;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
       }
       .active-sku {
         align-self: start;
@@ -250,6 +320,14 @@
     }
   }
 }
+@media only screen and (min-width: $tablet) {
+  .product-hero {
+    .product-hero-container {
+      .product-hero-image {
+      }
+    }
+  }
+}
 
 @media only screen and (min-width: $desktop) {
   .product-hero {
@@ -258,30 +336,23 @@
       padding-bottom: 2rem !important;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      height: calc(100vh - 111px);
-      overflow: hidden;
+      display: grid;
+      grid-template-columns: auto 572px;
 
       .product-hero-details {
         .product-details-container {
           padding: 1.5rem;
           background-color: #fff;
           margin-bottom: 1.5rem;
-          max-height: 60%;
-          overflow: scroll;
           display: flex;
           flex-direction: column;
           width: 572px;
-          height: 60%;
 
           .product-title {
             color: $color__mcalpine-black;
             padding-bottom: 1.5rem;
             border-bottom: solid 1px #d8d8d8;
             margin: 0;
-          }
-          ul {
-            overflow-y: scroll;
           }
 
           .btn {
@@ -320,11 +391,11 @@
       }
 
       .product-hero-image {
-        min-height: 100%;
         justify-content: unset;
         flex-grow: 1;
-        position: relative;
-
+        position: sticky;
+        top: 32px;
+        width: auto;
         .product-hero-control-images {
           display: flex;
           flex-direction: column;
@@ -342,6 +413,33 @@
             width: 2rem;
             object-fit: contain;
             background-color: #f7f9fc;
+          }
+        }
+        .product-share {
+          height: 3.75rem;
+          margin-top: auto;
+          align-self: start;
+          z-index: 3;
+          .product-share-icon {
+            svg {
+              height: 1.125rem;
+            }
+          }
+
+          .product-share-links {
+            background-color: #e95c56;
+            padding: 0 1.5rem;
+            a {
+              padding: 1.25rem 0.75rem;
+
+              svg {
+                height: 1.125rem;
+
+                * {
+                  fill: #fff;
+                }
+              }
+            }
           }
         }
 
@@ -370,7 +468,15 @@
             margin-left: 0.5rem;
           }
         }
+        .product-image-div {
+          max-width: 100%;
+          max-height: 100%;
+          min-height: 40vh;
 
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+        }
         .product-image {
           display: none;
           max-height: 47.5rem;
