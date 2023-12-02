@@ -91,8 +91,9 @@
     padding: 1rem;
     .help-card-image {
       padding-bottom: 4.125rem;
+      height: 3.25rem;
       width: 3.25rem;
-      height: max-content;
+      object-fit: contain;
 
       svg {
         width: 100%;
@@ -155,6 +156,8 @@
         padding: 2rem;
         .help-card-image {
           padding-bottom: calc(12.25rem - 37.143cqw);
+          height: clamp(3.25rem, calc(-9.875rem + 60cqw), 5.875rem);
+
           width: clamp(3.25rem, calc(-9.875rem + 60cqw), 5.875rem);
         }
 
@@ -177,6 +180,7 @@
       .help-card-content {
         padding: 3.5rem 2.5rem;
         .help-card-image {
+          height: 5.875rem;
           width: 5.875rem;
           padding-bottom: 2.5rem;
         }

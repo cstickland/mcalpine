@@ -178,6 +178,7 @@
 .image-text-full-width-block .image-text-container .image-container .overflow-image {
   position: absolute;
   z-index: 3;
+  filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.1490196078));
 }
 .image-text-full-width-block .image-text-container .text-container {
   position: relative;

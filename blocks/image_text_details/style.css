@@ -137,6 +137,9 @@
 .image-text-block .image-text-container .image-container .overflow-image {
   position: absolute;
 }
+.image-text-block .image-text-container .image-container .video-block {
+  width: 100%;
+}
 .image-text-block .image-text-container .text-container {
   padding: 2rem;
 }

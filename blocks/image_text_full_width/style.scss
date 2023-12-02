@@ -91,6 +91,7 @@
       .overflow-image {
         position: absolute;
         z-index: 3;
+        filter: drop-shadow(20px 20px 30px #00000026);
       }
     }
     .text-container {

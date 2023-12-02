@@ -2311,7 +2311,7 @@ fieldset {
       transform: translateY(0); }
     .product-card:hover .sku-list-container .product-card-link, .product-card.open .sku-list-container .product-card-link {
       background-color: black;
-      width: 80%;
+      width: 56px;
       aspect-ratio: 1;
       align-self: end;
       margin-left: auto;
