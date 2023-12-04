@@ -171,7 +171,7 @@
                         </g>
                     </svg>
                 </a>
-                <a href="">
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(window.location.href)}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
                         <g transform="translate(-0.281 -0.121)">
                             <rect
@@ -203,7 +203,7 @@
                         </g>
                     </svg>
                 </a>
-                <a href="">
+                <a href="mailto:">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 29.999 24"

@@ -221,20 +221,24 @@
     width: 405px;
   }
   .image-text-block .image-text-container.color-red.i-left .image-container {
-    grid-area: 1/1/span 2/span 8;
+    grid-area: 1/1/span 2/span 7;
   }
   .image-text-block .image-text-container.color-red.i-left .text-container {
     grid-area: 2/5/span 2/span 8;
-    padding-left: 55%;
+    padding-left: 45%;
   }
   .image-text-block .image-text-container.color-red.i-left .text-container p {
     max-width: 85%;
   }
   .image-text-block .image-text-container.color-red.i-right .image-container {
-    grid-area: 1/5/span 2/span 8;
+    grid-area: 1/6/span 2/span 7;
   }
   .image-text-block .image-text-container.color-red.i-right .text-container {
     grid-area: 2/1/span 2/span 8;
+    padding-right: 42.5%;
+  }
+  .image-text-block .image-text-container.color-red.i-right .text-block-hash {
+    grid-area: 3/10/span 1/span 2;
   }
   .image-text-block .image-text-container.i-right .image-container {
     grid-area: 1/5/span 1/span 8;
@@ -264,6 +268,28 @@
   .image-text-block .image-text-container .text-container .color-block {
     width: 93px;
     height: 1.5rem;
+  }
+}
+@media only screen and (min-width: 80rem) {
+  .image-text-block .image-text-container.color-red.i-left .image-container {
+    grid-area: 1/1/span 2/span 8;
+  }
+  .image-text-block .image-text-container.color-red.i-left .text-container {
+    grid-area: 2/5/span 2/span 8;
+    padding-left: 45%;
+  }
+  .image-text-block .image-text-container.color-red.i-left .text-container p {
+    max-width: 85%;
+  }
+  .image-text-block .image-text-container.color-red.i-right .image-container {
+    grid-area: 1/5/span 2/span 8;
+  }
+  .image-text-block .image-text-container.color-red.i-right .text-container {
+    grid-area: 2/1/span 2/span 8;
+    padding-right: 55%;
+  }
+  .image-text-block .image-text-container.color-red.i-right .text-block-hash {
+    grid-area: 3/10/span 1/span 2;
   }
 }
 

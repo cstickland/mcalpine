@@ -207,11 +207,11 @@
 
         &.i-left {
           .image-container {
-            grid-area: 1 / 1 / span 2 / span 8;
+            grid-area: 1 / 1 / span 2 / span 7;
           }
           .text-container {
             grid-area: 2 / 5 / span 2 / span 8;
-            padding-left: 55%;
+            padding-left: 45%;
             p {
               max-width: 85%;
             }
@@ -220,10 +220,15 @@
 
         &.i-right {
           .image-container {
-            grid-area: 1 / 5 / span 2 / span 8;
+            grid-area: 1 / 6 / span 2 / span 7;
           }
           .text-container {
             grid-area: 2 / 1 / span 2 / span 8;
+            padding-right: 42.5%;
+          }
+
+          .text-block-hash {
+            grid-area: 3 / 10 / span 1 / span 2;
           }
         }
       }
@@ -266,6 +271,41 @@
         .color-block {
           width: 93px;
           height: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop__large) {
+  .image-text-block {
+    .image-text-container {
+      &.color-red {
+        &.i-left {
+          .image-container {
+            grid-area: 1 / 1 / span 2 / span 8;
+          }
+          .text-container {
+            grid-area: 2 / 5 / span 2 / span 8;
+            padding-left: 45%;
+            p {
+              max-width: 85%;
+            }
+          }
+        }
+
+        &.i-right {
+          .image-container {
+            grid-area: 1 /5 / span 2 / span 8;
+          }
+          .text-container {
+            grid-area: 2 / 1 / span 2 / span 8;
+            padding-right: 55%;
+          }
+
+          .text-block-hash {
+            grid-area: 3 / 10 / span 1 / span 2;
+          }
         }
       }
     }
