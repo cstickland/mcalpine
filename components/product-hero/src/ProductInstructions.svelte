@@ -1,49 +1,34 @@
 <script>
-    import { activeSku } from './stores.js';
-    
+    import { activeSku, product } from "./stores.js";
+    import { fade } from "svelte/transition";
+    import DownloadSvg from "./DownloadSvg.svelte";
 </script>
 
-<!-- <div class="product-instructions-container"> -->
-<!--     <?php if (have_rows('skus', $post_id)) : -->
-<!--         while (have_rows('skus', $post_id)) : the_row(); -->
-<!--             if (get_row_index() == 1) { -->
-<!--                 if (get_sub_field('product_installation_instructions')) { ?> -->
-<!--                     <div class="installation-instructions"> -->
-<!--                         <a href="<?php the_sub_field('product_installation_instructions'); ?>" download>Install Instructions -->
-<!--                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> -->
-<!--                                 <g data-name="Layer 2"> -->
-<!--                                     <g data-name="download"> -->
-<!--                                         <rect width="24" height="24" opacity="0" /> -->
-<!--                                         <rect x="4" y="18" width="16" height="2" rx="1" ry="1" /> -->
-<!--                                         <rect x="3" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 5 18)" /> -->
-<!--                                         <rect x="17" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 19 18)" /> -->
-<!--                                         <path d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39 1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z" /> -->
-<!--                                         <path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z" /> -->
-<!--                                     </g> -->
-<!--                                 </g> -->
-<!--                             </svg> -->
-<!--                         </a> -->
-<!--                     </div> -->
-<!--                 <?php } -->
-<!--                 if (get_sub_field('product_technical_drawing')) { ?> -->
-<!--                     <div class="technical-drawing"> -->
-<!--                         <a href="<?php the_sub_field('product_technical_drawing'); ?>" download>Technical Drawing <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> -->
-<!--                                 <g data-name="Layer 2"> -->
-<!--                                     <g data-name="download"> -->
-<!--                                         <rect width="24" height="24" opacity="0" /> -->
-<!--                                         <rect x="4" y="18" width="16" height="2" rx="1" ry="1" /> -->
-<!--                                         <rect x="3" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 5 18)" /> -->
-<!--                                         <rect x="17" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 19 18)" /> -->
-<!--                                         <path d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39 1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z" /> -->
-<!--                                         <path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z" /> -->
-<!--                                     </g> -->
-<!--                                 </g> -->
-<!--                             </svg> -->
-<!--                         </a> -->
-<!---->
-<!--                     </div> -->
-<!--     <?php } -->
-<!--             } -->
-<!--         endwhile; -->
-<!--     endif; ?> -->
-<!-- </div> -->
+{#if $product?.skus && $product?.skus.length > 0}
+    {#each $product.skus as productSku, i}
+        {#if i == $activeSku }
+            <div class="product-instructions-container" in:fade>
+                {#if productSku.product_installation_instructions}
+                <div class="installation-instructions">
+                    <a
+                        href={productSku.product_installation_instructions}
+                        download
+                        >Installation Instructions
+                        <DownloadSvg />
+                    </a>
+                </div>
+                {/if}
+                {#if productSku.product_technical_drawing}
+                <div class="technical-drawing">
+                    <a
+                        href={productSku.product_technical_drawing}
+                        download
+                        >Technical Drawing
+                        <DownloadSvg />
+                    </a>
+                </div>
+                {/if}
+            </div>
+        {/if}
+    {/each}
+{/if}

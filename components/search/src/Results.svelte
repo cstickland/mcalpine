@@ -156,7 +156,7 @@
                 width: 3.5rem;
                 height: 3.5rem;
                 aspect-ratio: 1;
-                object-fit: cover;
+                object-fit: contain;
                 margin-right: 1.625em;
             }
 

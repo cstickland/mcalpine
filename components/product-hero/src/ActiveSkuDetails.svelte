@@ -10,11 +10,13 @@
     {#if $display}
     <div transition:fade>{@html $product?.skus[$activeSku]?.product_description}</div>
     <ul transition:fade>
+        {#if $product?.skus[$activeSku]?.product_features}
         {#each $product?.skus[$activeSku]?.product_features as feature}
             <li>
                 {feature.feature}
             </li>
         {/each}
+        {/if}
     </ul>
     {/if}
     {/if}

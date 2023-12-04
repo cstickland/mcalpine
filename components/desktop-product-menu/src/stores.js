@@ -48,6 +48,7 @@ export const query = `{
             altText
             sourceUrl(size: THUMBNAIL)
           }
+          categoryImageHeight
         }
       }
     }

@@ -1,7 +1,7 @@
 <script>
     import { product, activeSku, display } from "./stores.js";
-    import { scale,fly, slide } from "svelte/transition";
-    import { linear, quadInOut } from 'svelte/easing'
+    import { scale, slide } from "svelte/transition";
+    import {  quadInOut } from 'svelte/easing'
     let shareOpen = false;
 </script>
 
@@ -39,7 +39,7 @@
     {#if $product.skus && $product.skus.length > 0}
         <div class="active-sku">
             Viewing: {#if $display}<span
-                    transition:fly={{ x: 100, opacity: 0.5 }}
+                    transition:scale={{start: 0.9, opacity: 0, duration: 300, easing: quadInOut }}
                     >{$product.skus[$activeSku].sku}</span
                 >{/if}
         </div>
@@ -47,8 +47,7 @@
         {#each $product.skus as productSku, i}
             {#if i == $activeSku && $display}
                 <img
-                    in:scale={{start: 0.9, opacity: 0, duration: 300, easing: quadInOut }}
-                    out:scale={{start: 0.9, opacity:0, duration:300, easing: quadInOut }}
+                    transition:scale={{start: 0.9, opacity: 0, duration: 300, easing: quadInOut }}
                     class="product-image active"
                     src={productSku.product_images[0].product_image}
                     alt=""

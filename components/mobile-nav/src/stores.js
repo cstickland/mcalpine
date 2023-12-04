@@ -21,6 +21,7 @@ export const openClassVersionTwo = writable('closed')
 export const menuParentId = writable('')
 export const navBarMenu = writable({})
 export const menuParentTitle = writable('')
+export const imageLinks = writable({})
 
 export function highlightResults(searchQuery, result) {
   let textToSearch = searchQuery
@@ -49,6 +50,7 @@ export async function getData(graphQlUrl, menus, query, productCategories) {
   const response = await fetchPromise.json()
   menus.set(response.data.menus.nodes)
   productCategories.set(response.data.productCategories.edges)
+  imageLinks.set(response.data.themeGeneralSettings.themeSettings.imageLinks)
 }
 
 export const query = `{
@@ -80,6 +82,19 @@ export const query = `{
       }
       name
       slug
+    }
+  }
+  themeGeneralSettings {
+    themeSettings {
+      imageLinks {
+        backgroundImage {
+          sourceUrl(size: MEDIUM_LARGE)
+        }
+        textAlignment
+        textColor
+        text
+        linkUrl
+      }
     }
   }
 }`

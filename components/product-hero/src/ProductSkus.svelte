@@ -7,6 +7,12 @@
     {#if  $product?.skus && $product?.skus.length > 0}
         <ul>
             {#each $product.skus as productSku, i}
+                {#if i == 0}
+                    <div class="sku-headers">
+                        <div class="title">Sku</div>
+                        <div class="attribute-title">{productSku.product_config_label}</div>
+                    </div>
+                {/if}
                 <li on:click={() => {
                     activeSku.set(i);
                 }} on:keydown class={i == $activeSku ? 'active' : ""}>
@@ -18,6 +24,7 @@
                         {/if}
                     {/each}
                     <div class="sku-text">{productSku.sku}</div>
+                    <div>{productSku.product_config_attribute}</div>
                 </li>
             {/each}
         </ul>

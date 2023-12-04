@@ -25,38 +25,38 @@
 <div
     class="mobile-hamburger {openClass}"
     on:click={() => {
-        if ($version == 1) {
+        if ($version == 1 || $version == 2) {
             open.set(!$open);
 
             if (!$open) {
                 searchOpen.set(false);
             }
         }
-        if ($version == 2) {
-            if ($searchOpen) {
-                if (position == "controls") {
-                    open.set(true);
-                    searchOpen.set(false);
-                    openClassVersionTwo.set("open");
-                } else {
-                    searchOpen.set(false);
-                    open.set(false);
-                    openClassVersionTwo.set("closed");
-                }
-                return;
-            }
-
-            if ($searchOpen == false) {
-                open.set(!$open);
-
-                if ($open) {
-                    openClassVersionTwo.set("open");
-                }
-                if (!$open) {
-                    openClassVersionTwo.set("closed");
-                }
-            }
-        }
+        // if ($version == 2) {
+        //     if ($searchOpen) {
+        //         if (position == "controls") {
+        //             open.set(true);
+        //             searchOpen.set(false);
+        //             openClassVersionTwo.set("open");
+        //         } else {
+        //             searchOpen.set(false);
+        //             open.set(false);
+        //             openClassVersionTwo.set("closed");
+        //         }
+        //         return;
+        //     }
+        //
+        //     if ($searchOpen == false) {
+        //         open.set(!$open);
+        //
+        //         if ($open) {
+        //             openClassVersionTwo.set("open");
+        //         }
+        //         if (!$open) {
+        //             openClassVersionTwo.set("closed");
+        //         }
+        //     }
+        // }
     }}
     on:keypress={() => {
         openKeyPressedHamburger();

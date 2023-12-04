@@ -167,6 +167,7 @@
 @media only screen and (min-width: 64rem) {
   .small-hero-block {
     width: 100%;
+    max-width: 120rem;
     display: flex;
     flex-direction: row;
     align-items: stretch;

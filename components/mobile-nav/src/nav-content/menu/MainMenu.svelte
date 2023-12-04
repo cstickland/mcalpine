@@ -70,7 +70,7 @@
                     menuParentId.set(link.id)
                     menuParentTitle.set(link.title)
                 }} on:keydown>
-                    <span>{link.title} </span>
+                    <a href={link.url} >{link.title}</a>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="13.922"
@@ -124,6 +124,11 @@
         text-decoration: none;
         border-bottom: solid 1px #f4f4f4;
         font-weight: 700;
+
+        a {
+            color: $color__mcalpine-red;
+            text-decoration: none;
+        }
         &:hover {
             background: transparent
                 linear-gradient(270deg, #ffffff 0%, #7caef214 100%) 0% 0%

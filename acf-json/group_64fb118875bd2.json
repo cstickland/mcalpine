@@ -56,6 +56,28 @@
             "preview_size": "thumbnail"
         },
         {
+            "key": "field_656cf3540e068",
+            "label": "Category Image Height (Navbar Category Menu)",
+            "name": "category_image_height",
+            "aria-label": "",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": 80,
+            "min": 80,
+            "max": 120,
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_650d84664a557",
             "label": "Breadcrumb Middle Link",
             "name": "breadcrumb_middle_link",
@@ -257,5 +279,5 @@
     "graphql_field_name": "customFields",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1701182028
+    "modified": 1701639095
 }

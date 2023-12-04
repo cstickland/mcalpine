@@ -12,6 +12,7 @@ class Product
     public $categoryId;
     public $subcategoryId;
     public $schematic_image;
+    public $backgroundColor;
 }
 
 $product = new Product();

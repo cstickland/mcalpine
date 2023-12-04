@@ -98,24 +98,38 @@
           grid-template-rows: 1fr 1fr;
           .position-1 {
             grid-area: 1 / 1 / span 1 / span 1;
+
+              animation-name: hero-schematic-1;
           }
 
           .position-2 {
             grid-area: 1 / 1 / span 1 / span 1;
+
+              animation-name: hero-schematic-2;
           }
 
           .position-3 {
             grid-area: 2 / 2 / span 1 / span 1;
+
+              animation-name: hero-schematic-3;
           }
 
           .position-4 {
             grid-area: 2 / 2 / span 1 / span 1;
+
+              animation-name: hero-schematic-4;
           }
 
           .home-hero-image-container {
             display: grid;
             grid-template-columns: 100%;
             grid-template-rows: 100%;
+            animation-duration: 5s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+          &:nth-of-type(2) {
+                animation-delay: 200ms;
+              }
 
             .home-hero-schematic-image {
               grid-area: 1 / 1 / span 1 / span 1;
@@ -124,7 +138,7 @@
               width: 100%;
               height: 100%;
               max-width: 400px;
-              max-height: 400px;
+              max-height: 200px;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -154,7 +168,7 @@
               justify-self: center;
               transition: opacity 0.25s linear;
               max-width: 385px;
-              max-height: 385px;
+              max-height: 272px;
               width: 100%;
               height: 100%;
               object-fit: contain;
@@ -259,13 +273,13 @@
               animation-duration: 5s;
               animation-fill-mode: forwards;
 
-              &:nth-of-type(2) {
-                animation-delay: 200ms;
-              }
+    
               .home-hero-schematic-image {
                 grid-area: 1 / 1 / span 1 / span 1;
                 align-self: center;
                 justify-self: center;
+                max-height:unset;
+                max-height:272px;
               }
 
               .home-hero-hover-image {
@@ -274,6 +288,7 @@
                 align-self: center;
                 justify-self: center;
                 transition: opacity 0.25s linear;
+                max-height: 272px;
               }
 
               &:hover {

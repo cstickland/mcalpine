@@ -50,7 +50,7 @@
 </script>
 
 <div class="mobile-nav-controls {openClass}">
-    {#if $version == 1}
+    {#if $version == 1 || $version == 2}
         {#if !$searchOpen}
             <Logo />
         {:else}
@@ -70,10 +70,10 @@
     {/if}
     <div class="control-icons">
         <SearchIcon />
-        {#if $version == 1}
+        {#if $version == 1 || $version == 2}
             <Hamburger openClass={openClassVersionOne} position={"controls"} />
-        {:else if $version == 2}
-            <Hamburger position={"controls"} openClass={$openClassVersionTwo} />
+        <!-- {:else if $version == 2} -->
+        <!--     <Hamburger position={"controls"} openClass={$openClassVersionTwo} /> -->
         {/if}
     </div>
 </div>

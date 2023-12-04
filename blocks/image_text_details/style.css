@@ -180,7 +180,7 @@
     gap: 0px;
   }
   .image-text-block .image-text-container .text-block-hash {
-    display: block;
+    display: none;
   }
   .image-text-block .image-text-container .text-container {
     min-width: 380px;
@@ -192,6 +192,7 @@
     grid-template-rows: 1fr 8fr 80px;
   }
   .image-text-block .image-text-container.color-red .text-block-hash {
+    display: block;
     grid-area: 3/2/span 1/span 2;
     overflow: hidden;
   }

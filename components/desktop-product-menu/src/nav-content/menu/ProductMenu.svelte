@@ -53,7 +53,7 @@
                             on:keydown
                         >
                             <div>{category.node.name}</div>
-                            <div class="background-gradient" />
+                            <div class="background-gradient-container"><div class="background-gradient" /></div>
                             <div class="category-image-container">
                                 {#if category.node.customFields.categoryImage}
                                     <img
@@ -62,12 +62,15 @@
                                         alt={category.node.customFields
                                             .categoryImage.sourceUrl}
                                         loading="lazy"
+
+                                        style={`height: ${category.node.customFields.categoryImageHeight}%;`}
                                     />
                                 {:else}
                                     <img
                                         src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
                                         alt=""
                                         loading="lazy"
+                                        style={`height: ${category.node.customFields.categoryImageHeight}%`}
                                     />
                                 {/if}
                             </div>
@@ -102,10 +105,10 @@
                     {#if category.node.parentId == categoryParentId}
                         <a
                             href={category.node.link}
-                            class="category-item {versionClass}"
+                            class="category-item"
                         >
                             <div>{category.node.name}</div>
-                            <div class="background-gradient" />
+                            <div class="background-gradient-container"><div class="background-gradient" /></div>
                             <div class="category-image-container">
                                 {#if category.node.customFields.categoryImage}
                                     <img
@@ -114,6 +117,8 @@
                                         alt={category.node.customFields
                                             .categoryImage.sourceUrl}
                                         loading="lazy"
+
+                                        style={`height: ${category.node.customFields.categoryImageHeight}%`}
                                     />
                                 {:else}
                                     <img
@@ -166,7 +171,6 @@
     }
     .category-list {
         max-height: calc(100% - 60px);
-        overflow: scroll;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
         gap: 2rem;
@@ -187,8 +191,15 @@
         border-radius: 8px;
         background-color: #fafafa;
         transition: background 0.5s linear;
-        overflow: hidden;
-
+        .background-gradient-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height:100%;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
         .background-gradient {
             position: absolute;
             width: 100%;
@@ -209,9 +220,16 @@
                 z-index: 1;
             }
         }
+        .category-image-container {
+            height:100%;
+            display:flex;
+            align-items: center;
+            width:fit-content;
 
-        img {
-            height: 146px;
+            img {
+                object-fit:cover;
+                width:auto;
+            }
         }
-    }
+          }
 </style>

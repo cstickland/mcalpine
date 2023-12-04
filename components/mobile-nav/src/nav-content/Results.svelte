@@ -100,32 +100,32 @@
                     <div>No other pages found</div>
                 {/if}
             </div>
-        {/if}        {#if $version == 1}
+        {/if}        {#if $version == 1 || $version == 2}
             <Submit {totalResults} {form} />
         {/if}
     {/if}
 </div>
-{#if $version == 2}
-    <div
-        class="version-two-input"
-        in:fade={{ duration: 200, delay: 200 }}
-        out:fade={{duration: 200}}
-    >
-        {#if $searchQuery.length > 0}
-            <Submit {form} />
-        {/if}
-        <div class="input-container">
-            <input
-                type="text"
-                name="s"
-                bind:value={$searchQuery}
-                placeholder="Search a product name, SKU or term…"
-                autofocus
-            />
-            <Hamburger {openClass} position="input" />
-        </div>
-    </div>
-{/if}
+<!-- {#if $version == 2} -->
+<!--     <div -->
+<!--         class="version-two-input" -->
+<!--         in:fade={{ duration: 200, delay: 200 }} -->
+<!--         out:fade={{duration: 200}} -->
+<!--     > -->
+<!--         {#if $searchQuery.length > 0} -->
+<!--             <Submit {form} /> -->
+<!--         {/if} -->
+<!--         <div class="input-container"> -->
+<!--             <input -->
+<!--                 type="text" -->
+<!--                 name="s" -->
+<!--                 bind:value={$searchQuery} -->
+<!--                 placeholder="Search a product name, SKU or term…" -->
+<!--                 autofocus -->
+<!--             /> -->
+<!--             <Hamburger {openClass} position="input" /> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- {/if} -->
 </div>
 <style lang="scss">
     @import "../../../../sass/abstracts/variables/_colors.scss";
@@ -187,7 +187,7 @@
                 width: 2.5rem;
                 height: 2.5rem;
                 aspect-ratio: 1;
-                object-fit: cover;
+                object-fit: contain;
                 margin-right: 1.625em;
             }
         }

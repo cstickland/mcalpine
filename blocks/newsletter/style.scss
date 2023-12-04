@@ -34,8 +34,8 @@
 }
 
 .newsletter-block {
-  background-size: 1920px;
-  max-width: 1920px;
+  background-size: 120rem;
+  max-width: 120rem;
   margin: 0 auto;
   display: flex;
   padding-top: 2.1875rem;
@@ -135,15 +135,12 @@
       background-color: #ffffff;
       max-width: 914px;
       margin: 0 auto;
-      height: 3.75rem;
+      height: 4.875rem;
       padding-top: 0;
     }
     .newsletter-container {
-      @include container-large;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
+      max-width: calc(100% - 144px);
+      margin: 0 auto;
       .newsletter-content {
         padding-top: 120px !important;
         padding-bottom: 120px !important;

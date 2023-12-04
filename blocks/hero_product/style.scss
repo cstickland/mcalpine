@@ -9,6 +9,73 @@
     background-color: $color__mcalpine-red;
 
     .product-hero-container {
+      .product-hero-details {
+        .product-details-container {
+          background-color: #ff574e;
+          color: #fff;
+
+          h1 {
+            color: #fff;
+          }
+
+          ul {
+            list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYV2P8DwQMRADGUYX4Qon6wQMAwY8n46u1YKYAAAAASUVORK5CYII=);
+          }
+        }
+
+        .product-skus-container {
+          background-color: #ff574e;
+          color: #fff;
+
+          ul {
+            .sku-headers {
+              border-bottom: 1px solid #e63128;
+            }
+
+            li {
+              &.active,
+              &:hover {
+                background-color: inherit;
+
+                .sku-text {
+                  color: #fff;
+                }
+              }
+
+              .sku-text {
+                color: #fff;
+              }
+            }
+          }
+        }
+
+        .product-instructions-container {
+          .technical-drawing,
+          .installation-instructions {
+            background-color: $color__mcalpine-black;
+
+            a {
+              color: #fff;
+
+              svg {
+                * {
+                  fill: #fff;
+                }
+              }
+
+              &:hover {
+                color: $color__mcalpine-red;
+
+                svg {
+                  * {
+                    fill: $color__mcalpine-red;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       .product-hero-image {
         .hero-breadcrumbs {
           a {
@@ -20,12 +87,56 @@
           }
           svg {
             path {
-              fill: $color__mcalpine-black;
+              fill: #fff;
             }
           }
 
           .breadcrumbs-current {
             color: #fff;
+          }
+        }
+
+        .active-sku {
+          color: #fff;
+
+          span {
+            background-color: #fff;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+          }
+        }
+
+        .product-share {
+          .product-share-icon {
+            background-color: $color__mcalpine-black;
+          }
+
+          .product-share-links {
+            background-color: #222222c9;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            a {
+              &:hover {
+                svg {
+                  * {
+                    fill: $color__mcalpine-red;
+                  }
+                }
+              }
+            }
+          }
+
+          &.active {
+            .product-share-icon {
+              * {
+                fill: #5a5a5a;
+              }
+
+              &:hover {
+                fill: $color__mcalpine-red;
+              }
+            }
           }
         }
       }
@@ -47,12 +158,18 @@
       justify-content: center;
       flex-direction: column;
       align-self: flex-start;
+      max-width: 572px;
+      width: 100%;
+      margin: 0 auto;
+      padding-bottom: 1.25rem;
+      position: relative;
 
       .product-share {
         height: 2.5rem;
         display: flex;
         align-items: center;
 
+        align-self: end;
         .product-share-icon {
           background-color: $color__mcalpine-red;
           height: 100%;
@@ -76,13 +193,15 @@
           background-color: #e95c56;
           height: 100%;
           display: flex;
-          padding: 0 1.5rem;
+          padding: 0 0.5rem;
 
           a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 100%;
-            padding: 1.25rem 0.75rem;
-
+            padding: 0 0.5rem;
+            aspect-ratio: 1;
             svg {
               height: 1.125rem;
 
@@ -118,6 +237,7 @@
         bottom: 0;
         object-fit: contain;
         object-position: center 6rem;
+        z-index: -1;
 
         svg {
           width: 100%;
@@ -127,40 +247,45 @@
       }
       .active-sku {
         align-self: start;
-        padding-top: 2.5rem;
+        padding-top: 1rem;
 
         span {
           color: $color__mcalpine-red;
-          padding-left: 1.5rem;
+          margin-left: 1.5rem;
+          display: inline-block;
         }
       }
       .product-hero-control-images {
         display: flex;
         flex-direction: row;
-        margin: 0 auto;
 
         z-index: 2;
         align-self: start;
         top: 50%;
         gap: 0.75rem;
         max-height: 12rem;
-        overflow-y: scroll;
+        max-width: 100%;
+        overflow-x: scroll;
+        margin-bottom: 1.25rem;
 
         .product-image-thumbnail {
-          height: 2rem;
-          width: 2rem;
+          height: 4rem;
+          width: 4rem;
           object-fit: contain;
           background-color: #f7f9fc;
           cursor: pointer;
           border: solid 1px #f4f4f4;
         }
       }
-
+      .product-image-div {
+        height: 40vh;
+      }
       .product-image {
         display: none;
         object-fit: contain;
         width: 100%;
         max-width: 572px;
+        max-height: 472px;
         margin-bottom: 1.5rem;
         z-index: 2;
         filter: drop-shadow(30px 40px 60px #00000029);
@@ -244,18 +369,44 @@
     .product-skus-container {
       background-color: #fff;
       padding: 0;
+      max-height: min-content;
+      height: 270px;
       ul {
+        max-height: 100%;
+        overflow-y: scroll;
         list-style: none;
         margin: 0;
         padding-left: 0;
         display: flex;
         flex-direction: column;
+        .sku-headers {
+          display: grid;
+          flex-direction: row;
+          padding: 1.25rem 1.75rem;
+          grid-template-columns: 55px 25% 40%;
+          gap: 1.25rem;
+          .title {
+            grid-area: 1 / 2 / span 1 / span 1;
+          }
+
+          .attribute-title {
+            grid-area: 1 / 3 / span 1 / span 1;
+          }
+        }
         li {
           padding: 1.125rem 1.75rem;
-          display: flex;
+          display: grid;
+          grid-template-columns: 55px 25% 40%;
           gap: 1.25rem;
           align-items: center;
           cursor: pointer;
+
+          .sku-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+          }
 
           &.active,
           &:hover {
@@ -320,14 +471,6 @@
     }
   }
 }
-@media only screen and (min-width: $tablet) {
-  .product-hero {
-    .product-hero-container {
-      .product-hero-image {
-      }
-    }
-  }
-}
 
 @media only screen and (min-width: $desktop) {
   .product-hero {
@@ -367,7 +510,6 @@
             overflow-y: scroll;
             width: 100%;
             li {
-              display: flex;
               gap: 1.375rem;
               object-fit: contain;
               .sku-image-container {
@@ -395,7 +537,8 @@
         flex-grow: 1;
         position: sticky;
         top: 32px;
-        width: auto;
+        width: 100%;
+        max-width: none;
         .product-hero-control-images {
           display: flex;
           flex-direction: column;
@@ -431,7 +574,6 @@
             padding: 0 1.5rem;
             a {
               padding: 1.25rem 0.75rem;
-
               svg {
                 height: 1.125rem;
 

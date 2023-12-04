@@ -1,25 +1,23 @@
+<script>
+    import { imageLinks } from '../../stores.js';
+    imageLinks.subscribe((value) => {
+        console.log(value)
+    })
+</script>
+
+
 <div class="menu-image-container">
+    {#if $imageLinks && $imageLinks.length > 0}
+    {#each $imageLinks as link}
     <a
-        href="/"
-        class="image-link white text-bottom"
-        style="background-image: url('http://mcalpine2.local/wp-content/uploads/2023/09/coatbridge_manual_assembly.jpg');"
+        href={link.Url}
+        class="image-link {link.textColor} {link.textAlignement}"
+        style={`background-image: url('${link.backgroundImage.sourceUrl}');`}
     >
-        <p>UK’s First Chrome 3+ Brassware!</p>
+        <p>{link.text}</p>
     </a>
-    <a
-        href="/"
-        class="image-link black"
-        style="background-image: url('http://mcalpine2.local/wp-content/uploads/2023/09/McAlpine-Mactun-Tundish-Website-Carousel.jpg');"
-    >
-        <p>20,000 Tradespeople Can’t Be Wrong!</p>
-    </a>
-    <a
-        href="/"
-        class="image-link black"
-        style="background-image: url('http://mcalpine2.local/wp-content/uploads/2023/09/McAlpine-Mactun-Tundish-Website-Carousel.jpg');"
-    >
-        <p>20,000 Tradespeople Can’t Be Wrong!</p>
-    </a>
+    {/each}
+    {/if}
 </div>
 
 <style lang="scss">

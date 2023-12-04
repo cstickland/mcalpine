@@ -1,6 +1,70 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .faq-contact {
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
 }
@@ -57,9 +121,6 @@
 .faq-contact .faq-contact-form-container form .gform_footer .btn.btn-arrow {
   background-image: none;
   padding-right: 2rem;
-}
-.faq-contact .faq-contact-block-hash {
-  display: none;
 }
 .faq-contact .red-background {
   display: none;

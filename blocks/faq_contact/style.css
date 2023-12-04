@@ -1,8 +1,73 @@
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-in-hero {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes underline {
+  from {
+    background-size: 0% 0.075em;
+  }
+  to {
+    background-size: 100% 0.075em;
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.075);
+  }
+}
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.075);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .faq-contact {
   width: 100%;
-  max-width: 110.25rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 2.1875rem 1.25rem;
+  position: relative;
 }
 @media only screen and (min-width: 48rem) {
   .faq-contact {
@@ -22,6 +87,7 @@
 .faq-contact .faq-contact-text-container {
   color: #ffffff;
   background-color: #e63128;
+  padding: 3rem 2rem;
 }
 .faq-contact .faq-contact-text-container .color-block {
   height: 0.75rem;
@@ -31,6 +97,10 @@
 }
 .faq-contact .faq-contact-form-container {
   background-color: #ffffff;
+  padding: 2rem 1.5rem;
+  transform: translateY(-1rem);
+  width: calc(100% - 2.5rem);
+  margin: 0 auto;
 }
 .faq-contact .faq-contact-form-container form .gform_fields {
   display: grid;
@@ -59,7 +129,20 @@
   padding-right: 2rem;
 }
 .faq-contact .faq-contact-block-hash {
-  display: none;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: calc(100% - 1.25rem);
+  height: 50%;
+  display: block;
+  padding: 2.1875rem 1.25rem;
+}
+.faq-contact .faq-contact-block-hash img {
+  max-width: none;
+  width: 120rem;
+  height: auto;
 }
 .faq-contact .red-background {
   display: none;
@@ -75,6 +158,7 @@
     grid-area: 1/5/span 1/span 8;
     z-index: 2;
     padding: 7.5%;
+    transform: translateY(0);
   }
   .faq-contact .faq-contact-form-container form .gform_fields {
     display: grid;
@@ -117,6 +201,9 @@
     display: block;
     grid-area: 2/10/span 1/span 3;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 0;
   }
   .faq-contact .faq-contact-block-hash img {
     max-width: none;

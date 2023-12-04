@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeSlide = 0
     slides[0].classList.add('show')
 
-    if (window.innerWidth > 768) {
       cycleSlides()
       homeHero.addEventListener('mousemove', (e) => {
         centerX = homeHero.offsetLeft + homeHero.offsetWidth / 2
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         homeHeroBackground.style.top = -mouseY * 0.015 + 'px'
         homeHeroBackground.style.left = -mouseX * 0.015 + 'px'
       })
-    }
 
     function cycleSlides() {
       slides.forEach((slide) => {
