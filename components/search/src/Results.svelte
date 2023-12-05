@@ -104,7 +104,6 @@
         width: 100%;
         max-width: 740px;
         box-shadow: 0px 20px 60px #00000014;
-        min-height: 50vh;
         padding-top: 1.75em;
         padding-bottom: 4rem;
         border: 1px solid #f4f4f4;

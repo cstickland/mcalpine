@@ -67,12 +67,13 @@
         "thumbnail"
     ],
     "taxonomies": [
-        "category"
+        "download-category"
     ],
-    "has_archive": false,
-    "has_archive_slug": "",
+    "has_archive": true,
+    "has_archive_slug": "downloads",
     "rewrite": {
-        "permalink_rewrite": "post_type_key",
+        "permalink_rewrite": "custom_permalink",
+        "slug": "downloads",
         "with_front": "1",
         "feeds": "0",
         "pages": "1"
@@ -83,5 +84,5 @@
     "delete_with_user": false,
     "register_meta_box_cb": "",
     "enter_title_here": "",
-    "modified": 1700053374
+    "modified": 1701787769
 }

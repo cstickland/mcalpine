@@ -5,15 +5,13 @@
 
 <div class="product-skus-container">
     {#if  $product?.skus && $product?.skus.length > 0}
+<div class="sku-headers">
+                        <div class="title">Sku</div>
+                        <div class="attribute-title">{$product.skus[0].product_config_label}</div>
+                    </div>
         <ul>
             {#each $product.skus as productSku, i}
-                {#if i == 0}
-                    <div class="sku-headers">
-                        <div class="title">Sku</div>
-                        <div class="attribute-title">{productSku.product_config_label}</div>
-                    </div>
-                {/if}
-                <li on:click={() => {
+                        <li on:click={() => {
                     activeSku.set(i);
                 }} on:keydown class={i == $activeSku ? 'active' : ""}>
                     {#each productSku.product_images as image, i}

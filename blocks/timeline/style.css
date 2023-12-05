@@ -207,12 +207,10 @@
   display: none;
 }
 .timeline-slides-block .timeline-slides .timeline-slide .slide-text-container .slide-message {
-  max-width: 80%;
   opacity: 0;
 }
 .timeline-slides-block .timeline-slides .timeline-slide .slide-text-container h3 {
   opacity: 0;
-  max-width: 350px;
   padding-bottom: 0.5rem;
 }
 .timeline-slides-block .dots-indicator-triangle {

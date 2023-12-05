@@ -61,7 +61,7 @@
             {@html $product.schematic_image}
         </div>
     {/if}
-    {#if $product?.skus}
+    {#if $product?.skus && $product?.skus.length > 1}
         <div class="product-hero-control-images">
             {#each $product?.skus as productSku, i}
                 <img

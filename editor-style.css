@@ -658,6 +658,7 @@ table {
 input[type='text'],
 input[type='email'],
 input[type='tel'],
+input[type='number'],
 textarea {
   padding: 1.25rem 1.5rem;
   border: solid 1px #cfcfcf;
@@ -666,12 +667,14 @@ textarea {
   input[type='text']:hover,
   input[type='email']:hover,
   input[type='tel']:hover,
+  input[type='number']:hover,
   textarea:hover {
     box-shadow: 5px 15px 15px #00000000;
     border: 1px solid #7caef2; }
   input[type='text']:focus-visible,
   input[type='email']:focus-visible,
   input[type='tel']:focus-visible,
+  input[type='number']:focus-visible,
   textarea:focus-visible {
     box-shadow: 0px 0px 10px #7caef2bf;
     border: 1px solid #7caef2;

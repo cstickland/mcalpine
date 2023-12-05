@@ -37,6 +37,7 @@ function mcalpine_setup()
             'interests' => esc_html__('Interest', 'mcalpine'),
             'footer' => esc_html__('Footer', 'mcalpine'),
             'mobilenav' => esc_html__('Mobilev1', 'mcalpine'),
+            'productcategories' => esc_html__('Product Category Order', 'mcalpine')
         )
     );
 }

@@ -1,6 +1,8 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .international-contact {
+  container-type: inline-size;
+  container-name: international-contact-grid-container;
   @include container-large;
   h2 {
     color: $color__mcalpine-black;
@@ -51,8 +53,7 @@
       padding-bottom: 5rem;
     }
     .international-contact-grid {
-      flex-direction: row;
-      flex-wrap: wrap;
+      display: grid;
       gap: 3rem;
     }
   }
@@ -63,6 +64,31 @@
     .flag-images {
       img {
         width: 4.375rem;
+      }
+    }
+  }
+}
+
+@supports (container-type: inline-size) {
+  @container international-contact-grid-container (min-width: 600px) {
+    .international-contact {
+      .international-contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+  @container international-contact-grid-container (min-width: 1000px) {
+    .international-contact {
+      .international-contact-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+
+  @container international-contact-grid-container (min-width: 1400px) {
+    .international-contact {
+      .international-contact-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
       }
     }
   }

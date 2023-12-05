@@ -7,6 +7,12 @@ add_filter('register_taxonomy_args', function ($args, $taxonomy) {
         $args['graphql_single_name'] = 'productCategory';
         $args['graphql_plural_name'] = 'productCategories';
     }
+    if ('download_categories' === $taxonomy) {
+        $args['show_in_graphql'] = true;
+        $args['graphql_single_name'] = 'downloadCategory';
+        $args['graphql_plural_name'] = 'downloadCategories';
+    }
+
 
     return $args;
 }, 10, 2);

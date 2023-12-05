@@ -276,7 +276,7 @@
   }
   .image-text-block .image-text-container.color-red.i-left .text-container {
     grid-area: 2/5/span 2/span 8;
-    padding-left: 45%;
+    padding-left: 55%;
   }
   .image-text-block .image-text-container.color-red.i-left .text-container p {
     max-width: 85%;
