@@ -27,9 +27,6 @@
             </div>
         </div></a
     >
-    <a class="category-card-link-small" href={url}>
-        {title}
-    </a>
 </li>
 
 <style lang="scss">

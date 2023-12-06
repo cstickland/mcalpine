@@ -9,23 +9,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const arrow = timeline.querySelector('.dots-indicator-triangle')
     let activeDot = dots[0]
 
+    setActiveSlide(activeSlide, slides)
+    setActiveSlide(activeSlide, dots)
     dots.forEach((dot) => {
       const slideLeft = activeDot.getBoundingClientRect().left
       const timelineLeft = timeline.getBoundingClientRect().left
       marginValue = slideLeft + arrow.offsetWidth / 2 - timelineLeft
-      arrow.style.marginLeft = `${marginValue}px`
 
       dot.addEventListener('click', () => {
         activeSlide = dot.dataset.year
 
         setActiveSlide(activeSlide, slides)
         setActiveSlide(activeSlide, dots)
-        setInterval(() => {
-          const slideLeft = activeDot.getBoundingClientRect().left
-          const timelineLeft = timeline.getBoundingClientRect().left
-          marginValue = slideLeft + arrow.offsetWidth / 2 - timelineLeft
-          arrow.style.marginLeft = `${marginValue}px`
-        }, 1)
       })
     })
 
@@ -44,9 +39,15 @@ window.addEventListener('DOMContentLoaded', () => {
           }
           if (slide.classList.contains('timeline-dot')) {
             activeDot = slide
-            if (window.innerWidth < 1024) {
-              slide.scrollIntoView({ inline: 'center', block: 'nearest' })
-            }
+            // slide.scrollIntoView({ inline: 'center', block: 'nearest' })
+            dotsContainer.scrollTo({
+              top: 0,
+              left:
+                slide.offsetLeft -
+                dotsContainer.clientWidth / 2 +
+                slide.clientWidth / 2,
+              behaviour: 'smooth',
+            })
           }
         } else {
           slide.classList.remove('active')

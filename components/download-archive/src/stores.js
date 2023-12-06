@@ -2,7 +2,27 @@ import { writable } from 'svelte/store'
 
 export const allItems = writable([])
 
-export const query = ``
+export const query = `{
+  downloads(first: 1000) {
+    edges {
+      node {
+        id
+        title
+        downloadCategories {
+          nodes {
+            name
+          }
+        }
+        featuredImage {
+          node {
+            altText
+            sourceUrl(size: MEDIUM)
+          }
+        }
+      }
+    }
+  }
+}`
 
 export async function getData(query) {
   const fetchPromise = await fetch('/graphql', {
@@ -37,6 +57,5 @@ export function divideItemsIntoPages(postsPerPage, items, currentPage) {
   if (page.length > 0) {
     pagesArray.push(page)
   }
-  console.log(pagesArray)
   return pagesArray
 }

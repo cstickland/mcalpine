@@ -75,6 +75,11 @@ function mcalpine_register_scripts()
 
 
     wp_enqueue_script('product-hero', get_template_directory_uri() . "/components/product-hero/dist/product-hero.js", array(), array());
+    if (is_archive()) {
+
+        wp_enqueue_script('download-archive-js', get_template_directory_uri() . "/components/download-archive/dist/download-archive.js", array(), array());
+        wp_enqueue_style('download-archive', get_template_directory_uri() . "/components/download-archive/dist/download-archive.css", array(), array());
+    }
 }
 
 

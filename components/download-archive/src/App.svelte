@@ -10,7 +10,6 @@
     } from "./stores.js";
     import { onMount } from "svelte";
 
-    export let archiveType = "";
     export let postsPerPage; 
 
     let currentPage = 1;
@@ -18,27 +17,21 @@
     let transition = false;
 
     onMount(async () => {
-        let query;
         $allItems = [];
-
-        if (archiveType == "warranties") {
-            query = warrantyQuery;
             let items = [];
             let data = await getData(query);
-
-            data.data.warranties.edges.forEach((warranty) => {
-                let warrantyObject = {
-                    title: warranty.node.title,
-                    url: warranty.node.link,
-                    imageUrl: warranty.node.featuredImage.node.sourceUrl,
-                    imageAlt: warranty.node.featuredImage.node.altText,
-                };
-                items.push(warrantyObject);
+            console.log(data)
+            data.data.downloads.edges.forEach((download) => {
+                let downloadObject = {
+                    title: download.node.title,
+                    imageUrl: download.node.featuredImage.node.sourceUrl,
+                    imageAlt: download.node.featuredImage.node.altText
+                         };
+                items.push(downloadObject);
             });
             allItems.set(items);
         }
-
-    });
+    );
 
 
     allItems.subscribe((value) => {
@@ -59,7 +52,7 @@
             {#if transition == false}
             {#each currentPageItems as item}
                 <Card {...item} />
-            {/each}
+             {/each}
             {/if}
         </ul>
     </div>
