@@ -1,6 +1,6 @@
 <?php
 
-require_once('hero_slider/hero-slider.php');
+// require_once('hero_slider/hero-slider.php');
 require_once('contact/contact.php');
 require_once('reviews/reviews.php');
 require_once('content/content.php');

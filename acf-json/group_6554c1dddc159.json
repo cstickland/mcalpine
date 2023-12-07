@@ -43,6 +43,27 @@
             "min_size": "",
             "max_size": "",
             "mime_types": ""
+        },
+        {
+            "key": "field_6571dc910c57b",
+            "label": "File Message",
+            "name": "file_message",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -63,9 +84,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "show_in_graphql": 0,
-    "graphql_field_name": "downloads",
+    "show_in_graphql": 1,
+    "graphql_field_name": "downloadFields",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1700053572
+    "modified": 1701972226
 }
