@@ -12,7 +12,7 @@ endif; ?>">
             <div class="color-block"></div>
             <h2><?php the_field('title'); ?></h2>
             <?php if (get_field('text')) : ?>
-                <p><?php the_field('text'); ?></p>
+                <div><?php the_field('text'); ?></div>
             <?php endif; ?>
             <?php $link = get_field('link');
             if ($link) :

@@ -39,6 +39,7 @@
       }
     }
     .home-hero-text {
+      z-index: 2;
       transform: translateY(40%);
       opacity: 0;
       animation-name: slide-in-hero;
@@ -99,25 +100,25 @@
           .position-1 {
             grid-area: 1 / 1 / span 1 / span 1;
 
-              animation-name: hero-schematic-1;
+            animation-name: hero-schematic-1;
           }
 
           .position-2 {
             grid-area: 1 / 1 / span 1 / span 1;
 
-              animation-name: hero-schematic-2;
+            animation-name: hero-schematic-2;
           }
 
           .position-3 {
             grid-area: 2 / 2 / span 1 / span 1;
 
-              animation-name: hero-schematic-3;
+            animation-name: hero-schematic-3;
           }
 
           .position-4 {
             grid-area: 2 / 2 / span 1 / span 1;
 
-              animation-name: hero-schematic-4;
+            animation-name: hero-schematic-4;
           }
 
           .home-hero-image-container {
@@ -127,9 +128,9 @@
             animation-duration: 5s;
             animation-fill-mode: forwards;
             opacity: 0;
-          &:nth-of-type(2) {
-                animation-delay: 200ms;
-              }
+            &:nth-of-type(2) {
+              animation-delay: 200ms;
+            }
 
             .home-hero-schematic-image {
               grid-area: 1 / 1 / span 1 / span 1;
@@ -273,13 +274,12 @@
               animation-duration: 5s;
               animation-fill-mode: forwards;
 
-    
               .home-hero-schematic-image {
                 grid-area: 1 / 1 / span 1 / span 1;
                 align-self: center;
                 justify-self: center;
-                max-height:unset;
-                max-height:272px;
+                max-height: unset;
+                max-height: 272px;
               }
 
               .home-hero-hover-image {

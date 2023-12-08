@@ -2,6 +2,7 @@
     import { product, activeSku, display } from "./stores.js";
     import { scale, slide } from "svelte/transition";
     import {  quadInOut } from 'svelte/easing'
+    import ControlImages from './ControlImages.svelte'
     let shareOpen = false;
 </script>
 
@@ -34,7 +35,7 @@
                 />
             </svg>
         </span>
-        <div class="breadcrumbs-current">{$product.title}</div>
+        <div class="breadcrumbs-current">{@html $product.title}</div>
     </div>
     {#if $product.skus && $product.skus.length > 0}
         <div class="active-sku">
@@ -62,19 +63,7 @@
         </div>
     {/if}
     {#if $product?.skus && $product?.skus.length > 1}
-        <div class="product-hero-control-images">
-            {#each $product?.skus as productSku, i}
-                <img
-                    on:click={() => {
-                        activeSku.set(i);
-                    }}
-                    on:keydown
-                    alt=""
-                    class="product-image-thumbnail"
-                    src={productSku.product_images[0].product_image}
-                />
-            {/each}
-        </div>
+        <ControlImages />
     {/if}
     <div class="product-share {shareOpen ? 'active' : ''}">
         <div
@@ -143,34 +132,6 @@
                         </g>
                     </svg>
                 </a>
-                <a href="">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 26.834 26.834"
-                    >
-                        <g transform="translate(0 0)">
-                            <path
-                                d="M18.841,0H7.993A8,8,0,0,0,0,7.993V18.841a8,8,0,0,0,7.993,7.993H18.841a8,8,0,0,0,7.993-7.993V7.993A8,8,0,0,0,18.841,0Zm5.3,18.841a5.3,5.3,0,0,1-5.3,5.3H7.993a5.3,5.3,0,0,1-5.3-5.3V7.993a5.3,5.3,0,0,1,5.3-5.3H18.841a5.3,5.3,0,0,1,5.3,5.3Z"
-                                fill="#fff"
-                            />
-                            <path
-                                d="M396.5,309.5"
-                                transform="translate(-372.362 -290.659)"
-                                fill="#fff"
-                            />
-                            <path
-                                d="M113.34,106.4a6.94,6.94,0,1,0,6.94,6.94A6.94,6.94,0,0,0,113.34,106.4Zm0,11.183a4.243,4.243,0,1,1,4.243-4.243A4.243,4.243,0,0,1,113.34,117.583Zm0,0"
-                                transform="translate(-99.923 -99.923)"
-                                fill="#fff"
-                            />
-                            <path
-                                d="M310.724,81.662A1.662,1.662,0,1,1,309.062,80,1.662,1.662,0,0,1,310.724,81.662Zm0,0"
-                                transform="translate(-288.687 -75.13)"
-                                fill="#fff"
-                            />
-                        </g>
-                    </svg>
-                </a>
                 <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(window.location.href)}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
                         <g transform="translate(-0.281 -0.121)">
@@ -215,7 +176,10 @@
                         />
                     </svg>
                 </a>
-                <a href="">
+                <div on:keydown on:click={() => {
+                    navigator.clipboard.writeText(encodeURI(window.location.href))
+                    alert('Added Url to Clipboard')
+                }}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         ><g data-name="Layer 2"
                             ><g data-name="link-2"
@@ -233,7 +197,7 @@
                             ></g
                         ></svg
                     >
-                </a>
+                </div>
             </div>
         {/if}
     </div>

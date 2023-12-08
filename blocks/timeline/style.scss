@@ -73,11 +73,11 @@
         font-size: clamp(
           4.5rem,
           -1.666666666666666rem + 12.847222222222221vw,
-          13.75rem
+          10rem
         );
         width: 2ch;
         word-wrap: break-word;
-        line-height: 0.85;
+        line-height: 0.8;
         font-weight: bold;
         letter-spacing: 0px;
       }
@@ -255,8 +255,8 @@
         max-width: 80%;
         background: transparent;
         padding: 2rem 7.5%;
-        padding-bottom: 15rem;
         transition: background 0.5s ease-in-out;
+        height: calc(100vh - 161px);
         .slide-hash {
           display: block;
           opacity: 0;
