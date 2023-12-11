@@ -11,9 +11,9 @@
     export let siteUrl = "";
     const graphQlUrl = `${siteUrl}/graphql`;
 
-    onMount(async () => {
-        await getData(graphQlUrl, query, productCategories);
-    });
+
+        $productCategories = getData(graphQlUrl, query, productCategories);
+  
 
     export let allProductsLink = "";
 
@@ -22,7 +22,12 @@
 
 <svelte:window bind:innerHeight />
 
-<div
+{#await $productCategories}
+   <div> 
+        <div class="product-text">Products</div>
+   </div> 
+{:then categories} 
+ <div
     on:mouseenter={() => {
         open.set(true);
     }}
@@ -35,9 +40,11 @@
         open.set(false);
     }}
 >
-    <div class="product-text">Product</div>
+    <div class="product-text">Products</div>
     <Content {allProductsLink} />
 </div>
+   
+{/await}
 
 <style lang="scss">
     .product-text {

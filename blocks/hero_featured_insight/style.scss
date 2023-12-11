@@ -28,6 +28,8 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
+        min-height: 228px;
+        object-fit: cover;
         object-position: center;
         mix-blend-mode: multiply;
         background: transparent
@@ -61,10 +63,12 @@
         padding-top: 0.625rem;
         padding-bottom: 1rem;
         padding-right: 2rem;
+        margin: 0;
       }
 
       p {
         padding-right: 2rem;
+        margin: 0;
       }
 
       .featured-insight-link {

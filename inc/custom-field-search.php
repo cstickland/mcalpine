@@ -15,7 +15,7 @@ function cf_search_join($join)
 {
     global $wpdb;
 
-    if (is_search() || is_graphql_request()) {
+    if (!is_admin() && is_search() || is_graphql_request()) {
         $join .= ' LEFT JOIN ' . $wpdb->postmeta . ' ON ' . $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
     }
 
@@ -32,7 +32,7 @@ function cf_search_where($where)
 {
     global $pagenow, $wpdb;
 
-    if (is_search() || is_graphql_request()) {
+    if (!is_admin() && is_search() || is_graphql_request()) {
         $where = preg_replace(
             "/\(\s*" . $wpdb->posts . ".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
             "(" . $wpdb->posts . ".post_title LIKE $1) OR (" . $wpdb->postmeta . ".meta_value LIKE $1)",
@@ -53,7 +53,7 @@ function cf_search_distinct($where)
 {
     global $wpdb;
 
-    if (is_search() || is_graphql_request()) {
+    if (!is_admin() && is_search() || is_graphql_request()) {
         return "DISTINCT";
     }
 

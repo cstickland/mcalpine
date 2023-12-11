@@ -297,9 +297,23 @@
       &:hover {
         .sku-list-container {
           padding-top: 1rem;
+
+          grid-template-columns: 10% 15% 50% 15% 10%;
+          grid-template-rows: 10% 80% 10%;
+          grid-template-areas:
+            '. . . close close'
+            '. sku sku sku .'
+            '. . . . .';
           .sku-close {
             margin-right: 1rem;
           }
+        }
+      }
+
+      .sku-list-container {
+        .sku-list {
+          padding: 0;
+          font-size: 0.75rem;
         }
       }
 

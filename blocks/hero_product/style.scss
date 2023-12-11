@@ -535,6 +535,17 @@
             }
           }
         }
+
+        .product-instructions-container {
+          flex-direction: row;
+          gap: 0.25rem;
+
+          .technical-drawing,
+          .installation-instructions {
+            display: flex;
+            align-items: center;
+          }
+        }
       }
 
       .product-hero-image {

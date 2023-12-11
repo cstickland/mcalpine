@@ -38,16 +38,16 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#if [...$productCategories].length > 0}
+            {#if [...$productCategories] && [...$productCategories].length > 0}
                 {#each [...$productCategories] as category}
-                    {#if category.node.parentId == categoryParentId}
+                    {#if category?.node?.parentId == categoryParentId}
                         <div
                             class="category-item {versionClass}"
                             on:click={() => {
                                 setParentCategories(
-                                    category.node.id,
-                                    category.node.name,
-                                    category.node.link
+                                    category?.node?.id,
+                                    category?.node?.name,
+                                    category?.node?.link
                                 );
                             }}
                             on:keydown
@@ -57,20 +57,20 @@
                             <div class="category-image-container">
                                 {#if category.node.customFields.categoryImage}
                                     <img
-                                        src={category.node.customFields
-                                            .categoryImage.sourceUrl}
-                                        alt={category.node.customFields
-                                            .categoryImage.sourceUrl}
+                                        src={category?.node?.customFields
+                                            ?.categoryImage?.sourceUrl}
+                                        alt={category?.node?.customFields
+                                            ?.categoryImage?.sourceUrl}
                                         loading="lazy"
 
-                                        style={`height: ${category.node.customFields.categoryImageHeight}%;`}
+                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%;`}
                                     />
                                 {:else}
                                     <img
                                         src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
                                         alt=""
                                         loading="lazy"
-                                        style={`height: ${category.node.customFields.categoryImageHeight}%`}
+                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%`}
                                     />
                                 {/if}
                             </div>
@@ -100,25 +100,25 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#if [...$productCategories].length > 0}
+            {#if [...$productCategories] && [...$productCategories].length > 0}
                 {#each [...$productCategories] as category}
-                    {#if category.node.parentId == categoryParentId}
+                    {#if category?.node?.parentId == categoryParentId}
                         <a
                             href={category.node.link}
                             class="category-item"
                         >
-                            <div>{category.node.name}</div>
+                            <div>{category?.node?.name}</div>
                             <div class="background-gradient-container"><div class="background-gradient" /></div>
                             <div class="category-image-container">
-                                {#if category.node.customFields.categoryImage}
+                                {#if category?.node?.customFields?.categoryImage}
                                     <img
-                                        src={category.node.customFields
-                                            .categoryImage.sourceUrl}
-                                        alt={category.node.customFields
-                                            .categoryImage.sourceUrl}
+                                        src={category?.node?.customFields
+                                            ?.categoryImage?.sourceUrl}
+                                        alt={category?.node?.customFields
+                                            ?.categoryImage?.sourceUrl}
                                         loading="lazy"
 
-                                        style={`height: ${category.node.customFields.categoryImageHeight}%`}
+                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%`}
                                     />
                                 {:else}
                                     <img
@@ -224,10 +224,10 @@
             height:100%;
             display:flex;
             align-items: center;
-            width:fit-content;
+            width: max-content;
 
             img {
-                object-fit:cover;
+                object-fit: contain;
                 width:auto;
             }
         }

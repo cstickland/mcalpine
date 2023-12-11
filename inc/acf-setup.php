@@ -15,6 +15,9 @@ add_action('pre_get_posts', function ($query) {
     if (!is_admin() && is_archive() && $query->is_main_query()) {
         $query->set('posts_per_page', -1);
     }
+    if (!is_admin() && is_search() && $query->is_main_query()) {
+        $query->set('posts_per_page', -1);
+    }
     if (is_home() && $query->is_main_query()) {
 
         $query->set('posts_per_page', -1);

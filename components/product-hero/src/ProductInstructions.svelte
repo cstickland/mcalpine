@@ -9,24 +9,24 @@
         {#if i == $activeSku }
             <div class="product-instructions-container" in:fade>
                 {#if productSku.product_installation_instructions}
-                <div class="installation-instructions">
-                    <a
-                        href={productSku.product_installation_instructions}
-                        download
-                        >Installation Instructions
-                        <DownloadSvg />
-                    </a>
-                </div>
+                    <div class="installation-instructions">
+                        <a
+                            href={productSku.product_installation_instructions}
+                            download
+                            >Instructions
+                            <DownloadSvg />
+                        </a>
+                    </div>
                 {/if}
                 {#if productSku.product_technical_drawing}
-                <div class="technical-drawing">
-                    <a
-                        href={productSku.product_technical_drawing}
-                        download
-                        >Technical Drawing
-                        <DownloadSvg />
-                    </a>
-                </div>
+                    <div class="technical-drawing">
+                        <a
+                            href={productSku.product_technical_drawing}
+                            download
+                            >Tech Drawing
+                            <DownloadSvg />
+                        </a>
+                    </div>
                 {/if}
             </div>
         {/if}

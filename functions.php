@@ -51,3 +51,5 @@ function address_custom_column($column, $post_id)
     }
 }
 add_action('manage_product_posts_custom_column', 'address_custom_column', 10, 2);
+
+add_filter('run_wptexturize', '__return_false');

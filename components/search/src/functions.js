@@ -13,6 +13,8 @@ export function highlightResults(searchQuery, result) {
 }
 
 export async function getResults(searchTerm, previousSuggestions) {
+  searchTerm = searchTerm.replace('&', '&amp;')
+
   const query = `{
   posts(where: {search: "${searchTerm}"}, first: 100) {
     edges {
@@ -158,7 +160,7 @@ export function levenshteinDistance(a, b) {
           Math.min(
             distances[i - 1][j],
             distances[i][j - 1],
-            distances[i - 1][j - 1],
+            distances[i - 1][j - 1]
           ) + 1
       }
     }
@@ -185,7 +187,7 @@ export function sortProductsBySimilarity(products, searchTerm) {
     product: product,
     distance: levenshteinDistance(
       getSkusList(product, searchTerm)[0],
-      searchTerm,
+      searchTerm
     ),
   }))
 
@@ -210,7 +212,7 @@ function sortOtherResultsBySimilarity(otherResults, searchTerm) {
     other: other,
     distance: levenshteinDistance(
       other.title.toLowerCase,
-      searchTerm.toLowerCase(),
+      searchTerm.toLowerCase()
     ),
   }))
   wordDistances.sort((a, b) => a.distance - b.distance)
