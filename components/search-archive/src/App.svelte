@@ -46,7 +46,7 @@
             if(insight.postType == 'product') {
                 categories.add(insight.categoryName);
 
-                if(insight.subcategoryName.length > 0) {
+                if(insight?.subcategoryName && insight?.subcategoryName.length > 0) {
                     insight.subcategoryName.forEach((name) => {
                         categories.add(name);
                     })

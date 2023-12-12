@@ -53,3 +53,23 @@ function address_custom_column($column, $post_id)
 add_action('manage_product_posts_custom_column', 'address_custom_column', 10, 2);
 
 add_filter('run_wptexturize', '__return_false');
+
+
+// function livchem_search_filter($s)
+// {
+//     return urldecode($s);
+// }
+//
+// add_filter('get_search_query', 'livchem_search_filter');
+// add_filter('the_search_query', 'livchem_search_filter');
+//
+// function livchem_query_vars_search_filter($query)
+// {
+//     if ($query->is_search && !!is_admin()) {
+//         $query->query_vars['s'] = urldecode($query->query_vars['s']);
+//         $query->query_vars['s'] = str_replace('″', '"', $query->query_vars['s']);
+//     }
+//
+//     return $query;
+// }
+// add_action('parse_query', 'livchem_query_vars_search_filter');

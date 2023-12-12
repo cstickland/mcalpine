@@ -793,11 +793,14 @@
     	let div0;
     	let t0;
     	let div1;
-    	let t2;
+    	let raw_value = "&amp; View All Results" + "";
+    	let t1;
     	let div3;
     	let div2;
     	let svg;
     	let path;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
@@ -805,34 +808,33 @@
     			div0 = element("div");
     			t0 = space();
     			div1 = element("div");
-    			div1.textContent = "View All Results";
-    			t2 = space();
+    			t1 = space();
     			div3 = element("div");
     			div2 = element("div");
     			svg = svg_element("svg");
     			path = svg_element("path");
     			attr_dev(div0, "class", "result-count svelte-o89x2o");
-    			add_location(div0, file$3, 6, 4, 121);
+    			add_location(div0, file$3, 9, 4, 148);
     			attr_dev(div1, "class", "view-all-text svelte-o89x2o");
-    			add_location(div1, file$3, 8, 8, 163);
+    			add_location(div1, file$3, 11, 8, 190);
     			attr_dev(path, "d", "M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z");
     			attr_dev(path, "fill", "#fff");
-    			add_location(path, file$3, 16, 17, 471);
+    			add_location(path, file$3, 19, 17, 514);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "width", "13.922");
     			attr_dev(svg, "height", "16.245");
     			attr_dev(svg, "viewBox", "0 0 13.922 16.245");
     			attr_dev(svg, "class", "svelte-o89x2o");
-    			add_location(svg, file$3, 11, 12, 291);
+    			add_location(svg, file$3, 14, 12, 334);
     			attr_dev(div2, "class", "view-all-chevron svelte-o89x2o");
-    			add_location(div2, file$3, 10, 8, 248);
+    			add_location(div2, file$3, 13, 8, 291);
     			attr_dev(div3, "class", "view-all svelte-o89x2o");
-    			add_location(div3, file$3, 9, 4, 217);
+    			add_location(div3, file$3, 12, 4, 260);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "id", "search-submit");
     			attr_dev(button, "class", "search-submit submit-btn svelte-o89x2o");
     			button.value = "view all results";
-    			add_location(button, file$3, 0, 0, 0);
+    			add_location(button, file$3, 2, 0, 2);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -842,17 +844,25 @@
     			append_dev(button, div0);
     			append_dev(button, t0);
     			append_dev(button, div1);
-    			append_dev(button, t2);
+    			div1.innerHTML = raw_value;
+    			append_dev(button, t1);
     			append_dev(button, div3);
     			append_dev(div3, div2);
     			append_dev(div2, svg);
     			append_dev(svg, path);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", click_handler, false, false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -866,6 +876,10 @@
 
     	return block;
     }
+
+    const click_handler = e => {
+    	
+    };
 
     function instance$3($$self, $$props) {
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -954,7 +968,10 @@
     }
 
     async function getResults(searchTerm, previousSuggestions) {
+      console.log(searchTerm);
       searchTerm = searchTerm.replace('&', '&amp;');
+      searchTerm = searchTerm.replace('”', '%22');
+      console.log(searchTerm);
 
       const query = `{
   posts(where: {search: "${searchTerm}"}, first: 100) {

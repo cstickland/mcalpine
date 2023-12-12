@@ -1,12 +1,15 @@
+
+
 <button
     type="submit"
     id="search-submit"
     class="search-submit submit-btn"
     value="view all results"
+    on:click={(e) => {}}
 >
     <div class="result-count"></div>
 
-        <div class="view-all-text">View All Results</div>
+        <div class="view-all-text">{@html "&amp; View All Results"}</div>
     <div class="view-all">
         <div class="view-all-chevron">
             <svg
