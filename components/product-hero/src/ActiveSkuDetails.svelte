@@ -13,7 +13,7 @@
         {#if $product?.skus[$activeSku]?.product_features}
         {#each $product?.skus[$activeSku]?.product_features as feature}
             <li>
-                {feature.feature}
+                {@html feature.feature}
             </li>
         {/each}
         {/if}

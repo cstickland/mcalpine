@@ -275,7 +275,7 @@
                             "label": "Feature",
                             "name": "feature",
                             "aria-label": "",
-                            "type": "textarea",
+                            "type": "wysiwyg",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -284,11 +284,12 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "show_in_graphql": 1,
                             "default_value": "",
-                            "maxlength": "",
-                            "rows": "",
-                            "placeholder": "",
-                            "new_lines": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0,
                             "parent_repeater": "field_643cffddfd79b"
                         }
                     ],
@@ -363,5 +364,5 @@
     "graphql_types": [
         "Product"
     ],
-    "modified": 1701191376
+    "modified": 1702482356
 }

@@ -265,10 +265,21 @@
         align-self: start;
         top: 50%;
         gap: 0.75rem;
-        max-height: 12rem;
         max-width: 100%;
         overflow-x: scroll;
         margin-bottom: 1.25rem;
+
+        .control-images {
+          height: 18.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .chevron-up,
+        .chevron-down {
+          cursor: pointer;
+        }
 
         .product-image-thumbnail {
           height: 4rem;
@@ -564,8 +575,6 @@
           align-self: start;
           top: 50%;
           gap: 0.75rem;
-          max-height: 12rem;
-          overflow-y: scroll;
 
           .product-image-thumbnail {
             height: 2rem;
