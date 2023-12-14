@@ -30,9 +30,14 @@
   }
 }
 
+.info-card-container {
+  container-type: inline-size;
+  container-name: info-card;
+}
+
 .info-card {
   transform: scale(0.7);
-  aspect-ratio: 1/1;
+  aspect-ratio: 1/1.05;
   background-color: $color__mcalpine-red;
   display: flex;
   flex-direction: column;
@@ -40,6 +45,8 @@
   padding: 2.5rem 2.625rem;
   position: relative;
   z-index: 2;
+  width: 100%;
+  height: 100%;
 
   &:first-of-type {
     animation-delay: 100ms;
@@ -88,7 +95,6 @@
     width: auto;
     object-fit: contain;
     transition: height 0.2s ease-in-out;
-    margin-bottom: 87px;
   }
   &:hover {
     background: #5a5a5ae6 0% 0% no-repeat padding-box;
@@ -98,16 +104,22 @@
       right: -1rem;
       opacity: 1;
     }
+
     .info-card-text {
       z-index: 2;
 
       .info-card-message {
+        display: block;
         opacity: 0;
+        height: 0;
         animation-name: grow-card;
-        animation-delay: 150ms;
+        animation-delay: 200ms;
         animation-fill-mode: forwards;
         animation-duration: 300ms;
         margin-bottom: auto;
+      }
+      .info-card-title {
+        margin-top: 0%;
       }
     }
 
@@ -133,6 +145,8 @@
     .info-card-title {
       font-weight: 400;
       margin-bottom: 1.5rem;
+      margin-top: 40%;
+      transition: all 0.2s ease-in-out;
     }
 
     .info-card-message {
@@ -141,9 +155,25 @@
       display: grid;
       grid-template-rows: 0fr;
       transform: translateY(4rem);
+      display: none;
 
       div {
         overflow: hidden;
+      }
+    }
+  }
+}
+
+@supports (contain: inline-size) {
+  @container info-card (min-width: 300px) {
+    .info-card {
+      .info-card-text {
+        .info-card-title {
+          font-size: clamp(1.266rem, 0.2687rem + 5.3189cqw, 1.758rem);
+        }
+        .info-card-message {
+          font-size: clamp(1rem, 0.75rem + 1.333cqw, 1.125rem);
+        }
       }
     }
   }
@@ -158,10 +188,12 @@
     grid-template-rows: 1fr;
     transform: translateY(4rem);
     opacity: 0;
+    display: block;
   }
   100% {
     opacity: 1;
     transform: translateY(0);
     grid-template-rows: 1fr;
+    display: block;
   }
 }

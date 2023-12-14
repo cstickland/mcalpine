@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-full-width-block']); ?> id="query-<?php the_title(); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-full-width-block animate']); ?> id="query-<?php the_title(); ?>">
     <div class="image-text-container  <?php
                                         if (get_field('show_overflow_image')) : echo 'overflow ';
                                         endif;
