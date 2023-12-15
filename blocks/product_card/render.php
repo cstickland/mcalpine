@@ -17,7 +17,9 @@ endif;
                         if (have_rows('product_images')) :
                             while (have_rows('product_images')) : the_row(); ?>
                                 <?php if ($count == 0) { ?>
-                                    <img src="<?php the_sub_field('product_image'); ?>" />
+                                    <a class="product-image-link" href="<?php echo get_permalink($product_id); ?>">
+                                        <img src="<?php the_sub_field('product_image'); ?>" />
+                                    </a>
                                 <?php } ?>
                 <?php $count++;
                             endwhile;
@@ -48,11 +50,12 @@ endif;
                     $i = 1;
                     if (have_rows('skus', $product_id)) :
                         while (have_rows('skus', $product_id)) : the_row(); ?>
-                            <span><?php the_sub_field('sku');
-                                    if ($i < $sku_count) {
-                                        echo ',';
-                                    } ?><span>
-                            <?php $i++;
+                            <span>
+                                <a href="<?php echo get_permalink($product_id) . '/?sku=' . get_sub_field('sku'); ?>">
+                                    <?php the_sub_field('sku'); ?>
+                                </a>
+                            </span>
+                    <?php $i++;
                         endwhile;
                     endif; ?>
                 </div>

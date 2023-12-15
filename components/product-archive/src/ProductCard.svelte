@@ -7,7 +7,7 @@
 <div class="product-card-container">
     <div class="product-card {openClass}" >
         <div class="product-block-image">
-            <img src={product.image_url} alt="" />
+            <a class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></a>
             <div class="product-title">{@html product.title}</div>
             <div
                 class="sku-count"
@@ -40,7 +40,7 @@
             <div class="sku-list">
                 {#each product.skus as sku}
                     <span>
-                        {sku}
+                        <a href={`${product.link}/?sku=${sku}`}>{sku}</a>
                     </span>
                 {/each}
             </div>

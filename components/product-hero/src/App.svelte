@@ -1,24 +1,33 @@
 <script>
     export let productDetails = {};
-    import { product, activeSku, display } from './stores.js'
-    import { onMount } from 'svelte'
-    import ProductDetails from './ProductDetails.svelte';
-    import ProductImage from './ProductImage.svelte';
+    import { product, activeSku, display } from "./stores.js";
+    import { onMount } from "svelte";
+    import ProductDetails from "./ProductDetails.svelte";
+    import ProductImage from "./ProductImage.svelte";
 
     onMount(() => {
-        product.set(productDetails)
-        console.log($product.skus)
-    })
+        product.set(productDetails);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const skuActive = urlParams.get("sku");
+        if ($product.skus && $product.skus.length) {
+            $product.skus.forEach((productSku, i) => {
+                if (productSku.sku == skuActive) {
+                    activeSku.set(i);
+                }
+            });
+        }
+    });
 
     activeSku.subscribe((value) => {
-        display.set(false)
+        display.set(false);
         setTimeout(() => {
-            display.set(true)
-        },300)
-    })
+            display.set(true);
+        }, 300);
+    });
 </script>
 
 <div class="product-hero-container">
-   <ProductImage />
+    <ProductImage />
     <ProductDetails />
 </div>
