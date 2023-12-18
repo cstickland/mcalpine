@@ -13,8 +13,8 @@
 
 <div class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
     <div class="insight-card-text">
-        <h6 class="insight-identifier">{insight.identifier}</h6>
-        <h3 class="insight-card-title">{insight.title}</h3>
+        <h6 class="insight-identifier">{@html insight.identifier}</h6>
+        <h3 class="insight-card-title">{@html insight.title}</h3>
     </div>
     <div class="insight-card-image-container">
         <img

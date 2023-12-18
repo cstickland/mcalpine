@@ -39,6 +39,8 @@
   aspect-ratio: 1;
   container-type: inline-size;
   container-name: category-card;
+  height: 100%;
+  width: 100%;
 
   .category-card {
     background-color: #f9f9f9;
@@ -56,6 +58,7 @@
       transition: all 0.2s ease-in-out;
       max-height: 85%;
       object-fit: contain;
+      filter: drop-shadow(4px 8px 8px #00000026);
     }
 
     .category-link-container {
@@ -68,6 +71,7 @@
       h5 {
         padding-left: 1.5rem;
         padding-bottom: 0.5rem;
+        margin: 0;
       }
       .product-category-link {
         align-self: end;

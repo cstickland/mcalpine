@@ -3,7 +3,6 @@
     import * as animateScroll from "svelte-scrollto";
     export let currentPage;
     export let totalPages;
-    export let transition;
 
     function setCurrentcurrentPage(newPage) {
 
