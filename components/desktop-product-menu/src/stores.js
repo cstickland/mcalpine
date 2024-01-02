@@ -32,23 +32,38 @@ export async function getData(graphQlUrl, query, productCategories) {
   })
 
   const response = await fetchPromise.json()
-  productCategories.set(response.data.productCategories.edges)
+  console.log(response.data.themeGeneralSettings.themeSettings.parentCategories)
+  productCategories.set(
+    response.data.themeGeneralSettings.themeSettings.parentCategories
+  )
 }
 
 export const query = `{
-  productCategories(first: 1000) {
-    edges {
-      node {
+  themeGeneralSettings {
+    themeSettings {
+      parentCategories {
         id
         name
-        parentId
         link
         customFields {
           categoryImage {
-            altText
             sourceUrl(size: THUMBNAIL)
           }
           categoryImageHeight
+        }
+        children {
+          edges {
+            node {
+              id
+              link
+              customFields {
+                categoryImage {
+                  sourceUrl(size: THUMBNAIL)
+                }
+                categoryImageHeight
+              }
+            }
+          }
         }
       }
     }

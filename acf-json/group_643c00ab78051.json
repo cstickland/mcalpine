@@ -1389,6 +1389,50 @@
                     "parent_repeater": "field_656c9cb03f6f1"
                 }
             ]
+        },
+        {
+            "key": "field_65942743ea55c",
+            "label": "Product Category Menu",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6594276cea55e",
+            "label": "Parent Categories",
+            "name": "parent_categories",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "taxonomy": "product_categories",
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -1415,5 +1459,5 @@
     "graphql_types": [
         "ThemeGeneralSettings"
     ],
-    "modified": 1701616979
+    "modified": 1704208422
 }

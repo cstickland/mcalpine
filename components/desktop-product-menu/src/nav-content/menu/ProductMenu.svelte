@@ -184,6 +184,7 @@
         margin-bottom: 0;
         position: relative;
         flex-direction: row;
+        max-width: 480px;
         justify-content: space-between;
         color: $color__mcalpine-black;
         padding: 0 1.25rem;
