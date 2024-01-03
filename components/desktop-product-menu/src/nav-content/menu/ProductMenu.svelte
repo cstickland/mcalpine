@@ -40,42 +40,40 @@
         <div class="category-list">
             {#if [...$productCategories] && [...$productCategories].length > 0}
                 {#each [...$productCategories] as category}
-                    {#if category?.node?.parentId == categoryParentId}
                         <div
                             class="category-item {versionClass}"
                             on:click={() => {
                                 setParentCategories(
-                                    category?.node?.id,
-                                    category?.node?.name,
-                                    category?.node?.link
+                                    category?.id,
+                                    category?.name,
+                                    category?.link
                                 );
                             }}
                             on:keydown
                         >
-                            <div>{category.node.name}</div>
+                            <div>{category.name}</div>
                             <div class="background-gradient-container"><div class="background-gradient" /></div>
                             <div class="category-image-container">
-                                {#if category.node.customFields.categoryImage}
+                                {#if category?.customFields?.categoryImage}
                                     <img
-                                        src={category?.node?.customFields
+                                        src={category?.customFields
                                             ?.categoryImage?.sourceUrl}
-                                        alt={category?.node?.customFields
+                                        alt={category?.customFields
                                             ?.categoryImage?.sourceUrl}
                                         loading="lazy"
 
-                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%;`}
+                                        style={`height: ${category?.customFields?.categoryImageHeight}%;`}
                                     />
                                 {:else}
                                     <img
                                         src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
                                         alt=""
                                         loading="lazy"
-                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%`}
+                                        style={`height: ${category?.customFields?.categoryImageHeight}%`}
                                     />
                                 {/if}
                             </div>
                         </div>
-                    {/if}
                 {/each}
             {/if}
         </div>
@@ -102,23 +100,24 @@
         <div class="category-list">
             {#if [...$productCategories] && [...$productCategories].length > 0}
                 {#each [...$productCategories] as category}
-                    {#if category?.node?.parentId == categoryParentId}
+                    {#if category?.id == categoryParentId}
+                        {#each category?.children?.edges as child}
                         <a
-                            href={category.node.link}
+                            href={child?.node?.link}
                             class="category-item"
                         >
-                            <div>{category?.node?.name}</div>
+                            <div>{child?.node?.name}</div>
                             <div class="background-gradient-container"><div class="background-gradient" /></div>
                             <div class="category-image-container">
-                                {#if category?.node?.customFields?.categoryImage}
+                                {#if child?.node?.customFields?.categoryImage}
                                     <img
-                                        src={category?.node?.customFields
+                                        src={child?.node?.customFields
                                             ?.categoryImage?.sourceUrl}
                                         alt={category?.node?.customFields
                                             ?.categoryImage?.sourceUrl}
                                         loading="lazy"
 
-                                        style={`height: ${category?.node?.customFields?.categoryImageHeight}%`}
+                                        style={`height: ${child?.customFields?.categoryImageHeight}%`}
                                     />
                                 {:else}
                                     <img
@@ -129,6 +128,7 @@
                                 {/if}
                             </div>
                         </a>
+                        {/each}
                     {/if}
                 {/each}
             {/if}

@@ -1,8 +1,6 @@
 <script>
     import { imageLinks } from '../../stores.js';
-    imageLinks.subscribe((value) => {
-        console.log(value)
-    })
+
 </script>
 
 

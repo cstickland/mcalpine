@@ -24,7 +24,9 @@ if ($identifier == 'FAQ') {
         <h3 class="insight-card-title"><?php echo get_the_title($insight_id); ?></h3>
     </div>
     <div class="insight-card-image-container">
-        <img class="insight-card-background-image" src="<?php echo get_the_post_thumbnail_url($insight_id); ?>" alt="" />
+        <?php if (!empty(get_the_post_thumbnail_url($insight_id))) : ?>
+            <img class="insight-card-background-image" src="<?php echo get_the_post_thumbnail_url($insight_id); ?>" alt="" />
+        <?php endif; ?>
         <div class="insight-card-hover-gradient"></div>
     </div>
     <div class="insight-card-link">

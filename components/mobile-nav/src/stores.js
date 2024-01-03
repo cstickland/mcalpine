@@ -49,27 +49,13 @@ export async function getData(graphQlUrl, menus, query, productCategories) {
 
   const response = await fetchPromise.json()
   menus.set(response.data.menus.nodes)
-  productCategories.set(response.data.productCategories.edges)
+  productCategories.set(
+    response.data.themeGeneralSettings.themeSettings.parentCategories
+  )
   imageLinks.set(response.data.themeGeneralSettings.themeSettings.imageLinks)
 }
 
 export const query = `{
-  productCategories(first: 1000) {
-    edges {
-      node {
-        id
-        name
-        parentId
-        link
-        customFields {
-          categoryImage {
-            altText
-            sourceUrl(size: THUMBNAIL)
-          }
-        }
-      }
-    }
-  }
   menus {
     nodes {
       menuItems(where: {parentId: null}) {
@@ -86,6 +72,32 @@ export const query = `{
   }
   themeGeneralSettings {
     themeSettings {
+      parentCategories {
+        id
+        name
+        link
+        customFields {
+          categoryImage {
+            sourceUrl(size: THUMBNAIL)
+          }
+          categoryImageHeight
+        }
+        children {
+          edges {
+            node {
+              id
+              name
+              link
+              customFields {
+                categoryImage {
+                  sourceUrl(size: THUMBNAIL)
+                }
+                categoryImageHeight
+              }
+            }
+          }
+        }
+      }
       imageLinks {
         backgroundImage {
           sourceUrl(size: MEDIUM_LARGE)

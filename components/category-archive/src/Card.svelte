@@ -8,7 +8,11 @@
 <li class="category-card-container">
     <a class="category-card" href={url}>
         <div class="category-card">
-            <img class="category-card-image" src={imageUrl} alt={imageAlt} />
+            {#if imageUrl && imageUrl.length > 0}
+                <img class="category-card-image" src={imageUrl} alt={imageAlt} />
+                {:else}
+                <div></div>
+            {/if}
             <div class="category-link-container">
                 <h5>{title}</h5>
                 <div class="product-category-link">

@@ -54,26 +54,23 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#each $productCategories as category}
-                {#if category.node.parentId == categoryParentId}
+            {#each [...$productCategories] as category}
                     <div
                         class="category-item {versionClass}"
                         on:click={() => {
                             setParentCategories(
-                                category.node.id,
-                                category.node.name
+                                category?.id,
+                                category?.name
                             );
                         }}
                         on:keydown
                     >
-                        <div>{category.node.name}</div>
+                        <div>{category?.name}</div>
                         <div class="category-image-container">
-                            {#if category.node.customFields.categoryImage}
+                            {#if category?.customFields?.categoryImage}
                                 <img
-                                    src={category.node.customFields
-                                        .categoryImage.sourceUrl}
-                                    alt={category.node.customFields
-                                        .categoryImage.sourceUrl}
+                                    src={category?.customFields?.categoryImage?.sourceUrl}
+                                    alt={category?.customFields?.categoryImage?.sourceUrl}
                                     loading="lazy"
                                 />
                             {:else}
@@ -85,7 +82,6 @@
                             {/if}
                         </div>
                     </div>
-                {/if}
             {/each}
         </div>
     </div>
@@ -119,18 +115,19 @@
         </div>
         <div class="category-list">
             {#each $productCategories as category}
-                {#if category.node.parentId == categoryParentId}
+                {#if category.id == categoryParentId}
+                    {#each category?.children?.edges as child}
                     <a
-                        href={category.node.link}
+                        href={child?.node?.link}
                         class="category-item {versionClass}"
                     >
-                        <div>{category.node.name}</div>
+                        <div>{child?.node?.name}</div>
                         <div class="category-image-container">
-                            {#if category.node.customFields.categoryImage}
+                            {#if child?.node?.customFields.categoryImage}
                                 <img
-                                    src={category.node.customFields
+                                    src={child?.node?.customFields
                                         .categoryImage.sourceUrl}
-                                    alt={category.node.customFields
+                                    alt={child?.node?.customFields
                                         .categoryImage.sourceUrl}
                                     loading="lazy"
                                 />
@@ -143,6 +140,7 @@
                             {/if}
                         </div>
                     </a>
+                    {/each}
                 {/if}
             {/each}
         </div>
