@@ -12,9 +12,6 @@
     if ($version == 2) {
         versionClass = "submit-version-two";
     }
-
-
-    
 </script>
 
 <button
@@ -127,7 +124,9 @@
                     align-items: center;
                     justify-content: center;
                     svg {
-                        fill: #e63128;
+                        * {
+                            fill: #e63128;
+                        }
                     }
                 }
             }
@@ -140,7 +139,9 @@
 
                     .view-all-chevron {
                         svg {
-                            fill: #ffffff;
+                            * {
+                                fill: #ffffff;
+                            }
                         }
                     }
                 }

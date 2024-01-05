@@ -32,19 +32,15 @@
         out:fade={{ axis: "x", duration: 200 }}
     >
         <div class="menu-title" on:click={() => activeMenu.set(0)} on:keydown>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                ><g data-name="Layer 2"
-                    ><g data-name="chevron-left"
-                        ><rect
-                            width="24"
-                            height="24"
-                            transform="rotate(90 12 12)"
-                            opacity="0"
-                        /><path
-                            d="M13.36 17a1 1 0 0 1-.72-.31l-3.86-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.42L10.9 12l3.18 3.3a1 1 0 0 1 0 1.41 1 1 0 0 1-.72.29z"
-                        /></g
-                    ></g
-                ></svg
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13.922"
+                height="16.245"
+                viewBox="0 0 13.922 16.245"
+                ><path
+                    d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z"
+                    fill="#fff"
+                /></svg
             >
             {#if categoryParentTitle == null}
                 <div>Products</div>
@@ -55,33 +51,32 @@
         </div>
         <div class="category-list">
             {#each [...$productCategories] as category}
-                    <div
-                        class="category-item {versionClass}"
-                        on:click={() => {
-                            setParentCategories(
-                                category?.id,
-                                category?.name
-                            );
-                        }}
-                        on:keydown
-                    >
-                        <div>{category?.name}</div>
-                        <div class="category-image-container">
-                            {#if category?.customFields?.categoryImage}
-                                <img
-                                    src={category?.customFields?.categoryImage?.sourceUrl}
-                                    alt={category?.customFields?.categoryImage?.sourceUrl}
-                                    loading="lazy"
-                                />
-                            {:else}
-                                <img
-                                    src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
-                                    alt=""
-                                    loading="lazy"
-                                />
-                            {/if}
-                        </div>
+                <div
+                    class="category-item {versionClass}"
+                    on:click={() => {
+                        setParentCategories(category?.id, category?.name);
+                    }}
+                    on:keydown
+                >
+                    <div>{category?.name}</div>
+                    <div class="category-image-container">
+                        {#if category?.customFields?.categoryImage}
+                            <img
+                                src={category?.customFields?.categoryImage
+                                    ?.sourceUrl}
+                                alt={category?.customFields?.categoryImage
+                                    ?.sourceUrl}
+                                loading="lazy"
+                            />
+                        {:else}
+                            <img
+                                src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
+                                alt=""
+                                loading="lazy"
+                            />
+                        {/if}
                     </div>
+                </div>
             {/each}
         </div>
     </div>
@@ -117,29 +112,29 @@
             {#each $productCategories as category}
                 {#if category.id == categoryParentId}
                     {#each category?.children?.edges as child}
-                    <a
-                        href={child?.node?.link}
-                        class="category-item {versionClass}"
-                    >
-                        <div>{child?.node?.name}</div>
-                        <div class="category-image-container">
-                            {#if child?.node?.customFields.categoryImage}
-                                <img
-                                    src={child?.node?.customFields
-                                        .categoryImage.sourceUrl}
-                                    alt={child?.node?.customFields
-                                        .categoryImage.sourceUrl}
-                                    loading="lazy"
-                                />
-                            {:else}
-                                <img
-                                    src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
-                                    alt=""
-                                    loading="lazy"
-                                />
-                            {/if}
-                        </div>
-                    </a>
+                        <a
+                            href={child?.node?.link}
+                            class="category-item {versionClass}"
+                        >
+                            <div>{child?.node?.name}</div>
+                            <div class="category-image-container">
+                                {#if child?.node?.customFields.categoryImage}
+                                    <img
+                                        src={child?.node?.customFields
+                                            .categoryImage.sourceUrl}
+                                        alt={child?.node?.customFields
+                                            .categoryImage.sourceUrl}
+                                        loading="lazy"
+                                    />
+                                {:else}
+                                    <img
+                                        src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
+                                        alt=""
+                                        loading="lazy"
+                                    />
+                                {/if}
+                            </div>
+                        </a>
                     {/each}
                 {/if}
             {/each}
@@ -159,12 +154,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         border-bottom: solid 1px #f4f4f4;
         font-weight: 700;
         padding: 1.125rem 1rem;
         cursor: pointer;
         svg {
-            height: 1.5rem;
+            height: 0.75rem;
+            transform: rotate(180deg);
 
             path {
                 fill: #5a5a5a;

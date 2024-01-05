@@ -9,7 +9,7 @@
 >
     <div class="result-count"></div>
 
-        <div class="view-all-text">{@html "&amp; View All Results"}</div>
+        <div class="view-all-text">{@html "View All Results"}</div>
     <div class="view-all">
         <div class="view-all-chevron">
             <svg

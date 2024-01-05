@@ -3,7 +3,8 @@
     import { highlightResults } from "./functions";
     import { results, searchQuery } from "./stores.js";
 
-    $: totalResults = $results?.data?.products?.nodes?.length + $results.data.other.length;
+    $: totalResults =
+        $results?.data?.products?.nodes?.length + $results.data.other.length;
 </script>
 
 {#if $searchQuery.length > 0}
@@ -41,17 +42,30 @@
                                 alt=""
                                 class="result-image"
                             />
-                            <div class="c-red search-product-sku-count">
-                                {product?.customFields2?.skus.length}
-                                {#if product?.customFields2?.skus.length > 1}
-                                    Skus
-                                {:else}Sku{/if}
-                            </div>
                             <div>
                                 {@html highlightResults(
                                     $searchQuery,
                                     product?.title
                                 )}
+                            </div>
+                            <div class="c-red search-product-sku-count">
+                                {#if product?.customFields2?.skus.length > 2}
+                                    {#each product?.customFields2.skus as sku, i}
+                                        {#if i < 2}
+                                            <span>{sku.sku}</span>
+                                        {/if}
+                                    {/each}
+                                    <span
+                                        >+{product.customFields2.skus.length -
+                                            2} more</span
+                                    >
+                                {:else}
+                                    {#each product?.customFields2.skus as sku, i}
+                                        {#if i < 2}
+                                            <span>{sku.sku}</span>
+                                        {/if}
+                                    {/each}
+                                {/if}
                             </div>
                         </a>
                     {/if}
@@ -160,7 +174,17 @@
             }
 
             .search-product-sku-count {
-                margin-right: 1.5rem;
+                margin-left: 1rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                span {
+                    font-size: 0.75rem;
+                    color: #7caef2;
+                    display: inline-flex;
+                    align-items: center;
+                }
             }
         }
 

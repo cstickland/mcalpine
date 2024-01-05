@@ -1,8 +1,8 @@
 <script>
     import { product, activeSku, display } from "./stores.js";
     import { scale, slide } from "svelte/transition";
-    import {  quadInOut } from 'svelte/easing'
-    import ControlImages from './ControlImages.svelte'
+    import { quadInOut } from "svelte/easing";
+    import ControlImages from "./ControlImages.svelte";
     let shareOpen = false;
 </script>
 
@@ -40,21 +40,33 @@
     {#if $product.skus && $product.skus.length > 0}
         <div class="active-sku">
             Viewing: {#if $display}<span
-                    transition:scale={{start: 0.9, opacity: 0, duration: 300, easing: quadInOut }}
-                    >{$product.skus[$activeSku].sku}</span
+                    transition:scale={{
+                        start: 0.9,
+                        opacity: 0,
+                        duration: 300,
+                        easing: quadInOut,
+                    }}>{$product.skus[$activeSku].sku}</span
                 >{/if}
         </div>
         <div class="product-image-div active">
-        {#each $product.skus as productSku, i}
-            {#if i == $activeSku && $display}
-                <img
-                    transition:scale={{start: 0.9, opacity: 0, duration: 300, easing: quadInOut }}
-                    class="product-image active"
-                    src={productSku.product_images[0].product_image}
-                    alt=""
-                />
-            {/if}
-        {/each}
+            {#each $product.skus as productSku, i}
+                {#if i == $activeSku && $display}
+                    {#if productSku.product_images[0].product_image}
+                        <img
+                            transition:scale={{
+                                start: 0.9,
+                                opacity: 0,
+                                duration: 300,
+                                easing: quadInOut,
+                            }}
+                            class="product-image active"
+                            src={productSku?.product_images[0]?.product_image ||
+                                ""}
+                            alt=""
+                        />
+                    {/if}
+                {/if}
+            {/each}
         </div>
     {/if}
     {#if $product.schematic_image}
@@ -132,7 +144,11 @@
                         </g>
                     </svg>
                 </a>
-                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(window.location.href)}`}>
+                <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(
+                        window.location.href
+                    )}`}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
                         <g transform="translate(-0.281 -0.121)">
                             <rect
@@ -176,10 +192,15 @@
                         />
                     </svg>
                 </a>
-                <div on:keydown on:click={() => {
-                    navigator.clipboard.writeText(encodeURI(window.location.href))
-                    alert('Added Url to Clipboard')
-                }}>
+                <div
+                    on:keydown
+                    on:click={() => {
+                        navigator.clipboard.writeText(
+                            encodeURI(window.location.href)
+                        );
+                        alert("Added Url to Clipboard");
+                    }}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         ><g data-name="Layer 2"
                             ><g data-name="link-2"

@@ -291,7 +291,8 @@
         }
       }
       .product-image-div {
-        height: 40vh;
+        max-height: 70vh;
+        // height: 40vh;
       }
       .product-image {
         display: none;
@@ -656,9 +657,9 @@
         }
         .product-image-div {
           max-width: 100%;
-          max-height: 100%;
+          max-height: 70vh;
           grid-area: image;
-          height: 70vh;
+          // height: 70vh;
           z-index: 2;
           display: flex;
           justify-content: center;

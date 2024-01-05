@@ -55,17 +55,32 @@
                                 alt=""
                                 class="result-image"
                             />
+                            <div class="">
                             <div class="c-red search-product-sku-count">
-                                {product?.customFields2?.skus.length}
-                                {#if product?.customFields2?.skus.length > 1}
-                                    Skus
-                                {:else}Sku{/if}
+                                {#if product?.customFields2?.skus.length > 2}
+                                    {#each product?.customFields2.skus as sku, i}
+                                        {#if i < 2}
+                                            <span>{sku.sku}</span>
+                                        {/if}
+                                    {/each}
+                                    <span
+                                        >+{product.customFields2.skus.length -
+                                            2} more</span
+                                    >
+                                {:else}
+                                    {#each product?.customFields2.skus as sku, i}
+                                        {#if i < 2}
+                                            <span>{sku.sku}</span>
+                                        {/if}
+                                    {/each}
+                                {/if}
                             </div>
                             <div>
                                 {@html highlightResults(
                                     $searchQuery,
                                     product?.title
                                 )}
+                            </div>
                             </div>
                         </a>
                     {/if}
@@ -161,8 +176,17 @@
             font-size: 1rem;
             border-bottom: solid 1px #f4f4f4;
 
-            .search-product-sku-count {
-                padding-right: 1rem;
+             .search-product-sku-count {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                span {
+                    font-size: 0.75rem;
+                    color: #7caef2;
+                    display: inline-flex;
+                    align-items: center;
+                }
             }
 
             &.other {
