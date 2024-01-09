@@ -41,7 +41,7 @@
             {#if [...$productCategories] && [...$productCategories].length > 0}
                 {#each [...$productCategories] as category}
                         <div
-                            class="category-item {versionClass}"
+                            class="category-item"
                             on:click={() => {
                                 setParentCategories(
                                     category?.id,
@@ -200,6 +200,7 @@
             height:100%;
             overflow: hidden;
             border-radius: 0.5rem;
+            z-index: 1;
         }
         .background-gradient {
             position: absolute;
@@ -226,6 +227,8 @@
             display:flex;
             align-items: center;
             width: max-content;
+            max-width: 40%;
+            z-index:2;
 
             img {
                 object-fit: contain;

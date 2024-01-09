@@ -1,5 +1,7 @@
 <header>
-    <nav class="main-nav <?php the_field('navbar_color'); ?>">
+    <nav class="main-nav <?php if (!is_archive()) {
+                                echo get_field('navbar_color');
+                            } ?>">
         <section class="desktop-menu container">
             <div class="nav-content">
 

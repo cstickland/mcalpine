@@ -7,7 +7,7 @@ get_header();
 
 <main id="primary" class="site-main">
 
-    <?php echo do_blocks('<!-- wp:mcalpine/small-hero {"name":"mcalpine/small-hero","data":{"title":"Where To Buy","_title":"field_64ef3eb65a74d","message":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam…","_message":"field_64ef3ec25a74e","image":"","_image":"field_64ef3ed55a74f","breadcrumb_middle_link":"","_breadcrumb_middle_link":"field_64ef4f89decd4"},"mode":"edit"} /-->'); ?>
+    <?php echo do_blocks('<!-- wp:mcalpine/small-hero {"name":"mcalpine/small-hero","data":{"title":"Where To Buy","_title":"field_64ef3eb65a74d","message":"' . get_field('where_to_buy_hero_text', 'option') . '","_message":"field_64ef3ec25a74e","image":"","_image":"field_64ef3ed55a74f","breadcrumb_middle_link":"","_breadcrumb_middle_link":"field_64ef4f89decd4"},"mode":"edit"} /-->'); ?>
 
 
     <!-- Start Stockist.co widget -->
@@ -84,6 +84,10 @@ get_header();
 
     .acf-map {
         display: none;
+    }
+
+    .small-hero-content {
+        padding-bottom: 3rem;
     }
 </style>
 <?php

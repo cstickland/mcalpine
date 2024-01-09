@@ -39,11 +39,13 @@
                         <div class="review-card-author-container">
                             <?php
                             $image = get_sub_field('photo_image');
-                            $imageurl = $image['url'];
-                            $imagealt = $image['alt'];
-                            $imagetitle = $image['title'];
+                            if ($image) :
+                                $imageurl = $image['url'];
+                                $imagealt = $image['alt'];
+                                $imagetitle = $image['title'];
                             ?>
-                            <img src="<?php echo $imageurl; ?>" alt="<?php echo $imagealt; ?>" />
+                                <img src="<?php echo $imageurl; ?>" alt="<?php echo $imagealt; ?>" />
+                            <?php endif; ?>
                             <div>
                                 <div class="review-card-author-name"><?php the_sub_field('name'); ?></div>
                                 <div class="review-card-author-company"><?php the_sub_field('company_name'); ?></div>

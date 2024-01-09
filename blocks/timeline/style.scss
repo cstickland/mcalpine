@@ -67,6 +67,7 @@
         opacity: 0;
         position: absolute;
         top: 1rem;
+
         left: 1.25rem;
         color: $color__mcalpine-red;
         font-size: 4.5rem;
@@ -249,12 +250,13 @@
         display: none;
       }
       .timeline-slide {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         scroll-snap-align: start;
         min-width: 80%;
         max-width: 80%;
         background: transparent;
-        padding: 2rem 7.5%;
+        padding: 2rem 5%;
         transition: background 0.5s ease-in-out;
         height: calc(100vh - 161px);
         .slide-hash {
@@ -281,8 +283,10 @@
           align-items: center;
           gap: 2rem;
           position: relative;
-          padding-top: 179px;
           padding-left: 0;
+          padding-bottom: 5rem;
+          width: 100%;
+          height: 100%;
           img {
             opacity: 1;
             margin-top: 0;
@@ -304,7 +308,7 @@
             height: 1.5rem;
           }
           .slide-message {
-            max-width: 405px;
+            max-width: 95%;
           }
           h3 {
             color: $color__mcalpine-red;
