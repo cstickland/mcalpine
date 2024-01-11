@@ -154,6 +154,19 @@
     }
 
     .large-hero-container {
+      position: relative;
+      .white-reveal {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 10;
+
+        animation-name: slide-away;
+        animation-fill-mode: forwards;
+        animation-duration: 1000ms;
+        animation-timing-function: ease-in-out;
+      }
       .hero-title {
         grid-area: 1 / 1 / span 2 / span 6;
         justify-content: start;
@@ -175,10 +188,20 @@
           display: block;
           margin: 0;
           padding-top: 1.625rem;
+          padding-left: 5%;
+          @include slide-in;
+          animation-delay: 500ms;
+          animation-duration: 500ms;
+          animation-timing-function: ease-in-out;
         }
 
         .large-hero-breadcrumbs {
           font-size: 1rem;
+          @include slide-in;
+          opacity: 0;
+          animation-delay: 300ms;
+          animation-duration: 500ms;
+          animation-timing-function: ease-in-out;
         }
       }
 
@@ -191,6 +214,13 @@
         max-height: 70vh;
         grid-area: 2 / 1 / span 2 / span 12;
         padding-top: 0;
+        overflow: hidden;
+
+        img {
+          // object-fit: contain;
+          @include zoom;
+          animation-duration: 1500ms;
+        }
       }
       .large-hatching {
         grid-area: 4/ 3 / span 1 / span 4;
@@ -212,6 +242,19 @@
         h2,
         p {
           padding-right: 3.625rem;
+          animation-timing-function: ease-in-out;
+        }
+
+        h2 {
+          @include slide-in;
+          animation-delay: 700ms;
+          animation-duration: 500ms;
+        }
+
+        p {
+          @include slide-in;
+          animation-delay: 700ms;
+          animation-duration: 500ms;
         }
 
         .large-link {
@@ -227,5 +270,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes slide-away {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
   }
 }

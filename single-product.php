@@ -35,8 +35,8 @@ get_header();
                 </div>
             <?php endif; ?>
     <?php the_content();
+            echo do_blocks('<!-- wp:mcalpine/product-category-guide-download /-->');
         endwhile;
-        the_posts_navigation();
     endif;
     ?>
 </main><!-- #main -->

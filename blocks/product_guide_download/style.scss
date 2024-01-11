@@ -1,0 +1,142 @@
+@import '../../sass/abstracts/_abstracts.scss';
+
+.product-guide-block {
+  &.animated {
+    .product-guide-container {
+      overflow: hidden;
+      .product-guide-content {
+        h2,
+        .product-guide-text,
+        .buttons-container {
+          @include slide-in;
+        }
+        h2 {
+          animation-delay: 250ms;
+        }
+        .product-guide-text {
+          animation-delay: 400ms;
+        }
+        .buttons-container {
+          animation-delay: 650ms;
+        }
+      }
+
+      .product-guide-background-image {
+        @include image-fade-in;
+        transform-origin: center center;
+        animation-duration: 0.5s;
+      }
+    }
+  }
+}
+
+.product-guide-block {
+  color: $color__mcalpine-black;
+  .product-guide-container {
+    display: grid;
+    @include container-large;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    overflow: hidden;
+    position: relative;
+    .background-image-container {
+      grid-area: 1 / 1 / span 1 / span 1;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      .product-guide-background-image {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 1;
+      }
+    }
+    .product-guide-gradients {
+      z-index: 2;
+      grid-area: 1 / 1 / span 1 / span 1;
+
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 2fr 2fr 1fr;
+
+      .product-guide-gradient-white {
+        grid-area: 1 / 1 / span 1 / span 1;
+        background-color: #f2f7fd;
+      }
+      .product-guide-gradient-blue {
+        grid-area: 2 / 1 / span 1 / span 1;
+        background: transparent
+          linear-gradient(180deg, #f2f7fd 0%, #7caef200 100%) 0% 0% no-repeat
+          padding-box;
+      }
+    }
+    .product-guide-content {
+      z-index: 3;
+      grid-area: 1 / 1 / span 1 / span 1;
+      border: solid 1px #f4f4f4;
+      padding-bottom: 258px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+
+      .white-dash {
+        height: 1.5rem;
+        width: 94px;
+        background-color: $color__mcalpine-red;
+        margin-top: 50px;
+      }
+
+      h2 {
+        padding-top: 2rem;
+        max-width: 360px;
+      }
+      .product-guide-text {
+        padding-top: 0.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .buttons-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-guide-block {
+    .product-guide-container {
+      .product-guide-gradients {
+        grid-template-columns: 1.5fr 1fr 3fr;
+        grid-template-rows: 100%;
+
+        .product-guide-gradient-white {
+          grid-area: 1 / 1 / span 1 / span 1;
+        }
+
+        .product-guide-gradient-blue {
+          grid-area: 1 / 2 / span 1 / span 2;
+          background: transparent
+            linear-gradient(90deg, #f2f7fd 0%, #7caef200 100%) 0% 0% no-repeat
+            padding-box;
+        }
+      }
+      .product-guide-background-image {
+        max-height: 560px;
+      }
+      .product-guide-content {
+        .white-dash {
+          margin-top: 0;
+        }
+        padding-bottom: 7.5rem;
+        padding-left: 6rem;
+        padding-top: 7.5rem;
+        height: 100%;
+        h2 {
+          max-width: 480px;
+        }
+      }
+    }
+  }
+}

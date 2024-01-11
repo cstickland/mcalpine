@@ -20,7 +20,9 @@
         <?php $allowed_blocks = array('mcalpine/product-card', 'acf/content', 'mcalpine/info-card', 'mcalpine/insight-card', 'mcalpine/category-card'); ?>
         <InnerBlocks allowedBlocks="<?php echo esc_attr(wp_json_encode($allowed_blocks)); ?>" />
     </ul>
-    <?php if ($link) :
+    <?php
+    $link = get_field('link');
+    if ($link) :
         $link_url = $link['url'];
         $link_title = $link['title'];
         $link_target = $link['target'] ? $link['target'] : '_self';

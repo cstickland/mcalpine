@@ -1,6 +1,7 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'large-hero-block']); ?>>
     <div class="large-hero-gradient"></div>
     <div class="large-hero-container">
+        <div class="white-reveal"></div>
 
         <div class="hero-title">
             <div class="large-hero-breadcrumbs">
