@@ -25,17 +25,17 @@
         let data = await getData(query);
         data.data.downloads.edges.forEach((download) => {
             let date = new Date(
-                Date.parse(download.node.downloadFields.fileDownload.dateGmt)
+                Date.parse(download?.node?.downloadFields?.fileDownload?.dateGmt)
             );
             let downloadObject = {
                 title: download.node.title,
-                imageUrl: download.node.featuredImage.node.sourceUrl,
-                imageAlt: download.node.featuredImage.node.altText,
-                fileUrl: download.node.downloadFields.fileDownload.mediaItemUrl,
-                message: download.node.downloadFields.fileMessage,
+                imageUrl: download?.node?.featuredImage?.node?.sourceUrl,
+                imageAlt: download?.node?.featuredImage?.node?.altText,
+                fileUrl: download?.node?.downloadFields?.fileDownload?.mediaItemUrl,
+                message: download?.node?.downloadFields?.fileMessage,
                 date: date,
-                fileType: download.node.downloadFields.fileType,
-                categories: download.node.downloadCategories.nodes,
+                fileType: download?.node?.downloadFields?.fileType,
+                categories: download?.node?.downloadCategories?.nodes,
             };
             items.push(downloadObject);
         });

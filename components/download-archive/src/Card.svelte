@@ -1,7 +1,7 @@
 <script>
     export let fileUrl;
-    export let imageUrl;
-    export let imageAlt;
+    export let imageUrl = "";
+    export let imageAlt = "";
     export let title;
     export let message;
     export let date;
@@ -14,12 +14,22 @@
 <li class="download-card-container">
     <div class="download-card-desktop" href={fileUrl} download>
         <div class="download-card">
-            <img class="download-card-image" src={imageUrl} alt={imageAlt} />
+            {#if imageUrl != ""}
+                <img
+                    class="download-card-image"
+                    src={imageUrl}
+                    alt={imageAlt}
+                />
+            {:else}
+                <div class="download-card-image" />
+            {/if}
             <div class="download-card-text-container">
                 <div class="download-card-text">
                     <h5>{title}</h5>
                     <div class="download-card-message">
-                        {message}
+                        {#if message}
+                            {message}
+                        {/if}
                     </div>
                     <div class="download-info-container">
                         <div>
@@ -73,15 +83,21 @@
     <div class="download-card-mobile" href={fileUrl} download>
         <div class="download-card">
             <div class="download-image-text">
-                <img
-                    class="download-card-image"
-                    src={imageUrl}
-                    alt={imageAlt}
-                />
+                {#if imageUrl != ""}
+                    <img
+                        class="download-card-image"
+                        src={imageUrl}
+                        alt={imageAlt}
+                    />
+                {:else}
+                    <div class="download-card-image" />
+                {/if}
                 <div class="download-card-text">
                     <h5>{title}</h5>
                     <div class="download-card-message">
-                        {message}
+                        {#if message}
+                            {message}
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -157,7 +173,7 @@
                     width: calc(50% - 0.5rem);
 
                     h5 {
-                    color: $color__mcalpine-red;
+                        color: $color__mcalpine-red;
                     }
                 }
                 padding-bottom: 1rem;
@@ -191,18 +207,18 @@
                 margin-top: 1rem;
 
                 &:hover {
-                background-color: #eb5a53;
+                    background-color: #eb5a53;
                 }
                 .download-icon {
-                    width:1.5rem;
-                    height:min-content;
+                    width: 1.5rem;
+                    height: min-content;
                     display: flex;
                     align-items: center;
 
                     svg {
                         width: 1.5rem !important;
                         * {
-                        fill:#fff;
+                            fill: #fff;
                         }
                     }
                 }

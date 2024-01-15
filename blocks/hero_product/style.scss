@@ -245,6 +245,9 @@
           width: 100%;
           height: 100%;
           object-fit: contain;
+          * {
+            stroke-width: 1px;
+          }
         }
       }
       .active-sku {
@@ -255,6 +258,9 @@
           color: $color__mcalpine-red;
           margin-left: 1.5rem;
           display: inline-block;
+          background-color: #fff;
+          border-radius: 50px;
+          padding: 0.5rem 1rem;
         }
       }
       .product-hero-control-images {
@@ -682,7 +688,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          grid-area: 1 / 1 / span 4 / span 2;
+          grid-area: 3 / 2 / span 1 / span 1;
         }
       }
     }

@@ -20,6 +20,7 @@
     </ul>
     {/if}
     {/if}
-    <a href="" class="btn btn-black">WHERE TO BUY</a>
-    <a href="" class="btn btn-black btn-outline">LEAVE A REVIEW</a>
+    <a href="/where-to-buy" class="btn btn-black">WHERE TO BUY</a>
+    <a href="https://www.reviews.io/company-reviews/store/mcalpine-plumbing" 
+        class="btn btn-black btn-outline">LEAVE A REVIEW</a>
 </div>
