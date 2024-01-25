@@ -73,3 +73,5 @@ add_filter('run_wptexturize', '__return_false');
 //     return $query;
 // }
 // add_action('parse_query', 'livchem_query_vars_search_filter');
+//
+//

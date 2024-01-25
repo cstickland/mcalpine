@@ -16,6 +16,7 @@ export async function getResults(searchTerm, previousSuggestions) {
   console.log(searchTerm)
   searchTerm = searchTerm.replace('&', '&amp;')
   searchTerm = searchTerm.replace('”', '%22')
+  searchTerm = searchTerm.replace('″', '%22')
   console.log(searchTerm)
 
   const query = `{
@@ -86,14 +87,15 @@ export async function getResults(searchTerm, previousSuggestions) {
   })
 
   const response = await fetchPromise.json()
+  console.log(response)
   let categories = []
 
   let otherResults = []
   let otherSimilarity = []
-  let products = response.data.products.nodes
-  let productCategories = response.data.productCategories.edges
-  let posts = response.data.posts.edges
-  let pages = response.data.pages.edges
+  let products = response?.data?.products?.nodes || []
+  let productCategories = response?.data?.productCategories?.edges || []
+  let posts = response?.data?.posts?.edges || []
+  let pages = response?.data?.pages?.edges || []
 
   // put all posts and pages into an "other" array
   posts.forEach((post) => {
@@ -110,22 +112,27 @@ export async function getResults(searchTerm, previousSuggestions) {
   otherResults.forEach((result) => {
     otherSimilarity.push(result.title)
   })
-
-  response.data.other = sortOtherResultsBySimilarity(otherResults, searchTerm)
-
+  if (response.data) {
+    response.data.other = sortOtherResultsBySimilarity(otherResults, searchTerm)
+  }
   //if no products are found, but a product categories are then use products from the category
   if (products.length == 0 && productCategories.length == 1) {
     products = productCategories[0].node.products
   }
 
   //sort products by sku compared to search term using levenstein distance
-  response.data.products.nodes = sortProductsBySimilarity(products, searchTerm)
-
+  if (response?.data?.products) {
+    response.data.products.nodes = sortProductsBySimilarity(
+      products,
+      searchTerm
+    )
+  }
   // move all category names into a single level array.
-  response.data.productCategories.edges.forEach((category) => {
-    categories.push(category.node.name)
-  })
-
+  if (response?.data) {
+    response.data.productCategories.edges.forEach((category) => {
+      categories.push(category.node.name)
+    })
+  }
   if (categories.length > 0) {
     // sort categories compared to search term using levenstein distance
     response.data.productCategories = sortBySimilarity(categories, searchTerm)
