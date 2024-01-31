@@ -3,7 +3,7 @@
     <div class="large-hero-container">
         <div class="white-reveal"></div>
 
-        <div class="hero-title">
+        <div class="hero-title-container">
             <div class="large-hero-breadcrumbs">
                 <a href="<?php echo get_site_url(); ?>">Home</a>
                 <?php if (get_field('breadcrumb_middle_link')) : ?>
@@ -24,8 +24,7 @@
                 </div>
             </div>
             <?php if (get_field('title')) : ?>
-                <h1 class="hero-title-mobile"><?php the_field('title'); ?></h1>
-                <h1 class="hero-title-desktop"><?php the_field('title'); ?></h1>
+                <h1 class="hero-title"><?php the_field('title'); ?></h1>
             <?php endif; ?>
         </div>
         <div class="large-hero-image-container">

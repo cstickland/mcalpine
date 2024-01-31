@@ -19,21 +19,36 @@
     @include container-large;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    .white-reveal {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 10;
 
+      animation-name: slide-away;
+      animation-fill-mode: forwards;
+      animation-duration: 1000ms;
+      animation-timing-function: ease-in-out;
+    }
     .large-hero-image-container {
       display: flex;
       z-index: 1;
       padding-top: 3.5rem;
+      overflow: hidden;
 
       img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
         object-position: center;
         mix-blend-mode: multiply;
         background: transparent
           linear-gradient(180deg, #22222200 0%, #222222 100%) 0% 0% no-repeat
           padding-box;
+
+        object-fit: contain;
+        @include zoom;
+        animation-duration: 1500ms;
       }
     }
 
@@ -67,15 +82,25 @@
         max-width: 450px;
       }
 
+      h2,
+      p {
+        animation-timing-function: ease-in-out;
+      }
       h2 {
         padding-top: 0.625rem;
         padding-bottom: 1rem;
         padding-right: 2rem;
+        @include slide-in;
+        animation-delay: 700ms;
+        animation-duration: 500ms;
       }
 
       p {
         padding-right: 2rem;
         margin: 0;
+        @include slide-in;
+        animation-delay: 700ms;
+        animation-duration: 500ms;
       }
 
       .large-link {
@@ -96,7 +121,7 @@
         }
       }
     }
-    .hero-title {
+    .hero-title-container {
       color: $color__mcalpine-red;
       background-color: #ffffff;
       position: absolute;
@@ -112,18 +137,23 @@
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
 
-      .hero-title-desktop {
-        display: none;
-      }
-
-      .hero-title-mobile {
+      .hero-title {
         margin-top: 0.5rem;
         margin-bottom: 0;
+        @include slide-in;
+        animation-delay: 500ms;
+        animation-duration: 500ms;
+        animation-timing-function: ease-in-out;
       }
 
       .large-hero-breadcrumbs {
         display: flex;
         align-items: center;
+        @include slide-in;
+        opacity: 0;
+        animation-delay: 300ms;
+        animation-duration: 500ms;
+        animation-timing-function: ease-in-out;
 
         font-size: 0.75rem;
         a {
@@ -155,19 +185,8 @@
 
     .large-hero-container {
       position: relative;
-      .white-reveal {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        z-index: 10;
 
-        animation-name: slide-away;
-        animation-fill-mode: forwards;
-        animation-duration: 1000ms;
-        animation-timing-function: ease-in-out;
-      }
-      .hero-title {
+      .hero-title-container {
         grid-area: 1 / 1 / span 2 / span 6;
         justify-content: start;
         padding-left: 0;
@@ -180,28 +199,15 @@
         justify-content: center;
         z-index: 3;
 
-        .hero-title-mobile {
-          display: none;
-        }
-
-        .hero-title-desktop {
+        .hero-title {
           display: block;
           margin: 0;
           padding-top: 1.625rem;
           padding-left: 5%;
-          @include slide-in;
-          animation-delay: 500ms;
-          animation-duration: 500ms;
-          animation-timing-function: ease-in-out;
         }
 
         .large-hero-breadcrumbs {
           font-size: 1rem;
-          @include slide-in;
-          opacity: 0;
-          animation-delay: 300ms;
-          animation-duration: 500ms;
-          animation-timing-function: ease-in-out;
         }
       }
 
@@ -214,13 +220,6 @@
         max-height: 70vh;
         grid-area: 2 / 1 / span 2 / span 12;
         padding-top: 0;
-        overflow: hidden;
-
-        img {
-          // object-fit: contain;
-          @include zoom;
-          animation-duration: 1500ms;
-        }
       }
       .large-hatching {
         grid-area: 4/ 3 / span 1 / span 4;
@@ -242,19 +241,6 @@
         h2,
         p {
           padding-right: 3.625rem;
-          animation-timing-function: ease-in-out;
-        }
-
-        h2 {
-          @include slide-in;
-          animation-delay: 700ms;
-          animation-duration: 500ms;
-        }
-
-        p {
-          @include slide-in;
-          animation-delay: 700ms;
-          animation-duration: 500ms;
         }
 
         .large-link {
