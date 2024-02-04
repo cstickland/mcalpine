@@ -1,5 +1,5 @@
 <?php
-get_header();
+get_header('product');
 ?>
 
 <main id="primary" class="site-main">

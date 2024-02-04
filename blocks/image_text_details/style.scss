@@ -38,6 +38,11 @@
 // }
 
 .image-text-block {
+  .text-color-block {
+    &.color-red {
+      background-color: $color__mcalpine-red;
+    }
+  }
   &.red {
     background-color: $color__mcalpine-red;
 
@@ -115,8 +120,10 @@
         width: 100%;
       }
     }
+    .text-color-block {
+      display: none;
+    }
     .text-container {
-      padding: 2rem;
       p {
         margin-bottom: 2rem;
         max-width: 405px;
@@ -164,7 +171,11 @@
       .text-block-hash {
         display: none;
       }
-
+      .text-color-block {
+        &.color-red {
+          display: block;
+        }
+      }
       .text-container {
         min-width: 380px;
         h2 {
@@ -198,12 +209,7 @@
           width: auto;
           display: flex;
           flex-direction: column;
-          justify-content: center;
           padding-bottom: 7.5%;
-
-          p {
-            width: 405px;
-          }
         }
 
         &.i-left {
@@ -211,11 +217,10 @@
             grid-area: 1 / 1 / span 2 / span 7;
           }
           .text-container {
-            grid-area: 2 / 5 / span 2 / span 8;
-            padding-left: 45%;
-            p {
-              max-width: 85%;
-            }
+            grid-area: 2 / 8 / span 2 / span 5;
+          }
+          .text-color-block {
+            grid-area: 3 / 6 / span 1 / span 2;
           }
         }
 
@@ -224,10 +229,11 @@
             grid-area: 1 / 6 / span 2 / span 7;
           }
           .text-container {
-            grid-area: 2 / 1 / span 2 / span 8;
-            padding-right: 42.5%;
+            grid-area: 2 / 1 / span 2 / span 5;
           }
-
+          .text-color-block {
+            grid-area: 3 / 6 / span 1 / span 2;
+          }
           .text-block-hash {
             grid-area: 3 / 10 / span 1 / span 2;
           }
@@ -248,7 +254,9 @@
             object-position: center center;
           }
         }
-
+        .text-color-block {
+          grid-area: 1 / 1 / span 1 / span 1;
+        }
         .text-container {
           grid-area: 1 / 1 / span 1 / span 4;
           width: auto;
@@ -265,6 +273,9 @@
         .text-container {
           grid-area: 1 / 9 / span 1 / span 4;
           width: auto;
+        }
+        .text-color-block {
+          grid-area: 1 / 9 / span 1 / span 4;
         }
       }
 
@@ -287,11 +298,7 @@
             grid-area: 1 / 1 / span 2 / span 8;
           }
           .text-container {
-            grid-area: 2 / 5 / span 2 / span 8;
-            padding-left: 55%;
-            p {
-              max-width: 85%;
-            }
+            grid-area: 2 / 9 / span 2 / span 4;
           }
         }
 
@@ -300,10 +307,11 @@
             grid-area: 1 /5 / span 2 / span 8;
           }
           .text-container {
-            grid-area: 2 / 1 / span 2 / span 8;
-            padding-right: 55%;
+            grid-area: 2 / 1 / span 2 / span 4;
           }
-
+          .text-color-block {
+            grid-area: 3 / 5 / span 1 / span 3;
+          }
           .text-block-hash {
             grid-area: 3 / 10 / span 1 / span 2;
           }

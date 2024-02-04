@@ -3,6 +3,7 @@
                                         echo get_field('color') . ' ';
                                         echo get_field('image_alignment_mobile') . ' ';
                                         echo get_field('image_alignment_desktop'); ?>">
+        <div class="text-color-block <?php the_field('color'); ?>"></div>
         <div class="text-container 
                 <?php the_field('color'); ?> 
 
@@ -20,7 +21,6 @@ endif; ?>">
                 $link_title = $link['title'];
                 $link_target = $link['target'] ? $link['target'] : '_self';
             ?>
-
                 <a class="btn <?php if (get_field('color') == 'color-white') {
                                     echo 'btn-red';
                                 } else {

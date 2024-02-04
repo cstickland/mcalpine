@@ -3,6 +3,8 @@
                                         echo get_field('color') . ' ';
                                         echo get_field('image_alignment_mobile') . ' ';
                                         echo get_field('image_alignment_desktop'); ?>">
+
+        <div class="text-color-block <?php the_field('color'); ?>"></div>
         <div class="text-container 
                 <?php the_field('color'); ?> 
 
