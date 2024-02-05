@@ -7,14 +7,15 @@
         divideItemsIntoPages,
         categoryQuery,
         warrantyQuery,
-        allItems
+        allItems,
+        currentPage
     } from "./stores.js";
     import { onMount } from "svelte";
 
     export let archiveType = "";
-    export let postsPerPage; 
-
-    let currentPage = 1;
+    export let postsPerPage;
+    const urlParams = new URLSearchParams(window.location.search);
+    currentPage.set(parseInt(urlParams.get("pagination")) || 1);
     let itemsDividedIntoPages;
     let transition = false;
 
@@ -43,47 +44,46 @@
             query = categoryQuery;
             let items = [];
             let data = await getData(query);
-            console.log(data)
+            console.log(data);
             data.data.productCategories.edges.forEach((category) => {
                 let categoryObject = {
                     title: category.node.name,
                     url: category.node.link,
-                    imageUrl: category.node.customFields.categoryImage?.sourceUrl,
+                    imageUrl:
+                        category.node.customFields.categoryImage?.sourceUrl,
                     imageAlt: category.node.customFields.categoryImage?.altText,
                 };
                 items.push(categoryObject);
             });
-        allItems.set(items);
-
+            allItems.set(items);
         }
     });
 
-
     allItems.subscribe((value) => {
-        itemsDividedIntoPages =  divideItemsIntoPages(
+        itemsDividedIntoPages = divideItemsIntoPages(
             postsPerPage,
             value,
             currentPage
         );
-    })
+    });
 
     $: totalPages = itemsDividedIntoPages.length;
-    $: currentPageItems = itemsDividedIntoPages[currentPage - 1] || [];
+    $: currentPageItems = itemsDividedIntoPages[$currentPage - 1] || [];
 </script>
 
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid mobile-two-column">
             {#if transition == false}
-            {#each currentPageItems as item}
-                <Card {...item} />
-            {/each}
+                {#each currentPageItems as item}
+                    <Card {...item} />
+                {/each}
             {/if}
         </ul>
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage bind:transition {totalPages} />
+            <Pagination  bind:transition {totalPages} />
         {/if}
     </div>
 </section>

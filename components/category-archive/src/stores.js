@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store'
 
 export const allItems = writable([])
+export const currentPage = writable(1)
 
 export const categoryQuery = `{
   productCategories(first: 1000) {

@@ -300,6 +300,9 @@
           .text-container {
             grid-area: 2 / 9 / span 2 / span 4;
           }
+          .text-color-block {
+            grid-area: 3 / 6 / span 1 / span 3;
+          }
         }
 
         &.i-right {

@@ -8,8 +8,8 @@
     import Filters from "./Filters.svelte";
 
     import { filters, divideItemsIntoPages, allItems } from "./stores.js";
-
-    let currentPage = 1;
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentPage = urlParams.get('page') || 1;
     let postsPerPage = 12;
     let categories = getCategories();
     let transition = false;

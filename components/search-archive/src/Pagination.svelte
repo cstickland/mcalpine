@@ -1,15 +1,18 @@
 <script>
-
     import * as animateScroll from "svelte-scrollto";
     export let currentPage;
     export let totalPages;
 
     function setCurrentcurrentPage(newPage) {
-
-        animateScroll.scrollTo({element: ".insight-archive-grid-container", duration: 200});
+        animateScroll.scrollTo({
+            element: ".insight-archive-grid-container",
+            duration: 200,
+        });
         // setTimeout(() => {
         currentPage = newPage;
-     
+        const url = new URL(location);
+        url.searchParams.set("page", newPage);
+        history.pushState({}, "", url);
         // }, 600);
     }
 </script>

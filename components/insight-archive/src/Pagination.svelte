@@ -1,24 +1,28 @@
 <script>
-
     import * as animateScroll from "svelte-scrollto";
-    export let currentPage;
+   import { currentPage } from './stores.js'; 
     export let totalPages;
 
     function setCurrentcurrentPage(newPage) {
-
-        animateScroll.scrollTo({element: ".insight-archive-filters-container", duration: 200});
+        animateScroll.scrollTo({
+            element: ".insight-archive-filters-container",
+            duration: 200,
+        });
         // setTimeout(() => {
-            
-        currentPage = newPage;
+
+        currentPage.set(newPage);
+        const url = new URL(location);
+        url.searchParams.set("pagination", newPage);
+        history.pushState({}, "", url);
         // }, 600);
     }
 </script>
 
-{#if currentPage > 1}
+{#if $currentPage > 1}
     <button
         class="prev-next-button"
         on:click={() => {
-            setCurrentcurrentPage(currentPage - 1);
+            setCurrentcurrentPage($currentPage - 1);
         }}>Prev</button
     >
 {:else}
@@ -26,44 +30,44 @@
 {/if}
 
 <div class="page-number-buttons">
-    {#if currentPage == totalPages && totalPages > 2}
+    {#if $currentPage == totalPages && totalPages > 2}
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage(currentPage - 2);
-            }}>{currentPage - 2}</button
+                setCurrentcurrentPage($currentPage - 2);
+            }}>{$currentPage - 2}</button
         >
     {/if}
-    {#if currentPage > 1}
+    {#if $currentPage > 1}
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage(currentPage - 1);
-            }}>{currentPage - 1}</button
+                setCurrentcurrentPage($currentPage - 1);
+            }}>{$currentPage - 1}</button
         >
     {/if}
 
     <button class="pagination-button pagination-button__current"
-        >{currentPage}</button
+        >{$currentPage}</button
     >
 
-    {#if currentPage < totalPages}
+    {#if $currentPage < totalPages}
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage(currentPage + 1);
-            }}>{currentPage + 1}</button
+                setCurrentcurrentPage($currentPage + 1);
+            }}>{$currentPage + 1}</button
         >
     {/if}
-    {#if currentPage == 1 && totalPages > 2}
+    {#if $currentPage == 1 && totalPages > 2}
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage(currentPage + 2);
-            }}>{currentPage + 2}</button
+                setCurrentcurrentPage($currentPage + 2);
+            }}>{$currentPage + 2}</button
         >
     {/if}
-    {#if currentPage < totalPages - 1 && totalPages > 3}
+    {#if $currentPage < totalPages - 1 && totalPages > 3}
         <div class="pagination-seperator-dots"><span>...</span></div>
         <button
             class="pagination-button"
@@ -74,11 +78,11 @@
     {/if}
 </div>
 
-{#if currentPage < totalPages}
+{#if $currentPage < totalPages}
     <button
         class="prev-next-button"
         on:click={() => {
-            setCurrentcurrentPage(currentPage + 1);
+            setCurrentcurrentPage($currentPage + 1);
         }}
     >
         Next

@@ -3,6 +3,8 @@ import { writable } from 'svelte/store'
 export const allItems = writable([])
 
 export const filters = writable(new Set())
+export const currentPage = writable(1)
+export const itemsDividedIntoPages = writable([])
 
 export const query = `{
   downloads(first: 1000) {
@@ -57,7 +59,6 @@ export function divideItemsIntoPages(
 ) {
   let page = []
   let pagesArray = []
-  currentPage = 1
 
   items.forEach((item) => {
     let addItem = false

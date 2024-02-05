@@ -10,9 +10,20 @@
     import GridToggleButtons from "./GridToggleButtons.svelte";
     import Filters from "./Filters.svelte";
     import ActiveFilters from "./ActiveFilters.svelte";
+    import { onMount } from "svelte";
 
-    import { parentFilters, childFilters, currentPage, postsPerPage } from './stores.js';
+    import {
+        parentFilters,
+        childFilters,
+        currentPage,
+        postsPerPage,
+    } from "./stores.js";
 
+    onMount(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentPageTemp = urlParams.get("page") || 1;
+        currentPage.set(currentPageTemp);
+    });
     let allProductsList;
     let gridStyle = true;
     let openFilters = true;
@@ -24,11 +35,11 @@
     } else {
         filtersClass = "hide-filters";
     }
-    
-    $: if(openFilters) {
-        filtersClosedClass = 'filters-open';
+
+    $: if (openFilters) {
+        filtersClosedClass = "filters-open";
     } else {
-        filtersClosedClass = 'filters-closed';
+        filtersClosedClass = "filters-closed";
     }
 
     $: totalProducts = allProductsList.length;
@@ -48,16 +59,16 @@
     $: if ($childFilters.size > 0) {
         allProductsList = allProducts.filter(function (product) {
             let productFound = false;
-            
+
             product.subcategoryId.forEach((subCategory) => {
-                if($childFilters.has(subCategory)) {
+                if ($childFilters.has(subCategory)) {
                     productFound = true;
                 }
-            })
-            console.log($childFilters)
+            });
+            console.log($childFilters);
             return productFound;
         });
-        console.log(allProductsList)
+        console.log(allProductsList);
     }
 
     $: if ($parentFilters.size > 0 && $childFilters.size == 0) {
@@ -105,15 +116,13 @@
             {/if}
         </div>
         {#if openFilters}
-            <Filters
-                {childCategories} {parentCategories}
-            />
+            <Filters {childCategories} {parentCategories} />
         {/if}{/if}
     <div class="archive-controls">
         {#if $parentFilters.size > 0 || $childFilters.size > 0}
-           <ActiveFilters />
-           {:else}
-           <div></div>
+            <ActiveFilters />
+        {:else}
+            <div />
         {/if}
         <div class="archive-controls-button-container">
             <CardsPerPage />
@@ -135,7 +144,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination  {totalPages} />
+            <Pagination {totalPages} />
         {/if}
     </div>
 </section>

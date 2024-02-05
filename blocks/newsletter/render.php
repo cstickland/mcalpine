@@ -4,7 +4,7 @@
         <div class="newsletter-content">
             <div class="newsletter-block-title"><?php the_field('title'); ?></div>
             <div class="newsletter-block-message"><?php the_field('text'); ?></div>
-            <?php echo do_shortcode('[gravityform id="2" title="true"]'); ?>
+            <?php echo do_shortcode(get_field('form_shortcode')); ?>
         </div>
     </div>
     <div class="white-cover"></div>

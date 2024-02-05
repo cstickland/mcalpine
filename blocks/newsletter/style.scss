@@ -84,6 +84,21 @@
     }
   }
   .installer-form {
+    input[type='checkbox'] {
+      appearance: none;
+      background-color: none;
+      margin: 0;
+      border: 1px solid #c7c7c7;
+      border-radius: 0.15em;
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+      width: 18px;
+      height: 18px;
+      overflow: hidden;
+      margin-right: 1.5rem;
+    }
+
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -104,9 +119,40 @@
           }
         }
       }
+      .ginput_container--name {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .ginput_container_consent {
+        display: flex;
+        align-items: center;
+
+        input[type='checkbox']::before {
+          content: '';
+          transform: scale(0);
+          width: 18px;
+          height: 18px;
+          transition: 120ms transform ease-in-out;
+          background: radial-gradient(
+            ellipse at center,
+            #ffffff 0%,
+            #ffffff 37%,
+            #ffffff 37%,
+            $color__mcalpine-black 37%,
+            $color__mcalpine-black 38%
+          );
+        }
+        input[type='checkbox']:checked {
+          border: solid 1px #222222;
+        }
+        input[type='checkbox']:checked::before {
+          transform: scale(1);
+        }
+      }
     }
     .gform_footer {
-      display: flex;
+      display: none;
       align-items: center;
       padding-right: 1.25rem;
       padding-left: 1.25rem;
@@ -156,12 +202,14 @@
         flex-grow: 1;
         max-width: 960px;
         .gform_fields {
-          flex-direction: row;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
           gap: 1.5rem;
           padding-right: 1.5rem;
-
-          .gfield--type-name {
-            width: 274px;
+          .ginput_container--name {
+            flex-direction: row;
+            gap: 1.5rem;
           }
           .gfield--type-email {
             flex-grow: 1;
@@ -171,10 +219,24 @@
               width: 100%;
             }
           }
+          .gfield--type-html {
+            div {
+              display: flex;
+              justify-content: end;
+            }
+          }
+          .ginput_container_consent {
+            height: 100%;
+
+            label {
+              display: flex;
+              align-items: center;
+            }
+          }
         }
       }
       .gform_footer {
-        display: flex;
+        display: none;
         align-items: center;
       }
     }
