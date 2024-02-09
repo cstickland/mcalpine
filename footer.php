@@ -1,7 +1,5 @@
 <?php
-
-?>
-<?php if (get_field('footer_version', 'option') == 1) {
+if (get_field('footer_version', 'option') == 1) {
     echo do_blocks('<!-- wp:acf/reviews {"name":"acf/reviews","data":{"title":"See why we’re the first choice for tradespeople world wide!","_title":"field_644e730be3b28","text":"Duis mauris augue, efficitur eu arcu sit amet, posuere dignissim neque. Aenean enim sem, pharetra et magna sit amet, luctus aliquet nibh.\r\n","_text":"field_644e750b23169","show_button":"1","_show_button":"field_644e75572316d","button_button_text":"Button Text","_button_button_text":"field_644e752e2316b","button_button_url":{"title":"HomePage","url":"http://mcalpine2.local/","target":""},"_button_button_url":"field_644e753b2316c","button":"","_button":"field_644e751a2316a"},"mode":"edit"} /-->');
     echo do_blocks('<!-- wp:acf/contact {"name":"acf/contact","mode":"preview"} /-->');
 }
@@ -65,7 +63,13 @@ if (get_field('footer_version', 'option') == 2) {
 </footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
-
+<?php if (have_rows('bottom_of_body', 'option')) :
+    while (have_rows('bottom_of_body', 'option')) : the_row();
+        if (get_sub_field('enable_script')) {
+            echo get_sub_field('script');
+        }
+    endwhile;
+endif; ?>
 </body>
 <script>
     const searchContainer = document.getElementById('search-container');
