@@ -1,6 +1,5 @@
 <?php
 
-
 $link = null;
 
 class Product
@@ -13,12 +12,26 @@ class Product
     public $subcategoryId;
     public $schematic_image;
     public $backgroundColor;
+    public $parentCategory;
+    public $childCategory;
+    public $childLink;
+    public $parentLink;
 }
 
 $product = new Product();
 
-
 $skus = [];
+
+$terms = get_the_terms($post_id, 'product_categories');
+foreach ($terms as $term) {
+    if ($term->parent == 0) {
+        $product->parentCategory = $term->name;
+        $product->parentLink = get_term_link($term->term_id);
+    } else {
+        $product->childCategory = $term->name;
+        $product->childLink = get_term_link($term->term_id);
+    }
+}
 
 if (have_rows('skus', $post_id)) :
     $skus = get_field('skus', $post_id);
@@ -41,7 +54,7 @@ endif;
 
 </section>
 
-
+<!-- Initiate ProductHero svelte component -->
 <script>
     const productHero = document.getElementById('product-hero');
     productHero.innerHTML = ''

@@ -38,7 +38,7 @@ $results = [];
 ?>
 
 <main id="primary" class="site-main">
-    <?php echo do_blocks('<!-- wp:mcalpine/search-hero -->'); ?>
+    <!-- <?php echo do_blocks('<!-- wp:mcalpine/search-hero -->'); ?> -->
     <div id="search-archive"></div>
     <ul>
         <?php
@@ -125,7 +125,8 @@ $results = [];
     new SearchArchive({
         target: archiveItems,
         props: {
-            allInsights: allProducts
+            allInsights: allProducts,
+            query: "<?php echo get_search_query(true); ?>"
         }
     })
 </script>

@@ -1,11 +1,13 @@
 <script>
     export let allInsights = [];
+    export let query = "";
 
     import { onMount } from "svelte";
     import InsightCard from "./InsightCard.svelte";
     import ProductCard from "./ProductCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
+    import Hero from "./Hero.svelte";
 
     import { filters, divideItemsIntoPages, allItems } from "./stores.js";
     const urlParams = new URLSearchParams(window.location.search);
@@ -56,7 +58,7 @@
         return categories;
     }
 </script>
-
+<Hero {query} />
 <div class="insight-archive-filters-container">
     <Filters {categories} />
 </div>

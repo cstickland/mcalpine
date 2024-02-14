@@ -75,4 +75,26 @@ fieldset {
       width: 100%;
     }
   }
+
+  input[type='checkbox']::before {
+    content: '';
+    transform: scale(0);
+    width: 18px;
+    height: 18px;
+    transition: 120ms transform ease-in-out;
+    background: radial-gradient(
+      ellipse at center,
+      #ffffff 0%,
+      #ffffff 37%,
+      #ffffff 37%,
+      $color__mcalpine-black 37%,
+      $color__mcalpine-black 38%
+    );
+  }
+  input[type='checkbox']:checked {
+    border: solid 1px #222222;
+  }
+  input[type='checkbox']:checked::before {
+    transform: scale(1);
+  }
 }

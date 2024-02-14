@@ -83,8 +83,39 @@
   }
 }
 
+input::file-selector-button {
+  font-size: 1rem;
+  padding: 1rem 1.6875rem;
+  line-height: 1;
+  text-align: center;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  width: fit-content;
+  transition: all 100ms ease-in-out;
+  background-color: #fff;
+  border: solid 1px #fff;
+  color: #222;
+  font-family: TheSans, sans-serif;
+  margin-right: 1rem;
+
+  &:hover {
+    background-color: $color__mcalpine-black;
+    color: #ffffff;
+    border-color: $color__mcalpine-black;
+  }
+}
+
+.ginput_container_fileupload {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 @media only screen and (min-width: $desktop) {
-  .btn {
+  .btn,
+  input::file-selector-button {
     font-size: 1.125rem;
     padding: 1.25rem 2rem;
   }
