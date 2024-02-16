@@ -13,11 +13,9 @@ export function highlightResults(searchQuery, result) {
 }
 
 export async function getResults(searchTerm, previousSuggestions) {
-  console.log(searchTerm)
   searchTerm = searchTerm.replace('&', '&amp;')
   searchTerm = searchTerm.replace('”', '%22')
   searchTerm = searchTerm.replace('″', '%22')
-  console.log(searchTerm)
 
   const query = `{
   posts(where: {search: "${searchTerm}"}, first: 100) {

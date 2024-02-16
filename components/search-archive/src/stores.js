@@ -1,14 +1,13 @@
 import { writable } from 'svelte/store'
 
 export const filters = writable(new Set())
-
 export const allItems = writable([])
 
 export function divideItemsIntoPages(
   postsPerPage,
   items,
   currentPage,
-  filters,
+  filters
 ) {
   let page = []
   let pagesArray = []

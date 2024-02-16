@@ -1,5 +1,5 @@
 <script>
-    import { slide, fade } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     import { filters } from "./stores.js";
 

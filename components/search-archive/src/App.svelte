@@ -1,6 +1,5 @@
 <script>
-    export let allInsights = [];
-    export let query = "";
+    export let searchTerm = "";
 
     import { onMount } from "svelte";
     import InsightCard from "./InsightCard.svelte";
@@ -10,14 +9,32 @@
     import Hero from "./Hero.svelte";
 
     import { filters, divideItemsIntoPages, allItems } from "./stores.js";
+    import {
+        getQuery,
+        getData,
+        determineProductResults,
+        getProductsLevenshtein,
+        getOthersLevenshtein
+    } from "./functions.js";
+
     const urlParams = new URLSearchParams(window.location.search);
-    let currentPage = urlParams.get('page') || 1;
+    let currentPage = parseInt(urlParams.get("page")) || 1;
     let postsPerPage = 12;
     let categories = getCategories();
     let transition = false;
 
-    onMount(() => {
-        allItems.set(allInsights);
+    onMount(async () => {
+        allItems.set(allInsights)
+        const query = getQuery(searchTerm)
+        const data = await getData(query)
+        const productResults = determineProductResults(data)
+        const productsWithDistances = getProductsLevenshtein(productResults, searchTerm)
+     
+        const otherResults = [...data.data.pages.edges, ...data.data.posts.edges]
+        const othersWithDistances = getOthersLevenshtein(otherResults, searchTerm)
+
+        const allResults = [...productsWithDistances, ...othersWithDistances].sort((a, b) => a.distance - b.distance)
+        allItems.set(allResults)
     });
 
     $: totalPages = insightsDividedIntoPages.length;
@@ -32,7 +49,7 @@
     filters.subscribe((value) => {
         insightsDividedIntoPages = divideItemsIntoPages(
             postsPerPage,
-            allInsights,
+            allItems,
             currentPage,
             value
         );
@@ -41,24 +58,28 @@
     function getCategories() {
         const categories = new Set();
 
-        allInsights.forEach((insight) => {
+        allItems.forEach((insight) => {
             if (insight.postType == "post") {
                 categories.add(insight.identifier);
             }
-            if(insight.postType == 'product') {
+            if (insight.postType == "product") {
                 categories.add(insight.categoryName);
 
-                if(insight?.subcategoryName && insight?.subcategoryName.length > 0) {
+                if (
+                    insight?.subcategoryName &&
+                    insight?.subcategoryName.length > 0
+                ) {
                     insight.subcategoryName.forEach((name) => {
                         categories.add(name);
-                    })
+                    });
                 }
             }
         });
         return categories;
     }
 </script>
-<Hero {query} />
+
+<Hero {searchTerm} />
 <div class="insight-archive-filters-container">
     <Filters {categories} />
 </div>

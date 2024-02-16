@@ -1,11 +1,11 @@
 <script>
- export let query = "";
+ export let searchTerm = "";
 </script>
 
 <div class='search-hero-block animate'>
     <div class="search-hero-content">
         <div class="search-hero__subtitle">You searched for:</div>
-        <h1>{query}</h1>
+        <h1>{searchTerm}</h1>
         <div class="search-hero-text">
             <p>Your query returned
                 <span class="search-hero__highlight">

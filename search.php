@@ -126,7 +126,7 @@ $results = [];
         target: archiveItems,
         props: {
             allInsights: allProducts,
-            query: "<?php echo get_search_query(true); ?>"
+            searchTerm: "<?php echo get_search_query(true); ?>"
         }
     })
 </script>
