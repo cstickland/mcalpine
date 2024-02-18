@@ -7,8 +7,8 @@
 <div class="product-card-container">
     <div class="product-card {openClass}" >
         <div class="product-block-image">
-            <a class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></a>
-            <div class="product-title">{@html product.title}</div>
+            <a class="product-image-link" href={product.link}><img src={product?.item?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl} alt="" /></a>
+            <div class="product-title">{@html product.item.title}</div>
             <div
                 class="sku-count"
                 on:click={() => {
@@ -17,9 +17,9 @@
                 on:keydown
             >
                 <span class="sku-count-default">
-                    {product.skus.length}
-                    {#if product.skus.length == 1}
-                        SKU{/if}{#if product.skus.length > 1} SKUs{/if}
+                    {product.item.customFields2.skus.length}
+                    {#if product.item.customFields2.skus.length == 1}
+                        SKU{/if}{#if product.item.customFields2.skus.length > 1} SKUs{/if}
                 </span>
                 <span class="sku-count-small">SKUs</span>
             </div>
@@ -38,13 +38,13 @@
         </div>
         <div class="sku-list-container">
             <div class="sku-list">
-                {#each product.skus as sku}
+                {#each product.item.customFields2.skus as sku}
                     <span>
-                        <a href={`${product.link}/?sku=${sku}`}>{sku}</a>
+                        <a href={`${product.item.link}/?sku=${sku.sku}`}>{sku.sku}</a>
                     </span>
                 {/each}
             </div>
-            <div class="product-title">{@html product.title}</div>
+            <div class="product-title">{@html product.item.title}</div>
             <div
                 class="sku-close"
                 on:click={() => {
@@ -67,7 +67,7 @@
                     ></svg
                 >
             </div>
-            <a class="product-card-link" href={product.link}>
+            <a class="product-card-link" href={product.item.link}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13.922"
@@ -81,5 +81,5 @@
             </a>
         </div>
     </div>
-    <a href={product.link} class="product-title-small">{@html product.title}</a>
+    <a href={product.item.link} class="product-title-small">{@html product.item.title}</a>
 </div>

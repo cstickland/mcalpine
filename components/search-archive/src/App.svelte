@@ -8,57 +8,93 @@
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
 
-    import { filters, divideItemsIntoPages, allItems } from "./stores.js";
+    import { filters, divideItemsIntoPages, allItems, currentPage } from "./stores.js";
     import {
         getQuery,
         getData,
         determineProductResults,
         getProductsLevenshtein,
-        getOthersLevenshtein
+        getOthersLevenshtein,
     } from "./functions.js";
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let currentPage = parseInt(urlParams.get("page")) || 1;
-    let postsPerPage = 12;
+        let postsPerPage = 12;
     let categories = getCategories();
     let transition = false;
+    let totalResults = "??";
 
     onMount(async () => {
-        allItems.set(allInsights)
-        const query = getQuery(searchTerm)
-        const data = await getData(query)
-        const productResults = determineProductResults(data)
-        const productsWithDistances = getProductsLevenshtein(productResults, searchTerm)
-     
-        const otherResults = [...data.data.pages.edges, ...data.data.posts.edges]
-        const othersWithDistances = getOthersLevenshtein(otherResults, searchTerm)
+        let productsWithDistances = [];
+        const query = getQuery(searchTerm);
+        const data = await getData(query);
+        const productResults = determineProductResults(data);
+        if (productResults && productResults.length > 0) {
+            productsWithDistances = getProductsLevenshtein(
+                productResults,
+                searchTerm
+            );
+        }
+        setPostType(data.data.pages.edges, "page");
+        setPostType(data.data.posts.edges, "post");
 
-        const allResults = [...productsWithDistances, ...othersWithDistances].sort((a, b) => a.distance - b.distance)
-        allItems.set(allResults)
+        const otherResults = [
+            ...data.data.pages.edges,
+            ...data.data.posts.edges,
+        ];
+        const othersWithDistances = getOthersLevenshtein(
+            otherResults,
+            searchTerm
+        );
+
+        const allResults = [
+            ...productsWithDistances,
+            ...othersWithDistances,
+        ].sort((a, b) => a.distance - b.distance);
+        console.log(allResults);
+        allItems.set(allResults);
+        totalResults = $allItems.length;
     });
 
-    $: totalPages = insightsDividedIntoPages.length;
+    function setPostType(items, type) {
+        items.forEach((item) => {
+            item.postType = type;
+        });
+    }
+
+    let totalPages = 0;
     $: insightsDividedIntoPages = divideItemsIntoPages(
         postsPerPage,
-        allInsights,
-        currentPage,
+        $allItems,
+        $currentPage,
         $filters
     );
-    $: currentPageInsights = insightsDividedIntoPages[currentPage - 1] || [];
 
+    allItems.subscribe((value) => {
+        insightsDividedIntoPages = divideItemsIntoPages(
+            postsPerPage,
+            value,
+            $currentPage,
+            $filters
+        );
+        console.log(insightsDividedIntoPages)
+        totalPages = insightsDividedIntoPages.length;
+
+    });
     filters.subscribe((value) => {
         insightsDividedIntoPages = divideItemsIntoPages(
             postsPerPage,
-            allItems,
-            currentPage,
+            $allItems,
+            $currentPage,
             value
         );
+
+        totalPages = insightsDividedIntoPages.length;
     });
+
 
     function getCategories() {
         const categories = new Set();
 
-        allItems.forEach((insight) => {
+        $allItems.forEach((insight) => {
             if (insight.postType == "post") {
                 categories.add(insight.identifier);
             }
@@ -79,17 +115,17 @@
     }
 </script>
 
-<Hero {searchTerm} />
+<Hero {searchTerm} {totalResults} />
 <div class="insight-archive-filters-container">
     <Filters {categories} />
 </div>
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            {#if transition == false}
-                {#each currentPageInsights as insight}
-                    {#if insight.postType === "post" || insight.postType === "page"}
-                        <InsightCard {insight} />
+            {#if transition == false && insightsDividedIntoPages && insightsDividedIntoPages.length}
+                {#each insightsDividedIntoPages[$currentPage - 1] as insight}
+                    {#if insight.postType === "other"}
+                        <!-- <InsightCard {insight} /> -->
                     {:else if insight.postType == "product"}
                         <ProductCard product={insight} />
                     {/if}
@@ -99,7 +135,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination bind:currentPage bind:transition {totalPages} />
+            <Pagination  bind:transition {totalPages} />
         {/if}
     </div>
 </section>

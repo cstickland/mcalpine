@@ -5,16 +5,19 @@
     let open = false;
 
     onMount(() => {
-        if(insight.identifier.toLowerCase() == 'faq') {
+                if(insight.identifier.toLowerCase() == 'faq') {
             insight.permalink = `/faq/?id=${insight.id}`
         }
+        console.log(insight)
     })
 </script>
 
 <div class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
     <div class="insight-card-text">
-        <h6 class="insight-identifier">{@html insight.identifier}</h6>
-        <h3 class="insight-card-title">{@html insight.title}</h3>
+        {#if insight.item.postType == 'page'}
+            <h6 class="insight-identifier">Page</h6>
+        {/if}
+        <h3 class="insight-card-title">{@html insight.item.node.title}</h3>
     </div>
     <div class="insight-card-image-container">
         <img

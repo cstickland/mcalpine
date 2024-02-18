@@ -2,6 +2,9 @@ import { writable } from 'svelte/store'
 
 export const filters = writable(new Set())
 export const allItems = writable([])
+const urlParams = new URLSearchParams(window.location.search)
+
+export const currentPage = writable(parseInt(urlParams.get('page')) || 1)
 
 export function divideItemsIntoPages(
   postsPerPage,
@@ -11,7 +14,6 @@ export function divideItemsIntoPages(
 ) {
   let page = []
   let pagesArray = []
-  currentPage = 1
   let currentItems = []
 
   if (filters.size == 0) {

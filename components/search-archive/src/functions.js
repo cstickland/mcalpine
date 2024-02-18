@@ -130,6 +130,7 @@ export function getProductsLevenshtein(products, term) {
   let productsWithDistances = products.map((product) => ({
     item: product,
     distance: getProductDistance(product, term),
+    postType: 'product',
   }))
 
   return productsWithDistances
@@ -146,7 +147,7 @@ function getProductDistance(product, term) {
   })
 
   items.forEach((item) => {
-    let distance = levenshteinDistance(item, term)
+    let distance = levenshteinDistance(item.toLowerCase(), term.toLowerCase())
     distances.push(distance)
   })
 
@@ -157,45 +158,10 @@ function getProductDistance(product, term) {
 export function getOthersLevenshtein(items, term) {
   let othersWithDistances = items.map((item) => ({
     item: item,
-    distance: levenshteinDistance(item.node.title.toLowerCase(), term),
+    distance: item.node.title.toLowerCase().includes(term.toLowerCase())
+      ? 0
+      : levenshteinDistance(item.node.title.toLowerCase(), term.toLowerCase()),
+    postType: 'other',
   }))
   return othersWithDistances
 }
-
-// export function sortProductsBySimilarity(products, searchTerm) {
-//   let wordDistances = products.map((product) => ({
-//     product: product,
-//     distance: levenshteinDistance(
-//       getSkusList(product, searchTerm)[0],
-//       searchTerm
-//     ),
-//   }))
-//
-//   wordDistances.sort((a, b) => a.distance - b.distance)
-//
-//   return wordDistances.map((wd) => wd.product)
-// }
-//
-// function getSkusList(product, searchTerm) {
-//   let skus = []
-//   let sortedSkus = []
-//   product.customFields2.skus.forEach((row) => {
-//     skus.push(row.sku.toLowerCase())
-//   })
-//
-//   sortedSkus = sortBySimilarity(skus, searchTerm.toLowerCase())
-//   return sortedSkus
-// }
-//
-// export function sortBySimilarity(products, searchTerm) {
-//   // Create an array of objects to store the words and their distances
-//   let wordDistances = products.map((word) => ({
-//     word: word,
-//     distance: levenshteinDistance(word.toLowerCase(), searchTerm.toLowerCase()),
-//   }))
-//
-//   // Sort the array by distance
-//   wordDistances.sort((a, b) => a.distance - b.distance)
-//   // Return the sorted list of words
-//   return wordDistances.map((wd) => wd.word)
-// }
