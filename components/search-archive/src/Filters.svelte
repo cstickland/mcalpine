@@ -3,9 +3,9 @@
 
     import { filters } from "./stores.js";
 
-    export let categories;
+    export let categories = [];
     let open = false;
-    const categoriesArray = [...categories];
+    $: categoriesArray = [...categories];
 </script>
 
 <div class="insight-archive-filters">

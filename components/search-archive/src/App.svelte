@@ -18,7 +18,7 @@
     } from "./functions.js";
 
         let postsPerPage = 12;
-    let categories = getCategories();
+    let categories;
     let transition = false;
     let totalResults = "??";
 
@@ -49,9 +49,9 @@
             ...productsWithDistances,
             ...othersWithDistances,
         ].sort((a, b) => a.distance - b.distance);
-        console.log(allResults);
         allItems.set(allResults);
         totalResults = $allItems.length;
+        categories = getCategories();
     });
 
     function setPostType(items, type) {
@@ -75,7 +75,6 @@
             $currentPage,
             $filters
         );
-        console.log(insightsDividedIntoPages)
         totalPages = insightsDividedIntoPages.length;
 
     });
@@ -86,32 +85,28 @@
             $currentPage,
             value
         );
-
+        currentPage.set(1)
         totalPages = insightsDividedIntoPages.length;
     });
 
 
     function getCategories() {
-        const categories = new Set();
+        let categories = new Set();
 
         $allItems.forEach((insight) => {
-            if (insight.postType == "post") {
-                categories.add(insight.identifier);
+            if (insight.item.postType == "post") {
+                insight.item.node.terms.nodes.forEach((term) => {
+                categories.add(term.name);
+                })
             }
             if (insight.postType == "product") {
-                categories.add(insight.categoryName);
-
-                if (
-                    insight?.subcategoryName &&
-                    insight?.subcategoryName.length > 0
-                ) {
-                    insight.subcategoryName.forEach((name) => {
-                        categories.add(name);
-                    });
-                }
+                insight.item.terms.nodes.forEach((term) => {
+                    categories.add(term.name)
+                })
             }
         });
-        return categories;
+        const sortedCategories = new Set(Array.from(categories).sort())
+        return sortedCategories;
     }
 </script>
 
@@ -125,7 +120,7 @@
             {#if transition == false && insightsDividedIntoPages && insightsDividedIntoPages.length}
                 {#each insightsDividedIntoPages[$currentPage - 1] as insight}
                     {#if insight.postType === "other"}
-                        <!-- <InsightCard {insight} /> -->
+                        <InsightCard {insight} />
                     {:else if insight.postType == "product"}
                         <ProductCard product={insight} />
                     {/if}
@@ -135,7 +130,7 @@
     </div>
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination  bind:transition {totalPages} />
+            <Pagination {totalPages} />
         {/if}
     </div>
 </section>

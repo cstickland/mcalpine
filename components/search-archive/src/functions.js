@@ -4,62 +4,89 @@ export function getQuery(searchTerm) {
   searchTerm = searchTerm.replace('″', '%22')
 
   return `{
-      posts(where: {search: "${searchTerm}"}, first: 100) {
-        edges {
+  posts(where: {search: "${searchTerm}"}, first: 100) {
+    edges {
+      node {
+        link
+        title
+        featuredImage {
           node {
-            link
-            title
+            sourceUrl(size: MEDIUM)
+            altText
           }
         }
-      }
-      productCategories(where: {search: "${searchTerm}"}, first: 100) {
-        edges {
-          node {
+        terms {
+          nodes {
             name
-            products(first: 100) {
-              nodes {
-                customFields2 {
-                  skus {
-                    sku
-                    productImages {
-                      productImage {
-                        mediaItemUrl
-                      }
-                    }
+          }
+        }
+        postId
+      }
+    }
+  }
+  productCategories(where: {search: "${searchTerm}"}, first: 100) {
+    edges {
+      node {
+        name
+        products(first: 100) {
+          nodes {
+            customFields2 {
+              skus {
+                sku
+                productImages {
+                  productImage {
+                    mediaItemUrl
                   }
                 }
-                link
-                title
               }
             }
-          }
-        }
-      }
-      products(where: {search: "${searchTerm}"}, first: 1000) {
-        nodes {
-          customFields2 {
-            skus {
-              sku
-              productImages {
-                productImage {
-                  mediaItemUrl
-                }
-              }
-            }
-          }
-          link
-          title
-        }
-      }
-      pages(where: {search: "${searchTerm}"}) {
-        edges {
-          node {
-            title
             link
+            title
+            terms {
+              nodes {
+                name
+              }
+            }
           }
         }
       }
-    }`
+    }
+  }
+  products(where: {search: "${searchTerm}"}, first: 1000) {
+    nodes {
+      customFields2 {
+        skus {
+          sku
+          productImages {
+            productImage {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+      link
+      title
+      terms {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+  pages(where: {search: "${searchTerm}"}) {
+    edges {
+      node {
+        title
+        link
+        featuredImage {
+          node {
+            sourceUrl(size: MEDIUM)
+          }
+        }
+      }
+    }
+  }
+}`
 }
 
 // fetch the data from the server

@@ -75,12 +75,8 @@
     .small-hero-text {
       margin: 0;
       color: #878787;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-height: 63px;
       line-height: 21px;
       width: 349px;
       padding-left: 1.25rem;
@@ -158,9 +154,6 @@
       .small-hero-text {
         margin: 0;
         color: #878787;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: none;
         overflow: hidden;
         text-overflow: none;
         line-height: 21px;

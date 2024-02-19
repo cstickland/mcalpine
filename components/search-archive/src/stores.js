@@ -23,20 +23,19 @@ export function divideItemsIntoPages(
   if (filters.size > 0) {
     currentItems = []
     items.forEach((insight) => {
-      if (insight.postType == 'post') {
-        if (filters.has(insight.identifier)) {
-          currentItems.push(insight)
-          return
-        }
+      if (insight.item.postType == 'post') {
+        insight.item.node.terms.nodes.forEach((term) => {
+          if (filters.has(term.name)) {
+            currentItems.push(insight)
+            return
+          }
+        })
       }
       if (insight.postType == 'product') {
-        if (filters.has(insight.categoryName)) {
-          currentItems.push(insight)
-          return
-        }
-        insight.subcategoryName.forEach((name) => {
-          if (filters.has(name)) {
+        insight.item.terms.nodes.forEach((term) => {
+          if (filters.has(term.name)) {
             currentItems.push(insight)
+            return
           }
         })
       }
