@@ -2,7 +2,8 @@ window.addEventListener('DOMContentLoaded', () => {
   var x, i, j, l, ll, selElmnt, a, b, c
 
   /* Look for any elements with the class "custom-select": */
-  x = document.querySelectorAll('.ginput_container_select')
+  x = document.querySelectorAll('.ginput_container_select, .address_country')
+  console.log(x)
   l = x.length
   for (i = 0; i < l; i++) {
     selElmnt = x[i].getElementsByTagName('select')[0]

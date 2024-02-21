@@ -80,6 +80,8 @@ function mcalpine_register_scripts()
         wp_enqueue_script('download-archive-js', get_template_directory_uri() . "/components/download-archive/dist/download-archive.js", array(), array());
         wp_enqueue_style('download-archive', get_template_directory_uri() . "/components/download-archive/dist/download-archive.css", array(), array());
     }
+
+    wp_enqueue_style('search-archive', get_template_directory_uri() . "/components/search-archive/dist/bundle.css", array(),);
 }
 
 

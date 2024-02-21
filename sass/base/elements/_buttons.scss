@@ -83,7 +83,8 @@
   }
 }
 
-input::file-selector-button {
+input::file-selector-button,
+.ginput_container_fileupload button {
   font-size: 1rem;
   padding: 1rem 1.6875rem;
   line-height: 1;
@@ -115,7 +116,8 @@ input::file-selector-button {
 
 @media only screen and (min-width: $desktop) {
   .btn,
-  input::file-selector-button {
+  input::file-selector-button,
+  .ginput_container_fileupload button {
     font-size: 1.125rem;
     padding: 1.25rem 2rem;
   }

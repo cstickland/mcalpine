@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import InsightCard from "./InsightCard.svelte";
     import ProductCard from "./ProductCard.svelte";
+    import PLaceholderCard from "./PlaceholderCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
@@ -16,11 +17,12 @@
         getProductsLevenshtein,
         getOthersLevenshtein,
     } from "./functions.js";
+    import PlaceholderCard from "./PlaceholderCard.svelte";
 
         let postsPerPage = 12;
     let categories;
-    let transition = false;
-    let totalResults = "??";
+    let totalResults = '';
+    let firstLoad = true;
 
     onMount(async () => {
         let productsWithDistances = [];
@@ -85,7 +87,10 @@
             $currentPage,
             value
         );
+        if(!firstLoad) {
         currentPage.set(1)
+            firstLoad = false;
+        }
         totalPages = insightsDividedIntoPages.length;
     });
 
@@ -117,15 +122,19 @@
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            {#if transition == false && insightsDividedIntoPages && insightsDividedIntoPages.length}
-                {#each insightsDividedIntoPages[$currentPage - 1] as insight}
-                    {#if insight.postType === "other"}
-                        <InsightCard {insight} />
-                    {:else if insight.postType == "product"}
-                        <ProductCard product={insight} />
-                    {/if}
+            <!-- {#if transition == false && insightsDividedIntoPages && insightsDividedIntoPages.length} -->
+            <!--     {#each insightsDividedIntoPages[$currentPage - 1] as insight} -->
+            <!--         {#if insight.postType === "other"} -->
+            <!--             <InsightCard {insight} /> -->
+            <!--         {:else if insight.postType == "product"} -->
+            <!--             <ProductCard product={insight} /> -->
+            <!--         {/if} -->
+            <!--     {/each} -->
+            <!-- {:else} -->
+                {#each Array(12) as _}
+                  <PlaceholderCard />
                 {/each}
-            {/if}
+            <!-- {/if} -->
         </ul>
     </div>
     <div class="pagination-container">

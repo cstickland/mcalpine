@@ -1,10 +1,11 @@
 <script>
+    import { fade } from 'svelte/transition'
     export let product = [];
     let open = false;
     $: openClass = open ? "open" : "closed";
 </script>
 
-<div class="product-card-container">
+<div class="product-card-container" in:fade={{ delay: 300, duration: 300}}>
     <div class="product-card {openClass}" >
         <div class="product-block-image">
             <a class="product-image-link" href={product.link}><img src={product?.item?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl} alt="" /></a>

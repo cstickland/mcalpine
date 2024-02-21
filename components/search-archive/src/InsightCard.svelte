@@ -21,9 +21,7 @@
 
 <div
     class="insight-card mobile-show col-{insight.columnWidth}"
-    in:fade={{ duration: 300 }}
-    out:fade={{ duration: 200 }}
->
+    in:fade={{ duration: 300, delay: 300 }}>
     <div class="insight-card-text">
         {#if insight.item.postType == "page"}
             <h6 class="insight-identifier">Page</h6>

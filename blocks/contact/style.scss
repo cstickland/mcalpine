@@ -81,6 +81,13 @@
             }
           }
         }
+        .ginput_container_address {
+          flex-wrap: wrap;
+
+          span {
+            width: calc(50% - 0.75rem);
+          }
+        }
       }
     }
     .form-checkbox-submit {

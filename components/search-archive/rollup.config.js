@@ -39,6 +39,9 @@ export default {
   },
   plugins: [
     svelte({
+      preprocess: autoPreprocess({
+        scss: {},
+      }),
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production,

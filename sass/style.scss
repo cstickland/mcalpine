@@ -53,3 +53,9 @@ html :where(.wp-block) {
 .c-red {
   color: $color__mcalpine-red;
 }
+
+.loading-dot {
+  width: 0.125rem;
+  height: 0.125rem;
+  background-color: #e63128;
+}
