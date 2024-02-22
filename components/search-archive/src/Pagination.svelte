@@ -10,7 +10,6 @@
         });
         // setTimeout(() => {
         currentPage.set(newPage);
-        console.log($currentPage)
         const url = new URL(location);
         url.searchParams.set("page", newPage);
         history.pushState({}, "", url);

@@ -59,34 +59,40 @@
 @media only screen and (min-width: $desktop) {
   .search-hero-block {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+    padding-left: 0;
+    margin: 0 auto;
     border-bottom: solid 1px #f4f4f4;
     padding-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 60rem 60rem 1fr;
+
     .search-hero-content {
-      width: 50%;
+      width: 100%;
       margin-left: auto;
       padding-left: 3.75rem;
       padding-top: 54px;
       padding-bottom: 68px;
+      grid-area: 1 / 2 / span 1 / span 2;
       h1 {
         color: #222222;
         padding: 1.5rem 1.25rem;
+        padding-left: 0;
       }
-
+      .search-hero__subtitle {
+        padding-left: 0;
+      }
       .search-hero-text {
         font-size: 25px;
         padding-top: 0;
+        padding-left: 0;
       }
     }
 
     .search-hero-image-container {
+      grid-area: 1 / 3 / span 1 / span 2;
       background: transparent
         linear-gradient(-105deg, #7caef220 0%, #7caef200 100%) 0% 0% no-repeat
         padding-box;
-      max-width: 50%;
-      width: 50%;
       margin-bottom: 0;
       height: unset;
       img {

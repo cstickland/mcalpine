@@ -2,14 +2,20 @@
     export let searchTerm = "";
 
     import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
     import InsightCard from "./InsightCard.svelte";
     import ProductCard from "./ProductCard.svelte";
-    import PLaceholderCard from "./PlaceholderCard.svelte";
+    import PlaceholderCard from "./PlaceholderCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
 
-    import { filters, divideItemsIntoPages, allItems, currentPage } from "./stores.js";
+    import {
+        filters,
+        divideItemsIntoPages,
+        allItems,
+        currentPage,
+    } from "./stores.js";
     import {
         getQuery,
         getData,
@@ -17,12 +23,12 @@
         getProductsLevenshtein,
         getOthersLevenshtein,
     } from "./functions.js";
-    import PlaceholderCard from "./PlaceholderCard.svelte";
 
-        let postsPerPage = 12;
+    let postsPerPage = 12;
     let categories;
-    let totalResults = '';
+    let totalResults = "";
     let firstLoad = true;
+    let transitioning = false;
 
     onMount(async () => {
         let productsWithDistances = [];
@@ -78,7 +84,6 @@
             $filters
         );
         totalPages = insightsDividedIntoPages.length;
-
     });
     filters.subscribe((value) => {
         insightsDividedIntoPages = divideItemsIntoPages(
@@ -87,13 +92,19 @@
             $currentPage,
             value
         );
-        if(!firstLoad) {
-        currentPage.set(1)
+        if (!firstLoad) {
+            currentPage.set(1);
             firstLoad = false;
         }
         totalPages = insightsDividedIntoPages.length;
     });
 
+    currentPage.subscribe(() => {
+        transitioning = true;
+        setTimeout(() => {
+            transitioning = false;
+        }, 100);
+    });
 
     function getCategories() {
         let categories = new Set();
@@ -101,16 +112,16 @@
         $allItems.forEach((insight) => {
             if (insight.item.postType == "post") {
                 insight.item.node.terms.nodes.forEach((term) => {
-                categories.add(term.name);
-                })
+                    categories.add(term.name);
+                });
             }
             if (insight.postType == "product") {
                 insight.item.terms.nodes.forEach((term) => {
-                    categories.add(term.name)
-                })
+                    categories.add(term.name);
+                });
             }
         });
-        const sortedCategories = new Set(Array.from(categories).sort())
+        const sortedCategories = new Set(Array.from(categories).sort());
         return sortedCategories;
     }
 </script>
@@ -122,19 +133,27 @@
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            <!-- {#if transition == false && insightsDividedIntoPages && insightsDividedIntoPages.length} -->
-            <!--     {#each insightsDividedIntoPages[$currentPage - 1] as insight} -->
-            <!--         {#if insight.postType === "other"} -->
-            <!--             <InsightCard {insight} /> -->
-            <!--         {:else if insight.postType == "product"} -->
-            <!--             <ProductCard product={insight} /> -->
-            <!--         {/if} -->
-            <!--     {/each} -->
-            <!-- {:else} -->
+            {#if insightsDividedIntoPages && insightsDividedIntoPages.length}
+                {#if !transitioning}
+                    {#each insightsDividedIntoPages[$currentPage - 1] as insight, i}
+                        <div class="card-contianer" in:fade={{ delay: 200 + (i * 75) }}>
+                            {#if insight.postType === "other"}
+                                <InsightCard {insight} />
+                            {:else if insight.postType == "product"}
+                                <ProductCard product={insight} />
+                            {/if}
+                        </div>
+                    {/each}
+                {:else}
+                    {#each Array(12) as _}
+                        <div class="blank-card" />
+                    {/each}
+                {/if}
+            {:else}
                 {#each Array(12) as _}
-                  <PlaceholderCard />
+                    <PlaceholderCard />
                 {/each}
-            <!-- {/if} -->
+            {/if}
         </ul>
     </div>
     <div class="pagination-container">
@@ -143,3 +162,11 @@
         {/if}
     </div>
 </section>
+
+<style lang="scss">
+    .blank-card {
+        background: transparent;
+        width: 100%;
+        aspect-ratio: 1;
+    }
+</style>

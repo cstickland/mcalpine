@@ -167,10 +167,11 @@ export function getProductsLevenshtein(products, term) {
 function getProductDistance(product, term) {
   let items = []
   let distances = []
-
   items.push(product.title.toLowerCase())
   product.customFields2.skus.forEach((sku) => {
-    items.push(sku.sku.toLowerCase())
+    if (sku.sku) {
+      items.push(sku.sku.toLowerCase())
+    }
   })
 
   items.forEach((item) => {

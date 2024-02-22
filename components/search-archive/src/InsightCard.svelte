@@ -13,7 +13,7 @@
                 }
             });
             if (identifier == "") {
-                identifier = insight.item.node.terms.nodes[0].name;
+                identifier = insight?.item?.node?.terms?.nodes[0]?.name || "";
             }
         }
     });
@@ -21,7 +21,7 @@
 
 <div
     class="insight-card mobile-show col-{insight.columnWidth}"
-    in:fade={{ duration: 300, delay: 300 }}>
+    >
     <div class="insight-card-text">
         {#if insight.item.postType == "page"}
             <h6 class="insight-identifier">Page</h6>

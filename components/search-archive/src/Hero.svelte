@@ -56,8 +56,8 @@
         border-radius: 50px;
         background-color: #e63128;
         color: #e63128;
-        animation: dot-flashing 1s infinite linear alternate;
-        animation-delay: 0.5s;
+        animation: dot-flashing 0.5s infinite linear alternate;
+        animation-delay: 0.25s;
     }
     .dot-flashing::before,
     .dot-flashing::after {
@@ -73,7 +73,7 @@
         border-radius: 50px;
         background-color: #e63128;
         color: #e63128;
-        animation: dot-flashing 1s infinite alternate;
+        animation: dot-flashing 0.5s infinite alternate;
         animation-delay: 0s;
     }
     .dot-flashing::after {
@@ -83,8 +83,8 @@
         border-radius: 50px;
         background-color: #e63128;
         color: #e63128;
-        animation: dot-flashing 1s infinite alternate;
-        animation-delay: 1s;
+        animation: dot-flashing 0.5s infinite alternate;
+        animation-delay: 0.5s;
     }
 
     @keyframes dot-flashing {
