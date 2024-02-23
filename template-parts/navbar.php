@@ -4,8 +4,6 @@
                             } ?>">
         <section class="desktop-menu container">
             <div class="nav-content">
-
-
                 <?php get_template_part("/template-parts/search-form") ?>
                 <div class="nav-container">
                     <div class="nav-links">
@@ -14,7 +12,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
         <section class="mobile-menu" id='mobile-menu'>
         </section>

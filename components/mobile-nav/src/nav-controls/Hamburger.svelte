@@ -9,7 +9,7 @@
     export let openClass;
 
     export let position;
-
+    
     function openKeyPressedHamburger(e) {
         switch (e.key) {
             case "Enter":

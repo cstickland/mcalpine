@@ -35,7 +35,7 @@
     "map": false
   },
   "scripts": {
-    "watch": "sass --style=compressed sass/style.scss:style.css blocks:blocks --watch",
+    "watch": "sass --style=compressed sass/style.scss:style.css blocks:blocks sass/login-style.scss:login-style.css --watch",
     "compile:css": "node-sass sass/ -o ./ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
     "compile:rtl": "rtlcss style.css style-rtl.css",
     "lint:scss": "wp-scripts lint-style 'sass/**/*.scss'",

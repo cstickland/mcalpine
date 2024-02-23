@@ -19,10 +19,23 @@
     } from "./stores.js";
 
     const graphQlUrl = "/graphql";
+    let scrollPosition;
 
     onMount(async () => {
         await getData(graphQlUrl, menus, query, productCategories);
+
+        document.addEventListener('scroll', () => {
+            if($open) {
+               document.documentElement.scrollTop = document.body.scrollTop = scrollPosition
+            }
+        })
     });
+
+    open.subscribe((value) => {
+        if(value) {
+            scrollPosition = document.documentElement.scrollTop
+        }
+    })
 
     let form;
     export let siteUrl = "";

@@ -1,0 +1,222 @@
+@import 'abstracts/abstracts';
+@import 'base/base';
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-3_Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-3_LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_Plain.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_PlainItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-7_Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-7_BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-9_Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('assets/fonts/TheSans-5_BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+
+.login {
+  background-color: #e63128;
+  font-family: TheSans, sans-serif;
+
+  #nav {
+    .wp-login-lost-password {
+      color: #fff;
+
+      &:hover {
+        color: $color__mcalpine-black;
+      }
+    }
+  }
+
+  #backtoblog {
+    a {
+      color: #fff;
+
+      &:hover {
+        color: $color__mcalpine-black;
+      }
+    }
+  }
+
+  #loginform {
+    background-color: #e63128;
+    color: #fff;
+    border-color: #dc514a;
+
+    input[type='text'],
+    input[type='password'] {
+      padding: 1.25rem 1.5rem;
+      border: solid 1px #cfcfcf;
+      border-radius: 0.5rem;
+      resize: none;
+      line-height: 1;
+      font-size: 1rem;
+      margin: 0;
+      &:hover {
+        box-shadow: 5px 15px 15px #00000000;
+        border: 1px solid #7caef2;
+      }
+
+      &:focus-visible {
+        box-shadow: 0px 0px 10px #7caef2bf;
+        border: 1px solid #7caef2;
+        outline: 0;
+      }
+    }
+
+    input[type='checkbox'] {
+      overflow: hidden;
+      border: solid 1px #fff;
+      width: 18px;
+      height: 18px;
+      appearance: none;
+      color: #fff;
+      outline: 0;
+      background: transparent;
+      position: relative;
+    }
+    input[type='checkbox']::before {
+      content: '';
+      transform: scale(0);
+      width: 17px;
+      height: 17px;
+      transition: 120ms transform ease-in-out;
+      background: radial-gradient(
+        ellipse at center,
+        #ffffff 0%,
+        #ffffff 37%,
+        #ffffff 37%,
+        $color__mcalpine-black 37%,
+        $color__mcalpine-black 38%
+      );
+      left: 3px;
+      top: 3px;
+      position: absolute;
+      transform-origin: center;
+    }
+    input[type='checkbox']:checked {
+      border: solid 1px #222222;
+    }
+    input[type='checkbox']:checked::before {
+      transform: scale(1);
+    }
+  }
+
+  .button.wp-hide-pw {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .button.button-primary.button-large,
+  #language-switcher .button {
+    font-size: 1rem;
+    padding: 1rem 1.6875rem;
+    line-height: 1;
+    text-align: center;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+
+    transition: all 100ms ease-in-out;
+  }
+
+  .button.button-primary.button-large {
+    background-color: $color__mcalpine-black;
+    border: solid 1px $color__mcalpine-black;
+    color: #ffffff;
+
+    &:hover {
+      background-color: $color__mcalpine-black-2;
+      border: solid 1px $color__mcalpine-black-2;
+    }
+  }
+  .user-pass-wrap {
+    padding-bottom: 1rem;
+  }
+
+  #language-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    .dashicons {
+      color: #fff;
+    }
+    .button {
+      background-color: transparent;
+      color: #fff;
+      border: solid 1px #fff;
+
+      &:hover {
+        background-color: #fff;
+        color: $color__mcalpine-black;
+        border-color: #fff;
+      }
+    }
+  }
+
+  #login h1 a,
+  .login h1 a {
+    height: 100px;
+    width: 300px;
+    background-size: 300px 100px;
+    background-repeat: no-repeat;
+    padding-bottom: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg id='Layer_2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 699.73 114.15' %3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23fff; stroke-width: 0px; %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_1-2'%3E%3Cg id='McAlpine_Logo_-_New'%3E%3Crect class='cls-1' x='465.55' width='36.42' height='114.15' /%3E%3Cpolygon class='cls-1' points='662.08 71.55 687.57 71.55 699.12 42.6 662.08 42.6 662.08 28.95 688.17 28.95 699.73 0 662.08 0 636.51 0 625.66 0 625.66 114.15 636.51 114.15 662.08 114.15 688.17 114.15 699.73 85.2 662.08 85.2 662.08 71.55' /%3E%3Cpolygon class='cls-1' points='346.9 0 310.48 0 310.48 114.15 328.69 114.15 346.9 114.15 362.39 114.15 373.94 82.9 346.9 82.9 346.9 0' /%3E%3Cpolygon class='cls-1' points='576.94 47.83 550.68 0 514.26 0 514.26 114.15 550.68 114.15 550.68 66.32 576.94 114.15 613.36 114.15 613.36 0 576.94 0 576.94 47.83' /%3E%3Cpath class='cls-1' d='m435.72,0h-54.1v114.15h36.42v-28.71h17.69c10.15,0,18.38-8.23,18.38-18.38V18.38c0-10.15-8.23-18.38-18.38-18.38Zm-8.26,48.73c0,4.3-3.36,8.35-9.42,8.35v-31.16c4.71,0,9.42,3.26,9.42,7.96v14.85Z' /%3E%3Cpath class='cls-1' d='m257.76,0h-36.42l-16.6,114.15h36.42l2.04-14.06h18.12l2.04,14.06h36.42L283.18,0h-25.43Zm-11.81,81.19l6.31-43.39,6.31,43.39h-12.62Z' /%3E%3Cpolygon class='cls-1' points='125.83 0 108.15 0 89.42 0 80.58 60.76 71.75 0 53.02 0 35.33 0 16.6 0 0 114.15 36.42 114.15 44.17 60.81 51.93 114.15 72.82 114.15 88.35 114.15 109.24 114.15 116.99 60.81 124.75 114.15 161.17 114.15 144.57 0 125.83 0' /%3E%3Cpath class='cls-1' d='m161.31,17.91h0v33.7h0c0,9.89,8.02,17.91,17.91,17.91h23.01v-17.91h-3.9c-5.37,0-9.72-4.35-9.72-9.72v-14.26c0-5.37,4.35-9.72,9.72-9.72h3.9V0h-23.01c-9.89,0-17.91,8.02-17.91,17.91Z' /%3E%3C/g %3E%3C/g %3E%3C/svg%3E%0A");
+  }
+
+  .privacy-policy-link {
+    color: #fff;
+
+    &:hover {
+      color: $color__mcalpine-black;
+    }
+  }
+}
