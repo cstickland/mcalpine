@@ -1,5 +1,6 @@
 <script>
     export let searchTerm = "";
+    export let results;
 
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
@@ -17,8 +18,6 @@
         currentPage,
     } from "./stores.js";
     import {
-        getQuery,
-        getData,
         determineProductResults,
         getProductsLevenshtein,
         getOthersLevenshtein,
@@ -32,8 +31,7 @@
 
     onMount(async () => {
         let productsWithDistances = [];
-        const query = getQuery(searchTerm);
-        const data = await getData(query);
+        const data = results;
         const productResults = determineProductResults(data);
         if (productResults && productResults.length > 0) {
             productsWithDistances = getProductsLevenshtein(
