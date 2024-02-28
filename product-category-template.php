@@ -28,7 +28,7 @@ $blocks = parse_blocks($post->post_content);
         target: categoryArchive,
         props: {
             archiveType: "categories",
-            postsPerPage: 12,
+            postsPerPage: 48,
         }
     })
 </script>

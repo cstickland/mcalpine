@@ -13,16 +13,23 @@
         setTimeout(() => {
             const urlParams = new URLSearchParams(window.location.search);
             const myParam = urlParams.get("id");
+
             if (myParam == id) {
                 open = true;
-
                 accordionElement.scrollIntoView({ behaviour: "smooth" });
             }
         }, 300);
     });
 </script>
 
-<div class="accordion {open ? 'open' : ''}" {id} bind:this={accordionElement}>
+<div
+    itemscope
+    itemprop="mainEntity"
+    itemtype="https://schema.org/Question"
+    class="accordion {open ? 'open' : ''}"
+    {id}
+    bind:this={accordionElement}
+>
     <div class="open-gradient" />
     <div
         class="accordion-question-container"
@@ -31,15 +38,22 @@
         }}
         on:keydown
     >
-        <h5 class="accordion-question">{question}</h5>
+        <h5 class="accordion-question" itemprop="name">{question}</h5>
+
         <div class="accordion-toggle-icon">
             <div class="vertical-line" />
             <div class="horizontal-line" />
         </div>
     </div>
     {#if open}
-        <div class="accordion-answer" transition:slide>
-            {@html answer}
+        <div
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+            class="accordion-answer"
+            transition:slide
+        >
+            <div itemprop="text">{@html answer}</div>
         </div>
     {/if}
 </div>

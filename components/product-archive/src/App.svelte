@@ -11,7 +11,6 @@
     import Filters from "./Filters.svelte";
     import ActiveFilters from "./ActiveFilters.svelte";
     import { onMount } from "svelte";
-
     import {
         parentFilters,
         childFilters,
@@ -19,11 +18,6 @@
         postsPerPage,
     } from "./stores.js";
 
-    onMount(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        let currentPageTemp = urlParams.get("page") || 1;
-        currentPage.set(currentPageTemp);
-    });
     let allProductsList;
     let gridStyle = true;
     let openFilters = true;
@@ -76,6 +70,14 @@
             return $parentFilters.has(product.categoryId);
         });
     }
+    onMount(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentPageTemp = urlParams.get("page") || 1;
+        currentPage.set(currentPageTemp);
+        wrapGrid(gridElement)
+
+    });
+
 </script>
 
 <section class="product-archive {filtersClass} {filtersClosedClass}">

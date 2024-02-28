@@ -1,0 +1,22 @@
+{
+    "key": "ui_options_page_65df415713d0e",
+    "title": "Archives",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Archives",
+    "menu_slug": "archives",
+    "parent_slug": "theme-general-settings",
+    "advanced_configuration": 0,
+    "icon_url": "",
+    "menu_title": "",
+    "position": "",
+    "redirect": false,
+    "description": "",
+    "update_button": "Update",
+    "updated_message": "Options Updated",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": 0,
+    "modified": 1709130105
+}

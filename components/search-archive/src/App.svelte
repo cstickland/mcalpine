@@ -1,16 +1,16 @@
 <script>
     export let searchTerm = "";
     export let results;
+    export let postsPerPage = 12;
 
-    import { onMount } from "svelte";
-    import { fade } from "svelte/transition";
     import InsightCard from "./InsightCard.svelte";
     import ProductCard from "./ProductCard.svelte";
     import PlaceholderCard from "./PlaceholderCard.svelte";
     import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
-
+    import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
     import {
         filters,
         divideItemsIntoPages,
@@ -18,12 +18,13 @@
         currentPage,
     } from "./stores.js";
     import {
+        getQuery,
+        getData,
         determineProductResults,
         getProductsLevenshtein,
         getOthersLevenshtein,
     } from "./functions.js";
 
-    let postsPerPage = 12;
     let categories;
     let totalResults = "";
     let firstLoad = true;
@@ -31,7 +32,8 @@
 
     onMount(async () => {
         let productsWithDistances = [];
-        const data = results;
+        const query = getQuery(searchTerm);
+        const data = await getData(query);
         const productResults = determineProductResults(data);
         if (productResults && productResults.length > 0) {
             productsWithDistances = getProductsLevenshtein(
@@ -134,7 +136,10 @@
             {#if insightsDividedIntoPages && insightsDividedIntoPages.length}
                 {#if !transitioning}
                     {#each insightsDividedIntoPages[$currentPage - 1] as insight, i}
-                        <div class="card-contianer" in:fade={{ delay: 200 + (i * 75) }}>
+                        <div
+                            class="card-contianer"
+                            in:fade={{ delay: 200 + i * 75 }}
+                        >
                             {#if insight.postType === "other"}
                                 <InsightCard {insight} />
                             {:else if insight.postType == "product"}

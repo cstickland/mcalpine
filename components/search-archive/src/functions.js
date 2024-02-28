@@ -1,4 +1,107 @@
+export function getQuery(searchTerm) {
+  return `{
+      posts(where: {search: "${searchTerm}"}, first: 1000) {
+        edges {
+          node {
+            link
+            title
+            featuredImage {
+              node {
+                sourceUrl(size: MEDIUM)
+                altText
+              }
+            }
+            terms {
+              nodes {
+                name
+              }
+            }
+            postId
+          }
+        }
+      }
+      productCategories(where: {search: "${searchTerm}"}, first: 1000) {
+        edges {
+          node {
+            name
+            products(first: 100) {
+              nodes {
+                customFields2 {
+                  skus {
+                    sku
+                    productImages {
+                      productImage {
+                        mediaItemUrl
+                      }
+                    }
+                  }
+                }
+                link
+                title
+                terms {
+                  nodes {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      products(where: {search: "${searchTerm}"}, first: 1000) {
+        nodes {
+          customFields2 {
+            skus {
+              sku
+              productImages {
+                productImage {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+          link
+          title
+          terms {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+      pages(where: {search: "${searchTerm}"}, first: 100) {
+        edges {
+          node {
+            title
+            link
+            featuredImage {
+              node {
+                sourceUrl(size: MEDIUM)
+              }
+            }
+          }
+        }
+      }
+    }`
+}
+
+export async function getData(query) {
+  const fetchPromise = await fetch('/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: query,
+    }),
+  })
+
+  const response = await fetchPromise.json()
+  return response
+}
+
 // Sort an array by closest comparison to string
+
 export function levenshteinDistance(a, b) {
   // Create a 2D array to store the distances
   let distances = new Array(a.length + 1)
