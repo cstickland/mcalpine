@@ -1,7 +1,9 @@
 <script>
-    import Card from "./Card.svelte";
-    import Pagination from "./Pagination.svelte";
-    import Filters from "./Filters.svelte";
+    import Pagination from "./pagination/Pagination.svelte";
+    import Filters from "./filters/Filters.svelte";
+    import LoadMore from "./pagination/LoadMore.svelte";
+    import FiltersToggle from "./filters/FiltersToggle.svelte";
+    import Grid from "./card-grid/Grid.svelte";
 
     import {
         getData,
@@ -9,16 +11,17 @@
         itemsDividedIntoPages,
         query,
         allItems,
-        filters,
         currentPage,
     } from "./stores.js";
+    import { filters } from "./filters.js";
     import { onMount } from "svelte";
 
     export let postsPerPage;
+    export let paginationType = 2;
 
     let transition = false;
-    export let showFilters = true;
     let categories = new Set();
+    let filtersOpen = false;
 
     onMount(async () => {
         let items = [];
@@ -54,89 +57,65 @@
     });
 
     allItems.subscribe((value) => {
-        itemsDividedIntoPages.set(divideItemsIntoPages(
-            postsPerPage,
-            value,
-            currentPage,
-            $filters
-        ));
-    });
-
-    filters.subscribe((value) => {
-        itemsDividedIntoPages.set(divideItemsIntoPages(
-            postsPerPage,
-            $allItems,
-            currentPage,
-            value
-        ));
+        itemsDividedIntoPages.set(
+            divideItemsIntoPages(postsPerPage, value, currentPage, $filters)
+        );
     });
 
     $: totalPages = $itemsDividedIntoPages.length;
     let currentPageItems;
 
     itemsDividedIntoPages.subscribe((value) => {
-        currentPageItems = value[$currentPage - 1]
-    })
+        currentPageItems = value[$currentPage - 1];
+    });
 
     currentPage.subscribe((value) => {
-        currentPageItems = $itemsDividedIntoPages[value - 1] || [];
+        if (paginationType === 1) {
+            currentPageItems = $itemsDividedIntoPages[value - 1] || [];
+        }
+        if (paginationType === 2) {
+            let itemsToDisplay = [];
+            for (let i = 0; i < value && i < totalPages; i++) {
+                itemsToDisplay.push(...$itemsDividedIntoPages[i]);
+            }
+            currentPageItems = itemsToDisplay;
+        }
     });
 </script>
 
-<div class="insight-archive-filters-container">
-    {#if showFilters && [...categories].length}
-        <Filters {categories}  />
+<section class="download-archive {filtersOpen ? 'filters-open' : ''}">
+    <FiltersToggle bind:filtersOpen />
+    {#if filtersOpen}
+        <Filters {categories} {postsPerPage} />
     {/if}
-</div>
-<section class="download-archive">
-    <div class="download-archive-grid-container">
-        <ul class="download-archive-grid mobile-two-column">
-            {#if transition == false}
-                {#each currentPageItems as item}
-                    <Card {...item} />
-                {/each}
-            {/if}
-        </ul>
-    </div>
+    <Grid {currentPageItems} />
     <div class="pagination-container">
         {#if totalPages > 1}
-            <Pagination  bind:transition {totalPages} />
+            <Pagination bind:transition {totalPages} />
         {/if}
+        <LoadMore />
     </div>
 </section>
 
 <style lang="scss">
     @import "./colors.scss";
 
-    .download-archive-grid-container {
+    .download-archive {
         @include container-large;
-        container-type: inline-size;
-        container-name: download-grid;
-    }
-    .download-archive-grid {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        width: 100%;
         display: grid;
-        grid-template-columns: 1fr;
-    }
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "filters active active sort"
+            "results results results results"
+            "pagination pagination pagination pagination";
 
-    @supports (container-type: inline-size) {
-        @container download-grid (min-width: 650px) {
-            .download-archive-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        @container download-grid (min-width: 1000px) {
-            .download-archive-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @container download-grid (min-width: 1400px) {
-            .download-archive-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        &.filters-open {
+            grid-template-areas:
+                "filters active active sort"
+                "filters-open results results results"
+                "pagination pagination pagination pagination";
         }
     }
 </style>

@@ -31,7 +31,7 @@
 
 
 <style lang="scss">
-    @import './colors.scss';
+    @import '../colors.scss';
     svg {
         height: 1.25rem;
         * {

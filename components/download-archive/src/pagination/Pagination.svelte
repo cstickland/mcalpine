@@ -3,20 +3,18 @@
     export let totalPages;
     export let transition;
 
-    import { currentPage } from "./stores.js";
+    import { currentPage } from "../stores.js";
 
     function setCurrentcurrentPage(newPage) {
         const url = new URL(location);
         url.searchParams.set("pagination", newPage);
         history.pushState({}, "", url);
         animateScroll.scrollTo({ element: "#category-archive", duration: 200 });
-        // setTimeout(() => {
         transition = true;
         currentPage.set(newPage);
         setTimeout(() => {
             transition = false;
         }, 10);
-        // }, 600);
     }
 </script>
 

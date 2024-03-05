@@ -4,7 +4,8 @@
     export let imageAlt = "";
     export let title;
     export let date;
-    export let fileType;
+    
+    let fileType = fileUrl.split(/[#?]/)[0].split('.').pop().trim().toUpperCase();
 
     import DownloadIcon from "./DownloadSvg.svelte";
     let downloaded = false;
@@ -109,7 +110,7 @@
 </li>
 
 <style lang="scss">
-    @import "./colors.scss";
+    @import "../colors.scss";
     .download-card-container {
         border: solid 1px #f4f4f4;
         position: relative;

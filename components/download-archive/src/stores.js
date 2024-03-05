@@ -1,8 +1,7 @@
 import { writable } from 'svelte/store'
 
 export const allItems = writable([])
-
-export const filters = writable(new Set())
+export const postsPerPage = writable(48)
 export const currentPage = writable(1)
 export const itemsDividedIntoPages = writable([])
 
@@ -24,12 +23,10 @@ export const query = `{
           }
         }
         downloadFields {
-          fileType
           fileDownload {
             mediaItemUrl
             dateGmt
           }
-          fileMessage
         }
       }
     }
