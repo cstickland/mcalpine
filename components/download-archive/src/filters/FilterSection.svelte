@@ -3,15 +3,16 @@
     export let title = "title";
     export let items = [];
     export let filters = new Set();
-
     let openCategory = false;
 
     function toggleFilter(id) {
-        if (filters.has(id)) {
-            filters.delete(id);
+        if ($filters.has(id)) {
+            if ($filters.delete(id)) {
+                filters.set($filters);
+            }
             return;
         }
-        filters.add(id);
+        filters.set($filters.add(id));
     }
 </script>
 
@@ -60,14 +61,18 @@
             class="product-archive-category-list"
             transition:slide={{ axis: "y", duration: 300 }}
         >
-            {#each items as item}
+            {#each [...items] as item}
                 <li
                     on:click={() => {
                         toggleFilter(item.id);
                     }}
                     on:keydown
                 >
-                    <div class="category-toggle unchecked checked">
+                    <div
+                        class="category-toggle {$filters.has(item.id)
+                            ? 'checked'
+                            : 'unchecked'}"
+                    >
                         <div class="toggle-circle" />
                     </div>
                     {@html item.name}

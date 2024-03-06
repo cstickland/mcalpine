@@ -36,7 +36,7 @@
 </ul>
 
 <style lang="scss">
-    @import "./colors.scss";
+    @import "../colors.scss";
 
     ul {
         grid-area: active;

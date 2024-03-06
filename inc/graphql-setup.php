@@ -12,7 +12,11 @@ add_filter('register_taxonomy_args', function ($args, $taxonomy) {
         $args['graphql_single_name'] = 'downloadCategory';
         $args['graphql_plural_name'] = 'downloadCategories';
     }
-
+    if ('download_types' === $taxonomy) {
+        $args['show_in_graphql'] = true;
+        $args['graphql_single_name'] = 'downloadType';
+        $args['graphql_plural_name'] = 'downloadTypes';
+    }
 
     return $args;
 }, 10, 2);

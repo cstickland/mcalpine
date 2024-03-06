@@ -13,14 +13,13 @@
         allItems,
         currentPage,
     } from "./stores.js";
-    import { filters } from "./filters.js";
+    import { allCategories, allFileTypes, allDownloadTypes } from './filters.js'
     import { onMount } from "svelte";
 
     export let postsPerPage;
     export let paginationType = 2;
 
     let transition = false;
-    let categories = new Set();
     let filtersOpen = false;
 
     onMount(async () => {
@@ -41,24 +40,28 @@
                 imageAlt: download?.node?.featuredImage?.node?.altText,
                 fileUrl:
                     download?.node?.downloadFields?.fileDownload?.mediaItemUrl,
-                message: download?.node?.downloadFields?.fileMessage,
                 date: date,
-                fileType: download?.node?.downloadFields?.fileType,
+                fileType: download?.node?.downloadFields?.fileDownload?.mediaItemUrl?.split(/[#?]/)[0].split('.').pop().trim(),
                 categories: download?.node?.downloadCategories?.nodes,
+                downloadType: download?.node?.downloadTypes?.nodes
+
             };
             items.push(downloadObject);
         });
         allItems.set(items);
+        console.log($allItems) 
         $allItems.forEach((item) => {
             item.categories.forEach((category) => {
-                categories.add(category.name);
+                $allCategories.add({name: category.name, id: category.id});
             });
+            $allFileTypes.add({name: item.fileUrl.split(/[#?]/)[0].split('.').pop().trim().toUpperCase(), id: item.fileUrl.split(/[#?]/)[0].split('.').pop().trim()})
         });
+        console.log($allFileTypes) 
     });
 
     allItems.subscribe((value) => {
         itemsDividedIntoPages.set(
-            divideItemsIntoPages(postsPerPage, value, currentPage, $filters)
+            divideItemsIntoPages(postsPerPage, value, currentPage, new Set())
         );
     });
 
@@ -86,7 +89,7 @@
 <section class="download-archive {filtersOpen ? 'filters-open' : ''}">
     <FiltersToggle bind:filtersOpen />
     {#if filtersOpen}
-        <Filters {categories} {postsPerPage} />
+        <Filters bind:categories={$allCategories} bind:fileTypes={$allFileTypes} {postsPerPage} />
     {/if}
     <Grid {currentPageItems} />
     <div class="pagination-container">

@@ -14,6 +14,7 @@ export const query = `{
         downloadCategories {
           nodes {
             name
+            id
           }
         }
         featuredImage {
@@ -26,6 +27,13 @@ export const query = `{
           fileDownload {
             mediaItemUrl
             dateGmt
+          }
+        }
+        databaseId
+        downloadTypes {
+          nodes {
+            id
+            name
           }
         }
       }

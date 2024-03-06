@@ -1,30 +1,45 @@
 <script>
     import FiltersSection from './FilterSection.svelte'
-    import {filters} from '../filters.js';
-    import {itemsDividedIntoPages, divideItemsIntoPages, allItems, currentPage} from '../stores.js';
+    import { onMount } from 'svelte'
+    import { activeCategoryFilters, activeFileTypeFilters, activeDownloadTypeFilters } from '../filters.js'
     export let postsPerPage;
 
     export let categories;
     export let fileTypes;
     export let downloadTypes;
     
-    let filtersArray = [categories, fileTypes, downloadTypes];
+    activeCategoryFilters.subscribe((value) => {
+        console.log(value)
+    })
+    activeFileTypeFilters.subscribe((value) => {
+        console.log(value)
+    })
+    activeDownloadTypeFilters.subscribe((value) => {
+        console.log(value)
+    })
 
-    filters.subscribe((value) => {
-        itemsDividedIntoPages.set(
-            divideItemsIntoPages(postsPerPage, $allItems, currentPage, value)
-        );
-    });
+
+    onMount(() => {
+        
+    })
 </script>
 
 <div class="filters">
-    {#each filtersArray as filterSection}
         <FiltersSection
-            title={filterSection.title}
-            items={filterSection.items}
-            bind:filters={filterSection.filters}
+            title='Download Type'
+            items={downloadTypes}
+            filters={activeDownloadTypeFilters}
         />
-    {/each}
+        <FiltersSection
+            title='Categories'
+            items={categories}
+            filters={activeCategoryFilters}
+        />
+        <FiltersSection
+            title='File Type'
+            items={fileTypes}
+            filters={activeFileTypeFilters}
+        />
 </div>
 
 <style lang="scss">
