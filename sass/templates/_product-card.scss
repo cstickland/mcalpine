@@ -95,6 +95,8 @@
 }
 
 .product-card {
+  display: block;
+  text-decoration: none;
   transform-origin: bottom left;
   animation-duration: 350ms;
   position: relative;

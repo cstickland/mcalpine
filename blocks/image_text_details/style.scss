@@ -124,6 +124,7 @@
       display: none;
     }
     .text-container {
+      padding: clamp(2rem, 0.944rem + 3.38vw, 5rem);
       p {
         margin-bottom: 2rem;
         max-width: 405px;
@@ -177,6 +178,7 @@
         }
       }
       .text-container {
+        padding: 50px;
         min-width: 380px;
         h2 {
           max-width: 420px;

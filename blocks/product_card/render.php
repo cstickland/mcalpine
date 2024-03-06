@@ -9,7 +9,7 @@ endif;
 
 <?php if (!is_null(get_post($product_id))) { ?>
     <div class="product-card-container">
-        <div <?php echo get_block_wrapper_attributes(['class' => 'product-card']); ?> id="query-<?php the_title(); ?>">
+        <a href='<?php echo get_permalink($product_id); ?>' <?php echo get_block_wrapper_attributes(['class' => 'product-card']); ?> id="query-<?php the_title(); ?>">
             <div class="product-block-image">
                 <?php $count = 0; ?>
                 <?php if (have_rows('skus', $product_id)) :
@@ -17,9 +17,9 @@ endif;
                         if (have_rows('product_images')) :
                             while (have_rows('product_images')) : the_row(); ?>
                                 <?php if ($count == 0) { ?>
-                                    <a class="product-image-link" href="<?php echo get_permalink($product_id); ?>">
+                                    <div class="product-image-link" href="<?php echo get_permalink($product_id); ?>">
                                         <img src="<?php the_sub_field('product_image'); ?>" />
-                                    </a>
+                                    </div>
                                 <?php } ?>
                 <?php $count++;
                             endwhile;
@@ -40,7 +40,6 @@ endif;
                     </div>
                     <span class="sku-count-small">SKUs</span>
                 </div>
-                <a class="product-card-link" href="<?php echo get_permalink($product_id); ?>">></a>
             </div>
             <div class="sku-list-container">
                 <div class="product-title"><?php echo get_the_title($product_id); ?></div>
@@ -51,9 +50,7 @@ endif;
                     if (have_rows('skus', $product_id)) :
                         while (have_rows('skus', $product_id)) : the_row(); ?>
                             <span>
-                                <a href="<?php echo get_permalink($product_id) . '/?sku=' . get_sub_field('sku'); ?>">
-                                    <?php the_sub_field('sku'); ?>
-                                </a>
+                                <?php the_sub_field('sku'); ?>
                             </span>
                     <?php $i++;
                         endwhile;
@@ -69,13 +66,9 @@ endif;
                         </g>
                     </svg>
                 </div>
-                <a class="product-card-link" href="<?php echo get_permalink($product_id); ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245">
-                        <path d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z" fill="#fff" />
-                    </svg>
-                </a>
+
             </div>
-        </div>
+        </a>
         <a class="product-title-small" href="<?php echo get_permalink($product_id); ?>">
             <?php echo get_the_title($product_id); ?>
         </a>

@@ -93,7 +93,7 @@ $term = get_queried_object();
         target: archiveItems,
         props: {
             allProducts: allProducts,
-            showFilters: true,
+            showFilters: false,
 
         }
     })
