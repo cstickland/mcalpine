@@ -10,9 +10,9 @@
             if ($filters.delete(id)) {
                 filters.set($filters);
             }
-            return;
+        } else {
+            filters.set($filters.add(id));
         }
-        filters.set($filters.add(id));
     }
 </script>
 
@@ -64,12 +64,12 @@
             {#each [...items] as item}
                 <li
                     on:click={() => {
-                        toggleFilter(item.id);
+                        toggleFilter(item);
                     }}
                     on:keydown
                 >
                     <div
-                        class="category-toggle {$filters.has(item.id)
+                        class="category-toggle {$filters.has(item)
                             ? 'checked'
                             : 'unchecked'}"
                     >
@@ -104,6 +104,7 @@
             background-color: #c4cad114;
             color: $color__mcalpine-black;
             padding: 0.875rem 1.5rem;
+            margin-right: 1.5rem;
             font-size: 1.125rem;
             cursor: pointer;
             transition: all 100ms ease-in-out;
@@ -127,6 +128,7 @@
             padding-bottom: 1rem;
             cursor: pointer;
             padding: 1.25rem;
+            padding-left: 0;
 
             h5 {
                 margin: 0;

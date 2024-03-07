@@ -1,44 +1,27 @@
 <script>
     import FiltersSection from './FilterSection.svelte'
-    import { onMount } from 'svelte'
-    import { activeCategoryFilters, activeFileTypeFilters, activeDownloadTypeFilters } from '../filters.js'
-    export let postsPerPage;
+    import { allActiveFilters } from '../filters.js'
 
     export let categories;
     export let fileTypes;
     export let downloadTypes;
-    
-    activeCategoryFilters.subscribe((value) => {
-        console.log(value)
-    })
-    activeFileTypeFilters.subscribe((value) => {
-        console.log(value)
-    })
-    activeDownloadTypeFilters.subscribe((value) => {
-        console.log(value)
-    })
-
-
-    onMount(() => {
-        
-    })
 </script>
 
 <div class="filters">
         <FiltersSection
             title='Download Type'
             items={downloadTypes}
-            filters={activeDownloadTypeFilters}
+            filters={allActiveFilters}
         />
         <FiltersSection
             title='Categories'
             items={categories}
-            filters={activeCategoryFilters}
+            filters={allActiveFilters}
         />
         <FiltersSection
             title='File Type'
             items={fileTypes}
-            filters={activeFileTypeFilters}
+            filters={allActiveFilters}
         />
 </div>
 

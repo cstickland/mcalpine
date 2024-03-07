@@ -1,14 +1,15 @@
 <script>
-    export let currentPageItems = [];
-    
+   import { postsPerPage, currentPage } from "../stores"; 
     import Card from "./Card.svelte";
+    import {filteredItems} from '../filters.js'
 </script>
-
 
 <div class="download-archive-grid-container">
     <ul class="download-archive-grid mobile-two-column">
-        {#each currentPageItems as item}
-            <Card {...item} />
+        {#each [...$filteredItems] as item, i}
+            {#if i < $postsPerPage * $currentPage}
+                <Card {...item} />
+            {/if}
         {/each}
     </ul>
 </div>

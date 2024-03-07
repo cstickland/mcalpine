@@ -1,15 +1,14 @@
 <script>
-    import { fade } from 'svelte/transition'
     export let product = [];
     let open = false;
     $: openClass = open ? "open" : "closed";
 </script>
 
-<div class="product-card-container animate" >
-    <div class="product-card {openClass}" >
+<div class="product-card-container">
+    <a href={product.link} class="product-card {openClass}" >
         <div class="product-block-image">
-            <a class="product-image-link" href={product.link}><img src={product?.item?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl} alt="" /></a>
-            <div class="product-title">{@html product.item.title}</div>
+            <div class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></div>
+            <div class="product-title">{@html product.title}</div>
             <div
                 class="sku-count"
                 on:click={() => {
@@ -18,9 +17,9 @@
                 on:keydown
             >
                 <span class="sku-count-default">
-                    {product.item.customFields2.skus.length}
-                    {#if product.item.customFields2.skus.length == 1}
-                        SKU{/if}{#if product.item.customFields2.skus.length > 1} SKUs{/if}
+                    {product.skus.length}
+                    {#if product.skus.length == 1}
+                        SKU{/if}{#if product.skus.length > 1} SKUs{/if}
                 </span>
                 <span class="sku-count-small">SKUs</span>
             </div>
@@ -39,13 +38,13 @@
         </div>
         <div class="sku-list-container">
             <div class="sku-list">
-                {#each product.item.customFields2.skus as sku}
+                {#each product.skus as sku}
                     <span>
-                        <a href={`${product.item.link}/?sku=${sku.sku}`}>{sku.sku}</a>
+                        {sku}
                     </span>
                 {/each}
             </div>
-            <div class="product-title">{@html product.item.title}</div>
+            <div class="product-title">{@html product.title}</div>
             <div
                 class="sku-close"
                 on:click={() => {
@@ -68,7 +67,7 @@
                     ></svg
                 >
             </div>
-            <a class="product-card-link" href={product.item.link}>
+            <a class="product-card-link" href={product.link}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13.922"
@@ -81,6 +80,6 @@
                 >
             </a>
         </div>
-    </div>
-    <a href={product.item.link} class="product-title-small">{@html product.item.title}</a>
+    </a>
+    <a href={product.link} class="product-title-small">{@html product.title}</a>
 </div>

@@ -4,8 +4,8 @@
     export let imageAlt = "";
     export let title;
     export let date;
+    export let fileType;
     
-    let fileType = fileUrl.split(/[#?]/)[0].split('.').pop().trim().toUpperCase();
 
     import DownloadIcon from "./DownloadSvg.svelte";
     let downloaded = false;
@@ -63,7 +63,7 @@
                                     ></g
                                 ></svg
                             >
-                            {fileType}
+                            {fileType.toUpperCase()}
                         </div>
                     </div>
                 </div>

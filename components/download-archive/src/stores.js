@@ -3,7 +3,6 @@ import { writable } from 'svelte/store'
 export const allItems = writable([])
 export const postsPerPage = writable(48)
 export const currentPage = writable(1)
-export const itemsDividedIntoPages = writable([])
 
 export const query = `{
   downloads(first: 1000) {
@@ -56,37 +55,31 @@ export async function getData(query) {
   return response
 }
 
-export function divideItemsIntoPages(
-  postsPerPage,
-  items,
-  currentPage,
-  filters
-) {
-  let page = []
-  let pagesArray = []
+export async function setUp() {
+  let items = []
+  let data = await getData(query)
+  const urlParams = new URLSearchParams(window.location.search)
+  currentPage.set(parseInt(urlParams.get('pagination')) || 1)
 
-  items.forEach((item) => {
-    let addItem = false
-    if (filters.size == 0) {
-      addItem = true
+  data.data.downloads.edges.forEach((download) => {
+    let date = new Date(
+      Date.parse(download?.node?.downloadFields?.fileDownload?.dateGmt)
+    )
+    let downloadObject = {
+      title: download.node.title,
+      imageUrl: download?.node?.featuredImage?.node?.sourceUrl,
+      imageAlt: download?.node?.featuredImage?.node?.altText,
+      fileUrl: download?.node?.downloadFields?.fileDownload?.mediaItemUrl,
+      date: date,
+      fileType: download?.node?.downloadFields?.fileDownload?.mediaItemUrl
+        ?.split(/[#?]/)[0]
+        .split('.')
+        .pop()
+        .trim(),
+      categories: download?.node?.downloadCategories?.nodes,
+      downloadTypes: download?.node?.downloadTypes?.nodes,
     }
-    item.categories.forEach((category) => {
-      if (filters.has(category.name)) {
-        addItem = true
-      }
-    })
-    if (addItem) {
-      page.push(item)
-
-      if (page.length == postsPerPage) {
-        pagesArray.push(page)
-        page = []
-        return
-      }
-    }
+    items.push(downloadObject)
   })
-  if (page.length > 0) {
-    pagesArray.push(page)
-  }
-  return pagesArray
+  return items
 }

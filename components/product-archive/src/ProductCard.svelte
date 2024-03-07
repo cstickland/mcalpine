@@ -5,9 +5,9 @@
 </script>
 
 <div class="product-card-container">
-    <div class="product-card {openClass}" >
+    <a href={product.link} class="product-card {openClass}" >
         <div class="product-block-image">
-            <a class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></a>
+            <div class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></div>
             <div class="product-title">{@html product.title}</div>
             <div
                 class="sku-count"
@@ -40,7 +40,7 @@
             <div class="sku-list">
                 {#each product.skus as sku}
                     <span>
-                        <a href={`${product.link}/?sku=${sku}`}>{sku}</a>
+                        {sku}
                     </span>
                 {/each}
             </div>
@@ -80,6 +80,6 @@
                 >
             </a>
         </div>
-    </div>
+    </a>
     <a href={product.link} class="product-title-small">{@html product.title}</a>
 </div>
