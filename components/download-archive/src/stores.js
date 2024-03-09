@@ -52,6 +52,7 @@ export async function getData(query) {
   })
 
   const response = await fetchPromise.json()
+  console.log(response)
   return response
 }
 

@@ -51,7 +51,7 @@
                     .split(".")
                     .pop()
                     .trim()
-                    .toUpperCase(),
+                    .toUpperCase() || '',
                 id: item.fileUrl.split(/[#?]/)[0].split(".").pop().trim(),
                 filterType: "fileType",
             }));
