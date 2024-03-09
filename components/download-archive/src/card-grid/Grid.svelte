@@ -1,12 +1,38 @@
 <script>
-   import { postsPerPage, currentPage } from "../stores"; 
+    import { postsPerPage, currentPage } from "../stores";
     import Card from "./Card.svelte";
-    import {filteredItems} from '../filters.js'
+    import { filteredItems, sortBy } from "../filters.js";
+
+    let items = [...$filteredItems];
+
+    filteredItems.subscribe((value) => {
+        items = sortItems($sortBy, value)
+    });
+
+    sortBy.subscribe((value) => {
+        items = sortItems(value, $filteredItems)
+    });
+
+    function sortItems(sortNumber, items) {
+        if(sortNumber === 1) {
+            return [...items].sort((a,b) => { return b.date - a.date })
+        }
+        if(sortNumber === 2) {
+            return [...items].sort((a,b) => { return a.date - b.date })
+        }
+        if (sortNumber === 3) {
+            return [...items].sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+        }
+        if (sortNumber === 4) {
+            return [...items].sort((a,b) => (a.title > b.title) ? -1 : ((b.title > a.title) ? 1 : 0))
+        }
+    }
+
 </script>
 
 <div class="download-archive-grid-container">
     <ul class="download-archive-grid mobile-two-column">
-        {#each [...$filteredItems] as item, i}
+        {#each items as item, i}
             {#if i < $postsPerPage * $currentPage}
                 <Card {...item} />
             {/if}
@@ -15,7 +41,7 @@
 </div>
 
 <style lang="scss">
-    @import '../colors.scss';
+    @import "../colors.scss";
 
     .download-archive-grid-container {
         container-type: inline-size;
@@ -28,7 +54,7 @@
         padding: 0;
         list-style: none;
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
 
@@ -50,6 +76,4 @@
             }
         }
     }
-
 </style>
-

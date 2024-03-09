@@ -5,18 +5,20 @@ export const allFileTypes = writable(new Set())
 export const allDownloadTypes = writable(new Set())
 export const allActiveFilters = writable(new Set())
 export const filteredItems = writable(new Set())
+export const sortBy = writable(3)
+export const searchTerm = writable('')
 
-export function filterItems(filters, items) {
+export function filterItems(filters, items, searchTerm) {
   let filteredItems = new Set()
   items.forEach((item) => {
-    if (isItemFilterMatch(filters, item)) {
+    if (isItemFilterMatch(filters, item, searchTerm)) {
       filteredItems.add(item)
     }
   })
   return filteredItems
 }
 
-function isItemFilterMatch(filters, item) {
+function isItemFilterMatch(filters, item, searchTerm) {
   let isCategoryMatch = false
   let isDownloadTypeMatch = false
   let isFileTypeMatch = false
@@ -25,6 +27,14 @@ function isItemFilterMatch(filters, item) {
   let fileTypeFilters = []
   let downloadTypeFilters = []
 
+  if (searchTerm != '') {
+    if (
+      !item.fileUrl.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      return false
+    }
+  }
   // separate filters by type
   filters.forEach((filter) => {
     if (filter.filterType === 'category') {

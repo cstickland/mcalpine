@@ -4,10 +4,10 @@
     import LoadMore from "./pagination/LoadMore.svelte";
     import FiltersToggle from "./filters/FiltersToggle.svelte";
     import Grid from "./card-grid/Grid.svelte";
+    import Sort from "./filters/Sort.svelte";
     import { onMount } from "svelte";
     import {
         allItems,
-        currentPage,
         setUp,
     } from "./stores.js";
     import {
@@ -16,7 +16,8 @@
         allDownloadTypes,
         filteredItems,
         filterItems,
-        allActiveFilters
+        allActiveFilters,
+        searchTerm
     } from "./filters.js";
 
     export let postsPerPage;
@@ -61,11 +62,11 @@
     });
 
     allItems.subscribe((value) => {
-        if($allActiveFilters.size === 0) {
+        if($allActiveFilters.size === 0 && $searchTerm === '') {
             filteredItems.set(value)
             return
         }
-        filteredItems.set(filterItems($allActiveFilters, value))
+        filteredItems.set(filterItems($allActiveFilters, value, $searchTerm))
     })
 
     allActiveFilters.subscribe((value) => {
@@ -73,7 +74,15 @@
             filteredItems.set($allItems)
             return
         }
-        filteredItems.set(filterItems(value, $allItems))
+        filteredItems.set(filterItems(value, $allItems, $searchTerm))
+    })
+
+    searchTerm.subscribe((value) => {
+        if(value.size === '' && $allActiveFilters.size === 0) {
+            filteredItems.set($allItems)
+            return
+        }
+        filteredItems.set(filterItems($allActiveFilters, $allItems, value))
     })
 
 </script>
@@ -89,6 +98,7 @@
         />
     {/if}
     <ActiveFilters />
+    <Sort />
     <Grid />
     <div class="pagination-container">
         <LoadMore />
@@ -100,6 +110,32 @@
 
     .download-archive {
         @include container-large;
+        padding-top: 0;
+        width: 100%;
+        display: grid;
+        gap: 0.625rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "filters sort"
+            "active active"
+            "results results"
+            "pagination pagination";
+
+        &.filters-open {
+            grid-template-areas:
+                "filters sort" 
+                "active active" 
+                "filters-open filters-open" 
+                "results results"
+                "pagination pagination";
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        .download-archive {
+        @include container-large;
+        gap:2rem;
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -115,5 +151,7 @@
                 "filters-open results results results"
                 "pagination pagination pagination pagination";
         }
+    }
+
     }
 </style>

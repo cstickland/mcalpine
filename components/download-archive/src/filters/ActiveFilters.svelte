@@ -39,9 +39,10 @@
     ul {
         grid-area: active;
         li {
+        height: min-content;
         border-radius: 50px;
         border-color: $color__mcalpine-grey;
-        padding: 0.375rem 2rem;
+        padding: 0.375rem 1.5rem;
         }
     }
 </style>

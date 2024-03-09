@@ -104,7 +104,6 @@
             background-color: #c4cad114;
             color: $color__mcalpine-black;
             padding: 0.875rem 1.5rem;
-            margin-right: 1.5rem;
             font-size: 1.125rem;
             cursor: pointer;
             transition: all 100ms ease-in-out;
@@ -125,10 +124,9 @@
             border: 0;
             outline: 0;
             justify-content: space-between;
-            padding-bottom: 1rem;
             cursor: pointer;
-            padding: 1.25rem;
-            padding-left: 0;
+            padding: 0.625rem 0;
+
 
             h5 {
                 margin: 0;
@@ -147,5 +145,12 @@
                 }
             }
         }
+    }
+    @media only screen and (min-width: 768px) {
+        .product-archive-filters-section {
+        .filter-category-title {
+            padding: 1.25rem 0;
+        }}
+
     }
 </style>

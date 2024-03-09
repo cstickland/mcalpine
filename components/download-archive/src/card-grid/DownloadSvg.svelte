@@ -1,4 +1,8 @@
-<svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+<svg
+    class="download-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+>
     <g data-name="Layer 2">
         <g data-name="download">
             <rect width="24" height="24" opacity="0" />
@@ -29,13 +33,12 @@
     </g>
 </svg>
 
-
 <style lang="scss">
-    @import '../colors.scss';
+    @import "../colors.scss";
     svg {
-        height: 1.25rem;
+        height: 1rem;
         * {
-        fill: #000;
+            fill: #000;
         }
     }
 
@@ -43,7 +46,7 @@
         &:hover {
             .download-icon {
                 * {
-                fill: $color__mcalpine-red;
+                    fill: $color__mcalpine-red;
                 }
             }
         }
@@ -53,6 +56,11 @@
             * {
                 fill: #fff;
             }
+        }
+    }
+    @container download-card (min-width: 350px) {
+        .download-icon {
+            height: clamp(1rem, 0.368rem + 2.857cqw, 1.125rem) !important;
         }
     }
 </style>

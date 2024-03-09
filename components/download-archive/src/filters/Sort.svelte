@@ -1,10 +1,14 @@
 <script>
     import { slide } from "svelte/transition";
-    import { filters } from "./stores.js";
+    import { sortBy } from "../filters";
 
-    export let categories;
     let open = false;
-    const categoriesArray = [...categories];
+    const sortByOptions = [
+        { title: "Date (New to Old)", id: 1 },
+        { title: "Date (Old to New)", id: 2 },
+        { title: "Alphabetical (A-Z)", id: 3 },
+        { title: "Alphabetical (Z-A)", id: 4 },
+    ];
 </script>
 
 <div class="insight-archive-filters">
@@ -18,7 +22,7 @@
                 open = !open;
             }}
         >
-            Categories
+            <span>Sort By</span>
             {#if open}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     ><g data-name="Layer 2"
@@ -51,59 +55,89 @@
                 class="insight-archive-filter-dropdown"
                 transition:slide={{ duration: 200 }}
             >
-                {#each categoriesArray as category}
-                    <li
-                        on:click={() => {
-                            if (!$filters.has(category)) {
-                                $filters = $filters.add(category);
-                            } else {
-                                if ($filters.delete(category)) {
-                                    $filters = $filters;
-                                }
-                            }
-                        }}
-                        on:keydown
-                    >
-                        <div
-                            class="category-toggle {$filters.has(category)
-                                ? 'checked'
-                                : 'unchecked'}"
-                        >
-                            <div class="toggle-circle" />
-                        </div>
-                        {category}
+                {#each sortByOptions as option}
+                    <li on:keydown on:click={() => {
+                        sortBy.set(option.id)
+                    }}>
+                        {option.title}
                     </li>
                 {/each}
             </ul>
         {/if}
     </div>
-    <ul class="insight-archive-rounded-buttons">
-        {#each [...$filters] as filter}
-            <li
-                on:keydown
-                on:click={() => {
-                    if ($filters.delete(filter)) {
-                        $filters = $filters;
-                    }
-                }}
-            >
-                {filter}
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    ><g data-name="Layer 2"
-                        ><g data-name="close"
-                            ><rect
-                                width="24"
-                                height="24"
-                                transform="rotate(180 12 12)"
-                                opacity="0"
-                            /><path
-                                d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"
-                            /></g
-                        ></g
-                    ></svg
-                >
-            </li>
-        {/each}
-    </ul>
 </div>
+
+<style lang="scss">
+    @import "../colors.scss";
+    .insight-archive-filters {
+        display: flex;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        width: max-content;
+        justify-self: end;
+        .insight-archive-filter-categories {
+            position: relative;
+
+            .dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 1.125rem;
+                color: #222222;
+                padding-bottom: 0.25rem;
+                border-bottom: solid 2px $color__mcalpine-black;
+                cursor: pointer;
+                gap: 3rem;
+
+                padding: 0.75rem;
+                svg {
+                    width: 1.5rem;
+                    margin-left: 1rem;
+                    rect,
+                    path {
+                        fill: #222222;
+                    }
+                }
+            }
+
+            .insight-archive-filter-dropdown {
+                margin: 0;
+                list-style: none;
+                font-size: 1.125rem;
+                width: 100%;
+                position: absolute;
+                padding: 0;
+               gap: 0; 
+                background-color: white;
+                z-index: 2;
+                width: 100%;
+                min-width: max-content;
+                border-top: 0;
+                border-radius: 0 0 8px 8px;
+                color: $color__mcalpine-black;
+                cursor: pointer;
+                box-shadow: 0px 3px 6px rgba(124, 174, 242, 0.3019607843);
+                overflow: hidden;
+                li {
+                    padding: 0.5rem 0.75rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                    transition: padding 150ms ease-in-out;
+                    font-size: 1.125rem;
+
+                    &:hover {
+                        padding-left: 0.625rem;
+                        color: $color__mcalpine-red;
+                        background: transparent
+                            linear-gradient(
+                                75deg,
+                                #ffffff 0%,
+                                rgba(124, 174, 242, 0.2509803922) 100%
+                            )
+                            0% 0% no-repeat padding-box;
+                    }
+                }
+            }
+        }
+    }
+</style>

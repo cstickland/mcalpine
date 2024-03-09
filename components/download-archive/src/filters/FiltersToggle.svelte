@@ -1,7 +1,9 @@
 <script>
+    import { allActiveFilters } from "../filters";
     export let filtersOpen;
 </script>
 
+<div class="filters-heading-container">
 <button
     on:click={() => {filtersOpen = !filtersOpen}}
     class="filters-heading-open"
@@ -23,9 +25,28 @@
     Filters
 </button>
 
+{#if $allActiveFilters.size > 0}
+<button class="clear-filters" on:keydown on:click={() => {allActiveFilters.set(new Set())}}>
+    Clear Selection
+</button>
+{/if}
+</div>
 <style lang="scss">
     @import "../colors.scss";
+    .filters-heading-container {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
 
+        .clear-filters {
+        border: 0;
+        text-decoration: underline;
+        color: $color__mcalpine-black;
+        outline: 0;
+        background: transparent;
+        cursor: pointer;
+        }
+    }
     .filters-heading-open {
         cursor: pointer;
         display: flex;

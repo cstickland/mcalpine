@@ -67,8 +67,8 @@ export async function setUp() {
     )
     let downloadObject = {
       title: download.node.title,
-      imageUrl: download?.node?.featuredImage?.node?.sourceUrl,
-      imageAlt: download?.node?.featuredImage?.node?.altText,
+      imageUrl: download?.node?.featuredImage?.node?.sourceUrl || '',
+      imageAlt: download?.node?.featuredImage?.node?.altText || '',
       fileUrl: download?.node?.downloadFields?.fileDownload?.mediaItemUrl,
       date: date,
       fileType: download?.node?.downloadFields?.fileDownload?.mediaItemUrl
