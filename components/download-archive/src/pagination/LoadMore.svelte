@@ -1,17 +1,35 @@
 <script>
-    import { currentPage, postsPerPage } from "../stores.js";
-    import { filteredItems } from "../filters.js";
+    import { postsPerPage, allItems, endCursor, hasNextPage, isLoading, getData, parseDownloads } from "../stores.js";
+    import { filteredQuery, allActiveFilters, searchTerm } from '../filters.js'
 
-    function loadMore() {
-        currentPage.set($currentPage + 1);
+    let isLoadingButton = false;
+
+    async function loadMore() {
+        // isLoading.set(true)
+        isLoadingButton = true
+        let downloadTypes = []
+        let downloadCategories = [] 
+        $allActiveFilters.forEach((value) => {
+            if(value.taxonomyName === 'download_types') {
+                downloadTypes.push(value.slug)
+            }
+            if(value.taxonomyName === 'download_categories') {
+                downloadCategories.push(value.slug)
+            }
+        })
+        const query = filteredQuery($searchTerm, downloadCategories, downloadTypes, "TITLE", "ASC", $endCursor)
+        const response = await getData(query)
+
+        allItems.set([...$allItems, ...parseDownloads(response?.data?.downloads?.edges)])
+        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
+        endCursor.set(response?.data.downloads.pageInfo.endCursor)
+        isLoadingButton = false
     }
 </script>
 
-{#if $postsPerPage * $currentPage < $filteredItems.size}
     <button class="btn btn-black" aria-label="load more" on:click={loadMore}>
-        Load More
+        {!isLoadingButton ? "Load More" : "Loading..."}
     </button>
-{/if}
 
 <style>
     button {

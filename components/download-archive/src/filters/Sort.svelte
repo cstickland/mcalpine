@@ -1,6 +1,6 @@
 <script>
     import { slide } from "svelte/transition";
-    import { sortBy } from "../filters";
+    // import { sortBy } from "../filters";
 
     let open = false;
     const sortByOptions = [

@@ -5,87 +5,56 @@ export const allFileTypes = writable(new Set())
 export const allDownloadTypes = writable(new Set())
 export const allActiveFilters = writable(new Set())
 export const filteredItems = writable(new Set())
-export const sortBy = writable(3)
+export const sort = writable('TITLE')
+export const order = writable('DESC')
 export const searchTerm = writable('')
 
-export function filterItems(filters, items, searchTerm) {
-  let filteredItems = new Set()
-  items.forEach((item) => {
-    if (isItemFilterMatch(filters, item, searchTerm)) {
-      filteredItems.add(item)
-    }
-  })
-  return filteredItems
-}
+export function filteredQuery(
+  searchTerm,
+  downloadCategories,
+  downloadTypes,
+  orderBy,
+  order,
+  endCursor
+) {
+  let downloadCategoriesString = 'null'
+  if (downloadCategories.length > 0) {
+    downloadCategoriesString = JSON.stringify(downloadCategories)
+  }
 
-function isItemFilterMatch(filters, item, searchTerm) {
-  let isCategoryMatch = false
-  let isDownloadTypeMatch = false
-  let isFileTypeMatch = false
-
-  let categoryFilters = []
-  let fileTypeFilters = []
-  let downloadTypeFilters = []
-
-  if (searchTerm != '') {
-    if (
-      !item.fileUrl.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  let downloadTypesString = 'null'
+  if (downloadTypes.length > 0) {
+    downloadTypesString = JSON.stringify(downloadTypes)
+  }
+  let query = `{
+    downloads(
+        first: 48
+        where: {search: "${searchTerm}", downloadCategories: ${downloadCategoriesString}, downloadTypes: ${downloadTypesString}, orderby: {field: ${orderBy}, order: ${order}}}
+        after: "${endCursor}"
     ) {
-      return false
-    }
-  }
-  // separate filters by type
-  filters.forEach((filter) => {
-    if (filter.filterType === 'category') {
-      categoryFilters.push(filter)
-    }
-    if (filter.filterType === 'downloadType') {
-      downloadTypeFilters.push(filter)
-    }
-    if (filter.filterType === 'fileType') {
-      fileTypeFilters.push(filter)
-    }
-  })
-  //check if items matches category filters
-  if (categoryFilters.length > 0) {
-    categoryFilters.forEach((filter) => {
-      item.categories.forEach((category) => {
-        if (filter.id === category.id) {
-          isCategoryMatch = true
+        edges {
+            node {
+                id
+                title   
+                featuredImage {
+                    node {
+                        altText
+                        sourceUrl(size: MEDIUM)
+                    }
+                }
+                downloadFields {
+                    fileDownload {
+                        mediaItemUrl
+                        dateGmt
+                    }
+                }
+                databaseId
+            }
         }
-      })
-    })
-  } else {
-    isCategoryMatch = true
-  }
-
-  //check if item matches downloadTypeFilters
-  if (downloadTypeFilters.length > 0) {
-    downloadTypeFilters.forEach((filter) => {
-      item.downloadTypes.forEach((type) => {
-        if (filter.id === type.id) {
-          isDownloadTypeMatch = true
+        pageInfo {
+            endCursor
+            hasNextPage
         }
-      })
-    })
-  } else {
-    isDownloadTypeMatch = true
-  }
-
-  // check if item matches fileTypeFilters
-  if (fileTypeFilters.length > 0) {
-    fileTypeFilters.forEach((filter) => {
-      if (item.fileType === filter.id) {
-        isFileTypeMatch = true
-      }
-    })
-  } else {
-    isFileTypeMatch = true
-  }
-
-  if (isFileTypeMatch && isDownloadTypeMatch && isCategoryMatch) {
-    return true
-  }
-  return false
+    }}`
+  return query
 }

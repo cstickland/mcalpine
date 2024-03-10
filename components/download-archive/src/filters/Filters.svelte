@@ -1,12 +1,56 @@
 <script>
     import FiltersSection from "./FilterSection.svelte";
-    import { searchTerm, allActiveFilters } from "../filters.js";
+    import { searchTerm, allActiveFilters, filteredQuery, } from "../filters.js";
+    import {allItems, hasNextPage, endCursor, getData, parseDownloads, isLoading} from "../stores.js";
     import { slide } from "svelte/transition";
 
     export let categories;
-    export let fileTypes;
+    // export let fileTypes;
     export let downloadTypes;
-</script>
+
+    allActiveFilters.subscribe(async (values) => {
+        isLoading.set(true)
+        let downloadTypes = []
+        let downloadCategories = [] 
+        values.forEach((value) => {
+            if(value.taxonomyName === 'download_types') {
+                downloadTypes.push(value.slug)
+            }
+            if(value.taxonomyName === 'download_categories') {
+                downloadCategories.push(value.slug)
+            }
+        })
+        const query = filteredQuery($searchTerm, downloadCategories, downloadTypes, "TITLE", "ASC", "")
+        const response = await getData(query)
+
+        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
+        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
+        endCursor.set(response?.data.downloads.pageInfo.endCursor)
+        isLoading.set(false)
+    })
+
+    searchTerm.subscribe(async (value) => {
+         isLoading.set(true)
+        let downloadTypes = []
+        let downloadCategories = [] 
+        $allActiveFilters.forEach((value) => {
+            if(value.taxonomyName === 'download_types') {
+                downloadTypes.push(value.slug)
+            }
+            if(value.taxonomyName === 'download_categories') {
+                downloadCategories.push(value.slug)
+            }
+        })
+        const query = filteredQuery(value, downloadCategories, downloadTypes, "TITLE", "ASC", "")
+        const response = await getData(query)
+
+        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
+        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
+        endCursor.set(response?.data.downloads.pageInfo.endCursor)
+        isLoading.set(false)
+    })
+
+  </script>
 
 <div class="filters" in:slide>
     <input
@@ -26,11 +70,7 @@
         items={categories}
         filters={allActiveFilters}
     />
-    <FiltersSection
-        title="File Type"
-        items={fileTypes}
-        filters={allActiveFilters}
-    />
+
 </div>
 
 <style lang="scss">

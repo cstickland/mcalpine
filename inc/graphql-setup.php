@@ -42,3 +42,61 @@ add_filter('register_post_type_args', function ($args, $post_type) {
 
     return $args;
 }, 10, 2);
+
+
+
+add_action('graphql_register_types', function () {
+
+    $customposttype_graphql_single_name = "Download"; // Replace this with your custom post type single name in PascalCase
+
+    // Registering the 'categorySlug' argument in the 'where' clause.
+    // Feel free to change the name 'categorySlug' to something that suits your requirements.
+    register_graphql_field('RootQueryTo' . $customposttype_graphql_single_name . 'ConnectionWhereArgs', 'downloadCategories', [
+        'type' => ['list_of' => 'String'], // To accept multiple strings
+        'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
+    ]);
+    register_graphql_field('RootQueryTo' . $customposttype_graphql_single_name . 'ConnectionWhereArgs', 'downloadTypes', [
+        'type' => ['list_of' => 'String'], // To accept multiple strings
+        'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
+    ]);
+});
+
+// Next, we add a filter to modify the query arguments.
+add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
+
+    $categorySlug = $args['where']['downloadCategories']; // Accessing the 'downloadCategories' argument.
+    $downloadTypeSlug = $args['where']['downloadTypes'];
+
+    $categorySlugArray = [
+        'taxonomy' => 'download_categories', // Replace 'your_taxonomy' with your actual taxonomy key
+        'field' => 'slug',
+        'terms' => $categorySlug
+    ];
+    $downloadTypeSlugArray = [
+        'taxonomy' => 'download_types', // Replace 'your_taxonomy' with your actual taxonomy key
+        'field' => 'slug',
+        'terms' => $downloadTypeSlug
+    ];
+
+    if (isset($categorySlug) && isset($downloadTypeSlug)) {
+        $query_args['tax_query'] = [
+            'relation' => 'AND',
+            $categorySlugArray,
+            $downloadTypeSlugArray
+        ];
+    }
+
+    if (isset($categorySlug) && !isset($downloadTypeSlug)) {
+        $query_args['tax_query'] = [
+            $categorySlugArray
+        ];
+    }
+
+    if (isset($downloadTypeSlug) && !isset($categorySlug)) {
+        $query_args['tax_query'] = [
+            $downloadTypeSlugArray
+        ];
+    }
+
+    return $query_args;
+}, 10, 5);

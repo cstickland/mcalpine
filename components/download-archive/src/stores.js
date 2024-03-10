@@ -3,41 +3,52 @@ import { writable } from 'svelte/store'
 export const allItems = writable([])
 export const postsPerPage = writable(48)
 export const currentPage = writable(1)
+export const hasNextPage = writable(false)
+export const endCursor = writable('null')
+export const isLoading = writable(true)
 
-export const query = `{
-  downloads(first: 1000) {
-    edges {
-      node {
-        id
-        title
-        downloadCategories {
-          nodes {
-            name
-            id
-          }
+export const initialQuery = `{
+    downloads(first: 48) {
+        edges {
+            node {
+                id
+                title
+                featuredImage {
+                    node {
+                        altText
+                        sourceUrl(size: MEDIUM)
+                    }
+                }
+                downloadFields {
+                    fileDownload {
+                        mediaItemUrl
+                        dateGmt
+                    }
+                }
+                databaseId
+            }
         }
-        featuredImage {
-          node {
-            altText
-            sourceUrl(size: MEDIUM)
-          }
+        pageInfo {
+            endCursor
+            hasNextPage
         }
-        downloadFields {
-          fileDownload {
-            mediaItemUrl
-            dateGmt
-          }
-        }
-        databaseId
-        downloadTypes {
-          nodes {
-            id
-            name
-          }
-        }
-      }
     }
-  }
+    downloadTypes(first: 100, where: {hideEmpty: true}) {
+        nodes {
+            id
+            slug
+            name
+            taxonomyName
+        }
+    }
+    downloadCategories(first: 100, where: {hideEmpty: true}) {
+        nodes {
+            id
+            slug
+            name
+            taxonomyName
+        }
+    }
 }`
 
 export async function getData(query) {
@@ -52,17 +63,34 @@ export async function getData(query) {
   })
 
   const response = await fetchPromise.json()
-  console.log(response)
   return response
 }
 
-export async function setUp() {
-  let items = []
-  let data = await getData(query)
+export async function setUp(
+  postsPerPage,
+  hasNextPage,
+  endCursor,
+  endCursorText
+) {
+  let data = await getData(
+    initialQuery(
+      postsPerPage,
+      'null',
+      'null',
+      'null',
+      'null',
+      'TITLE',
+      'ASC',
+      endCursorText
+    )
+  )
   const urlParams = new URLSearchParams(window.location.search)
   currentPage.set(parseInt(urlParams.get('pagination')) || 1)
+}
 
-  data.data.downloads.edges.forEach((download) => {
+export function parseDownloads(downloads) {
+  let items = []
+  downloads.forEach((download) => {
     let date = new Date(
       Date.parse(download?.node?.downloadFields?.fileDownload?.dateGmt)
     )

@@ -8,16 +8,16 @@
     import { onMount } from "svelte";
     import {
         allItems,
-        setUp,
+        getData,
+        parseDownloads,
+        hasNextPage,
+        endCursor,
+        initialQuery,
     } from "./stores.js";
     import {
         allCategories,
         allFileTypes,
         allDownloadTypes,
-        filteredItems,
-        filterItems,
-        allActiveFilters,
-        searchTerm
     } from "./filters.js";
 
     export let postsPerPage;
@@ -25,65 +25,13 @@
     let filtersOpen = false;
 
     onMount(async () => {
-        let tempFileTypes = new Set()
-        let tempDownloadTypes = new Set()
-        let tempCategories = new Set()
-
-        allItems.set(await setUp());
-        $allItems.forEach((item) => {
-            item.categories.forEach((category) => {
-                tempCategories.add(JSON.stringify({
-                    name: category.name,
-                    id: category.id,
-                    filterType: "category",
-                }));
-            });
-            item.downloadTypes.forEach((downloadType) => {
-                tempDownloadTypes.add(JSON.stringify({
-                    name: downloadType.name,
-                    id: downloadType.id,
-                    filterType: "downloadType",
-                }));
-            });
-            tempFileTypes.add(JSON.stringify({
-                name: item.fileUrl
-                    .split(/[#?]/)[0]
-                    .split(".")
-                    .pop()
-                    .trim()
-                    .toUpperCase() || '',
-                id: item.fileUrl.split(/[#?]/)[0].split(".").pop().trim(),
-                filterType: "fileType",
-            }));
-        });
-        allCategories.set(new Set([...tempCategories].map((s) => { return JSON.parse(s)})))
-        allDownloadTypes.set(new Set([...tempDownloadTypes].map((s) => { return JSON.parse(s)})))
-        allFileTypes.set(new Set([...tempFileTypes].map((s) => { return JSON.parse(s)})))
+        const response = await getData(initialQuery)
+        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
+        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
+        endCursor.set(response?.data.downloads.pageInfo.endCursor)
+        allDownloadTypes.set(response?.data.downloadTypes.nodes)
+        allCategories.set(response?.data.downloadCategories.nodes)
     });
-
-    allItems.subscribe((value) => {
-        if($allActiveFilters.size === 0 && $searchTerm === '') {
-            filteredItems.set(value)
-            return
-        }
-        filteredItems.set(filterItems($allActiveFilters, value, $searchTerm))
-    })
-
-    allActiveFilters.subscribe((value) => {
-        if(value.size === 0) {
-            filteredItems.set($allItems)
-            return
-        }
-        filteredItems.set(filterItems(value, $allItems, $searchTerm))
-    })
-
-    searchTerm.subscribe((value) => {
-        if(value.size === '' && $allActiveFilters.size === 0) {
-            filteredItems.set($allItems)
-            return
-        }
-        filteredItems.set(filterItems($allActiveFilters, $allItems, value))
-    })
 
 </script>
 
@@ -100,9 +48,11 @@
     <ActiveFilters />
     <Sort />
     <Grid />
-    <div class="pagination-container">
-        <LoadMore />
-    </div>
+    {#if $hasNextPage}
+        <div class="pagination-container">
+            <LoadMore />
+        </div>
+    {/if}
 </section>
 
 <style lang="scss">

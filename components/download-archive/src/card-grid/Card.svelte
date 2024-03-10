@@ -8,6 +8,7 @@
 
     import PlaceholderImage from "./PlaceholderImage.svelte";
     import DownloadIcon from "./DownloadSvg.svelte";
+    import { fade } from "svelte/transition";
     let downloaded = false;
 
     function downloadFile(e) {
@@ -19,7 +20,7 @@
     }
 </script>
 
-<li class="download-card-container-query">
+<li in:fade class="download-card-container-query">
     <div class="download-card-container {downloaded ? 'downloaded' : ''}">
         <a
             class="download-card-desktop"
