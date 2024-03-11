@@ -42,6 +42,7 @@ function reading_time()
         <?php echo do_blocks('<!-- wp:mcalpine/top-articles {"name":"mcalpine/top-articles","data":{},"mode":"preview"} /-->'); ?>
     </div>
 </main><!-- #main -->
+
 <style>
     .post-content {
         max-width: 820px;

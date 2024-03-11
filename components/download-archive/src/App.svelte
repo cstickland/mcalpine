@@ -18,6 +18,8 @@
         allCategories,
         allFileTypes,
         allDownloadTypes,
+        allActiveFilters,
+        filteredQuery
     } from "./filters.js";
 
     export let postsPerPage;
@@ -32,6 +34,27 @@
         allDownloadTypes.set(response?.data.downloadTypes.nodes)
         allCategories.set(response?.data.downloadCategories.nodes)
     });
+
+    allActiveFilters.subscribe(async (value) => {
+        let downloadTypes = []
+        let downloadCategories = []
+
+        if(value.filters) {
+        value.filters.forEach((value) => {
+            if(value.taxonomyName === 'download_types') {
+                downloadTypes.push(value.slug)
+            }
+            if(value.taxonomyName === 'download_categories') {
+                downloadCategories.push(value.slug)
+            }
+        })
+        }
+        const query = filteredQuery(value.searchTerm, downloadCategories, downloadTypes, value.sort, value.order, $endCursor)
+        const response = await getData(query)
+        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
+        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
+        endCursor.set(response?.data.downloads.pageInfo.endCursor)
+    })
 
 </script>
 

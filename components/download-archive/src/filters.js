@@ -1,13 +1,16 @@
 import { writable } from 'svelte/store'
 
+const initialFilters = {
+  searchTerm: '',
+  filters: new Set(),
+  order: 'ASC',
+  sort: 'TITLE',
+}
+
 export const allCategories = writable(new Set())
 export const allFileTypes = writable(new Set())
 export const allDownloadTypes = writable(new Set())
-export const allActiveFilters = writable(new Set())
-export const filteredItems = writable(new Set())
-export const sort = writable('TITLE')
-export const order = writable('DESC')
-export const searchTerm = writable('')
+export const allActiveFilters = writable(initialFilters)
 
 export function filteredQuery(
   searchTerm,

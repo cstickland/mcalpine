@@ -1,17 +1,22 @@
 <script>
     import { slide } from "svelte/transition";
+    import { allActiveFilters } from "../filters";
+    import { endCursor } from "../stores";
+
     export let title = "title";
     export let items = [];
-    export let filters = new Set();
     let openCategory = false;
 
     function toggleFilter(id) {
-        if ($filters.has(id)) {
-            if ($filters.delete(id)) {
-                filters.set($filters);
-            }
+        endCursor.set('')
+        let tempFilters = $allActiveFilters;
+
+        if ($allActiveFilters.filters.has(id)) {
+            tempFilters.filters.delete(id)
+            allActiveFilters.set(tempFilters)
         } else {
-            filters.set($filters.add(id));
+            tempFilters.filters.add(id)
+            allActiveFilters.set(tempFilters)
         }
     }
 </script>
@@ -69,7 +74,7 @@
                     on:keydown
                 >
                     <div
-                        class="category-toggle {$filters.has(item)
+                        class="category-toggle {$allActiveFilters.filters.has(item)
                             ? 'checked'
                             : 'unchecked'}"
                     >

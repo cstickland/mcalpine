@@ -1,74 +1,36 @@
 <script>
     import FiltersSection from "./FilterSection.svelte";
-    import { searchTerm, allActiveFilters, filteredQuery, } from "../filters.js";
-    import {allItems, hasNextPage, endCursor, getData, parseDownloads, isLoading} from "../stores.js";
+    import { allActiveFilters} from "../filters.js";
+    import { endCursor } from "../stores.js";
     import { slide } from "svelte/transition";
 
     export let categories;
     // export let fileTypes;
     export let downloadTypes;
-
-    allActiveFilters.subscribe(async (values) => {
-        isLoading.set(true)
-        let downloadTypes = []
-        let downloadCategories = [] 
-        values.forEach((value) => {
-            if(value.taxonomyName === 'download_types') {
-                downloadTypes.push(value.slug)
-            }
-            if(value.taxonomyName === 'download_categories') {
-                downloadCategories.push(value.slug)
-            }
-        })
-        const query = filteredQuery($searchTerm, downloadCategories, downloadTypes, "TITLE", "ASC", "")
-        const response = await getData(query)
-
-        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
-        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
-        endCursor.set(response?.data.downloads.pageInfo.endCursor)
-        isLoading.set(false)
-    })
-
-    searchTerm.subscribe(async (value) => {
-         isLoading.set(true)
-        let downloadTypes = []
-        let downloadCategories = [] 
-        $allActiveFilters.forEach((value) => {
-            if(value.taxonomyName === 'download_types') {
-                downloadTypes.push(value.slug)
-            }
-            if(value.taxonomyName === 'download_categories') {
-                downloadCategories.push(value.slug)
-            }
-        })
-        const query = filteredQuery(value, downloadCategories, downloadTypes, "TITLE", "ASC", "")
-        const response = await getData(query)
-
-        allItems.set([...parseDownloads(response?.data?.downloads?.edges)])
-        hasNextPage.set(response?.data.downloads.pageInfo.hasNextPage)
-        endCursor.set(response?.data.downloads.pageInfo.endCursor)
-        isLoading.set(false)
-    })
-
-  </script>
+    
+    function setSearchTerm(value) {
+        endCursor.set('')
+        const currentFilters = $allActiveFilters
+        currentFilters.searchTerm = value;
+        allActiveFilters.set(currentFilters)
+    }
+</script>
 
 <div class="filters" in:slide>
     <input
         type="text"
         on:input={(e) => {
-            searchTerm.set(e.target.value);
+            setSearchTerm(e.target.value);
         }}
         placeholder="Type SKU or filename"
     />
     <FiltersSection
         title="Download Type"
         items={downloadTypes}
-        filters={allActiveFilters}
     />
     <FiltersSection
         title="Categories"
         items={categories}
-        filters={allActiveFilters}
     />
 
 </div>

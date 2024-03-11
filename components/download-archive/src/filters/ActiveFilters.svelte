@@ -3,7 +3,7 @@
 </script>
 
 <ul class="active-filters">
-    {#each [...$allActiveFilters] as filter}
+    {#each [...$allActiveFilters.filters] as filter}
         <li
             on:keydown
             on:click={() => {

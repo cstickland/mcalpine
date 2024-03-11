@@ -1,6 +1,13 @@
 <script>
     import { allActiveFilters } from "../filters";
     export let filtersOpen;
+
+    function clearFilters(values) {
+        let tempFilters = values;
+
+        tempFilters.filters = new Set()
+        return tempFilters;
+    }
 </script>
 
 <div class="filters-heading-container">
@@ -26,7 +33,7 @@
 </button>
 
 {#if $allActiveFilters.size > 0}
-<button class="clear-filters" on:keydown on:click={() => {allActiveFilters.set(new Set())}}>
+<button class="clear-filters" on:keydown on:click={() => {allActiveFilters.set(clearFilters($allActiveFilters))}}>
     Clear Selection
 </button>
 {/if}

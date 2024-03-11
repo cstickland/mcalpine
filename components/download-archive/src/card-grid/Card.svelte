@@ -11,6 +11,8 @@
     import { fade } from "svelte/transition";
     let downloaded = false;
 
+    let fileTypeString = fileType?.toUpperCase() || ''
+
     function downloadFile(e) {
         if (downloaded === false) {
             downloaded = true;
@@ -67,7 +69,7 @@
                                         ></g
                                     ></svg
                                 >
-                                {fileType.toUpperCase()}
+                                {fileTypeString}
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,7 @@
                                     ></g
                                 ></svg
                             >
-                            {fileType}
+                            {fileTypeString}
                         </div>
                     </div>
                 </div>
@@ -126,7 +128,7 @@
             <h5>{title}</h5>
             <div class="download-info-container">
                 <div>
-                    {date.toLocaleDateString("en-GB").replaceAll("/", ".")}
+                    {date ? date.toLocaleDateString("en-GB").replaceAll("/", ".") : ''}
                 </div>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -142,7 +144,7 @@
                             ></g
                         ></svg
                     >
-                    {fileType}
+                    {fileTypeString}
                 </div>
             </div>
         </div>

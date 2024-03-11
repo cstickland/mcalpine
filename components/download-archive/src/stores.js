@@ -8,7 +8,7 @@ export const endCursor = writable('null')
 export const isLoading = writable(true)
 
 export const initialQuery = `{
-    downloads(first: 48) {
+    downloads(first: 48, where: {orderby: {field: TITLE, order: ASC}}) {
         edges {
             node {
                 id

@@ -1,14 +1,25 @@
 <script>
     import { slide } from "svelte/transition";
-    // import { sortBy } from "../filters";
+    import { allActiveFilters } from "../filters";
+    import { endCursor } from "../stores";
 
     let open = false;
     const sortByOptions = [
-        { title: "Date (New to Old)", id: 1 },
-        { title: "Date (Old to New)", id: 2 },
-        { title: "Alphabetical (A-Z)", id: 3 },
-        { title: "Alphabetical (Z-A)", id: 4 },
+        { title: "Date (New to Old)", id: 1, sort: 'DATE', order: 'ASC' },
+        { title: "Date (Old to New)", id: 2, sort: 'DATE', order: 'DESC' },
+        { title: "Alphabetical (A-Z)", id: 3, sort: 'TITLE', order: 'ASC' },
+        { title: "Alphabetical (Z-A)", id: 4, sort: 'TITLE', order: 'DESC' },
     ];
+
+    function setSorting(option) {
+    endCursor.set('')
+      let tempFilters = $allActiveFilters;
+      tempFilters.sort = option.sort
+      tempFilters.order = option.order
+        console.log(tempFilters)
+      allActiveFilters.set(tempFilters)
+        
+    }
 </script>
 
 <div class="insight-archive-filters">
@@ -57,7 +68,7 @@
             >
                 {#each sortByOptions as option}
                     <li on:keydown on:click={() => {
-                        sortBy.set(option.id)
+                       setSorting(option) 
                     }}>
                         {option.title}
                     </li>
