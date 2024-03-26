@@ -6,6 +6,7 @@
 
     import ProductCard from "./ProductCard.svelte";
     import Pagination from "./Pagination.svelte";
+    import LoadMore from './LoadMore.svelte';
     import CardsPerPage from "./CardsPerPage.svelte";
     import GridToggleButtons from "./GridToggleButtons.svelte";
     import Filters from "./Filters.svelte";
@@ -20,7 +21,7 @@
 
     let allProductsList;
     let gridStyle = true;
-    let openFilters = true;
+    let openFilters = false;
     let filtersClass;
     let filtersClosedClass;
 
@@ -59,10 +60,8 @@
                     productFound = true;
                 }
             });
-            console.log($childFilters);
             return productFound;
         });
-        console.log(allProductsList);
     }
 
     $: if ($parentFilters.size > 0 && $childFilters.size == 0) {
@@ -72,9 +71,9 @@
     }
     onMount(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        let currentPageTemp = urlParams.get("page") || 1;
+        let currentPageTemp = parseInt(urlParams.get("page")) || 1;
         currentPage.set(currentPageTemp);
-        wrapGrid(gridElement)
+        // wrapGrid(gridElement)
 
     });
 
@@ -138,15 +137,18 @@
                 : "product-archive-grid rows"}
         >
             {#each allProductsList as product, i}
-                {#if i >= postRangeLow && i < postRangeHigh}
+                {#if i < postRangeHigh}
                     <ProductCard {product} />
                 {/if}
             {/each}
         </ul>
     </div>
     <div class="pagination-container">
-        {#if totalPages > 1}
-            <Pagination {totalPages} />
-        {/if}
+    {#if $currentPage < totalPages}
+        <LoadMore />
+    {/if}
+        <!-- {#if totalPages > 1} -->
+        <!--     <Pagination {totalPages} /> -->
+        <!-- {/if} -->
     </div>
 </section>

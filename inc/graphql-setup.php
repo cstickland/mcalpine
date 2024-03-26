@@ -44,13 +44,11 @@ add_filter('register_post_type_args', function ($args, $post_type) {
 }, 10, 2);
 
 
+// Add fields to filter download via their custom taxonomies in GraphQL
 
 add_action('graphql_register_types', function () {
 
-    $customposttype_graphql_single_name = "Download"; // Replace this with your custom post type single name in PascalCase
-
-    // Registering the 'categorySlug' argument in the 'where' clause.
-    // Feel free to change the name 'categorySlug' to something that suits your requirements.
+    $customposttype_graphql_single_name = "Download";
     register_graphql_field('RootQueryTo' . $customposttype_graphql_single_name . 'ConnectionWhereArgs', 'downloadCategories', [
         'type' => ['list_of' => 'String'], // To accept multiple strings
         'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
@@ -61,19 +59,19 @@ add_action('graphql_register_types', function () {
     ]);
 });
 
-// Next, we add a filter to modify the query arguments.
+// Add a filter to modify the query arguments.
 add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
 
-    $categorySlug = $args['where']['downloadCategories']; // Accessing the 'downloadCategories' argument.
+    $categorySlug = $args['where']['downloadCategories'];
     $downloadTypeSlug = $args['where']['downloadTypes'];
 
     $categorySlugArray = [
-        'taxonomy' => 'download_categories', // Replace 'your_taxonomy' with your actual taxonomy key
+        'taxonomy' => 'download_categories',
         'field' => 'slug',
         'terms' => $categorySlug
     ];
     $downloadTypeSlugArray = [
-        'taxonomy' => 'download_types', // Replace 'your_taxonomy' with your actual taxonomy key
+        'taxonomy' => 'download_types',
         'field' => 'slug',
         'terms' => $downloadTypeSlug
     ];

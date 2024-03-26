@@ -38,7 +38,7 @@ export function getQuery(searchTerm) {
                 }
                 link
                 title
-                terms {
+                terms(where: {taxonomies: PRODUCTCATEGORY}) {
                   nodes {
                     name
                   }
@@ -62,7 +62,7 @@ export function getQuery(searchTerm) {
           }
           link
           title
-          terms {
+          terms(where: {taxonomies: PRODUCTCATEGORY}) {
             nodes {
               name
             }

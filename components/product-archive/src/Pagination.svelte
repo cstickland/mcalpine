@@ -46,16 +46,16 @@
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage($currentPage + 1);
-            }}>{$currentPage + 1}</button
+                setCurrentcurrentPage(parseInt($currentPage) + 1);
+            }}>{parseInt($currentPage) + 1}</button
         >
     {/if}
     {#if $currentPage == 1 && totalPages > 2}
         <button
             class="pagination-button"
             on:click={() => {
-                setCurrentcurrentPage($currentPage + 2);
-            }}>{$currentPage + 2}</button
+                setCurrentcurrentPage(parseInt($currentPage) + 2);
+            }}>{parseInt($currentPage) + 2}</button
         >
     {/if}
     {#if $currentPage < totalPages - 1 && totalPages > 3}

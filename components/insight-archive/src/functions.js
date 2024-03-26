@@ -12,7 +12,7 @@ export function divideInsightsIntoPages(filters) {
   let page = []
   let pagesArray = []
   let insights = []
-  const postsPerPage = 16
+  const postsPerPage = 6
 
   if (filters.size == 0) {
     insights = allInsights

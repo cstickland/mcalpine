@@ -1,45 +1,45 @@
-@for $i from 2 through 50 {
-  .animated {
-    .acf-innerblocks-container {
-      .insight-card:nth-of-type(#{$i}) {
-        animation-delay: ($i - 1) * 200ms;
-
-        .insight-card-text {
-          h6 {
-            animation-delay: (($i - 1) * 200) + 100ms;
-          }
-          h3 {
-            animation-delay: (($i - 1) * 200) + 350ms;
-          }
-        }
-        .insight-card-image-container {
-          .insight-card-background-image {
-            animation-delay: (($i - 1) * 200) + 350ms;
-          }
-        }
-      }
-    }
-  }
-  .insight-card:nth-of-type(#{$i}) {
-    animation-delay: ($i - 1) * 75ms;
-
-    .insight-card-image-container {
-      .insight-card-background-image {
-        animation-delay: (($i - 1) * 75) + 50ms;
-      }
-    }
-
-    .insight-card-text {
-      h6 {
-        animation-delay: (($i - 1) * 75) + 350ms;
-      }
-
-      h3 {
-        animation-delay: (($i - 1) * 75) + 500ms;
-      }
-    }
-  }
-}
+// @for $i from 2 through 50 {
+//   .animated {
+//     .acf-innerblocks-container {
+//       .insight-card:nth-of-type(#{$i}) {
+//         animation-delay: ($i - 1) * 200ms;
+//
+//         .insight-card-text {
+//           h6 {
+//             animation-delay: (($i - 1) * 200) + 100ms;
+//           }
+//           h3 {
+//             animation-delay: (($i - 1) * 200) + 350ms;
+//           }
+//         }
+//         .insight-card-image-container {
+//           .insight-card-background-image {
+//             animation-delay: (($i - 1) * 200) + 350ms;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .insight-card:nth-of-type(#{$i}) {
+//     animation-delay: ($i - 1) * 75ms;
+//
+//     .insight-card-image-container {
+//       .insight-card-background-image {
+//         animation-delay: (($i - 1) * 75) + 50ms;
+//       }
+//     }
+//
+//     .insight-card-text {
+//       h6 {
+//         animation-delay: (($i - 1) * 75) + 350ms;
+//       }
+//
+//       h3 {
+//         animation-delay: (($i - 1) * 75) + 500ms;
+//       }
+//     }
+//   }
+// }
 
 @for $y from 1 through 50 {
   .insight-archive-grid:nth-child(#{$y}) {

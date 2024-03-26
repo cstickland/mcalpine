@@ -16,7 +16,7 @@ class Category
 {
     public $name;
     public $parent;
-    public $id;
+    public $term_id;
 }
 
 $products = [];
@@ -33,7 +33,7 @@ foreach ($categories as $category) {
 
     $new_category->name = $category->name;
     $new_category->parent = $category->parent;
-    $new_category->id = $category->term_id;
+    $new_category->term_id = $category->term_id;
 
     if ($new_category->parent > 0) {
 
@@ -63,7 +63,6 @@ foreach ($categories as $category) {
                                     while (have_rows('product_images')) : the_row();
                                         if (get_row_index() == 1) {
                                             $product_image = get_sub_field('product_image');
-                                            var_dump($product_image);
                                         }
                                     endwhile;
                                 endif;

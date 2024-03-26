@@ -20,6 +20,12 @@ class Category
 }
 
 $term = get_queried_object();
+$child_term_ids = get_term_children($term->term_id, 'product_categories');
+$child_terms;
+
+foreach ($child_term_ids as $id) {
+    $child_terms[] = get_term($id);
+}
 ?>
 
 <main id="primary" class="site-main">
@@ -55,12 +61,13 @@ $term = get_queried_object();
                     endwhile;
                 endif;
                 $product_categories = wp_get_object_terms($post_id, 'product_categories');
+                $child_category = [];
 
                 foreach ($product_categories as $category) {
                     if ($category->parent == 0) {
                         $parent_category = $category->term_id;
                     } else {
-                        $child_category = $category->term_id;
+                        $child_category[] = $category->term_id;
                     }
                 }
 
@@ -87,13 +94,15 @@ $term = get_queried_object();
 
 <script>
     const allProducts = <?php echo json_encode($products); ?>;
+    const childCategories = <?php echo json_encode($child_terms); ?>;
     const archiveItems = document.getElementById('archive-items');
     archiveItems.innerHTML = ''
     new Archive({
         target: archiveItems,
         props: {
             allProducts: allProducts,
-            showFilters: false,
+            childCategories: childCategories,
+            showFilters: true,
 
         }
     })

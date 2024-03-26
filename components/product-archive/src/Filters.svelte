@@ -9,6 +9,7 @@
 
     export let currentChildCategories = [];
 
+
     $: if ($parentFilters.size > 0) {
         currentChildCategories = [];
 
@@ -23,12 +24,14 @@
 </script>
 
 <div class="product-archive-filters" transition:slide={{ duration: 300 }}>
+    {#if parentCategories.length > 1}
     <FilterSection
         title="Category"
         categories={parentCategories}
         bind:currentPage
         isParent={true}
     />
+    {/if}
     <FilterSection
         title="Subcategory"
         categories={currentChildCategories}

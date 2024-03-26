@@ -16,6 +16,7 @@
     }
 
     function toggleFilter(id) {
+    currentPage.set(1)
         if (isParent) {
             if ($parentFilters.has(id)) {
                 if ($parentFilters.delete(id)) {
@@ -86,14 +87,14 @@
             {#each categories as category}
                 <li
                     on:click={() => {
-                        toggleFilter(category.id);
+                        toggleFilter(category.term_id);
                     }}
                     on:keydown
                 >
                     {#if isParent}
                         <div
                             class="category-toggle {$parentFilters.has(
-                                category.id
+                                category.term_id
                             )
                                 ? 'checked'
                                 : 'unchecked'}"
@@ -103,7 +104,7 @@
                     {:else}
                         <div
                             class="category-toggle {$childFilters.has(
-                                category.id
+                                category.term_id
                             )
                                 ? 'checked'
                                 : 'unchecked'}"

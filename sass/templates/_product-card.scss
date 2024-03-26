@@ -3,49 +3,49 @@
   container-name: product-card;
 }
 
-@for $i from 2 through 50 {
-  .animated {
-    .acf-innerblocks-container {
-      .product-card-container:nth-of-type(#{$i}) {
-        animation-delay: ($i - 1) * 200ms;
-
-        .product-card {
-          .product-title {
-            animation-delay: (($i - 1) * 200) + 50ms;
-          }
-
-          .product-block-image {
-            img {
-              animation-delay: (($i - 1) * 200) + 150ms;
-            }
-          }
-          .sku-count {
-            animation-delay: (($i - 1) * 200) + 300ms;
-          }
-        }
-      }
-    }
-  }
-  .product-card-container:nth-of-type(#{$i}) {
-    animation-delay: ($i - 1) * 75ms;
-    .product-card {
-      animation-delay: ($i - 1) * 75ms;
-
-      .product-title {
-        animation-delay: (($i - 1) * 75) + 50ms;
-      }
-
-      .product-block-image {
-        img {
-          animation-delay: (($i - 1) * 75) + 150ms;
-        }
-      }
-      .sku-count {
-        animation-delay: (($i - 1) * 75) + 300ms;
-      }
-    }
-  }
-}
+// @for $i from 2 through 50 {
+//   .animated {
+//     .acf-innerblocks-container {
+//       .product-card-container:nth-of-type(#{$i}) {
+//         animation-delay: ($i - 1) * 200ms;
+//
+//         .product-card {
+//           .product-title {
+//             animation-delay: (($i - 1) * 200) + 50ms;
+//           }
+//
+//           .product-block-image {
+//             img {
+//               animation-delay: (($i - 1) * 200) + 150ms;
+//             }
+//           }
+//           .sku-count {
+//             animation-delay: (($i - 1) * 200) + 300ms;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .product-card-container:nth-of-type(#{$i}) {
+//     animation-delay: ($i - 1) * 75ms;
+//     .product-card {
+//       animation-delay: ($i - 1) * 75ms;
+//
+//       .product-title {
+//         animation-delay: (($i - 1) * 75) + 50ms;
+//       }
+//
+//       .product-block-image {
+//         img {
+//           animation-delay: (($i - 1) * 75) + 150ms;
+//         }
+//       }
+//       .sku-count {
+//         animation-delay: (($i - 1) * 75) + 300ms;
+//       }
+//     }
+//   }
+// }
 
 .animate {
   .product-card-container {

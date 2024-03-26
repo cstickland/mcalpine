@@ -7,7 +7,7 @@
 <div class="product-card-container">
     <a href={product.link} class="product-card {openClass}" >
         <div class="product-block-image">
-            <div class="product-image-link" href={product.link}><img src={product.image_url} alt="" /></div>
+            <div class="product-image-link" href={product.link}><img src={product?.customFields2?.skus[0]?.productImages[0]?.productImage?.mediaItemUrl} alt="" /></div>
             <div class="product-title">{@html product.title}</div>
             <div
                 class="sku-count"
@@ -17,9 +17,9 @@
                 on:keydown
             >
                 <span class="sku-count-default">
-                    {product.skus.length}
-                    {#if product.skus.length == 1}
-                        SKU{/if}{#if product.skus.length > 1} SKUs{/if}
+                    {product.customFields2.skus.length}
+                    {#if product.customFields2.skus.length == 1}
+                        SKU{/if}{#if product.customFields2.skus.length > 1} SKUs{/if}
                 </span>
                 <span class="sku-count-small">SKUs</span>
             </div>
@@ -38,9 +38,9 @@
         </div>
         <div class="sku-list-container">
             <div class="sku-list">
-                {#each product.skus as sku}
+                {#each product.customFields2.skus as sku}
                     <span>
-                        {sku}
+                        {sku.sku}
                     </span>
                 {/each}
             </div>

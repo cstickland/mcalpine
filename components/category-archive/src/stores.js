@@ -3,42 +3,54 @@ import { writable } from 'svelte/store'
 export const allItems = writable([])
 export const currentPage = writable(1)
 
-export const categoryQuery = `{
-  productCategories(first: 1000) {
-    edges {
-      node {
-        id
-        name
-        parentId
-        link
-        customFields {
-          categoryImage {
-            altText
-            sourceUrl(size: MEDIUM)
-          }
-        }
-      }
-    }
-  }
-}`
-
-export const warrantyQuery = `{
-  warranties {
-    edges {
-      node {
-        id
-        title
-        link
-        featuredImage {
+export function getCategoryQuery(postsPerPage, endCursor) {
+  return `{
+      productCategories(first: ${postsPerPage}, after: "${endCursor}") {
+        edges {
           node {
-            altText
-            sourceUrl(size: MEDIUM)
+            id
+            name
+            parentId
+            link
+            customFields {
+              categoryImage {
+                altText
+                sourceUrl(size: MEDIUM)
+              }
+            }
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
       }
-    }
-  }
-}`
+    }`
+}
+
+export function getWarrantyQuery(postsPerPage, endCursor) {
+  return `{
+      warranties(first: ${postsPerPage}, after: "${endCursor}") {
+        edges {
+          node {
+            id
+            title
+            link
+            featuredImage {
+              node {
+                altText
+                sourceUrl(size: MEDIUM)
+              }
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }`
+}
 
 export async function getData(query) {
   const fetchPromise = await fetch('/graphql', {
@@ -53,26 +65,4 @@ export async function getData(query) {
 
   const response = await fetchPromise.json()
   return response
-}
-
-export function divideItemsIntoPages(postsPerPage, items, currentPage) {
-  let count = 0
-  let page = []
-  let pagesArray = []
-  currentPage = 1
-
-  items.forEach((item) => {
-    page.push(item)
-
-    if (page.length == postsPerPage) {
-      pagesArray.push(page)
-      page = []
-      return
-    }
-  })
-  if (page.length > 0) {
-    pagesArray.push(page)
-  }
-  console.log(pagesArray)
-  return pagesArray
 }

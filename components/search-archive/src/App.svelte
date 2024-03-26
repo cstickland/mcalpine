@@ -7,6 +7,7 @@
     import ProductCard from "./ProductCard.svelte";
     import PlaceholderCard from "./PlaceholderCard.svelte";
     import Pagination from "./Pagination.svelte";
+    import LoadMore from './LoadMore.svelte';
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
     import { onMount } from "svelte";
@@ -29,6 +30,7 @@
     let totalResults = "";
     let firstLoad = true;
     let transitioning = false;
+    let currentItems = [];
 
     onMount(async () => {
         let productsWithDistances = [];
@@ -84,6 +86,7 @@
             $filters
         );
         totalPages = insightsDividedIntoPages.length;
+        currentItems = insightsDividedIntoPages[0]
     });
     filters.subscribe((value) => {
         insightsDividedIntoPages = divideItemsIntoPages(
@@ -97,13 +100,21 @@
             firstLoad = false;
         }
         totalPages = insightsDividedIntoPages.length;
+        currentPage.set(1);
+        currentItems = insightsDividedIntoPages[0]
     });
 
-    currentPage.subscribe(() => {
-        transitioning = true;
-        setTimeout(() => {
-            transitioning = false;
-        }, 100);
+    currentPage.subscribe((value) => {
+        currentItems = []
+
+        if(value == 1) {
+            currentItems = insightsDividedIntoPages[0];
+            return
+        }
+
+        for(let i = 0; i < value; i++) {
+            currentItems = [...currentItems, ...insightsDividedIntoPages[i]]
+        }
     });
 
     function getCategories() {
@@ -124,6 +135,7 @@
         const sortedCategories = new Set(Array.from(categories).sort());
         return sortedCategories;
     }
+
 </script>
 
 <Hero {searchTerm} {totalResults} />
@@ -133,9 +145,9 @@
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            {#if insightsDividedIntoPages && insightsDividedIntoPages.length}
+            {#if currentItems && currentItems.length}
                 {#if !transitioning}
-                    {#each insightsDividedIntoPages[$currentPage - 1] as insight, i}
+                    {#each currentItems as insight, i}
                         <div
                             class="card-contianer"
                             in:fade={{ delay: 200 + i * 75 }}
@@ -143,7 +155,7 @@
                             {#if insight.postType === "other"}
                                 <InsightCard {insight} />
                             {:else if insight.postType == "product"}
-                                <ProductCard product={insight} />
+                                <ProductCard product={insight.item} />
                             {/if}
                         </div>
                     {/each}
@@ -160,9 +172,12 @@
         </ul>
     </div>
     <div class="pagination-container">
-        {#if totalPages > 1}
-            <Pagination {totalPages} />
+        {#if $currentPage < totalPages}
+            <LoadMore />
         {/if}
+        <!-- {#if totalPages > 1} -->
+        <!--     <Pagination {totalPages} /> -->
+        <!-- {/if} -->
     </div>
 </section>
 
