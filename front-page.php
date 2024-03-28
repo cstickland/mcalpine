@@ -1,7 +1,6 @@
 <?php
-get_header();
+get_header('front-page');
 ?>
-
 <main id="primary" class="site-main">
     <?php
     while (have_posts()) :

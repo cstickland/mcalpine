@@ -88,6 +88,27 @@
             "append": ""
         },
         {
+            "key": "field_66055fa55a624",
+            "label": "Show Call to Action",
+            "name": "footer_show_call_to_action",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_65081df37d2b2",
             "label": "Footer Call To Action Text",
             "name": "footer_call_to_action_text",
@@ -101,6 +122,11 @@
                         "field": "field_6506c5d448ce7",
                         "operator": "==",
                         "value": "2"
+                    },
+                    {
+                        "field": "field_66055fa55a624",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -130,6 +156,11 @@
                         "field": "field_6506c5d448ce7",
                         "operator": "==",
                         "value": "2"
+                    },
+                    {
+                        "field": "field_66055fa55a624",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -1363,5 +1394,5 @@
     "graphql_types": [
         "ThemeGeneralSettings"
     ],
-    "modified": 1709130372
+    "modified": 1711628350
 }
