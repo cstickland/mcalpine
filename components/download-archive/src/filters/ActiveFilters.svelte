@@ -1,5 +1,6 @@
 <script>
     import { allActiveFilters } from "../filters.js";
+    import { endCursor } from "../stores.js";
 </script>
 
 <ul class="active-filters">
@@ -7,11 +8,15 @@
         <li
             on:keydown
             on:click={() => {
-                if ($allActiveFilters.delete(filter)) {
-                    allActiveFilters.set($allActiveFilters);
+                let tempFilters = $allActiveFilters;
+                endCursor.set('')
+
+                if ($allActiveFilters.filters.has(filter)) {
+                    tempFilters.filters.delete(filter);
+                    allActiveFilters.set(tempFilters);
                 }
             }}
-    >
+        >
             {filter.name}
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -39,10 +44,10 @@
     ul {
         grid-area: active;
         li {
-        height: min-content;
-        border-radius: 50px;
-        border-color: $color__mcalpine-grey;
-        padding: 0.375rem 1.5rem;
+            height: min-content;
+            border-radius: 50px;
+            border-color: $color__mcalpine-grey;
+            padding: 0.375rem 1.5rem;
         }
     }
 </style>
