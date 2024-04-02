@@ -6,18 +6,16 @@
     import Accordion from "./Accordion.svelte";
 
     let questions = [];
-    let categories = new Set();
+    export let categories = new Set();
     let filteredQuestions = [];
     let filteredCategories = new Set();
     let searchTerm = "";
 
     onMount(async () => {
+    console.log(categories);
         let results = await getData(query);
-        questions = results.data.posts.edges;
-        questions.forEach((question) => {
-            categories.add(question.node.categories.edges[0].node.name);
-        });
-
+        questions = results.data.faqs.edges;
+  
         const container = document.getElementById("faq");
         setTimeout(() => {
             container.style.minHeight = "unset";
@@ -38,7 +36,7 @@
             ) {
                 filteredQuestions.push(question);
                 filteredCategories.add(
-                    question.node.categories.edges[0].node.name
+                    question.node.faqCategories.edges[0].node.name
                 );
             }
         });
@@ -71,11 +69,11 @@
                 <h3 class="faq-category-title">{category}</h3>
                 {#if filteredQuestions.length > 0}
                     {#each filteredQuestions as question}
-                        {#if question.node.categories.edges[0].node.name == category}
+                        {#if question.node.faqCategories.edges[0].node.name == category}
                             <Accordion
                                 question={question.node.title}
                                 answer={question.node.faqFields.answer}
-                                id={question.node.postId}
+                                id={question.node.faqId}
                             />
                         {/if}
                     {/each}

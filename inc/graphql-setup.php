@@ -17,7 +17,11 @@ add_filter('register_taxonomy_args', function ($args, $taxonomy) {
         $args['graphql_single_name'] = 'downloadType';
         $args['graphql_plural_name'] = 'downloadTypes';
     }
-
+    if ('faq_categories' === $taxonomy) {
+        $args['show_in_graphql'] = true;
+        $args['graphql_single_name'] = 'faqCategory';
+        $args['graphql_plural_name'] = 'faqCategories';
+    }
     return $args;
 }, 10, 2);
 
@@ -38,6 +42,11 @@ add_filter('register_post_type_args', function ($args, $post_type) {
         $args['show_in_graphql'] = true;
         $args['graphql_single_name'] = 'download';
         $args['graphql_plural_name'] = 'downloads';
+    }
+    if ('faq' === $post_type) {
+        $args['show_in_graphql'] = true;
+        $args['graphql_single_name'] = 'faq';
+        $args['graphql_plural_name'] = 'faqs';
     }
 
     return $args;

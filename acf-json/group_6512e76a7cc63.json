@@ -29,12 +29,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
-            },
-            {
-                "param": "post_category",
-                "operator": "==",
-                "value": "category:faq"
+                "value": "faq"
             }
         ]
     ],
@@ -51,5 +46,5 @@
     "graphql_field_name": "faqFields",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1697383147
+    "modified": 1712065982
 }

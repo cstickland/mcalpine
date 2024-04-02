@@ -1,8 +1,7 @@
 <?php
 /* Template Name: Faq */
 
-get_header();
-global $post;
+get_header('faq');
 $blocks = parse_blocks($post->post_content);
 ?>
 

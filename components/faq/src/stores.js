@@ -3,21 +3,21 @@ import { writable } from 'svelte/store'
 export const filters = writable(new Set())
 
 export const query = `{
-  posts(where: {categoryName: "faq"}, first: 200) {
+  faqs(first: 200) {
     edges {
       node {
-        postId
         title
         faqFields {
           answer
         }
-        categories(where: {childless: true}) {
+        faqCategories(where: {childless: true}) {
           edges {
             node {
               name
             }
           }
         }
+        faqId
       }
     }
   }
