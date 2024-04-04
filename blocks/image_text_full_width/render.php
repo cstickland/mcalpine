@@ -1,4 +1,5 @@
 <div <?php echo get_block_wrapper_attributes(['class' => 'image-text-full-width-block animate']); ?> id="query-<?php the_title(); ?>">
+    <div class="swipe-reveal-container"></div>
     <div class="image-text-container  <?php
                                         if (get_field('show_overflow_image')) : echo 'overflow ';
                                         endif;
@@ -10,7 +11,9 @@
             $image_url = $image['url'];
 
             if (!empty($image)) : ?>
-                <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                <div class="background-image-container">
+                    <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
+                </div>
             <?php endif; ?>
 
             <?php if (get_field('show_overflow_image')) { ?>
