@@ -1,43 +1,89 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .animate {
-  .image-text-block {
-    opacity: 0;
-    .product-card {
-      .sku-count {
+  &.image-text-block {
+    &.red {
+      .swipe-reveal-container {
+        background-color: $color__mcalpine-red;
+      }
+    }
+    .image-container {
+      .image-text-background-image {
         opacity: 0;
       }
     }
-  }
-}
+    .text-container,
+    .text-color-block {
+      opacity: 0;
+    }
 
-.animated {
-  .product-card-container {
-    opacity: 1;
-
-    @include grow;
-    transform-origin: bottom left;
-    .product-card {
-      .product-title {
-        @include slide-in;
-        animation-delay: 50ms;
-      }
-      .product-block-image {
-        img {
-          @include grow;
-          animation-delay: 100ms;
+    &.animated {
+      &.i-left {
+        .swipe-reveal-container {
+          left: 100%;
+          transition: left 1.125s ease-in-out;
         }
       }
-      .sku-count {
-        @include grow;
-        transform-origin: center right;
-        animation-delay: 300ms;
+      &.i-right {
+        .swipe-reveal-container {
+          left: -100%;
+          transition: left 1.125s ease-in-out;
+        }
+      }
+      .image-container {
+        overflow: hidden;
+        .image-text-background-image {
+          @include image-fade-in;
+          animation-duration: 1s;
+          animation-delay: 0.25s;
+        }
+      }
+
+      .text-container,
+      .text-color-block {
+        @include fade-in;
+        animation-duration: 1s;
+        animation-delay: 0.625s;
+      }
+
+      .text-container {
+        .color-block,
+        h2,
+        div,
+        .btn {
+          opacity: 0;
+          @include slide-in;
+          animation-delay: 1.125s;
+        }
+
+        h2 {
+          animation-delay: 1.375s;
+        }
+
+        div {
+          animation-delay: 1.575s;
+        }
+
+        .btn {
+          animation-delay: 1.8s;
+        }
       }
     }
   }
 }
 
 .image-text-block {
+  position: relative;
+
+  .swipe-reveal-container {
+    position: absolute;
+    z-index: 2;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   .image-text-container {
     .text-color-block {
       &.color-red {

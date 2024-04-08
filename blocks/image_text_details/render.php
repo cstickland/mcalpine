@@ -1,4 +1,5 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block ' . get_field('background_color')]); ?> id="query-<?php the_title(); ?>">
+<div <?php echo get_block_wrapper_attributes(['class' => 'image-text-block animate ' . get_field('background_color') . ' ' . get_field('image_alignment_desktop')]); ?> id="query-<?php the_title(); ?>">
+    <div class="swipe-reveal-container"></div>
     <div class="image-text-container  <?php
                                         echo get_field('color') . ' ';
                                         echo get_field('image_alignment_mobile') . ' ';

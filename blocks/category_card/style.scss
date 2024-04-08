@@ -1,15 +1,15 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-// @for $i from 2 through 50 {
-//   .acf-innerblocks-container {
-//     .category-card-container:nth-of-type(#{$i}) {
-//       animation-delay: ($i - 1) * 200ms;
-//     }
-//   }
-//   .category-card-container:nth-of-type(#{$i}) {
-//     animation-delay: ($i - 1) * 75ms;
-//   }
-// }
+@for $i from 2 through 50 {
+  .acf-innerblocks-container {
+    .category-card-container:nth-of-type(#{$i}) {
+      animation-delay: ($i - 1) * 250ms;
+    }
+  }
+  // .category-card-container:nth-of-type(#{$i}) {
+  //   animation-delay: ($i - 1) * 75ms;
+  // }
+}
 
 .animate {
   .category-card-container {

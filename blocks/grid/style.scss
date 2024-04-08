@@ -1,5 +1,19 @@
 @import '../../sass/abstracts/_abstracts.scss';
+
 .grid-block {
+  &.animated {
+    .grid-title-container {
+      .grid-title,
+      .grid-link {
+        @include slide-in;
+        animation-duration: 500ms;
+      }
+    }
+    .grid-link-mobile {
+      @include slide-in;
+      animation-duration: 500ms;
+    }
+  }
   overflow: hidden;
   @include container-large;
   container-type: inline-size;
@@ -13,6 +27,7 @@
     margin-bottom: 2.5rem;
     .grid-link {
       display: none;
+      opacity: 0;
       color: $color__mcalpine-grey;
 
       &:hover {
@@ -21,6 +36,7 @@
     }
     .grid-title {
       width: auto;
+      opacity: 0;
       &.red {
         color: $color__mcalpine-red;
       }
@@ -76,6 +92,7 @@
 
   .grid-link-mobile {
     display: block;
+    opacity: 0;
     margin: 1.625rem auto;
     color: $color__mcalpine-grey;
     width: fit-content;

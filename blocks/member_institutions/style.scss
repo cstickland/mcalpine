@@ -3,7 +3,7 @@
 @for $i from 2 through 50 {
   .institution-icon-grid {
     li:nth-of-type(#{$i}) {
-      animation-delay: $i * 75ms;
+      animation-delay: $i * 150ms;
     }
   }
 }

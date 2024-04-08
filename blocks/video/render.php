@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'video-block hide-controls']); ?>>
+<div <?php echo get_block_wrapper_attributes(['class' => 'video-block hide-controls animate']); ?>>
     <div class="video-muted" data-video="<?php the_field('video_url'); ?>"></div>
     <div class="play-button">
     </div>

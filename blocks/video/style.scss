@@ -1,6 +1,31 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .video-block {
+  &.animate {
+    scale: 0.75;
+    opacity: 0;
+    transform-origin: bottom center;
+
+    &.animated {
+      animation-name: scale;
+      animation-fill-mode: forwards;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+    }
+  }
+}
+
+@keyframes scale {
+  from {
+    scale: 0.75;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.video-block {
   margin: 0 auto;
   width: 850px;
   max-width: 100%;
