@@ -7,7 +7,7 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     margin: 0 auto;
-    &:nth-of-type(2) {
+    &:nth-of-type(2n) {
       ul {
         margin-left: -30rem;
       }
@@ -26,10 +26,10 @@
       overflow: hidden;
       display: flex;
       white-space: nowrap;
-      color: #7caef2;
+      color: #fff;
       font-weight: 900;
-      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-      -webkit-text-stroke: 1px #7caef2;
+      text-shadow: -1px -1px 0 #7caef2, 1px -1px 0 #7caef2, -1px 1px 0 #7caef2,
+        1px 1px 0 #7caef2;
       font-size: 3.125rem;
       line-height: 0.8;
       font-size: clamp(3.125rem, -0.875rem + 8.333vw, 9.125rem);

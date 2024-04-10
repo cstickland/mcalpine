@@ -21,7 +21,7 @@ class Category
 
 $term = get_queried_object();
 $child_term_ids = get_term_children($term->term_id, 'product_categories');
-$child_terms;
+$child_terms = array();
 
 foreach ($child_term_ids as $id) {
     $child_terms[] = get_term($id);

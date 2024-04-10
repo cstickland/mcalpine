@@ -6,7 +6,7 @@
 
     import ProductCard from "./ProductCard.svelte";
     import Pagination from "./Pagination.svelte";
-    import LoadMore from './LoadMore.svelte';
+    import LoadMore from "./LoadMore.svelte";
     import CardsPerPage from "./CardsPerPage.svelte";
     import GridToggleButtons from "./GridToggleButtons.svelte";
     import Filters from "./Filters.svelte";
@@ -74,51 +74,52 @@
         let currentPageTemp = parseInt(urlParams.get("page")) || 1;
         currentPage.set(currentPageTemp);
         // wrapGrid(gridElement)
-
     });
-
 </script>
 
 <section class="product-archive {filtersClass} {filtersClosedClass}">
     {#if showFilters}
-        <div class="filters-heading">
-            <button
-                on:click={() => {
-                    openFilters = !openFilters;
-                }}
-                class="filters-heading-open"
-            >
-                <div class="filters-icon">
-                    <div class="filter-line line-one">
-                        <div class="filter-line-black" />
-                        <div class="filter-line-red" />
-                    </div>
-                    <div class="filter-line line-two">
-                        <div class="filter-line-black" />
-                        <div class="filter-line-red" />
-                    </div>
-                    <div class="filter-line line-three">
-                        <div class="filter-line-black" />
-                        <div class="filter-line-red" />
-                    </div>
-                </div>
-                Filters
-            </button>
-            {#if $parentFilters.size > 0 || $childFilters.size > 0}
-                <div
-                    class="clear-filters"
+        {#if parentCategories?.length || childCategories?.length }
+            <div class="filters-heading">
+                <button
                     on:click={() => {
-                        resetFilters();
+                        openFilters = !openFilters;
                     }}
-                    on:keydown
+                    class="filters-heading-open"
                 >
-                    Clear selection
-                </div>
+                    <div class="filters-icon">
+                        <div class="filter-line line-one">
+                            <div class="filter-line-black" />
+                            <div class="filter-line-red" />
+                        </div>
+                        <div class="filter-line line-two">
+                            <div class="filter-line-black" />
+                            <div class="filter-line-red" />
+                        </div>
+                        <div class="filter-line line-three">
+                            <div class="filter-line-black" />
+                            <div class="filter-line-red" />
+                        </div>
+                    </div>
+                    Filters
+                </button>
+                {#if $parentFilters.size > 0 || $childFilters.size > 0}
+                    <div
+                        class="clear-filters"
+                        on:click={() => {
+                            resetFilters();
+                        }}
+                        on:keydown
+                    >
+                        Clear selection
+                    </div>
+                {/if}
+            </div>
+            {#if openFilters}
+                <Filters {childCategories} {parentCategories} />
             {/if}
-        </div>
-        {#if openFilters}
-            <Filters {childCategories} {parentCategories} />
-        {/if}{/if}
+        {/if}
+    {/if}
     <div class="archive-controls">
         {#if $parentFilters.size > 0 || $childFilters.size > 0}
             <ActiveFilters />
@@ -144,9 +145,9 @@
         </ul>
     </div>
     <div class="pagination-container">
-    {#if $currentPage < totalPages}
-        <LoadMore />
-    {/if}
+        {#if $currentPage < totalPages}
+            <LoadMore />
+        {/if}
         <!-- {#if totalPages > 1} -->
         <!--     <Pagination {totalPages} /> -->
         <!-- {/if} -->
