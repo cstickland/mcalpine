@@ -66,44 +66,52 @@ add_action('graphql_register_types', function () {
         'type' => ['list_of' => 'String'], // To accept multiple strings
         'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
     ]);
+    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'relation', [
+        'type' => 'String',
+        'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
+    ]);
+    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'category', [
+        'type' => ['list_of' => 'String'],
+        'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
+    ]);
+    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'faqCategory', [
+        'type' => ['list_of' => 'String'],
+        'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
+    ]);
 });
 
 // Add a filter to modify the query arguments.
 add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
+    $taxonomy_queries = array();
+    $relation = 'AND';
 
-    $categorySlug = $args['where']['downloadCategories'];
-    $downloadTypeSlug = $args['where']['downloadTypes'];
-
-    $categorySlugArray = [
-        'taxonomy' => 'download_categories',
-        'field' => 'slug',
-        'terms' => $categorySlug
-    ];
-    $downloadTypeSlugArray = [
-        'taxonomy' => 'download_types',
-        'field' => 'slug',
-        'terms' => $downloadTypeSlug
-    ];
-
-    if (isset($categorySlug) && isset($downloadTypeSlug)) {
-        $query_args['tax_query'] = [
-            'relation' => 'AND',
-            $categorySlugArray,
-            $downloadTypeSlugArray
-        ];
+    if (isset($args['where']['relation'])) {
+        $relation = $args['where']['relation'];
     }
 
-    if (isset($categorySlug) && !isset($downloadTypeSlug)) {
-        $query_args['tax_query'] = [
-            $categorySlugArray
+    if (isset($args['where']['downloadCategories'])) {
+        $categorySlug = $args['where']['downloadCategories'];
+
+        $categorySlugArray = [
+            'taxonomy' => 'download_categories',
+            'field' => 'slug',
+            'terms' => $categorySlug
         ];
+        $taxonomy_queries[] = $categorySlugArray;
+    }
+    if (isset($args['where']['downloadTypes'])) {
+        $downloadTypeSlug = $args['where']['downloadTypes'];
+
+        $downloadTypeSlugArray = [
+            'taxonomy' => 'download_types',
+            'field' => 'slug',
+            'terms' => $downloadTypeSlug
+        ];
+        $taxonomy_queries[] = $downloadTypeSlugArray;
     }
 
-    if (isset($downloadTypeSlug) && !isset($categorySlug)) {
-        $query_args['tax_query'] = [
-            $downloadTypeSlugArray
-        ];
+    if (isset($categorySlug) || isset($downloadTypeSlug)) {
+        $query_args['tax_query'] = array_merge(['relation' => $relation, $taxonomy_queries]);
     }
-
     return $query_args;
 }, 10, 5);

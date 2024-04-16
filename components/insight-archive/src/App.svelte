@@ -1,9 +1,10 @@
 <script>
     export let allInsights = [];
+    export let hasNextPage = false;
+    export let endCursor = '';
 
     import InsightCard from "./InsightCard.svelte";
     import LoadMore from "./LoadMore.svelte";
-    import Pagination from "./Pagination.svelte";
     import Filters from "./Filters.svelte";
     import { onMount } from "svelte";
     import { filters, currentPage } from "./stores.js";
@@ -48,7 +49,7 @@
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            {#each currentPageInsights as insight}
+            {#each allInsights as insight}
                 <InsightCard {insight} />
             {/each}
         </ul>

@@ -14,6 +14,43 @@ class Insight
 
 $insights = [];
 get_header();
+
+$graphql = graphql([
+    'query' => '{
+      contentNodes(
+        where: {contentTypes: [POST, FAQ], orderby: {field: DATE, order: ASC}, relation: "OR"}
+        first: 48
+      ) {
+        nodes {
+          ... on Post {
+            id
+            featuredImage {
+              node {
+                altText
+                sourceUrl(size: MEDIUM)
+              }
+            }
+            link
+            title
+          }
+          ... on Faq {
+            id
+            contentTypeName
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }'
+]);
+
+$items = $graphql['data']['contentNodes']['nodes'];
+$endCursor = $graphql['data']['contentNodes']['pageInfo']['endCursor'];
+$hasNextPage = $graphql['data']['contentNodes']['pageInfo']['hasNextPage'];
+
+var_dump($graphql);
 ?>
 
 <main id="primary" class="site-main">
@@ -56,12 +93,14 @@ get_header();
 </main><!-- #main -->
 <script>
     const insightArchiveContainer = document.getElementById('insight-archive');
-    const allInsights = <?php echo json_encode($insights); ?>;
+    const allInsights = <?php echo json_encode($items); ?>;
     insightArchiveContainer.innerHTML = '';
     new InsightArchive({
         target: insightArchiveContainer,
         props: {
             allInsights: allInsights,
+            hasNextPage: <?php echo $hasNextPage ? 'true' : 'false'; ?>,
+            endCursor: "<?php echo $endCursor; ?>"
         },
     })
 </script>
