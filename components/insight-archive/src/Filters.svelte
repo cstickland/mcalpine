@@ -1,11 +1,9 @@
 <script>
-    import { slide, fade } from "svelte/transition";
-
+    import { slide} from "svelte/transition";
     import { filters } from "./stores.js";
 
     export let categories;
     let open = false;
-    const categoriesArray = [...categories];
 </script>
 
 <div class="insight-archive-filters">
@@ -52,11 +50,11 @@
                 class="insight-archive-filter-dropdown"
                 transition:slide={{ duration: 200 }}
             >
-                {#each categoriesArray as category}
+                {#each categories as category}
                     <li
                         on:click={() => {
                             if (!$filters.has(category)) {
-                                $filters = $filters.add(category);
+                                filters.set($filters.add(category));
                             } else {
                                 if ($filters.delete(category)) {
                                     $filters = $filters;
@@ -72,7 +70,7 @@
                         >
                             <div class="toggle-circle" />
                         </div>
-                        {category}
+                        {category.name}
                     </li>
                 {/each}
             </ul>
@@ -88,7 +86,7 @@
                     }
                 }}
             >
-                {filter}
+                {filter.name}
 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     ><g data-name="Layer 2"

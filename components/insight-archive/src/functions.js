@@ -1,58 +1,59 @@
-export function getCategories() {
-  const categories = new Set()
-
-  allInsights.forEach((insight) => {
-    categories.add(insight.identifier)
+export async function getData(query, variables) {
+  const fetchPromise = await fetch('/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-RapidAPI-Key': '<YOUR_RAPIDAPI_KEY>',
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: variables,
+    }),
   })
-  return categories
+
+  const response = await fetchPromise.json()
+  return response
 }
 
-export function divideInsightsIntoPages(filters) {
-  let count = 0
-  let page = []
-  let pagesArray = []
-  let insights = []
-  const postsPerPage = 6
-
-  if (filters.size == 0) {
-    insights = allInsights
-  }
-
-  if (filters.size > 0) {
-    insights = []
-    allInsights.forEach((insight) => {
-      if (filters.has(insight.identifier)) {
-        insights.push(insight)
+export const query = `
+query initialInsightQuery($faqCategories: [String], $categories: [String], $relation: String = "OR", $after: String) {
+  contentNodes(
+    where: {contentTypes: [POST, FAQ], faqCategories: $faqCategories, categories: $categories, relation: $relation}
+    first: 48
+    after: $after 
+  ) {
+    nodes {
+      ... on Post {
+        id
+        featuredImage {
+          node {
+            altText
+            sourceUrl(size: MEDIUM)
+          }
+        }
+        link
+        title
+        categories(where: {parent: 0}) {
+          nodes {
+            name
+          }
+        }
       }
-    })
-  }
-
-  insights.forEach((insight, i) => {
-    if (i < insights.length - 1) {
-      if (postsPerPage - count >= insight.columnWidth) {
-        count += insight.columnWidth
-        page.push(insight)
-        return
-      }
-      if (postsPerPage - count < insight.columnWidth) {
-        page[page.length - 1].columnWidth = postsPerPage - count + 1
-        pagesArray.push(page)
-        page = []
-        count = 0
-        count += insight.columnWidth
-        page.push(insight)
-        return
+      ... on Faq {
+        databaseId
+        title
+        contentTypeName
+        faqCategories(where: {parent: 0}) {
+          nodes {
+            name
+            id
+          }
+        }
       }
     }
-    if (postsPerPage > page.length) {
-      page.push(insight)
-      pagesArray.push(page)
-      return
+    pageInfo {
+      hasNextPage
+      endCursor
     }
-    pagesArray.push(page)
-    page = []
-    page.push(insight)
-    pagesArray.push(page)
-  })
-  return pagesArray
-}
+  }
+}`

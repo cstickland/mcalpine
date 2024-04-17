@@ -70,11 +70,11 @@ add_action('graphql_register_types', function () {
         'type' => 'String',
         'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
     ]);
-    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'category', [
+    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'categories', [
         'type' => ['list_of' => 'String'],
         'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
     ]);
-    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'faqCategory', [
+    register_graphql_field('RootQueryToContentNodeConnectionWhereArgs', 'faqCategories', [
         'type' => ['list_of' => 'String'],
         'description' => __('Filter by post objects that have the specific category slug', 'your_text_domain'),
     ]);
@@ -88,7 +88,27 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
     if (isset($args['where']['relation'])) {
         $relation = $args['where']['relation'];
     }
+    if (isset($args['where']['categories'])) {
+        $categorySlug = $args['where']['categories'];
 
+        $categorySlugArray = [
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => $categorySlug
+        ];
+        $taxonomy_queries[] = $categorySlugArray;
+    }
+
+    if (isset($args['where']['faqCategories'])) {
+        $categorySlug = $args['where']['faqCategories'];
+
+        $categorySlugArray = [
+            'taxonomy' => 'faq_categories',
+            'field' => 'slug',
+            'terms' => $categorySlug
+        ];
+        $taxonomy_queries[] = $categorySlugArray;
+    }
     if (isset($args['where']['downloadCategories'])) {
         $categorySlug = $args['where']['downloadCategories'];
 
@@ -110,8 +130,13 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
         $taxonomy_queries[] = $downloadTypeSlugArray;
     }
 
-    if (isset($categorySlug) || isset($downloadTypeSlug)) {
-        $query_args['tax_query'] = array_merge(['relation' => $relation, $taxonomy_queries]);
+    if (count($taxonomy_queries) > 0) {
+        if (count($taxonomy_queries) == 1) {
+            $query_args['tax_query'] = array_merge([$taxonomy_queries]);
+        }
+        if (count($taxonomy_queries) > 1) {
+            $query_args['tax_query'] = array('relation' => $relation, ...$taxonomy_queries);
+        }
     }
     return $query_args;
 }, 10, 5);

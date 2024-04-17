@@ -1,65 +1,65 @@
 <script>
-    export let allInsights = [];
+    export let allItems = [];
     export let hasNextPage = false;
     export let endCursor = '';
+    export let categories = [];
+    export let showFilters = true;
 
     import InsightCard from "./InsightCard.svelte";
     import LoadMore from "./LoadMore.svelte";
     import Filters from "./Filters.svelte";
-    import { onMount } from "svelte";
-    import { filters, currentPage } from "./stores.js";
-    import { divideInsightsIntoPages, getCategories } from "./functions.js";
+    import { filters } from "./stores.js";
+    import { getData, query } from './functions'
 
-    onMount(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentPageTemp = parseInt(urlParams.get("pagination")) || 1;
-        currentPage.set(currentPageTemp);
-    });
-
-    let categories = getCategories();
-    export let showFilters = true;
-
-    $: totalPages = insightsDividedIntoPages.length;
-    let insightsDividedIntoPages = divideInsightsIntoPages($filters);
-    let currentPageInsights = [];
-
-    currentPage.subscribe((value) => {
-        if (value == 1) {
-            currentPageInsights = [...insightsDividedIntoPages[value - 1]];
-            return;
+    filters.subscribe(async (values) => {
+        let categories = [];
+        let faqCategories = [];
+        endCursor = ''
+        values.forEach(filter => {
+            if(filter.taxonomyName === 'category') {
+                categories.push(filter.slug);
+            }
+            if(filter.taxonomyName === 'faq_categories') {
+                faqCategories.push(filter.slug)
+            }
+        })
+        if(categories.length === 0) {
+            categories = null
         }
-        currentPageInsights = [
-            ...currentPageInsights,
-            ...insightsDividedIntoPages[value - 1],
-        ];
-    });
+        if(faqCategories.length === 0) {
+            faqCategories = null
+        }
+    
+        const variables  = {
+            faqCategories: faqCategories,
+            categories: categories,
+            after: endCursor
+        }
+        let response = await getData(query, variables);
 
-    filters.subscribe((value) => {
-        currentPage.set(1);
-        insightsDividedIntoPages = divideInsightsIntoPages(value);
-        currentPageInsights = insightsDividedIntoPages[0] || [];
+        console.log(response)
+        allItems = [...response.data.contentNodes.nodes];
+        endCursor = response.data.contentNodes.pageInfo.endCursor;
+        hasNextPage = response.data.contentNodes.pageInfo.hasNextPage;
     });
 </script>
 
 <div class="insight-archive-filters-container">
     {#if showFilters}
-        <Filters {categories} />
+        <Filters {categories} bind:allItems />
     {/if}
 </div>
 <section class="insight-archive">
     <div class="insight-archive-grid-container">
         <ul class="insight-archive-grid">
-            {#each allInsights as insight}
-                <InsightCard {insight} />
+            {#each allItems as item}
+                <InsightCard insight={item} />
             {/each}
         </ul>
     </div>
     <div class="pagination-container">
-        {#if $currentPage < totalPages}
-            <LoadMore allItems={allInsights} />
+        {#if hasNextPage}
+            <LoadMore bind:allItems bind:hasNextPage bind:endCursor />
         {/if}
-        <!-- {#if totalPages > 1} -->
-        <!--     <Pagination {totalPages} /> -->
-        <!-- {/if} -->
     </div>
 </section>

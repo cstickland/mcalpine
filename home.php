@@ -16,81 +16,76 @@ $insights = [];
 get_header();
 
 $graphql = graphql([
-    'query' => '{
-      contentNodes(
-        where: {contentTypes: [POST, FAQ], orderby: {field: DATE, order: ASC}, relation: "OR"}
-        first: 48
-      ) {
-        nodes {
-          ... on Post {
-            id
-            featuredImage {
-              node {
-                altText
-                sourceUrl(size: MEDIUM)
-              }
-            }
-            link
-            title
-          }
-          ... on Faq {
-            id
-            contentTypeName
+    'query' => 'query initialInsightQuery($faqCategories: [String] = null, $categories: [String] = null, $relation: String = "OR") {
+  contentNodes(
+    where: {contentTypes: [POST, FAQ], faqCategories: $faqCategories, categories: $categories, relation: $relation}
+    first: 48
+    after: ""
+  ) {
+    nodes {
+      ... on Post {
+        id
+        featuredImage {
+          node {
+            altText
+            sourceUrl(size: MEDIUM)
           }
         }
-        pageInfo {
-          hasNextPage
-          endCursor
+        link
+        title
+        categories(where: {parent: 0}) {
+          nodes {
+            name
+          }
         }
       }
-    }'
+      ... on Faq {
+        databaseId
+        contentTypeName
+        link
+        title
+        featuredImage {
+          node {
+            altText
+            sourceUrl(size: MEDIUM)
+          }
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+  categories(where: {hideEmpty: true, parent: 0}, first: 100) {
+    nodes {
+      name
+      slug
+      taxonomyName
+    }
+  }
+  faqCategories(first: 100, where: {hideEmpty: true, parent: 0}) {
+    nodes {
+      name
+      slug
+      taxonomyName
+    }
+  }
+}'
 ]);
 
 $items = $graphql['data']['contentNodes']['nodes'];
 $endCursor = $graphql['data']['contentNodes']['pageInfo']['endCursor'];
 $hasNextPage = $graphql['data']['contentNodes']['pageInfo']['hasNextPage'];
-
-var_dump($graphql);
+$categories = array(...$graphql['data']['categories']['nodes'], ...$graphql['data']['faqCategories']['nodes']);
 ?>
 
 <main id="primary" class="site-main">
     <?php echo do_blocks('<!-- wp:mcalpine/featured-insight-hero {"name":"mcalpine/featured-insight-hero","mode":"preview"} /-->'); ?>
     <ul id="insight-archive" class="insight-archive-container">
-        <?php if (have_posts()) :
-            /* Start the Loop */
-            while (have_posts()) :
-                the_post();
-
-                $post_id = get_the_ID();
-                $insight_image = get_the_post_thumbnail_url();
-                $new_insight = new Insight();
-                $new_insight->title = get_the_title();
-                $new_insight->permalink = get_the_permalink();
-                $category;
-                foreach ((get_the_category()) as $cat) {
-                    if ($cat->parent == 0) {
-                        $category = $cat->cat_name;
-                    }
-                };
-                $new_insight->identifier = $category;
-                $new_insight->img = $insight_image;
-                $new_insight->columnWidth = 1;
-                $new_insight->id = $post_id;
-                // $new_insight->columnWidth = get_field('column_width', get_the_ID()) ? (int)get_field('column_width', get_the_ID())  : 1;
-                $insights[] = $new_insight;
-        ?>
-
-                <li> <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-
-        <?php
-            endwhile;
-
-            the_posts_navigation();
-
-        endif;
-        ?>
     </ul>
 </main><!-- #main -->
+
 <script>
     const insightArchiveContainer = document.getElementById('insight-archive');
     const allInsights = <?php echo json_encode($items); ?>;
@@ -98,9 +93,10 @@ var_dump($graphql);
     new InsightArchive({
         target: insightArchiveContainer,
         props: {
-            allInsights: allInsights,
+            allItems: allInsights,
             hasNextPage: <?php echo $hasNextPage ? 'true' : 'false'; ?>,
-            endCursor: "<?php echo $endCursor; ?>"
+            endCursor: "<?php echo $endCursor; ?>",
+            categories: <?php echo json_encode($categories); ?>
         },
     })
 </script>
