@@ -5,7 +5,7 @@
     let open = false;
 </script>
 
-<a href={insight.link ? insight.link : ""} class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+<a href={insight.link ? insight.link : "/faq?id=" + insight.databaseId} class="insight-card mobile-show col-{insight.columnWidth}" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
     <div class="insight-card-text">
         {#if insight.contentTypeName === 'faq'}
             <h6 class="insight-identifier">FAQ</h6>

@@ -19,7 +19,7 @@
     });
 </script>
 
-<a href={insight.item.node.link ? insight.item.node.link : ""}
+<a href={insight.item.node.link ? insight.item.node.link : "/faq?id=" + insight.item.node.databaseId}
     class="insight-card mobile-show col-{insight.columnWidth}"
     >
     <div class="insight-card-text">
@@ -28,6 +28,9 @@
         {/if}
         {#if insight.item.postType == "post"}
             <h6 class="insight-identifier">{identifier}</h6>
+        {/if}
+        {#if insight.item.postType == "faq"}
+            <h6 class="insight-identifier">Faq</h6>
         {/if}
         <h3 class="insight-card-title">{@html insight.item.node.title}</h3>
     </div>

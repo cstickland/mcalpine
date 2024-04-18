@@ -82,6 +82,15 @@ export function getQuery(searchTerm) {
           }
         }
       }
+      faqs(where: {search: "${searchTerm}"}, first: 100) {
+        edges {
+          node {
+            contentTypeName
+            databaseId
+            title
+          }
+        }
+      }
     }`
 }
 

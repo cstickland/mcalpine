@@ -6,7 +6,6 @@
     import InsightCard from "./InsightCard.svelte";
     import ProductCard from "./ProductCard.svelte";
     import PlaceholderCard from "./PlaceholderCard.svelte";
-    import Pagination from "./Pagination.svelte";
     import LoadMore from './LoadMore.svelte';
     import Filters from "./Filters.svelte";
     import Hero from "./Hero.svelte";
@@ -45,10 +44,12 @@
         }
         setPostType(data.data.pages.edges, "page");
         setPostType(data.data.posts.edges, "post");
+        setPostType(data.data.faqs.edges, "faq");
 
         const otherResults = [
             ...data.data.pages.edges,
             ...data.data.posts.edges,
+            ...data.data.faqs.edges
         ];
         const othersWithDistances = getOthersLevenshtein(
             otherResults,
@@ -175,9 +176,6 @@
         {#if $currentPage < totalPages}
             <LoadMore />
         {/if}
-        <!-- {#if totalPages > 1} -->
-        <!--     <Pagination {totalPages} /> -->
-        <!-- {/if} -->
     </div>
 </section>
 

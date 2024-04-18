@@ -12,7 +12,6 @@
     let searchTerm = "";
 
     onMount(async () => {
-    console.log(categories);
         let results = await getData(query);
         questions = results.data.faqs.edges;
   

@@ -22,14 +22,7 @@
     });
 </script>
 
-<div
-    itemscope
-    itemprop="mainEntity"
-    itemtype="https://schema.org/Question"
-    class="accordion {open ? 'open' : ''}"
-    {id}
-    bind:this={accordionElement}
->
+<div class="accordion {open ? 'open' : ''}" {id} bind:this={accordionElement}>
     <div class="open-gradient" />
     <div
         class="accordion-question-container"
@@ -38,7 +31,7 @@
         }}
         on:keydown
     >
-        <h5 class="accordion-question" itemprop="name">{question}</h5>
+        <h5 class="accordion-question">{question}</h5>
 
         <div class="accordion-toggle-icon">
             <div class="vertical-line" />
@@ -46,13 +39,7 @@
         </div>
     </div>
     {#if open}
-        <div
-            itemscope
-            itemprop="acceptedAnswer"
-            itemtype="https://schema.org/Answer"
-            class="accordion-answer"
-            transition:slide
-        >
+        <div class="accordion-answer" transition:slide>
             <div itemprop="text">{@html answer}</div>
         </div>
     {/if}

@@ -17,7 +17,7 @@ $faq_posts = get_posts([
                     "name": "<?php echo $faq->post_title; ?>",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "<?php echo get_field('answer', $faq->ID); ?>"
+                        "text": "<?php echo strip_tags(get_field('answer', $faq->ID)); ?>"
                     }
                 }
                 <?php if ($i < count($faq_posts) - 1) { ?>, <?php } ?>
