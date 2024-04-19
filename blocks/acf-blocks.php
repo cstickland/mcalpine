@@ -43,3 +43,4 @@ require_once('video/vimeo_video.php');
 require_once('hero_large_category/hero_large_category.php');
 require_once('find_product/find_product.php');
 require_once('product_guide_download/product_guide_download.php');
+require_once('product_highlights/product_highlights.php');

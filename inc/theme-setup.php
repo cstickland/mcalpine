@@ -106,8 +106,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
                 'mcalpine/product-details',
                 'mcalpine/image-text-product',
                 'mcalpine/image-text-details',
-                'acf/find-product'
-
+                'acf/find-product',
+                'mcalpine/product-highlights'
             );
             return $allowed_blocks;
         }
