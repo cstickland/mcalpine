@@ -1,162 +1,72 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-@for $i from 2 through 50 {
-  .institution-icon-grid {
-    li:nth-of-type(#{$i}) {
-      animation-delay: $i * 150ms;
-    }
-  }
-}
-
-.animate {
-  .member-institutions-text {
-    opacity: 0;
-  }
-
-  .institution-icon-grid {
-    li {
-      opacity: 0;
-    }
-  }
-}
-
-.animated {
-  .member-institutions-text {
-    @include slide-in;
-  }
-  .institution-icon-grid {
-    li {
-      @include grow;
-      transform-origin: center center;
-    }
-  }
-}
-
-.editor-styles-wrapper {
-  .animate {
-    .newsletter-block-title {
-      opacity: 1;
-    }
-
-    .newsletter-block-message {
-      opacity: 1;
-    }
-  }
-}
-
-.member-institutions {
+.product-highlights {
   @include container-large;
-  padding-top: 0 !important;
-  background: transparent
-    radial-gradient(circle at 50% -75%, #7caef212 0%, #ffffff 100%) 0% 0%;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center -75%;
-  font-size: clamp(1rem, -0.5rem + 3.125vw, 1.5rem);
-  .red-band {
-    height: 1px;
-    border-top: solid 2px $color__mcalpine-red;
-    border-radius: 50%;
-    width: 75%;
-    margin: 0 auto;
-    margin-bottom: 1.5rem;
-  }
-  .member-institutions-text {
-    text-align: center;
-    padding-bottom: 2rem;
-    max-width: 350px;
-    margin: 0 auto;
+  overflow: scroll;
+  background-color: #fff;
+  color: $color__mcalpine-black;
+
+  &.red {
+    background-color: $color__mcalpine-red;
+    color: #fff;
   }
 
-  .institution-icon-grid {
+  h2 {
+    padding-bottom: 1rem;
+  }
+
+  .highlights-icon-grid {
     list-style: none;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 5rem;
-    grid-template-rows: 100%;
-    gap: 27px;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(76px, 1fr));
+    gap: 1rem;
     padding: 0;
+    margin: 0;
+    justify-items: center;
     overflow-x: scroll;
-    li {
-      min-width: calc(25% - 1.325rem);
-      a {
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        height: 100%;
 
-        img {
-          height: 100%;
-          width: 100%;
-          max-height: 148px;
-          max-width: 252px;
-          object-fit: contain;
-        }
+    li {
+      container-type: inline-size;
+      container-name: block-grid-container;
+      aspect-ratio: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 274px;
+
+      svg {
+        width: 100%;
+        max-width: 96px;
+      }
+
+      h5 {
+        font-size: clamp(0.75rem, 0.491rem + 5.444cqw, 1.424rem);
+        padding-top: 1.5rem;
+        text-transform: uppercase;
+        max-width: 96px;
       }
     }
   }
 }
 
 @media only screen and (min-width: $tablet) {
-  .member-institutions {
-    .red-band {
-      margin-bottom: calc(-12rem + 28.125vw);
-    }
-    .institution-icon-grid {
-      margin-top: calc(-17.1875rem + 40.2344vw);
-      height: clamp(5rem, -7.75rem + 26.5625vw, 9.25rem);
+  .product-highlights {
+    h2 {
+      padding-bottom: 2.25rem;
     }
   }
 }
 
-@media only screen and (min-width: $desktop) {
-  .member-institutions {
-    .red-band {
-      margin-bottom: 6rem;
-      width: 20%;
+@media only screen and (min-width: $desktop__large) {
+  .product-highlights {
+    h2 {
+      padding-bottom: 3.5rem;
     }
-    .institution-icon-grid {
-      margin: 0;
-      padding: 0;
-      margin-top: 8.5625rem;
-      height: auto;
-      list-style: none;
-      display: grid;
-      width: 100%;
-      grid-template-rows: auto;
-      grid-template-columns: repeat(5, 1fr);
-      row-gap: 96px;
-
-      overflow-x: scroll;
-      li {
-        height: 148px;
-        min-width: calc(25% - 18.6px);
-        a {
-          display: flex;
-          justify-content: center;
-          overflow: hidden;
-          height: 100%;
-          filter: gray; /* IE6-9 */
-          filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
-          -webkit-filter: grayscale(1);
-          opacity: 0.45;
-          transition: all 0.2s ease-in-out;
-          img {
-            height: 100%;
-            width: 100%;
-            max-height: 116px;
-            max-width: 180px;
-            object-fit: contain;
-          }
-
-          &:hover {
-            filter: grayscale(0);
-            opacity: 1;
-          }
-        }
-      }
+    .highlights-icon-grid {
+      gap: 1fr;
     }
   }
 }

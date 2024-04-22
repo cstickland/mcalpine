@@ -1,6 +1,105 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
-.product-highlights {
+.grid-block {
+  &.animated {
+    .grid-title-container {
+      .grid-title,
+      .grid-link {
+        @include slide-in;
+        animation-duration: 500ms;
+      }
+    }
+    .grid-link-mobile {
+      @include slide-in;
+      animation-duration: 500ms;
+    }
+  }
+  overflow: hidden;
+  @include container-large;
+  container-type: inline-size;
+  container-name: block-grid-container;
+
+  .grid-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 2.5rem;
+    .grid-link {
+      display: none;
+      opacity: 0;
+      color: $color__mcalpine-grey;
+
+      &:hover {
+        color: $color__mcalpine-red;
+      }
+    }
+    .grid-title {
+      width: auto;
+      opacity: 0;
+      &.red {
+        color: $color__mcalpine-red;
+      }
+
+      &.white {
+        color: #ffffff;
+      }
+
+      &.black {
+        color: $color__mcalpine-black;
+      }
+      &.center {
+        margin: 0 auto;
+        margin-bottom: 2.5rem;
+      }
+      &.columns-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .acf-innerblocks-container {
+      max-width: 100%;
+      display: grid;
+      grid-template-columns: 100%;
+      gap: 1.25rem;
+    }
+  }
+
+  &.scroll {
+    ul {
+      overflow: scroll;
+      padding-bottom: 2rem;
+      .acf-innerblocks-container {
+        gap: 1.125rem;
+        grid-template-columns: repeat(4, calc(50% - 0.625rem));
+      }
+    }
+  }
+
+  &.column-2 {
+    ul {
+      .acf-innerblocks-container {
+        gap: 1.125rem;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+
+  .grid-link-mobile {
+    display: block;
+    opacity: 0;
+    margin: 1.625rem auto;
+    color: $color__mcalpine-grey;
+    width: fit-content;
+    &:hover {
+      color: $color__mcalpine-red;
+    }
+  }
 }
 
 @supports (container-type: inline-size) {

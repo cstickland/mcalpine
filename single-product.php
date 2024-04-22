@@ -31,6 +31,9 @@ get_header('product');
                         <?php if ($block['blockName'] == 'mcalpine/product-suitability') { ?>
                             <a href="#suitability" class="sticky-link">Use Case</a>
                         <?php } ?>
+                        <?php if ($block['blockName'] == 'mcalpine/product-highlights') { ?>
+                            <a href="#product-highlights" class="sticky-link">Product Highlights</a>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             <?php endif; ?>

@@ -3,6 +3,33 @@
     "title": "Product Highlights",
     "fields": [
         {
+            "key": "field_662667a217cb4",
+            "label": "Background Colour",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "white": "White",
+                "red": "Red"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_6622459315333",
             "label": "Title",
             "name": "title",
@@ -120,5 +147,5 @@
     "graphql_field_name": "productHighlights",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1713522330
+    "modified": 1713792973
 }
