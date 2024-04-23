@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "mcalpine/product-faq",
+  "version": "0.1.0",
+  "title": "Product Faq",
+  "category": "widgets",
+  "icon": "editor-ul",
+  "description": "Questions and answers block for products.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "mcalpine",
+  "style": "file:./style.css",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  }
+}

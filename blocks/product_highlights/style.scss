@@ -1,7 +1,51 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.editor-styles-wrapper {
+  .animate {
+    h2 {
+      opacity: 1;
+    }
+    .highlights-icon-grid {
+      li {
+        img,
+        svg,
+        h5 {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
 .product-highlights {
   @include container-large;
+
+  &.animated {
+    h2 {
+      @include slide-in;
+    }
+
+    li {
+      svg,
+      img,
+      h5 {
+        @include slide-in;
+      }
+      @for $i from 1 through 12 {
+        &:nth-of-type(#{$i}) {
+          svg,
+          img {
+            animation-delay: $i * 150ms;
+          }
+
+          h5 {
+            animation-delay: $i * 150ms + 250ms;
+          }
+        }
+      }
+    }
+  }
+
   overflow: scroll;
   background-color: #fff;
   color: $color__mcalpine-black;
@@ -13,6 +57,7 @@
 
   h2 {
     padding-bottom: 1rem;
+    opacity: 0;
   }
 
   .highlights-icon-grid {
@@ -37,12 +82,16 @@
       width: 100%;
       max-width: 274px;
 
-      svg {
+      svg,
+      img {
         width: 100%;
         max-width: 96px;
+        opacity: 0;
       }
 
       h5 {
+        opacity: 0;
+        font-weight: 700;
         font-size: clamp(0.75rem, 0.491rem + 5.444cqw, 1.424rem);
         padding-top: 1.5rem;
         text-transform: uppercase;
@@ -67,6 +116,11 @@
     }
     .highlights-icon-grid {
       gap: 1fr;
+
+      li {
+        padding-top: 54px;
+        padding-bottom: 42px;
+      }
     }
   }
 }
