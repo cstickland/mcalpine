@@ -221,7 +221,7 @@
             "show_in_graphql": 1,
             "default_value": 100,
             "min": 80,
-            "max": 150,
+            "max": 130,
             "step": "",
             "prepend": "",
             "append": ""
@@ -279,5 +279,5 @@
     "graphql_field_name": "imageTextFullWidthBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1701180722
+    "modified": 1714985232
 }

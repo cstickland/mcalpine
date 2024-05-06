@@ -7,10 +7,11 @@
                                         echo get_field('image_alignment_mobile'); ?>">
         <div class="image-container <?php the_field('background_image_height'); ?>">
             <?php $image = get_field('image');
-            $image_alt = $image['alt'];
-            $image_url = $image['url'];
 
-            if (!empty($image)) : ?>
+            if (!empty($image)) :
+                $image_alt = $image['alt'];
+                $image_url = $image['url'];
+            ?>
                 <div class="background-image-container">
                     <img class="image-text-background-image" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" />
                 </div>
