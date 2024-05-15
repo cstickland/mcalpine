@@ -45,3 +45,4 @@ require_once('find_product/find_product.php');
 require_once('product_guide_download/product_guide_download.php');
 require_once('product_highlights/product_highlights.php');
 require_once('product_faq/product_faq.php');
+require_once('product_specifications/product_specifications.php');
