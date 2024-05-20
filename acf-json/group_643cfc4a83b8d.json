@@ -336,6 +336,76 @@
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_64736a878b344"
+                },
+                {
+                    "key": "field_664b59db77bb2",
+                    "label": "Specifications",
+                    "name": "specifications",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Row",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_664b59eb77bb3",
+                            "label": "Specification Label",
+                            "name": "specification_label",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_664b59db77bb2"
+                        },
+                        {
+                            "key": "field_664b59f877bb4",
+                            "label": "Specification Value",
+                            "name": "specification_value",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_664b59db77bb2"
+                        }
+                    ],
+                    "parent_repeater": "field_64736a878b344"
                 }
             ]
         }
@@ -364,5 +434,5 @@
     "graphql_types": [
         "Product"
     ],
-    "modified": 1702482356
+    "modified": 1716214347
 }
