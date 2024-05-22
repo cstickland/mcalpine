@@ -1,9 +1,85 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .specifications-block {
+  --border-color: #707070;
+  --header-color: #5a5a5a;
+  --header-background-color: #fff;
+  --text-color: #222222;
+  --background-color: #fff;
+
+  &.red {
+    --border-color: #fff;
+    --header-color: #fff;
+    --header-background-color: #{$color__mcalpine-red};
+    --text-color: #fff;
+    --background-color: #{$color__mcalpine-red};
+  }
+
   @include container-large;
-  background-color: white;
-  color: $color__mcalpine-black;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  display: none;
+
+  &.accordion {
+    display: block;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .accordion-question-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 0;
+      padding-right: 0;
+
+      h2 {
+        padding: 0;
+      }
+      .accordion-toggle-icon {
+        margin-top: 0;
+      }
+    }
+
+    .accordion-answer {
+      width: 100%;
+      padding: 0;
+      display: grid;
+      overflow: hidden;
+      height: 0px;
+
+      transition: 250ms all ease-in-out;
+      table {
+        width: 100%;
+      }
+    }
+
+    &.open {
+      .accordion-answer {
+        height: 460px;
+        overflow: scroll;
+      }
+
+      &.red {
+        color: var(--text-color);
+      }
+    }
+
+    &.red {
+      h2 {
+        color: var(--header-color);
+      }
+
+      .accordion-toggle-icon {
+        div {
+          background-color: #fff !important;
+        }
+      }
+    }
+  }
+
   .table-container {
     height: 320px;
     overflow: scroll;
@@ -24,22 +100,32 @@
     }
 
     tr {
-      border-bottom: solid 1px #707070;
+      border-bottom: solid 1px var(--border-color);
 
       th {
         text-align: left;
         font-weight: 900;
         padding: 0 1.25rem 1.25rem 1.25rem;
-        color: #5a5a5a;
+        color: var(--header-color);
         text-transform: uppercase;
         position: sticky;
         top: 0;
-        background-color: #fff;
+        background-color: var(--header-background-color);
       }
 
       td {
         padding: 1.25rem;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .specifications-block {
+    display: block;
+
+    &.accordion {
+      display: none;
     }
   }
 }

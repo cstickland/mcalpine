@@ -46,7 +46,16 @@ get_header('product');
     endif;
     ?>
 </main><!-- #main -->
+<script>
+    const accordions = document.querySelectorAll('.accordion');
 
+    accordions.forEach((accordion) => {
+        const questionContainer = accordion.querySelector('.accordion-question-container');
+        questionContainer.addEventListener('click', () => {
+            accordion.classList.toggle('open')
+        })
+    })
+</script>
 <?php
 
 get_footer();

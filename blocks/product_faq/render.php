@@ -32,14 +32,3 @@
         </ul>
     <?php endif; ?>
 </section>
-
-<script>
-    const accordions = document.querySelectorAll('.accordion');
-
-    accordions.forEach((accordion) => {
-        const questionContainer = accordion.querySelector('.accordion-question-container');
-        questionContainer.addEventListener('click', () => {
-            accordion.classList.toggle('open')
-        })
-    })
-</script>

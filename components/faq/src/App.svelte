@@ -68,12 +68,14 @@
                 <h3 class="faq-category-title">{category}</h3>
                 {#if filteredQuestions.length > 0}
                     {#each filteredQuestions as question}
-                        {#if question.node.faqCategories.edges[0].node.name == category}
-                            <Accordion
-                                question={question.node.title}
-                                answer={question.node.faqFields.answer}
-                                id={question.node.faqId}
-                            />
+                        {#if question.node.faqCategories.edges[0]}
+                            {#if question.node.faqCategories.edges[0].node.name == category}
+                                <Accordion
+                                    question={question.node.title}
+                                    answer={question.node.faqFields.answer}
+                                    id={question.node.faqId}
+                                />
+                            {/if}
                         {/if}
                     {/each}
                 {/if}

@@ -70,3 +70,44 @@ $specifications = array_unique($specifications);
         </table>
     </div>
 </div>
+
+<div <?php echo get_block_wrapper_attributes(['class' => 'specifications-block animate accordion ' . get_field('background_color')]); ?> id="suitability">
+    <div class="accordion-question-container">
+        <h2>Specifications</h2>
+
+        <div class="accordion-toggle-icon">
+            <div class="vertical-line"></div>
+            <div class="horizontal-line"></div>
+        </div>
+
+    </div>
+    <div class="table-container accordion-answer">
+        <table>
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <?php foreach ($specifications as $specification) { ?>
+                        <th><?php echo $specification; ?></th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($skus as $sku) { ?>
+                    <tr>
+                        <td><?php echo $sku->name; ?></td>
+                        <?php
+                        foreach ($specifications as $specification) {
+                            $text = "-";
+                            foreach ($sku->specifications as $sku_specification) {
+                                if ($sku_specification->label == $specification) {
+                                    $text = $sku_specification->value;
+                                }
+                            } ?>
+                            <td><?php echo $text; ?></td>
+                        <?php } ?>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

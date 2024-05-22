@@ -12,7 +12,7 @@ $category_parent_id = $category[0]->category_parent;
 $title = get_field('product_guide_title', $category[0]);
 $message = get_field('product_guide_message', $category[0]);
 $download_url = get_field('product_guide_file', $category[0]);
-$background_image_url = get_field('product_guide_download-background_image', $category[0]);
+$background_image_url = get_field('product_guide_download_background_image', $category[0]);
 $button_text = "Download";
 ?>
 <?php if ($title) { ?>
@@ -20,7 +20,6 @@ $button_text = "Download";
         <div class="product-guide-container">
             <?php if ($background_image_url) :
                 $url = $background_image_url['url'];
-                $title = $background_image_url['title'];
                 $alt = $background_image_url['alt']; ?>
                 <div class="background-image-container">
                     <img src="<?php echo $url; ?>" alt="<?php echo $alt; ?>" class="product-guide-background-image" />
