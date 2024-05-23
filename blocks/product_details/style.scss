@@ -1,12 +1,60 @@
 @import '../../sass/abstracts/_abstracts.scss';
 .product-details {
+  display: none;
+
+  &.accordion {
+    display: block;
+
+    .accordion-question-container {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .accordion-toggle-icon {
+        margin-top: 0;
+      }
+    }
+
+    .accordion-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      padding: 0;
+      transition: all 0.25s ease-in-out;
+    }
+
+    &.open {
+      .accordion-answer {
+        grid-template-rows: 1fr;
+      }
+
+      .acf-innerblocks-container {
+        visibility: show;
+      }
+    }
+  }
   .acf-innerblocks-container {
     max-width: 100%;
     display: grid;
     grid-template-columns: 100%;
+    visibility: visible;
+    height: 100%;
+    overflow: hidden;
 
     &.block-editor-block-list__layout {
       padding-bottom: 3rem;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-details {
+    display: block;
+
+    &.accordion {
+      display: none;
     }
   }
 }
