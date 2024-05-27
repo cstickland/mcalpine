@@ -18,6 +18,51 @@
 }
 
 .product-highlights {
+  display: none;
+
+  &.accordion {
+    display: block;
+    padding: 0;
+
+    .accordion-question-container {
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid 1px #f4f4f4;
+
+      .product-highlights-title {
+        padding-bottom: 0;
+      }
+    }
+
+    .accordion-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      padding: 0;
+      transition: grid-template-rows 0.25s ease-in-out;
+
+      #product-highlights {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: all 0.25s ease-in-out;
+      }
+    }
+
+    &.open {
+      .accordion-answer {
+        grid-template-rows: 1fr;
+
+        #product-highlights {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+      }
+    }
+  }
   @include container-large;
 
   &.animated {
