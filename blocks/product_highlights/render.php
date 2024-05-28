@@ -25,7 +25,7 @@
         </ul>
     <?php endif; ?>
 </section>
-<section id="product-highlights" <?php echo get_block_wrapper_attributes(['class' => 'product-highlights animate accordion ' . get_field('background_color')]); ?> id="query-<?php the_title(); ?>">
+<section id="product-highlights" <?php echo get_block_wrapper_attributes(['class' => 'product-highlights accordion ' . get_field('background_color')]); ?> id="query-<?php the_title(); ?>">
     <div class="accordion-question-container">
         <h2 class="product-highlights-title"><?php the_field('title'); ?></h2>
         <div class="accordion-toggle-icon">

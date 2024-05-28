@@ -24,16 +24,18 @@
 
   &.accordion {
     display: block;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
+    border: 0;
+    color: var(--text-color);
 
     .accordion-question-container {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      border-bottom: solid 1px #f4f4f4;
 
       h2 {
         padding: 0;
@@ -53,6 +55,8 @@
       transition: 250ms all ease-in-out;
       table {
         width: 100%;
+        margin-left: 1.25rem;
+        margin-right: 1.25rem;
       }
     }
 
@@ -60,6 +64,8 @@
       .accordion-answer {
         height: 460px;
         overflow: scroll;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
       }
 
       &.red {

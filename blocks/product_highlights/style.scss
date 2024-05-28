@@ -23,9 +23,12 @@
   &.accordion {
     display: block;
     padding: 0;
+    border: 0;
+    color: #222222;
 
     .accordion-question-container {
-      padding: 1rem 1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -34,6 +37,7 @@
 
       .product-highlights-title {
         padding-bottom: 0;
+        opacity: 1;
       }
     }
 
@@ -49,6 +53,14 @@
         padding-top: 0;
         padding-bottom: 0;
         transition: all 0.25s ease-in-out;
+
+        li {
+          img,
+          svg,
+          h5 {
+            opacity: 1;
+          }
+        }
       }
     }
 
@@ -57,8 +69,8 @@
         grid-template-rows: 1fr;
 
         #product-highlights {
-          padding-top: 1rem;
-          padding-bottom: 1rem;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
         }
       }
     }
@@ -150,6 +162,16 @@
   .product-highlights {
     h2 {
       padding-bottom: 2.25rem;
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .product-highlights {
+    display: block;
+
+    &.accordion {
+      display: none;
     }
   }
 }

@@ -113,3 +113,20 @@
   animation-timing-function: ease-in-out;
   transform-origin: center center;
 }
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@mixin fade-out {
+  animation-name: fade-out;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+}
