@@ -76,18 +76,22 @@ if (get_post_type() == 'product') {
 </div>
 
 <div <?php echo get_block_wrapper_attributes(['class' => 'review-block ' . get_field('colour_style') . ' accordion ' . $is_product_page]);  ?> id="reviews-product">
-    <div class="accordion-question-container">
-        <h2>Reviews</h2>
+    <?php if ($is_product_page == "product") : ?>
+        <div class="accordion-question-container">
+            <h2>Reviews</h2>
 
-        <div class="accordion-toggle-icon">
-            <div class="vertical-line"></div>
-            <div class="horizontal-line"></div>
+            <div class="accordion-toggle-icon">
+                <div class="vertical-line"></div>
+                <div class="horizontal-line"></div>
+            </div>
         </div>
-    </div>
-    <div class="review-block-container accordion-answer">
-        <div class="answer">
+    <?php endif; ?>
+    <div class="review-block-container <?php if ($is_product_page == 'product') {
+                                            echo 'accordion-answer';
+                                        } ?>">
+        <div class=" answer">
             <div class="reviews-title-section ">
-                <h3>Hear from real life users & customers!</h3>
+                <h3><?php the_field('title'); ?></h3>
             </div>
 
             <?php if (have_rows('reviews', 'option')) : ?>
@@ -154,52 +158,48 @@ if (get_post_type() == 'product') {
     </div>
 </div>
 
-<?php
-if ($is_product_page == "product") { ?>
-    <script>
-        const container = document.getElementById('reviews-product');
-        console.log(container)
 
-        const arrowPrevious = container.querySelector('.arrow-prev');
-        const arrowNext = container.querySelector('.arrow-next');
+<script>
+    const container = document.getElementById('reviews-product');
 
-        const reviews = container.querySelectorAll('.reviews-card');
-        let active = 0;
+    const arrowPrevious = container.querySelector('.arrow-prev');
+    const arrowNext = container.querySelector('.arrow-next');
 
-        arrowPrevious.addEventListener('mousedown', () => {
-            reviews[active].classList.add('fade');
+    const reviews = container.querySelectorAll('.reviews-card');
+    let active = 0;
 
-            setTimeout(() => {
-                reviews[active].classList.remove('active');
-                reviews[active].classList.remove('fade');
-                if (active == 0) {
-                    active = reviews.length - 1;
-                    reviews[active].classList.add('active')
-                    return;
-                }
-                active--;
+    arrowPrevious.addEventListener('mousedown', () => {
+        reviews[active].classList.add('fade');
+
+        setTimeout(() => {
+            reviews[active].classList.remove('active');
+            reviews[active].classList.remove('fade');
+            if (active == 0) {
+                active = reviews.length - 1;
                 reviews[active].classList.add('active')
+                return;
+            }
+            active--;
+            reviews[active].classList.add('active')
 
-            }, 350)
-        })
+        }, 350)
+    })
 
-        arrowNext.addEventListener('mousedown', () => {
-            reviews[active].classList.add('fade');
+    arrowNext.addEventListener('mousedown', () => {
+        reviews[active].classList.add('fade');
 
-            setTimeout(() => {
-                reviews[active].classList.remove('active');
-                reviews[active].classList.remove('fade');
+        setTimeout(() => {
+            reviews[active].classList.remove('active');
+            reviews[active].classList.remove('fade');
 
-                if (active == reviews.length - 1) {
-                    active = 0
-                    reviews[active].classList.add('active')
-                    return
-                }
-                active++;
+            if (active == reviews.length - 1) {
+                active = 0
                 reviews[active].classList.add('active')
+                return
+            }
+            active++;
+            reviews[active].classList.add('active')
 
-            }, 350)
-        })
-    </script>
-
-<?php } ?>
+        }, 350)
+    })
+</script>

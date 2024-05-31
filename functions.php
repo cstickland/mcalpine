@@ -76,3 +76,22 @@ add_filter('run_wptexturize', '__return_false');
 // add_action('parse_query', 'livchem_query_vars_search_filter');
 //
 //
+/**
+ * Disabling Gutenberg
+ *
+ * @param $use_block_editor
+ * @param $post_type
+ *
+ * @return false|mixed
+ */
+if (!function_exists('pac_ft_disable_gutenberg')) :
+    function pac_ft_disable_gutenberg($use_block_editor, $post_type)
+    {
+        $post_types = ['post', 'faq'];
+        if (in_array($post_type, $post_types)) {
+            $use_block_editor = false;
+        }
+        return $use_block_editor;
+    }
+    add_filter('use_block_editor_for_post_type', 'pac_ft_disable_gutenberg', 999, 2);
+endif;

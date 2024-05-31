@@ -95,7 +95,14 @@ get_header();
 <main id="primary" class="site-main">
     <div id="search-archive"></div>
 </main>
+<?php
+if (get_field('posts_per_page', 'option') == "") {
+    $posts_per_page = 48;
+} else {
 
+    $posts_per_page = get_field('posts_per_page', 'option');
+}
+?>
 <script>
     const archiveItems = document.getElementById('search-archive');
     archiveItems.innerHTML = ''
@@ -103,7 +110,7 @@ get_header();
         target: archiveItems,
         props: {
             searchTerm: "<?php echo get_search_query(true); ?>",
-            postsPerPage: <?php echo get_field('posts_per_page', 'option'); ?>
+            postsPerPage: <?php echo $posts_per_page; ?>
         }
     })
 </script>
