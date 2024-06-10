@@ -10,21 +10,6 @@ class Product
     public $image_url;
     public $categoryId;
     public $subcategoryId;
-    public $postType;
-    public $categoryName;
-    public $subcategoryName;
-}
-
-class Insight
-{
-    public $identifier;
-    public $title;
-    public $permalink;
-    public $id;
-    public $img;
-    public $alt;
-    public $columnWidth;
-    public $postType;
 }
 
 class Category
@@ -34,94 +19,87 @@ class Category
     public $id;
 }
 
-$results = [];
+$term = get_queried_object();
+$child_term_ids = get_term_children($term->term_id, 'product_categories');
+$child_terms = array();
+
+foreach ($child_term_ids as $id) {
+    $child_terms[] = get_term($id);
+}
 ?>
+
 <main id="primary" class="site-main">
-    <div id="search-archive"></div>
-    <ul>
+    <?php echo do_blocks('<!-- wp:mcalpine/small-hero /-->'); ?>
+    <div id="archive-items">
         <?php
-        if (have_posts()) :
-            while (have_posts()) :
-                the_post();
+        while (have_posts()) :
+            the_post();
+        ?> <li><?php the_title(); ?></li>
+            <?php
+            $post_id = get_the_ID();
+            $skus = [];
+            if (have_rows('skus', $post_id)) :
+                while (have_rows('skus', $post_id)) : the_row();
+                    $skus[] = get_sub_field('sku');
 
-                $post_type = get_post_type();
-                if ($post_type === 'post') {
-                    $post_id = get_the_ID();
-                    $insight_image = get_the_post_thumbnail_url();
-                    $new_insight = new Insight();
-                    $new_insight->title = get_the_title();
-                    $new_insight->permalink = get_the_permalink();
-                    $category;
-                    foreach ((get_the_category()) as $cat) {
-                        if ($cat->parent == 0) {
-                            $category = $cat->cat_name;
-                        }
-                    };
-                    $new_insight->identifier = $category;
-                    $new_insight->img = $insight_image;
-                    $new_insight->columnWidth = 1;
-                    $new_insight->id = $post_id;
-                    $new_insight->postType = $post_type;
-                    $results[] = $new_insight;
-                }
-                if ($post_type == 'product') {
-                    $post_id = get_the_ID();
-                    $skus = [];
-                    if (have_rows('skus', $post_id)) :
-                        while (have_rows('skus', $post_id)) : the_row();
-                            $skus[] = get_sub_field('sku');
-
-                            if (get_row_index() == 1) {
-                                if (have_rows('product_images')) :
-                                    while (have_rows('product_images')) : the_row();
-                                        if (get_row_index() == 1) {
-                                            $product_image = get_sub_field('product_image');
-                                        }
-                                    endwhile;
-                                endif;
-                            }
-                        endwhile;
-                    endif;
-                    $product_categories = wp_get_object_terms($post_id, 'product_categories');
-                    $child_category = [];
-                    foreach ($product_categories as $category) {
-                        if ($category->parent == 0) {
-                            $parent_category = $category->term_id;
-                            $parent_category_name = $category->name;
-                        } else {
-                            $child_category[] = $category->term_id;
-                            $child_category_name[] = $category->name;
-                        }
+                    if (get_row_index() == 1) {
+                        if (have_rows('product_images')) :
+                            while (have_rows('product_images')) : the_row();
+                                if (get_row_index() == 1) {
+                                    $product_image = get_sub_field('product_image');
+                                }
+                            endwhile;
+                        endif;
                     }
+                endwhile;
+            endif;
+            $product_categories = wp_get_object_terms($post_id, 'product_categories');
+            $child_category = [];
 
-                    $new_product = new Product();
-                    $new_product->title = get_the_title();
-                    $new_product->link = get_the_permalink();
-                    $new_product->skus = $skus;
-                    $new_product->image_url = $product_image;
-                    $new_product->categoryId = $parent_category;
-                    $new_product->subcategoryId = $child_category;
-                    $new_product->categoryName = $parent_category_name;
-                    $new_product->subcategoryName = $child_category_name;
-                    $new_product->postType = $post_type;
-                    $results[] = $new_product;
+            foreach ($product_categories as $category) {
+                if ($category->parent == 0) {
+                    $parent_category = $category->term_id;
+                } else {
+                    $child_category[] = $category->term_id;
                 }
-            endwhile;
-        endif;
-        ?>
-    </ul>
+            }
+
+            $new_product = new Product();
+            $new_product->title = get_the_title();
+            $new_product->link = get_the_permalink();
+            $new_product->skus = $skus;
+            $new_product->image_url = $product_image;
+            $new_product->categoryId = $parent_category;
+            $new_product->subcategoryId = $child_category;
+            $products[] = $new_product;
+
+
+            ?>
+        <?php endwhile;
+
+        the_posts_navigation(); ?>
+    </div>
+
+
 </main><!-- #main -->
+<script src="<?php echo get_template_directory_uri() . '/components/product-archive/dist/bundle.js'; ?>"></script>
 
 <script>
-    const allProducts = <?php echo json_encode($results); ?>;
-    const archiveItems = document.getElementById('search-archive');
+    const allProducts = <?php echo json_encode($products); ?>;
+    const childCategories = <?php echo json_encode($child_terms); ?>;
+    const archiveItems = document.getElementById('archive-items');
     archiveItems.innerHTML = ''
-    new SearchArchive({
+    new Archive({
         target: archiveItems,
         props: {
-            allInsights: allProducts
+            allProducts: allProducts,
+            childCategories: childCategories,
+            showFilters: true,
+
         }
     })
 </script>
+
+
 <?php
 get_footer();
