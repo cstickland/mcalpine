@@ -1,55 +1,57 @@
 <script>
     import Content from "./nav-content/Content.svelte";
-    import { onMount } from "svelte";
-    import {
-        open,
-        getData,
-        query,
-        productCategories,
-        clickOutside,
-    } from "./stores.js";
-    export let siteUrl = "";
-    const graphQlUrl = `${siteUrl}/graphql`;
 
-
-        $productCategories = getData(graphQlUrl, query, productCategories);
-  
+    export let productCategories = {};
 
     export let allProductsLink = "";
 
     let innerHeight;
+    let open = false;
+    let activeMenu = 0;
+
+    export function clickOutside(node) {
+        const handleClick = (event) => {
+            if (
+                node &&
+                !node.contains(event.target) &&
+                !event.defaultPrevented
+            ) {
+                node.dispatchEvent(new CustomEvent("click_outside", node));
+            }
+        };
+
+        document.addEventListener("click", handleClick, true);
+
+        return {
+            destroy() {
+                document.removeEventListener("click", handleClick, true);
+            },
+        };
+    }
 </script>
 
 <svelte:window bind:innerHeight />
 
-{#await $productCategories}
-   <div> 
-        <div class="product-text">Products</div>
-   </div> 
-{:then categories} 
- <div
+<div
     on:mouseenter={() => {
-        open.set(true);
+        open = true;
     }}
     use:clickOutside
     on:click_outside={() => {
-        open.set(false);
+        open = false;
     }}
-
     on:mouseleave={() => {
-        open.set(false);
+        open = false;
     }}
 >
     <div class="product-text">Products</div>
-    <Content {allProductsLink} />
+    {#if open}
+        <Content {productCategories} {allProductsLink} bind:activeMenu  />
+    {/if}
 </div>
-   
-{/await}
 
 <style lang="scss">
     .product-text {
         cursor: pointer;
     }
-
-   
 </style>

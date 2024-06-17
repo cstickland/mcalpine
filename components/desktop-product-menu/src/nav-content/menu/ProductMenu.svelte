@@ -1,6 +1,8 @@
 <script>
     import { fade } from "svelte/transition";
-    import { activeMenu, productCategories } from "../../stores.js";
+
+    export let productCategories;
+    export let activeMenu = 0;
 
     let categoryParentId = null;
     let categoryParentTitle = null;
@@ -18,7 +20,7 @@
         categoryParentLink = link;
     }
 
-    let versionClass;
+    // let versionClass;
 </script>
 
 {#if categoryParentId == null}
@@ -27,7 +29,7 @@
         in:fade={{ axis: "x", delay: 200, duration: 200 }}
         out:fade={{ axis: "x", duration: 200 }}
     >
-        <div class="menu-title" on:click={() => activeMenu.set(0)} on:keydown>
+        <div class="menu-title" on:click={() => activeMenu = 0} on:keydown>
             {#if categoryParentTitle == null}
                 <div>Product Categories</div>
             {:else}
@@ -38,8 +40,8 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#if [...$productCategories] && [...$productCategories].length > 0}
-                {#each [...$productCategories] as category}
+            {#if [...productCategories] && [...productCategories].length > 0}
+                {#each [...productCategories] as category}
                         <div
                             class="category-item"
                             on:click={() => {
@@ -98,8 +100,8 @@
             <div class="spacer" />
         </div>
         <div class="category-list">
-            {#if [...$productCategories] && [...$productCategories].length > 0}
-                {#each [...$productCategories] as category}
+            {#if [...productCategories] && [...productCategories].length > 0}
+                {#each [...productCategories] as category}
                     {#if category?.id == categoryParentId}
                         {#each category?.children?.edges as child}
                         <a

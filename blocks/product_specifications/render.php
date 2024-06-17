@@ -3,17 +3,6 @@ $skus = [];
 $id = get_the_ID();
 $specifications = [];
 
-class Sku
-{
-    public $name;
-    public $specifications;
-}
-
-class Specification
-{
-    public $label;
-    public $value;
-}
 
 if (have_rows('skus', $id)) :
     while (have_rows('skus', $id)) : the_row();

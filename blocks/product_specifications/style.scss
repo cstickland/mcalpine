@@ -129,6 +129,9 @@
 @media only screen and (min-width: $desktop) {
   .specifications-block {
     display: block;
+    h2 {
+      padding-top: 0;
+    }
 
     &.accordion {
       display: none;

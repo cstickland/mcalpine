@@ -1,6 +1,10 @@
 <?php
 
 // wordpress uses this as the archive page for "posts"
+function hello()
+{
+}
+
 class Insight
 {
     public $identifier;

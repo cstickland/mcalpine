@@ -71,6 +71,46 @@ if (get_field('footer_version', 'option') == 2 && get_field('footer_show_call_to
     endwhile;
 endif; ?>
 </body>
+
+<?php
+
+$get_product_categories = graphql([
+    'query' => '{
+  themeGeneralSettings {
+    themeSettings {
+      parentCategories {
+        id
+        name
+        link
+        customFields {
+          categoryImage {
+            sourceUrl(size: THUMBNAIL)
+          }
+          categoryImageHeight
+        }
+        children(first: 100) {
+          edges {
+            node {
+              id
+              name
+              link
+              customFields {
+                categoryImage {
+                  sourceUrl(size: THUMBNAIL)
+                }
+                categoryImageHeight
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}'
+]);
+
+$product_categories = $get_product_categories['data']['themeGeneralSettings']['themeSettings']['parentCategories'];
+?>
 <script>
     const searchContainer = document.getElementById('search-container');
     searchContainer.innerHTML = ''
@@ -105,7 +145,8 @@ endif; ?>
     new ProductMenu({
         target: productMenu,
         props: {
-            allProductsLink: "<?php echo site_url() . '/products'; ?>"
+            allProductsLink: "<?php echo site_url() . '/products'; ?>",
+            productCategories: <?php echo json_encode($product_categories); ?>
         }
     })
 </script>
