@@ -3,6 +3,39 @@
 .find-product-block {
   color: $color__mcalpine_black;
   background-color: transparent;
+  display: none;
+
+  &.accordion {
+    display: block;
+    color: $color__mcalpine_black;
+
+    .accordion-question-container {
+      align-items: center;
+      border-bottom: solid #f4f4f4 1px;
+      .accordion-toggle-icon {
+        margin-top: 0;
+      }
+    }
+
+    .accordion-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: all 0.25s ease-in-out;
+      padding: 0 1.5rem;
+
+      .answer {
+        overflow: hidden;
+        margin: 0;
+      }
+    }
+
+    &.open {
+      .accordion-answer {
+        grid-template-rows: 1fr;
+        padding: 1.5rem;
+      }
+    }
+  }
 
   .find-product-block-container {
     @include container-large;
@@ -43,5 +76,15 @@
   &.bg-red {
     color: #fff;
     background-color: $color__mcalpine_red;
+  }
+}
+
+@media only screen and (min-width: $desktop) {
+  .find-product-block {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
   }
 }
