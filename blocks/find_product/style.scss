@@ -1,5 +1,14 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.block-editor {
+  .find-product-block {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
+  }
+}
 .find-product-block {
   color: $color__mcalpine_black;
   background-color: transparent;

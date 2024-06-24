@@ -1,4 +1,15 @@
 @import '../../sass/abstracts/_abstracts.scss';
+
+.block-editor {
+  .suitability-block {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
+  }
+}
+
 .suitability-block {
   overflow: hidden;
 

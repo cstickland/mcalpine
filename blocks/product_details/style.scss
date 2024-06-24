@@ -1,4 +1,14 @@
 @import '../../sass/abstracts/_abstracts.scss';
+
+.block-editor {
+  .product-details {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
+  }
+}
 .product-details {
   display: none;
 

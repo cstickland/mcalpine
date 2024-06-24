@@ -1,4 +1,16 @@
 @import '../../sass/abstracts/_abstracts.scss';
+
+.block-editor {
+  .review-block {
+    &.product {
+      display: block;
+
+      &.accordion {
+        display: none;
+      }
+    }
+  }
+}
 .review-block {
   &.accordion {
     display: none;

@@ -1,6 +1,19 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.block-editor {
+  .animate {
+    --animate-initial-opacity: 1;
+
+    &.image-text-block {
+      .swipe-reveal-container {
+        display: none;
+      }
+    }
+  }
+}
+
 .animate {
+  --animate-initial-opacity: 0;
   &.image-text-block {
     &.red {
       .swipe-reveal-container {
@@ -9,12 +22,12 @@
     }
     .image-container {
       .image-text-background-image {
-        opacity: 0;
+        opacity: var(--animate-initial-opacity);
       }
     }
     .text-container,
     .text-color-block {
-      opacity: 0;
+      opacity: var(--animate-initial-opacity);
     }
 
     &.animated {
@@ -51,7 +64,7 @@
         h2,
         div,
         .btn {
-          opacity: 0;
+          opacity: var(--animate-initial-opacity);
           @include slide-in;
           animation-delay: 1.125s;
         }

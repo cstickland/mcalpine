@@ -1,5 +1,15 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
+.block-editor {
+  .specifications-block {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
+  }
+}
+
 .specifications-block {
   --border-color: #707070;
   --header-color: #5a5a5a;

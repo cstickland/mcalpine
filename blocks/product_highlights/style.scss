@@ -1,6 +1,13 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .editor-styles-wrapper {
+  .product-highlights {
+    display: block;
+
+    &.accordion {
+      display: none;
+    }
+  }
   .animate {
     h2 {
       opacity: 1;
