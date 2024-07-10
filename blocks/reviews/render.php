@@ -1,13 +1,13 @@
 <?php
 
-$is_product_page = "";
+$is_product_page = "page";
 if (get_post_type() == 'product') {
     $is_product_page = 'product';
 }
 
 ?>
 
-<div <?php echo get_block_wrapper_attributes(['class' => 'review-block ' . get_field('colour_style') . ' ' . $is_product_page]);  ?> id="reviews">
+<div <?php echo get_block_wrapper_attributes(['class' => 'review-block reviews-desktop ' . get_field('colour_style') . ' ' . $is_product_page]);  ?> id="reviews">
     <div class="review-block-container">
         <div class="reviews-title-section">
             <h3><?php the_field('title'); ?></h3>
@@ -17,7 +17,6 @@ if (get_post_type() == 'product') {
                 if (have_rows('button')) :
                     while (have_rows('button')) : the_row();
             ?>
-
                         <a href="<?php the_sub_field('button_url'); ?>" class="btn <?php if (get_field('colour_style') == 'red') {
                                                                                         echo 'btn-red btn-outline';
                                                                                     } else {
@@ -86,10 +85,10 @@ if (get_post_type() == 'product') {
             </div>
         </div>
     <?php endif; ?>
-    <div class="review-block-container <?php if ($is_product_page == 'product') {
-                                            echo 'accordion-answer';
-                                        } ?>">
-        <div class=" answer">
+    <div class="review-block-container accordion-answer">
+        <div class="<?php if ($is_product_page == 'product') {
+                        echo 'answer';
+                    } ?>">
             <div class="reviews-title-section ">
                 <h3><?php the_field('title'); ?></h3>
             </div>

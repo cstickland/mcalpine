@@ -1,5 +1,7 @@
 <?php
 $term = get_queried_object();
+
+
 $link = !empty(get_field('breadcrumb_middle_link')) ? get_field('breadcrumb_middle_link') : null;
 $title = !empty(get_field('title')) ? get_field('title') : $term->name;
 $message =  !empty(get_field('message')) ? get_field('message') : get_field('hero_message', $term);
@@ -8,6 +10,13 @@ if ($term->taxonomy == 'post_tag' && $term->description != '') {
 }
 $image = !empty(get_field('image')) ? get_field('image') : get_field('category_hero_image', $term);
 $breadcrumb_end = 'hello';
+
+if ($term->parent != 0) {
+    $parent = get_term($term->parent);
+
+    $link['url'] = site_url() . '/product_categories/' . $parent->slug;
+    $link['title'] = $parent->name;
+}
 if (is_archive()) {
     $breadcrumb_end = $term->name;
 } else {

@@ -12,168 +12,168 @@
   }
 }
 .review-block {
+  display: none;
+
   &.accordion {
-    display: none;
-  }
-  &.product {
-    display: none;
+    &.page {
+      .accordion-answer {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+    display: block;
+    padding: 0;
+    border: 0;
 
-    &.accordion {
-      display: block;
+    .accordion-question-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      border-bottom: solid 1px #f4f4f4;
+
+      h2 {
+        padding: 0;
+      }
+      .accordion-toggle-icon {
+        margin-top: 0;
+      }
+    }
+
+    .accordion-answer {
+      width: 100%;
       padding: 0;
-      border: 0;
+      display: grid;
+      overflow: hidden;
+      grid-template-rows: 0fr;
 
-      .accordion-question-container {
+      transition: 250ms all ease-in-out;
+
+      .answer {
+        overflow: hidden;
+      }
+
+      .reviews-title-section {
+        padding: 0 1.25rem;
+        aspect-ratio: unset;
+      }
+
+      .slider-controls {
+        padding-top: 1rem;
+        padding-left: 1.25rem;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        border-bottom: solid 1px #f4f4f4;
+        gap: 0.5rem;
+        button {
+          cursor: pointer;
+          border: solid 0.5px #d8d8d8;
+          background-color: #fff;
+          transition: background-color 0.1s ease-in-out, border 0.1s ease-in-out;
+          width: 2.5rem;
+          height: 2.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:active {
+            outline: 0;
+          }
+          &.arrow-prev {
+            &:active {
+              background-color: $color__mcalpine-black;
+              border: solid 0.5px $color__mcalpine-black;
+            }
+            svg {
+              transform: rotate(180deg);
+              * {
+                fill: $color__mcalpine-red;
+              }
+            }
+          }
 
-        h2 {
-          padding: 0;
+          &.arrow-next {
+            &:active {
+              background-color: $color__mcalpine-red;
+              border: solid 0.5px $color__mcalpine-red;
+            }
+            svg {
+              * {
+                fill: $color__mcalpine-black;
+              }
+            }
+          }
+
+          svg {
+            width: 0.75rem;
+          }
         }
+      }
+
+      .reviews-cards {
+        flex-wrap: nowrap;
+        padding: 0 1.25rem;
+
+        .reviews-card {
+          display: none;
+          opacity: 0;
+          width: 100%;
+          transition: opacity 350ms ease-in-out;
+
+          &.active {
+            display: flex;
+            @include fade-in;
+
+            &.fade {
+              @include fade-out;
+            }
+          }
+        }
+      }
+    }
+    &.red {
+      color: #fff;
+
+      .accordion-question-container {
         .accordion-toggle-icon {
-          margin-top: 0;
+          .vertical-line,
+          .horizontal-line {
+            background-color: #fff;
+          }
         }
       }
 
       .accordion-answer {
-        width: 100%;
-        padding: 0;
-        display: grid;
-        overflow: hidden;
-        grid-template-rows: 0fr;
-
-        transition: 250ms all ease-in-out;
-
-        .answer {
-          overflow: hidden;
-        }
-
-        .reviews-title-section {
-          padding: 0 1.25rem;
-          aspect-ratio: unset;
-        }
-
         .slider-controls {
-          padding-top: 1rem;
-          padding-left: 1.25rem;
-          display: flex;
-          flex-direction: row;
-          gap: 0.5rem;
           button {
-            cursor: pointer;
             border: solid 0.5px #d8d8d8;
-            background-color: #fff;
-            transition: background-color 0.1s ease-in-out,
-              border 0.1s ease-in-out;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            &:active {
-              outline: 0;
-            }
-            &.arrow-prev {
+            background-color: $color__mcalpine-red;
+
+            &.arrow-prev,
+            &.arrow-next {
               &:active {
                 background-color: $color__mcalpine-black;
                 border: solid 0.5px $color__mcalpine-black;
               }
-              svg {
-                transform: rotate(180deg);
-                * {
-                  fill: $color__mcalpine-red;
-                }
-              }
-            }
-
-            &.arrow-next {
-              &:active {
-                background-color: $color__mcalpine-red;
-                border: solid 0.5px $color__mcalpine-red;
-              }
-              svg {
-                * {
-                  fill: $color__mcalpine-black;
-                }
-              }
             }
 
             svg {
+              * {
+                fill: #fff;
+              }
               width: 0.75rem;
             }
           }
         }
-
-        .reviews-cards {
-          flex-wrap: nowrap;
-          padding: 0 1.25rem;
-
-          .reviews-card {
-            display: none;
-            opacity: 0;
-            width: 100%;
-            transition: opacity 350ms ease-in-out;
-
-            &.active {
-              display: flex;
-              @include fade-in;
-
-              &.fade {
-                @include fade-out;
-              }
-            }
-          }
-        }
       }
-      &.red {
-        color: #fff;
+    }
 
-        .accordion-question-container {
-          .accordion-toggle-icon {
-            .vertical-line,
-            .horizontal-line {
-              background-color: #fff;
-            }
-          }
-        }
-
-        .accordion-answer {
-          .slider-controls {
-            button {
-              border: solid 0.5px #d8d8d8;
-              background-color: $color__mcalpine-red;
-
-              &.arrow-prev,
-              &.arrow-next {
-                &:active {
-                  background-color: $color__mcalpine-black;
-                  border: solid 0.5px $color__mcalpine-black;
-                }
-              }
-
-              svg {
-                * {
-                  fill: #fff;
-                }
-                width: 0.75rem;
-              }
-            }
-          }
-        }
-      }
-
-      &.open {
-        .accordion-answer {
-          overflow: scroll;
-          margin-top: 2rem;
-          margin-bottom: 2rem;
-          grid-template-rows: 1fr;
-        }
+    &.open {
+      .accordion-answer {
+        overflow: scroll;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        grid-template-rows: 1fr;
       }
     }
   }
@@ -236,9 +236,6 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-        width: 100%;
-        max-width: 424px;
-        height: 424px;
 
         .review-card-rating {
           font-size: 1.5rem;
@@ -283,11 +280,9 @@
   }
 
   @media only screen and (min-width: $desktop) {
-    &.product {
-      display: block;
-      &.accordion {
-        display: none;
-      }
+    display: block;
+    &.accordion {
+      display: none;
     }
     .review-block-container {
       display: flex;
@@ -311,6 +306,11 @@
         overflow-x: scroll;
         padding-bottom: 1rem;
         scrollbar-color: white $color__mcalpine-red;
+
+        .reviews-card {
+          height: 424px;
+          width: 424px;
+        }
       }
     }
   }

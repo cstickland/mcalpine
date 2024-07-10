@@ -3,7 +3,11 @@
     import { slide } from "svelte/transition";
     import { linear } from "svelte/easing";
     let scrollPosition = 0;
+
+    $: innerWidth = 0
 </script>
+
+<svelte:window bind:innerWidth />
 
 <div class="product-hero-control-images">
     {#if $product.skus && $product.skus.length <= 7}
@@ -22,7 +26,7 @@
         {/each}
     {/if}
     {#if $product.skus && $product.skus.length > 7}
-        {#if window.innerWidth < 1024}
+        {#if innerWidth < 1024}
             {#each $product?.skus as productSku, i}
                 {#if productSku.product_images[0].product_image}
                     <img
