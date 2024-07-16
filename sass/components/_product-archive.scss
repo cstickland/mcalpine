@@ -183,8 +183,10 @@
       gap: 1.25rem;
       height: fit-content;
 
-      &.columns {
-        grid-template-columns: 1fr 1fr;
+      @for $i from 1 through 4 {
+        &.columns-#{$i} {
+          grid-template-columns: repeat(#{$i}, 1fr);
+        }
       }
     }
   }

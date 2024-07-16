@@ -5,9 +5,7 @@
     export let showFilters = true;
 
     import ProductCard from "./ProductCard.svelte";
-    import Pagination from "./Pagination.svelte";
     import LoadMore from "./LoadMore.svelte";
-    import CardsPerPage from "./CardsPerPage.svelte";
     import GridToggleButtons from "./GridToggleButtons.svelte";
     import Filters from "./Filters.svelte";
     import ActiveFilters from "./ActiveFilters.svelte";
@@ -20,10 +18,12 @@
     } from "./stores.js";
 
     let allProductsList;
-    let gridStyle = true;
     let openFilters = false;
     let filtersClass;
     let filtersClosedClass;
+    let innerWidth = window.innerWidth;
+
+    let columns = 4;
 
     if (showFilters) {
         filtersClass = "";
@@ -41,6 +41,22 @@
     $: totalPages = Math.ceil(totalProducts / $postsPerPage);
     $: postRangeHigh = $currentPage * $postsPerPage;
     $: postRangeLow = postRangeHigh - $postsPerPage;
+
+    function updateWidth() {
+        if (innerWidth < 1024 && columns === 4) {
+            columns = 3;
+        }
+        if (innerWidth > 1024 && columns === 3) {
+            columns = 4;
+        }
+        if (innerWidth < 768 && columns > 2) {
+            columns = 2;
+        }
+
+        if(innerWidth > 767 && columns === 1) {
+            columns = 2;
+        }
+    }
 
     function resetFilters() {
         parentFilters.set(new Set());
@@ -73,13 +89,15 @@
         const urlParams = new URLSearchParams(window.location.search);
         let currentPageTemp = parseInt(urlParams.get("page")) || 1;
         currentPage.set(currentPageTemp);
-        // wrapGrid(gridElement)
+        updateWidth();
     });
 </script>
 
+<svelte:window bind:innerWidth on:resize={updateWidth} />
+
 <section class="product-archive {filtersClass} {filtersClosedClass}">
     {#if showFilters}
-        {#if parentCategories?.length || childCategories?.length }
+        {#if parentCategories?.length || childCategories?.length}
             <div class="filters-heading">
                 <button
                     on:click={() => {
@@ -127,16 +145,11 @@
             <div />
         {/if}
         <div class="archive-controls-button-container">
-            <CardsPerPage />
-            <GridToggleButtons bind:gridStyle />
+            <GridToggleButtons bind:columns />
         </div>
     </div>
     <div class="product-archive-grid-container">
-        <ul
-            class={gridStyle
-                ? "product-archive-grid columns"
-                : "product-archive-grid rows"}
-        >
+        <ul class="product-archive-grid columns-{columns}">
             {#each allProductsList as product, i}
                 {#if i < postRangeHigh}
                     <ProductCard {product} />
@@ -148,8 +161,5 @@
         {#if $currentPage < totalPages}
             <LoadMore />
         {/if}
-        <!-- {#if totalPages > 1} -->
-        <!--     <Pagination {totalPages} /> -->
-        <!-- {/if} -->
     </div>
 </section>

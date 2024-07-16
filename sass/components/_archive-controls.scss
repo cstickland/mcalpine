@@ -2,7 +2,6 @@
   grid-area: controls;
   display: flex;
   flex-direction: row;
-  height: 2.375rem;
   gap: 1rem;
   margin-bottom: 1.25rem;
   justify-content: space-between;
@@ -10,6 +9,10 @@
   .archive-controls-button-container {
     display: flex;
     gap: 10px;
+
+    .column-4 {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
   }
 
   .product-archive-total-results {
@@ -53,7 +56,17 @@
       outline: none;
     }
   }
-
+  .layout-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 0.5rem;
+  }
+  .layout-picker-options {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
   .layout-button {
     display: grid;
     width: 2.375rem;
@@ -69,34 +82,35 @@
       background-color: #222222;
     }
 
-    &.grid-layout-button-mobile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      .square {
-        width: 0.3125rem;
-        aspect-ratio: 1;
-        margin: 0 auto;
-      }
-    }
-    &.grid-layout-button {
-      grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: repeat(3, 1fr);
+    &.columns-1 {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0.625rem 0.96825rem;
     }
 
-    &.row-layout-button {
+    &.columns-2 {
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.25rem;
+      padding: 0.625rem;
+    }
+
+    &.columns-3 {
       grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: 1fr 3fr;
-      row-gap: 0.25rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.1625rem;
+      padding: 0.625rem;
+    }
+    &.columns-4 {
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.125rem;
     }
   }
 }
 
 @media only screen and (min-width: $desktop) {
   .archive-controls {
-    height: 2.5rem;
     gap: 1.25rem;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
