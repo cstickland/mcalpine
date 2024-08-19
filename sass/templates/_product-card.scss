@@ -207,6 +207,9 @@
       }
 
       .sku-close {
+        @media (hover: hover) {
+          display: none;
+        }
         grid-area: close;
         background-color: #ffffff4d;
         border-radius: 50px;

@@ -1,7 +1,6 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .product-hero {
-  @include container-large;
   padding-top: 0;
   padding-bottom: 0;
   background: transparent linear-gradient(53deg, #ffffff 0%, #7caef229 100%) 0%
@@ -29,7 +28,11 @@
         .product-skus-container {
           background-color: #ff574e;
           color: #fff;
-
+          &::before {
+            background: rgba(0, 0, 0, 0)
+              linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ff574e 100%)
+              0% 0% no-repeat padding-box;
+          }
           ul {
             .sku-headers {
               border-bottom: 1px solid #e63128;
@@ -51,11 +54,24 @@
             }
           }
         }
+        .accordion {
+          background-color: #ff574e;
 
+          .accordion-question-container {
+            .accordion-question {
+              color: white;
+            }
+            .accordion-toggle-icon {
+              .vertical-line,
+              .horizontal-line {
+                background-color: white;
+              }
+            }
+          }
+        }
         .product-instructions-container {
-          .technical-drawing,
-          .installation-instructions {
-            background-color: $color__mcalpine-black;
+          .download {
+            background-color: #ff574e;
 
             a {
               color: #fff;
@@ -67,11 +83,11 @@
               }
 
               &:hover {
-                color: $color__mcalpine-red;
+                color: $color__mcalpine-black;
 
                 svg {
                   * {
-                    fill: $color__mcalpine-red;
+                    fill: $color__mcalpine-black;
                   }
                 }
               }
@@ -101,6 +117,8 @@
 
         .active-sku {
           color: #fff;
+          display: flex;
+          flex-direction: row;
 
           span {
             background-color: #fff;
@@ -146,6 +164,7 @@
     }
   }
   .product-hero-container {
+    @include container-large;
     padding-top: 1.5rem !important;
     display: flex;
     flex-direction: column;
@@ -255,6 +274,8 @@
       .active-sku {
         align-self: start;
         padding-top: 1rem;
+        display: flex;
+        align-items: center;
 
         span {
           color: $color__mcalpine-red;
@@ -263,6 +284,7 @@
           background-color: #fff;
           border-radius: 50px;
           padding: 0.5rem 1rem;
+          margin-right: 1rem;
         }
       }
       .product-hero-control-images {
@@ -400,6 +422,21 @@
       max-height: min-content;
       display: flex;
       flex-direction: column;
+      position: relative;
+
+      &:before {
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: transparent
+          linear-gradient(180deg, #ffffff00 0%, #ffffff 100%) 0% 0% no-repeat
+          padding-box;
+      }
+
       .sku-headers {
         display: grid;
         flex-direction: row;
@@ -415,7 +452,7 @@
         }
       }
       ul {
-        max-height: 280px;
+        max-height: 235px;
         height: fit-content;
         overflow-y: scroll;
         list-style: none;
@@ -462,28 +499,67 @@
         }
       }
     }
+    .accordion {
+      background-color: white;
 
+      &.open {
+        .accordion-question-container {
+          border-bottom: solid 1px #f4f4f4;
+        }
+      }
+
+      .accordion-question-container {
+        .accordion-question {
+          font-size: 1.125rem;
+          display: flex;
+          align-items: center;
+        }
+        padding: 1.25rem 1.5rem;
+      }
+
+      .accordion-answer {
+        padding: 0;
+      }
+    }
     .product-instructions-container {
       display: flex;
       flex-direction: column;
 
-      .technical-drawing,
-      .installation-instructions {
+      .download {
         width: 100%;
         background-color: #fff;
 
         a {
           width: 100%;
-          color: $color__mcalpine-black;
-          padding: 1rem;
+          color: #878787;
           display: flex;
-          justify-content: center;
+          padding: 1.25rem 1.5rem;
+          justify-content: space-between;
           align-items: center;
           gap: 1.5rem;
           text-align: center;
-          font-size: 1rem;
+          font-size: 1.125rem;
           text-decoration: none;
-          text-transform: uppercase;
+          border-bottom: solid 1px #f4f4f4;
+
+          div {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+          }
+
+          span {
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            svg {
+              * {
+                fill: $color__mcalpine-red;
+              }
+            }
+          }
 
           svg {
             width: 2rem;
@@ -521,7 +597,6 @@
         .product-details-container {
           padding: 1.5rem;
           background-color: #fff;
-          margin-bottom: 1.5rem;
           display: flex;
           flex-direction: column;
 
@@ -539,6 +614,7 @@
 
         .product-skus-container {
           display: flex;
+
           ul {
             overflow-y: scroll;
             width: 100%;
@@ -565,11 +641,10 @@
         }
 
         .product-instructions-container {
-          flex-direction: row;
-          gap: 0.25rem;
+          background-color: white;
+          flex-direction: column;
 
-          .technical-drawing,
-          .installation-instructions {
+          .download {
             display: flex;
             align-items: center;
           }

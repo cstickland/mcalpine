@@ -106,8 +106,8 @@
 
 @media only screen and (min-width: $desktop) {
   .small-hero-block {
+    position: relative;
     width: 100%;
-    max-width: 120rem;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -115,8 +115,9 @@
     border-bottom: solid 1px #f4f4f4;
     padding-bottom: 0;
     .small-hero-content {
-      width: 50%;
-      margin-left: auto;
+      width: 100%;
+      max-width: 120rem;
+      margin: 0 auto;
       padding-left: 3.75rem;
       padding-top: 54px;
 
@@ -163,13 +164,16 @@
     }
 
     .small-hero-image-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
       background: transparent
         linear-gradient(-105deg, #7caef220 0%, #7caef200 100%) 0% 0% no-repeat
         padding-box;
       max-width: 50%;
       width: 50%;
       margin-bottom: 0;
-      height: unset;
       img {
         margin: 0 auto;
       }

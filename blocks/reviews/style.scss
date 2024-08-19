@@ -206,7 +206,7 @@
     @include container-large;
 
     .reviews-title-section {
-      max-width: 388px;
+      min-width: 388px;
       aspect-ratio: 1;
       width: 100%;
     }
@@ -290,7 +290,7 @@
       align-items: center;
 
       .reviews-title-section {
-        max-width: 24rem;
+        min-width: 388px;
 
         h3 {
           font-size: 2rem;
@@ -309,7 +309,6 @@
 
         .reviews-card {
           height: 424px;
-          width: 424px;
         }
       }
     }

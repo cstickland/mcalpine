@@ -19,6 +19,7 @@
                         easing: quadInOut,
                     }}>{$product.skus[$activeSku].sku}</span
                 >{/if}
+                <div>{$activeSku + 1} of {$product.skus.length}</div>
         </div>
         <div class="product-image-div active">
             {#each $product.skus as productSku, i}

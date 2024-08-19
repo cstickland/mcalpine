@@ -406,6 +406,76 @@
                         }
                     ],
                     "parent_repeater": "field_64736a878b344"
+                },
+                {
+                    "key": "field_66c3019c1f53b",
+                    "label": "Downloads",
+                    "name": "downloads",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Row",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_66c301b41f53c",
+                            "label": "Download Title",
+                            "name": "download_title",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_66c3019c1f53b"
+                        },
+                        {
+                            "key": "field_66c301c51f53d",
+                            "label": "Download File",
+                            "name": "download_file",
+                            "aria-label": "",
+                            "type": "file",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "return_format": "url",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "parent_repeater": "field_66c3019c1f53b"
+                        }
+                    ],
+                    "parent_repeater": "field_64736a878b344"
                 }
             ]
         }
@@ -434,5 +504,5 @@
     "graphql_types": [
         "Product"
     ],
-    "modified": 1716214347
+    "modified": 1724057995
 }

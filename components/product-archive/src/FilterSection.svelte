@@ -1,6 +1,6 @@
 <script>
     import { slide } from "svelte/transition";
-    import { childFilters, parentFilters, currentPage } from "./stores";
+    import { childFilters, parentFilters, currentPage, finishFilters, allFilters } from "./stores";
     export let categories = [];
     export let title = "title";
     export let isParent;
@@ -12,21 +12,38 @@
     }
 
     $: if (isParent && filters.length) {
-        childFilters.set(new Set);
+        childFilters.set(new Set());
     }
 
     function toggleFilter(id) {
-    currentPage.set(1)
+        currentPage.set(1);
+        if($allFilters.has(id)) {
+            if($allFilters.delete(id)) {
+                allFilters.set($allFilters);
+            }
+        } else {
+            allFilters.set($allFilters.add(id));
+        }
+
         if (isParent) {
             if ($parentFilters.has(id)) {
                 if ($parentFilters.delete(id)) {
                     parentFilters.set($parentFilters);
                 }
             } else {
-                    $parentFilters = $parentFilters.add(id);
+                $parentFilters = $parentFilters.add(id);
             }
-            filters = [...$parentFilters];
             return;
+        }
+        if(title == "Finish") {
+            if($finishFilters.has(id)) {
+                if($finishFilters.delete(id)) {
+                    finishFilters.set($finishFilters);
+                }
+            } else {
+                $finishFilters = $finishFilters.add(id);
+            }
+            return
         }
         if ($childFilters.has(id)) {
             if ($childFilters.delete(id)) {
@@ -35,7 +52,6 @@
         } else {
             $childFilters = $childFilters.add(id);
         }
-        filters = [...$childFilters];
     }
 </script>
 
@@ -91,27 +107,15 @@
                     }}
                     on:keydown
                 >
-                    {#if isParent}
                         <div
-                            class="category-toggle {$parentFilters.has(
-                                category.term_id
+                            class="category-toggle {$allFilters.has(
+                                category.term_id,
                             )
                                 ? 'checked'
                                 : 'unchecked'}"
                         >
                             <div class="toggle-circle" />
                         </div>
-                    {:else}
-                        <div
-                            class="category-toggle {$childFilters.has(
-                                category.term_id
-                            )
-                                ? 'checked'
-                                : 'unchecked'}"
-                        >
-                            <div class="toggle-circle" />
-                        </div>
-                    {/if}
                     {@html category.name}
                 </li>
             {/each}

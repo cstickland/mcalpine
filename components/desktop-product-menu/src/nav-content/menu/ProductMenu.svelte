@@ -174,7 +174,7 @@
     .category-list {
         max-height: calc(100% - 60px);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(332px, 480px));
         gap: 2rem;
     }
     .category-item {

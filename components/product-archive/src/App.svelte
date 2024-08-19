@@ -2,6 +2,7 @@
     export let allProducts = [];
     export let childCategories = [];
     export let parentCategories = [];
+    export let finishes = [];
     export let showFilters = true;
 
     import ProductCard from "./ProductCard.svelte";
@@ -11,8 +12,10 @@
     import ActiveFilters from "./ActiveFilters.svelte";
     import { onMount } from "svelte";
     import {
+        allFilters,
         parentFilters,
         childFilters,
+        finishFilters,
         currentPage,
         postsPerPage,
     } from "./stores.js";
@@ -40,7 +43,6 @@
     $: totalProducts = allProductsList.length;
     $: totalPages = Math.ceil(totalProducts / $postsPerPage);
     $: postRangeHigh = $currentPage * $postsPerPage;
-    $: postRangeLow = postRangeHigh - $postsPerPage;
 
     function updateWidth() {
         if (innerWidth < 1024 && columns === 4) {
@@ -53,38 +55,59 @@
             columns = 2;
         }
 
-        if(innerWidth > 767 && columns === 1) {
+        if (innerWidth > 767 && columns === 1) {
             columns = 2;
         }
     }
 
     function resetFilters() {
+        allFilters.set(new Set());
         parentFilters.set(new Set());
         childFilters.set(new Set());
+        finishFilters.set(new Set());
     }
 
-    $: if ($childFilters.size == 0 && $parentFilters.size == 0) {
+    $: if (
+        $childFilters.size == 0 &&
+        $parentFilters.size == 0 &&
+        $finishFilters.size == 0
+    ) {
         allProductsList = [...allProducts];
     }
 
-    $: if ($childFilters.size > 0) {
+    $: if (
+        $parentFilters.size > 0 ||
+        $childFilters.size > 0 ||
+        $finishFilters.size > 0
+    ) {
         allProductsList = allProducts.filter(function (product) {
-            let productFound = false;
+            let productFound = true;
 
-            product.subcategoryId.forEach((subCategory) => {
-                if ($childFilters.has(subCategory)) {
-                    productFound = true;
-                }
-            });
+            if ($parentFilters.size > 0) {
+                productFound = productInFilters($parentFilters, product);
+            }
+            if ($childFilters.size > 0 && productFound) {
+                productFound = productInFilters($childFilters, product); 
+            }
+            if ($finishFilters.size > 0 && productFound) {
+               productFound = productInFilters($finishFilters, product); 
+            }
+
             return productFound;
         });
     }
 
-    $: if ($parentFilters.size > 0 && $childFilters.size == 0) {
-        allProductsList = allProducts.filter(function (product) {
-            return $parentFilters.has(product.categoryId);
+    function productInFilters(filters, product) {
+        let filtersContains = false;
+
+        product.taxonomies.forEach((taxonomy) => {
+            if (filters.has(taxonomy)) {
+                filtersContains = true;
+            }
         });
+        return filtersContains;
     }
+
     onMount(() => {
         const urlParams = new URLSearchParams(window.location.search);
         let currentPageTemp = parseInt(urlParams.get("page")) || 1;
@@ -97,7 +120,7 @@
 
 <section class="product-archive {filtersClass} {filtersClosedClass}">
     {#if showFilters}
-        {#if parentCategories?.length || childCategories?.length}
+        {#if parentCategories?.length || childCategories?.length || finishes?.length}
             <div class="filters-heading">
                 <button
                     on:click={() => {
@@ -134,13 +157,13 @@
                 {/if}
             </div>
             {#if openFilters}
-                <Filters {childCategories} {parentCategories} />
+                <Filters {childCategories} {parentCategories} {finishes} />
             {/if}
         {/if}
     {/if}
     <div class="archive-controls">
-        {#if $parentFilters.size > 0 || $childFilters.size > 0}
-            <ActiveFilters />
+        {#if $allFilters.size > 0}
+            <ActiveFilters taxonomies={[...finishes, ...childCategories, ...parentCategories]} />
         {:else}
             <div />
         {/if}

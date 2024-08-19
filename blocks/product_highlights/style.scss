@@ -127,12 +127,21 @@
   .highlights-icon-grid {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(6, minmax(76px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
     gap: 1rem;
     padding: 0;
     margin: 0;
     justify-items: center;
     overflow-x: scroll;
+
+    @media only screen and (min-width: $tablet) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media only screen and (min-width: $desktop) {
+      grid-template-columns: repeat(6, 1fr);
+    }
 
     li {
       container-type: inline-size;
@@ -146,19 +155,31 @@
       width: 100%;
       max-width: 274px;
 
+      .highlight-image {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
       svg,
       img {
+        aspect-ratio: 1;
+        object-fit: contain;
         width: 100%;
         max-width: 96px;
         opacity: 0;
       }
 
       h5 {
+        display: table-caption;
         opacity: 0;
-        font-weight: 700;
+        font-weight: 900;
         font-size: clamp(0.75rem, 0.491rem + 5.444cqw, 1.424rem);
-        padding-top: 1.5rem;
+        padding-top: 1rem;
         text-transform: uppercase;
+
+        @media only screen and (min-width: $tablet) {
+          display: unset;
+        }
       }
     }
   }

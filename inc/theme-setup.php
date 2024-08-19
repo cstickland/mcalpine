@@ -109,7 +109,8 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
                 'acf/find-product',
                 'mcalpine/product-highlights',
                 'mcalpine/product-faq',
-                'mcalpine/product-specifications'
+                'mcalpine/product-specifications',
+                'mcalpine/product-downloads'
             );
             return $allowed_blocks;
         }

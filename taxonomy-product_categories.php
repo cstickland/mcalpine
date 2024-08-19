@@ -8,8 +8,7 @@ class Product
     public $title;
     public $link;
     public $image_url;
-    public $categoryId;
-    public $subcategoryId;
+    public $taxonomies;
 }
 
 class Category
@@ -26,6 +25,8 @@ $child_terms = array();
 foreach ($child_term_ids as $id) {
     $child_terms[] = get_term($id);
 }
+$all_finishes = [];
+$finishes = [];
 ?>
 
 <main id="primary" class="site-main">
@@ -60,15 +61,14 @@ foreach ($child_term_ids as $id) {
                         }
                     endwhile;
                 endif;
-                $product_categories = wp_get_object_terms($post_id, 'product_categories');
-                $child_category = [];
-
+                $product_categories = wp_get_object_terms($post_id, array('product_categories', 'product_finishes'));
+                $product_finishes = wp_get_object_terms($post_id, 'product_finishes');
+                foreach ($product_finishes as $product_finish) {
+                    $all_finishes[] = $product_finish;
+                }
+                $taxonomies = [];
                 foreach ($product_categories as $category) {
-                    if ($category->parent == 0) {
-                        $parent_category = $category->term_id;
-                    } else {
-                        $child_category[] = $category->term_id;
-                    }
+                    $taxonomies[] = $category->term_id;
                 }
 
                 $new_product = new Product();
@@ -76,8 +76,7 @@ foreach ($child_term_ids as $id) {
                 $new_product->link = get_the_permalink();
                 $new_product->skus = $skus;
                 $new_product->image_url = $product_image;
-                $new_product->categoryId = $parent_category;
-                $new_product->subcategoryId = $child_category;
+                $new_product->taxonomies = $taxonomies;
                 $products[] = $new_product;
 
 
@@ -87,6 +86,17 @@ foreach ($child_term_ids as $id) {
             the_posts_navigation(); ?>
         </div>
     <?php endif;
+    $all_finishes = array_unique($all_finishes);
+
+    foreach ($all_finishes as $finish) {
+        $new_category = new Category();
+
+        $new_category->name = $finish->name;
+        $new_category->parent = $finish->parent;
+        $new_category->term_id = $finish->term_id;
+        $finishes[] = $new_category;
+    }
+
     ?>
 
 </main><!-- #main -->
@@ -95,6 +105,7 @@ foreach ($child_term_ids as $id) {
 <script>
     const allProducts = <?php echo json_encode($products); ?>;
     const childCategories = <?php echo json_encode($child_terms); ?>;
+    const finishes = <?php echo json_encode($finishes); ?>;
     const archiveItems = document.getElementById('archive-items');
     archiveItems.innerHTML = ''
     new Archive({
@@ -102,6 +113,7 @@ foreach ($child_term_ids as $id) {
         props: {
             allProducts: allProducts,
             childCategories: childCategories,
+            finishes: finishes,
             showFilters: true,
 
         }
