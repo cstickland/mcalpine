@@ -1,25 +1,35 @@
 @import '../../sass/abstracts/_abstracts.scss';
 
 .block-editor {
-  .suitability-block {
-    display: block;
-
-    &.accordion {
+  .product-download-block {
+    .product-download-block-desktop {
+      display: block;
+    }
+    .accordion {
       display: none;
     }
   }
 }
 
-.suitability-block {
+.product-download-block {
   overflow: hidden;
-
-  display: none;
-
-  &.accordion {
+  .product-download-block-desktop {
+    display: none;
+  }
+  .accordion {
     display: block;
+
+    .accordion-question-container {
+      .grid-title {
+        color: $color__mcalpine-black;
+      }
+    }
 
     &.red {
       .accordion-question-container {
+        .grid-title {
+          color: white;
+        }
         .accordion-toggle-icon {
           .vertical-line,
           .horizontal-line {
@@ -100,10 +110,30 @@
         padding: 1rem 1.5rem;
         width: 100%;
 
+        div {
+          display: flex;
+          align-items: center;
+        }
+
+        span {
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-right: 1rem;
+
+          svg {
+            *,
+            path {
+              fill: $color__mcalpine-red;
+            }
+          }
+        }
+
         svg {
           height: 1.25rem;
           path {
-            fill: $color__mcalpine-red;
+            fill: $color__mcalpine-black;
           }
         }
       }
@@ -135,7 +165,7 @@
 
           box-shadow: inset 0px 0px 10px #0000000d;
           svg {
-            path {
+            * {
               fill: #fff;
             }
           }
@@ -146,10 +176,11 @@
 }
 
 @media only screen and (min-width: $desktop) {
-  .suitability-block {
-    display: block;
-
-    &.accordion {
+  .product-download-block {
+    .product-download-block-desktop {
+      display: block;
+    }
+    .accordion {
       display: none;
     }
   }
@@ -157,14 +188,14 @@
 
 @supports (container-type: inline-size) {
   @container block-suitability-container (min-width: 700px) {
-    .suitability-block {
+    .product-download-block {
       ul {
         grid-template-columns: 1fr 1fr;
       }
     }
   }
   @container block-suitability-container (min-width: 1050px) {
-    .suitability-block {
+    .product-download-block {
       .grid-title-container {
         .grid-link {
           display: block;
@@ -177,7 +208,7 @@
   }
 
   @container block-suitability-container (min-width: 1400px) {
-    .suitability-block {
+    .product-download-block {
       ul {
         grid-template-columns: repeat(4, 1fr);
       }

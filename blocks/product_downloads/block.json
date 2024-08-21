@@ -12,6 +12,7 @@
 		"mode": "preview",
 		"renderTemplate": "render.php"
 	},
+    "script": ["file:../../components/product-downloads/dist/product-downloads.js"],
     "supports": {
         "multiple": false
     }

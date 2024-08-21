@@ -20,6 +20,10 @@
     });
 
     activeSku.subscribe((value) => {
+        const event = new Event("activeSku");
+        event.activeSku = value;
+        document.dispatchEvent(event);
+
         display.set(false);
         setTimeout(() => {
             display.set(true);

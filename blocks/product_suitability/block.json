@@ -8,7 +8,6 @@
 	"icon": "editor-ul",
 	"description": "Example block scaffolded with Create Block tool.",
 	"style": "file:./style.css",
-	"editorStyle": "file:./style.css",
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php"

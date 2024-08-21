@@ -1,63 +1,67 @@
-<div <?php echo get_block_wrapper_attributes(['class' => 'suitability-block animate ' . get_field('background_color')]); ?> id="suitability">
-    <div class="suitability-content-container">
-        <div class="grid-title-container">
-            <h2 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">
-                Downloads
-            </h2>
-        </div>
-        <ul class="grid-block-grid">
-            <div><?php echo get_field('product_technical_drawing'); ?></div>
-            <!-- <?php foreach (get_the_tags() as $tag) { ?> -->
-            <!--     <li> -->
-            <!--         <a href="<?php echo get_tag_link($tag); ?>"> -->
-            <!--             <?php echo $tag->name; ?> -->
-            <!---->
-            <!--             <svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245"> -->
-            <!--                 <path d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z" fill="#fff" /> -->
-            <!--             </svg> -->
-            <!--         </a> -->
-            <!--     </li> -->
-            <!-- <?php } ?> -->
-        </ul>
-    </div>
-</div>
-<div <?php echo get_block_wrapper_attributes(['class' => 'suitability-block animate accordion ' . get_field('background_color')]); ?> id="suitability">
-    <div class=" accordion-question-container">
-        <h2 class="grid-title <?php the_field('title_color'); ?> <?php the_field('title_alignment'); ?>">
-            <?php the_field('title'); ?>
-        </h2>
-        <div class="accordion-toggle-icon">
-            <div class="vertical-line"></div>
-            <div class="horizontal-line"></div>
-        </div>
+<?php
 
-    </div>
-    <div class="accordion-answer">
-        <div class="suitability-content-container answer">
-            <ul class="grid-block-grid">
-                <?php foreach (get_the_tags() as $tag) { ?>
-                    <li>
-                        <a href="<?php echo get_tag_link($tag); ?>">
-                            <?php echo $tag->name; ?>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13.922" height="16.245" viewBox="0 0 13.922 16.245">
-                                <path d="M0,16.245V11.68L6.667,7.869,0,4.06V0L13.922,8.122,0,16.244Z" fill="#fff" />
-                            </svg>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<style>
-    .grid-block {
-        padding-bottom: 5rem;
+if (!class_exists('Product')) :
+    class Product
+    {
+        public $skus;
+        public $title;
+        public $link;
+        public $image_url;
+        public $categoryId;
+        public $subcategoryId;
+        public $schematic_image;
+        public $backgroundColor;
+        public $parentCategory;
+        public $childCategory;
+        public $childLink;
+        public $parentLink;
     }
+endif;
+$product = new Product();
 
-    .grid-block .acf-innerblocks-container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
+$skus = [];
+
+$terms = get_the_terms($post_id, 'product_categories');
+foreach ($terms as $term) {
+    if ($term->parent == 0) {
+        $product->parentCategory = $term->name;
+        $product->parentLink = get_term_link($term->term_id);
+    } else {
+        $product->childCategory = $term->name;
+        $product->childLink = get_term_link($term->term_id);
     }
-</style>
+}
+
+if (have_rows('skus', $post_id)) :
+    $skus = get_field('skus', $post_id);
+endif;
+
+$product->skus = $skus;
+$product->title = get_the_title($post_id);
+$image = get_field('product_schematic_image', $post_id);
+if ($image) :
+    $image_url = $image['url'];
+    if (pathinfo($image_url)['extension'] == 'svg') {
+        $product->schematic_image = file_get_contents($image_url);
+    } else {
+        $product->schematic_image = $image_url;
+    }
+endif;
+
+?>
+<section <?php echo get_block_wrapper_attributes(['class' => 'product-download-block ' . get_field('background_color')]); ?> id="product-downloads">
+</section>
+
+
+<!-- Initiate ProductDownloads svelte component -->
+<script>
+    const productDownloads = document.getElementById('product-downloads');
+    productDownloads.innerHTML = ''
+    new ProductDownloads({
+        target: productDownloads,
+        props: {
+            productDetails: <?php echo json_encode($product); ?>,
+            backgroundColor: "<?php echo get_field('background_color'); ?>"
+        }
+    })
+</script>
