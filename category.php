@@ -1,17 +1,18 @@
 <?php
 
 // wordpress uses this as the archive page for "posts"
-class Insight
-{
-    public $identifier;
-    public $title;
-    public $permalink;
-    public $id;
-    public $img;
-    public $alt;
-    public $columnWidth;
+if (!class_exists("Insight")) {
+    class Insight
+    {
+        public $identifier;
+        public $title;
+        public $permalink;
+        public $id;
+        public $img;
+        public $alt;
+        public $columnWidth;
+    }
 }
-
 $insights = [];
 get_header();
 ?>

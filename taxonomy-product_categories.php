@@ -2,22 +2,25 @@
 
 get_header();
 
-class Product
-{
-    public $skus;
-    public $title;
-    public $link;
-    public $image_url;
-    public $taxonomies;
+if (!class_exists('Product')) {
+    class Product
+    {
+        public $skus;
+        public $title;
+        public $link;
+        public $image_url;
+        public $taxonomies;
+    }
 }
 
-class Category
-{
-    public $name;
-    public $parent;
-    public $id;
+if (!class_exists('Finish_category')) {
+    class Finish_category
+    {
+        public $name;
+        public $parent;
+        public $term_id;
+    }
 }
-
 $term = get_queried_object();
 $child_term_ids = get_term_children($term->term_id, 'product_categories');
 $child_terms = array();
@@ -62,7 +65,7 @@ $finishes = [];
                     endwhile;
                 endif;
                 $product_categories = wp_get_object_terms($post_id, array('product_categories', 'product_finishes'));
-                $product_finishes = wp_get_object_terms($post_id, 'product_finishes');
+                $product_finishes = wp_get_object_terms($post_id, array('product_finishes'));
                 foreach ($product_finishes as $product_finish) {
                     $all_finishes[] = $product_finish;
                 }
@@ -86,17 +89,17 @@ $finishes = [];
             the_posts_navigation(); ?>
         </div>
     <?php endif;
-    $all_finishes = array_unique($all_finishes);
+    $all_finishes_unique = array_values(array_unique($all_finishes, SORT_REGULAR));
 
-    foreach ($all_finishes as $finish) {
-        $new_category = new Category();
+    foreach ($all_finishes_unique as $finish) {
+        $new_category = new Finish_category();
 
         $new_category->name = $finish->name;
         $new_category->parent = $finish->parent;
         $new_category->term_id = $finish->term_id;
         $finishes[] = $new_category;
     }
-
+    var_dump($finishes);
     ?>
 
 </main><!-- #main -->
