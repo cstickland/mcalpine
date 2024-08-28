@@ -1,94 +1,107 @@
 .legal-page {
-position: relative;
-    .legal-gradient {
-background: transparent linear-gradient(180deg, #7CAEF2 0%, #7CAEF200 100%) 0% 0% no-repeat padding-box;
-opacity: 0.15;
-height:346px;
-width: 100%;
-position: absolute;
-z-index: -1;
-top: 0;
-left: 0;
-    }
-h1, h2, h3, h4, h5, h6 {
+  position: relative;
+
+  .legal-gradient {
+    background: transparent linear-gradient(180deg, #7caef2 0%, #7caef200 100%)
+      0% 0% no-repeat padding-box;
+    opacity: 0.15;
+    height: 346px;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: $color__mcalpine-black;
-}
-    .legal-content {
-        @include container-large;
-        max-width: 870px;
-        width: 100%;
+  }
 
+  .legal-content {
+    @include container-large;
+    max-width: 870px;
+    width: 100%;
+  }
+
+  .hero-breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    font-size: 0.75rem;
+    width: max-content;
+
+    a {
+      text-decoration: none;
+      color: #878787;
+      margin-right: 0.5rem;
+
+      &:hover {
+        color: $color__mcalpine-red;
+      }
+
+      &.breadcrumb-middle-link {
+        margin-left: 0.5rem;
+      }
     }
-.hero-breadcrumbs {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  font-size: 0.75rem;
-  width: max-content;
-  a {
-    text-decoration: none;
-    color: #878787;
-    margin-right: 0.5rem;
-    &:hover {
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    svg {
+      width: 0.375rem;
+      margin: 0 0.5rem;
+
+      path {
+        fill: #5a5a5a;
+      }
+    }
+
+    .breadcrumbs-current {
       color: $color__mcalpine-red;
-    }
-
-    &.breadcrumb-middle-link {
       margin-left: 0.5rem;
     }
   }
-  span {
-    display: flex;
-    align-items: center;
-  }
-  svg {
-    width: 0.375rem;
-    margin: 0 0.5rem;
-    path {
-      fill: #5a5a5a;
-    }
-  }
-  .breadcrumbs-current {
-    color: $color__mcalpine-red;
-    margin-left: 0.5rem;
-  }
 }
-
-}
-
-
 
 @media only screen and (min-width: $desktop) {
-
-    .legal-page {
-        .legal-content {
-            box-sizing: content-box; 
-        }
+  .legal-page {
+    .legal-content {
+      box-sizing: content-box;
     }
-    .hero-breadcrumbs {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: start;
-        font-size: 1rem;
-        a {
-          text-decoration: none;
-          color: #878787;
-          margin-right: 0.5rem;
-          &:hover {
-            color: $color__mcalpine-red;
-          }
+  }
 
-          &.breadcrumb-middle-link {
-            margin-left: 0.5rem;
-          }
-        }
+  .hero-breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    font-size: 1rem;
 
-        .breadcrumbs-current {
-          color: $color__mcalpine-red;
-          margin-left: 0.5rem;
-        }
+    a {
+      text-decoration: none;
+      color: #878787;
+      margin-right: 0.5rem;
+
+      &:hover {
+        color: $color__mcalpine-red;
       }
 
+      &.breadcrumb-middle-link {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .breadcrumbs-current {
+      color: $color__mcalpine-red;
+      margin-left: 0.5rem;
+    }
+  }
 }

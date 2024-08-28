@@ -99,7 +99,6 @@ $finishes = [];
         $new_category->term_id = $finish->term_id;
         $finishes[] = $new_category;
     }
-    var_dump($finishes);
     ?>
 
 </main><!-- #main -->
