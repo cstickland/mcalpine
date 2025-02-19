@@ -36,12 +36,7 @@ if ($link) {
             <?php if (get_field('text')) : ?>
                 <div class="help-card-text"><?php the_field('text'); ?></div>
             <?php endif; ?>
-            <?php
-            if ($link) :
-                $link_url = $link['url'];
-                $link_title = $link['title'];
-                $link_target = $link['target'] ? $link['target'] : '_self';
-            ?>
+            <?php if ($link) : ?>
                 <div class="btn btn-red"><?php echo esc_html($link_title); ?></div>
             <?php endif; ?>
         </div>

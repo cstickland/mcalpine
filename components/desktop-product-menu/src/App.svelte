@@ -3,6 +3,7 @@
 
     export let productCategories = {};
 
+
     export let allProductsLink = "";
 
     let innerHeight;

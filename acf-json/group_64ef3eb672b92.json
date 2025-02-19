@@ -66,43 +66,6 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "medium"
-        },
-        {
-            "key": "field_64ef4f89decd4",
-            "label": "breadcrumb middle link",
-            "name": "breadcrumb_middle_link",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
-        },
-        {
-            "key": "field_6554ef111503e",
-            "label": "End Breadcrumb Text",
-            "name": "end_breadcrumb_text",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         }
     ],
     "location": [
@@ -127,5 +90,5 @@
     "graphql_field_name": "smallHeroBlock",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1700065625
+    "modified": 1737989482
 }

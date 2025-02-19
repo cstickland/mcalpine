@@ -1,5 +1,6 @@
 <script>
-    import { fade } from "svelte/transition";
+    import { children } from "svelte/internal";
+import { fade } from "svelte/transition";
 
     export let productCategories;
     export let activeMenu = 0;
@@ -42,9 +43,11 @@
         <div class="category-list">
             {#if [...productCategories] && [...productCategories].length > 0}
                 {#each [...productCategories] as category}
+                        {#if category?.children?.length > 0}
                         <div
                             class="category-item"
                             on:click={() => {
+                            console.log(category)
                                 setParentCategories(
                                     category?.id,
                                     category?.name,
@@ -76,6 +79,37 @@
                                 {/if}
                             </div>
                         </div>
+                        {:else}
+                            <a
+                            href={category?.link}
+                            class="category-item"
+                        >
+                            <div>{category?.name}</div>
+                            <div class="background-gradient-container"><div class="background-gradient" /></div>
+                            <div class="category-image-container">
+                                
+                                {#if category?.customFields?.categoryImage}
+
+                                   <img
+                                        src={category?.customFields
+                                            ?.categoryImage?.sourceUrl}
+                                        alt={category?.customFields
+                                            ?.categoryImage?.sourceUrl}
+                                        loading="lazy"
+
+                                        style={`height: ${category?.customFields?.categoryImageHeight}%;`}
+                                    />
+                                {:else}
+                                    <img
+                                        src="http://mcalpine2.local/wp-content/uploads/2023/06/wdu-1asuk-73x150.png"
+                                        alt=""
+                                        loading="lazy"
+                                    />
+                                {/if}
+                            </div>
+                        </a>
+
+                        {/if}
                 {/each}
             {/if}
         </div>

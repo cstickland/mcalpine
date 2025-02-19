@@ -8,35 +8,35 @@
     export const menus = {};
 </script>
 
-    <div class="nav-hover-padding-container">
-        <div
-            class="nav-content-container"
-            in:slide={{ axis: "y", duration: 300 }}
-            out:slide={{ axis: "y", duration: 200 }}
-        >
-            <ProductMenu {productCategories} bind:activeMenu />
+<div class="nav-hover-padding-container">
+    <div
+        class="nav-content-container"
+        in:slide={{ axis: "y", duration: 300 }}
+        out:slide={{ axis: "y", duration: 200 }}
+    >
+        <ProductMenu {productCategories} bind:activeMenu />
 
-            <a class="all-products-link" href={allProductsLink}
-                >View All Products
-                <div class="all-products-link-arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        ><g data-name="Layer 2"
-                            ><g data-name="chevron-right"
-                                ><rect
-                                    width="24"
-                                    height="24"
-                                    transform="rotate(-90 12 12)"
-                                    opacity="0"
-                                /><path
-                                    d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"
-                                /></g
-                            ></g
-                        ></svg
-                    >
-                </div></a
-            >
-        </div>
+        <a class="all-products-link" href={allProductsLink}
+            >View All Products
+            <div class="all-products-link-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    ><g data-name="Layer 2"
+                        ><g data-name="chevron-right"
+                            ><rect
+                                width="24"
+                                height="24"
+                                transform="rotate(-90 12 12)"
+                                opacity="0"
+                            /><path
+                                d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"
+                            /></g
+                        ></g
+                    ></svg
+                >
+            </div></a
+        >
     </div>
+</div>
 
 <style lang="scss">
     @import "../../../../sass/abstracts/variables/_colors.scss";

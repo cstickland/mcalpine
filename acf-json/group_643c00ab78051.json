@@ -17,7 +17,8 @@
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_6506c5d448ce7",
@@ -187,7 +188,8 @@
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_644e75732316e",
@@ -363,7 +365,8 @@
             },
             "show_in_graphql": 0,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_64ff3957a00d4",
@@ -489,7 +492,8 @@
             },
             "show_in_graphql": 0,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_6500667516367",
@@ -530,7 +534,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_650592ce49018",
@@ -691,7 +696,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_6522b4d907fb9",
@@ -822,7 +828,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65412ab9e8156",
@@ -916,7 +923,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_656746cf2804d",
@@ -1096,7 +1104,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_656c9cb03f6f1",
@@ -1248,89 +1257,6 @@
             ]
         },
         {
-            "key": "field_65942743ea55c",
-            "label": "Product Category Menu",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_6594276cea55e",
-            "label": "Parent Categories",
-            "name": "parent_categories",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "taxonomy": "product_categories",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "object",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "bidirectional": 0,
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_659d1f35b59b5",
-            "label": "Where To Buy",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_659d1f43b59b6",
-            "label": "Where To Buy Hero Text",
-            "name": "where_to_buy_hero_text",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "maxlength": "",
-            "rows": "",
-            "placeholder": "",
-            "new_lines": ""
-        },
-        {
             "key": "field_65ba490be0b02",
             "label": "WPAI",
             "name": "",
@@ -1346,7 +1272,8 @@
             },
             "show_in_graphql": 1,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65ba4915e0b03",
@@ -1394,5 +1321,5 @@
     "graphql_types": [
         "ThemeGeneralSettings"
     ],
-    "modified": 1711628350
+    "modified": 1739801785
 }

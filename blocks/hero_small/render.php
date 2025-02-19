@@ -2,16 +2,21 @@
 $term = get_queried_object();
 
 
-$link = !empty(get_field('breadcrumb_middle_link')) ? get_field('breadcrumb_middle_link') : null;
+$link =  null;
 $title = !empty(get_field('title')) ? get_field('title') : $term->name;
 $message =  !empty(get_field('message')) ? get_field('message') : get_field('hero_message', $term);
-if ($term->taxonomy == 'post_tag' && $term->description != '') {
-    $message = $term->description;
+
+if (isset($term)) {
+    if ($term->taxonomy == 'post_tag') {
+        if ($term->description != "") {
+            $message = $term->description;
+        }
+    }
 }
 $image = !empty(get_field('image')) ? get_field('image') : get_field('category_hero_image', $term);
 $breadcrumb_end = 'hello';
 
-if ($term->parent != 0) {
+if (isset($term) && $term->parent != 0 && isset($term->parent)) {
     $parent = get_term($term->parent);
 
     $link['url'] = site_url() . '/product_categories/' . $parent->slug;
@@ -22,6 +27,12 @@ if (is_archive()) {
 } else {
     $breadcrumb_end = get_the_title();
 };
+
+if (get_post_type() == 'page' && has_post_parent()) {
+    $parent = get_post_parent();
+    $link['url'] = get_permalink($parent);
+    $link['title'] = $parent->post_title;
+}
 
 ?>
 

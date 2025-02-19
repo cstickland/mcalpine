@@ -48,3 +48,4 @@ require_once('product_faq/product_faq.php');
 require_once('product_specifications/product_specifications.php');
 
 require_once('product_downloads/product_downloads.php');
+require_once('interactive_map/index.php');

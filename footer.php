@@ -76,40 +76,41 @@ endif; ?>
 
 $get_product_categories = graphql([
     'query' => '{
-  themeGeneralSettings {
-    themeSettings {
-      parentCategories {
-        id
-        name
-        link
-        customFields {
-          categoryImage {
-            sourceUrl(size: THUMBNAIL)
+      productCategories(
+        first: 100
+        where: {parent: 0, order: ASC, orderby: TERM_ORDER}
+      ) {
+        nodes {
+          id
+          link
+          name
+          customFields {
+            categoryImage {
+              sourceUrl(size: THUMBNAIL)
+            }
+            categoryImageHeight
           }
-          categoryImageHeight
-        }
-        children(first: 100) {
-          edges {
-            node {
-              id
-              name
-              link
-              customFields {
-                categoryImage {
-                  sourceUrl(size: THUMBNAIL)
+          children(first: 100, where: {order: ASC, orderby: TERM_ORDER}) {
+            edges {
+              node {
+                id
+                name
+                link
+                customFields {
+                  categoryImage {
+                    sourceUrl(size: THUMBNAIL)
+                  }
+                  categoryImageHeight
                 }
-                categoryImageHeight
               }
             }
           }
         }
       }
-    }
-  }
-}'
+    }'
 ]);
 
-$product_categories = $get_product_categories['data']['themeGeneralSettings']['themeSettings']['parentCategories'];
+$product_categories = $get_product_categories['data']['productCategories']['nodes'];
 ?>
 <script>
     const searchContainer = document.getElementById('search-container');

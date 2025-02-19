@@ -124,6 +124,7 @@ function rt_allowed_block_types($allowed_blocks, $editor_context)
 
 
         $allowed_blocks = array(
+            'mcalpine/interactive-map',
             'mcalpine/hero-contact',
             'mcalpine/image-text',
             'create-block/grid',
