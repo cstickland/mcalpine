@@ -20,8 +20,6 @@ import { fade } from "svelte/transition";
         categoryParentTitle = title;
         categoryParentLink = link;
     }
-
-    // let versionClass;
 </script>
 
 {#if categoryParentId == null}
@@ -43,11 +41,10 @@ import { fade } from "svelte/transition";
         <div class="category-list">
             {#if [...productCategories] && [...productCategories].length > 0}
                 {#each [...productCategories] as category}
-                        {#if category?.children?.length > 0}
+                        {#if category?.children?.edges?.length > 0}
                         <div
                             class="category-item"
                             on:click={() => {
-                            console.log(category)
                                 setParentCategories(
                                     category?.id,
                                     category?.name,
